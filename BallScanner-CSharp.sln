@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallScanner-CSharp", "BallScanner-CSharp\BallScanner-CSharp.csproj", "{0F6274C5-E124-4AD8-B12B-65BEB536902B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Millennium.Controls", "Millennium.Controls\Millennium.Controls.csproj", "{85EB13FD-3590-4201-B8B8-B6FE19C16697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Millennium.BallScanner", "Millennium.BallScanner\Millennium.BallScanner.csproj", "{D9DC0498-029B-4B46-824C-47AE1C3ED97A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0F6274C5-E124-4AD8-B12B-65BEB536902B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F6274C5-E124-4AD8-B12B-65BEB536902B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F6274C5-E124-4AD8-B12B-65BEB536902B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F6274C5-E124-4AD8-B12B-65BEB536902B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{85EB13FD-3590-4201-B8B8-B6FE19C16697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{85EB13FD-3590-4201-B8B8-B6FE19C16697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85EB13FD-3590-4201-B8B8-B6FE19C16697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85EB13FD-3590-4201-B8B8-B6FE19C16697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DC0498-029B-4B46-824C-47AE1C3ED97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DC0498-029B-4B46-824C-47AE1C3ED97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DC0498-029B-4B46-824C-47AE1C3ED97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DC0498-029B-4B46-824C-47AE1C3ED97A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
