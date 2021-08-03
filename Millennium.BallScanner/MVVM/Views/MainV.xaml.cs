@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using Millennium.Controls;
 
-namespace Millennium.BallScanner
+namespace Millennium.BallScanner.MVVM.Views
 {
-    public partial class MainV : Window
+    public partial class MainV : MillenniumWindow
     {
         public MainV()
         {

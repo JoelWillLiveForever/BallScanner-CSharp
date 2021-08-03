@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Millennium.BallScanner"
              StartupUri="MVVM/Views/MainV.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Millennium.Controls;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
