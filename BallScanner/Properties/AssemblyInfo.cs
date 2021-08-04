@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Ball Scanner")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Millennium Inc.")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Ball Scanner")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
