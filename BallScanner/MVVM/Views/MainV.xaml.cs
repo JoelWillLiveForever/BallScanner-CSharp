@@ -8,20 +8,5 @@ namespace BallScanner.MVVM.Views
         {
             InitializeComponent();
         }
-
-        private void WindowMinimize(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowMaximizeRestore(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowClose(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

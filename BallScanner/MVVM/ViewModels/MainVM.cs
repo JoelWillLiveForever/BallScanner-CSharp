@@ -1,6 +1,9 @@
-﻿namespace BallScanner.MVVM.ViewModels
+﻿using BallScanner.MVVM.Core;
+
+namespace BallScanner.MVVM.ViewModels
 {
-    public class MainVM
+    public class MainVM : BaseViewModel
     {
+
     }
 }

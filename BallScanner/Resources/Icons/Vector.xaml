@@ -3,29 +3,29 @@
 
     <Canvas x:Key="Icon_Minimize"
             Width="10"
-            Height="1"
-            x:Shared="False">
+            Height="3"
+            x:Shared="True">
         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" 
-              Data="M0 0 L10 0 L10 1 L0 1 Z" 
-              SnapsToDevicePixels="True" />
+              Data="M0 2 l10 0 l0 1 l-10 0 z" 
+              SnapsToDevicePixels="False" />
     </Canvas>
 
     <Canvas x:Key="Icon_Maximize"
             Width="10"
             Height="10"
-            x:Shared="False">
+            x:Shared="True">
         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" 
               Data="M0 0 h10 v10 h-10 Z M1 1 h8 v8 h-8 Z" 
-              SnapsToDevicePixels="True" />
+              SnapsToDevicePixels="False" />
     </Canvas>
 
     <Canvas x:Key="Icon_Close"
             Width="16"
             Height="16"
-            x:Shared="False">
+            x:Shared="True">
         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" 
               Data="M1 0 L8 7 L15 0 L16 1 L9 8 L16 15 L15 16 L8 9 L1 16 L0 15 L7 8 L0 1 Z" 
-              SnapsToDevicePixels="True" />
+              SnapsToDevicePixels="False" />
     </Canvas>
 
 </ResourceDictionary>

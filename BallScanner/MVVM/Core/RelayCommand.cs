@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace BallScanner.Core
+namespace BallScanner.MVVM.Core
 {
     public class RelayCommand : ICommand
     {

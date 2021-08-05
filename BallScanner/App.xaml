@@ -1,7 +1,8 @@
 ﻿<Application x:Class="BallScanner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BallScanner"
+             xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             xmlns:v="clr-namespace:BallScanner.MVVM.Views"
              StartupUri="MVVM/Views/MainV.xaml">
     
     <Application.Resources>
@@ -11,10 +12,17 @@
                 <!-- Application vector icons -->
                 <ResourceDictionary Source="Resources/Icons/Vector.xaml"/>
 
-                <!-- Application vector icons -->
+                <ResourceDictionary Source="Resources/Colors/Generic.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/WindowStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Values/Values.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type vm:MainVM}">
+                <v:MainV />
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
     
