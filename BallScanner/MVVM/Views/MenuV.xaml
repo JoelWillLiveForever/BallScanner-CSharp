@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BallScanner.MVVM.Views.MenuV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:MenuVM />
+    </UserControl.DataContext>
+
+    <DockPanel LastChildFill="True"
+>
+        <DockPanel DockPanel.Dock="Left"
+                   Width="200"
+                   Margin="10, 0, 10, 10"
+                   LastChildFill="True">
+
+            <TextBlock DockPanel.Dock="Top" 
+                       Grid.Row="0"
+                       Height="63"
+                       Background="Red"
+                       Foreground="White"
+                       TextAlignment="Center"
+                       VerticalAlignment="Stretch"
+                       Text="Logo" />
+
+            <ScrollViewer Grid.Row="1" 
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Visible">
+                <StackPanel Orientation="Vertical"
+                            Margin="0,10,0,0">
+                    <TextBlock Text="Menu" 
+                               Foreground="#ffffff"
+                               Opacity="0.6" 
+                               TextAlignment="Center" />
+                    <Separator />
+                    <Button Height="40" 
+                            Margin="0,7,0,0"
+                            Content="Scan"
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="Scan" />
+                    <Button Height="40" 
+                            Margin="0,7,0,0" 
+                            Content="Calibrate" 
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="Calibrate" />
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <ContentPresenter Content="{Binding CurrentActionVM}" />
+    </DockPanel>
+</UserControl>

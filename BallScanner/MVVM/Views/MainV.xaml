@@ -9,13 +9,13 @@
         Title="Ball Scanner"
         Height="450"
         Width="800"
+        MaxWidth="{Binding SystemParameters.MaximizedPrimaryScreenWidth}"
+        MaxHeight="{Binding SystemParameters.MaximizedPrimaryScreenHeight}"
         Style="{StaticResource WindowStyle}">
 
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>
 
-    <Grid>
-        
-    </Grid>
+    <ContentPresenter Content="{Binding CurrentActionVM}" />
 </Window>

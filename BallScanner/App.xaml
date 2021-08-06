@@ -22,7 +22,19 @@
             <DataTemplate DataType="{x:Type vm:MainVM}">
                 <v:MainV />
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type vm:MenuVM}">
+                <v:MenuV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ScanVM}">
+                <v:ScanV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:CalibrateVM}">
+                <v:CalibrateV />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
     

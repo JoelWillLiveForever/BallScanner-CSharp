@@ -76,7 +76,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVM\Models\CalibrateM.cs" />
+    <Compile Include="MVVM\Models\MenuM.cs" />
+    <Compile Include="MVVM\Models\ScanM.cs" />
+    <Compile Include="MVVM\ViewModels\CalibrateVM.cs" />
+    <Compile Include="MVVM\ViewModels\MenuVM.cs" />
+    <Compile Include="MVVM\ViewModels\ScanVM.cs" />
+    <Compile Include="MVVM\Views\CalibrateV.xaml.cs">
+      <DependentUpon>CalibrateV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\MenuV.xaml.cs">
+      <DependentUpon>MenuV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\ScanV.xaml.cs">
+      <DependentUpon>ScanV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Styles\WindowStyle.cs" />
+    <Page Include="MVVM\Views\CalibrateV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\MainV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +112,14 @@
       <DependentUpon>MainV.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\Views\MenuV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\ScanV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Colors\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
