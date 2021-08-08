@@ -16,6 +16,10 @@
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/WindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Values/Values.xaml"/>
+                
+                <!-- Merge Joel.Controls styles -->
+                <ResourceDictionary Source="pack://application:,,,/Joel.Controls;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 
