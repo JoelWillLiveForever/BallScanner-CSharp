@@ -17,7 +17,8 @@
                     Value="Normal"/>
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
-                    <WindowChrome CaptionHeight="{DynamicResource Value_WindowChrome_CaptionHeight}"
+                    <WindowChrome x:Name="MyWindowChrome"
+                                  CaptionHeight="{DynamicResource Value_WindowChrome_CaptionHeight}"
                                   CornerRadius="0"
                                   GlassFrameThickness="0"
                                   NonClientFrameEdges="None"

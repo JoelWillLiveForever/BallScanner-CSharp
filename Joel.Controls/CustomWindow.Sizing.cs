@@ -125,7 +125,7 @@ namespace Joel.Controls
             if (base.WindowState == WindowState.Maximized)
             {
                 this.ToggleWindowState();
-                //this.ToggleWindowState();
+                this.ToggleWindowState();
             }
         }
 
