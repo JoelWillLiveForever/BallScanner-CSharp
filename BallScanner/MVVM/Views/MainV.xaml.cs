@@ -20,14 +20,27 @@ namespace BallScanner.MVVM.Views
 
             MyWindowChrome = WindowChrome.GetWindowChrome(this);
 
-            Screen screen = Screen.FromHandle((new WindowInteropHelper(this)).Handle);
+            Screen screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
             ChangeMaxWidthAndMaxHeight(screen);
 
             currentDisplayName = screen.DeviceName;
 
             // Handlers
             SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
-            AddHandler(MouseMoveEvent, new System.Windows.Input.MouseEventHandler(OnMouseMove));
+            LocationChanged += new EventHandler(OnLocationChanged);
+            //AddHandler(MouseMoveEvent, new System.Windows.Input.MouseEventHandler(OnMouseMove));
+        }
+
+        private void OnLocationChanged(object sender, EventArgs e)
+        {
+            Screen screen = Screen.FromHandle((new WindowInteropHelper(this)).Handle);
+            if (currentDisplayName == screen.DeviceName)
+            {
+                return;
+            }
+
+            ChangeMaxWidthAndMaxHeight(screen);
+            currentDisplayName = screen.DeviceName;
         }
 
         private void OnDisplaySettingsChanged(object sender, EventArgs e)
@@ -43,17 +56,17 @@ namespace BallScanner.MVVM.Views
             }
         }
 
-        private void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Screen screen = Screen.FromHandle((new WindowInteropHelper(this)).Handle);
-            if (currentDisplayName == screen.DeviceName)
-            {
-                return;
-            }
+        //private void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    Screen screen = Screen.FromHandle((new WindowInteropHelper(this)).Handle);
+        //    if (currentDisplayName == screen.DeviceName)
+        //    {
+        //        return;
+        //    }
 
-            ChangeMaxWidthAndMaxHeight(screen);
-            currentDisplayName = screen.DeviceName;
-        }
+        //    ChangeMaxWidthAndMaxHeight(screen);
+        //    currentDisplayName = screen.DeviceName;
+        //}
 
         private void ChangeMaxWidthAndMaxHeight(Screen screen)
         {
@@ -70,8 +83,8 @@ namespace BallScanner.MVVM.Views
                 + MyWindowChrome.ResizeBorderThickness.Left
                 + MyWindowChrome.ResizeBorderThickness.Right;
 
-            Debug.WriteLine("X: Scale Factor = " + scaleFactorX + " Screen Width = " + screen.WorkingArea.Width + " WPF Width = " + MaxWidth);
-            Debug.WriteLine("Y: Scale Factor = " + scaleFactorY + " Screen Height = " + screen.WorkingArea.Height + " WPF Height = " + MaxHeight);
+            Debug.WriteLine("X: DPI = " + g.DpiX + " Screen Width = " + screen.WorkingArea.Width + " WPF Width = " + MaxWidth);
+            Debug.WriteLine("Y: DPI = " + g.DpiY + " Screen Height = " + screen.WorkingArea.Height + " WPF Height = " + MaxHeight);
         }
 
         //public override void OnApplyTemplate()

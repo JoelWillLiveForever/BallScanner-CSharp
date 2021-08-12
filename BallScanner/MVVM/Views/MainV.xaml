@@ -9,7 +9,7 @@
         Title="Ball Scanner"
         Height="450"
         Width="800"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource CustomWindowStyle}">
 
     <Window.DataContext>
         <vm:MainVM />

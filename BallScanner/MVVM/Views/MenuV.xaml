@@ -11,66 +11,63 @@
         <vm:MenuVM />
     </UserControl.DataContext>
 
-    <DockPanel LastChildFill="True"
->
+    <DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Left"
-                   Width="200"
-                   Margin="10, 0, 10, 10"
-                   LastChildFill="True">
+                   LastChildFill="True"
+                   Margin="10,0,10,10"
+                   Width="180">
 
-            <TextBlock DockPanel.Dock="Top" 
-                       Grid.Row="0"
-                       Height="63"
-                       Background="Red"
-                       Foreground="White"
-                       TextAlignment="Center"
-                       VerticalAlignment="Stretch"
-                       Text="Logo" />
+            <Viewbox DockPanel.Dock="Top"
+                     Child="{StaticResource Vector_Logo}"
+                     Margin="12,0,12,0" />
 
-            <ScrollViewer Grid.Row="1" 
-                          HorizontalScrollBarVisibility="Disabled"
-                          VerticalScrollBarVisibility="Visible">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Disabled">
+                
                 <StackPanel Orientation="Vertical"
-                            Margin="0,10,0,0">
-                    <TextBlock Text="Menu" 
-                               Foreground="#ffffff"
-                               Opacity="0.6" 
-                               TextAlignment="Center" />
-                    <Separator />
+                            Margin="0,8.7,0,0">
+                    <Button Content="{DynamicResource Text_Menu}" 
+                            Style="{StaticResource BlockHeaderButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0" 
                             Content="Account" 
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="Account" />
+                            CommandParameter="Account"
+                            Style="{StaticResource MenuButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0"
                             Content="Scan"
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="Scan" />
+                            CommandParameter="Scan" 
+                            Style="{StaticResource MenuButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0" 
                             Content="Calibrate" 
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="Calibrate" />
+                            CommandParameter="Calibrate"
+                            Style="{StaticResource MenuButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0" 
                             Content="Documents" 
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="Documents" />
+                            CommandParameter="Documents" 
+                            Style="{StaticResource MenuButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0" 
                             Content="Settings" 
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="Settings" />
+                            CommandParameter="Settings" 
+                            Style="{StaticResource MenuButtonStyle}"/>
                     <Button Height="40" 
                             Margin="0,7,0,0" 
                             Content="About" 
                             Command="{Binding MenuButtonClick}"
-                            CommandParameter="About" />
+                            CommandParameter="About" 
+                            Style="{StaticResource MenuButtonStyle}"/>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
-
+        
         <ContentPresenter Content="{Binding CurrentActionVM}" />
     </DockPanel>
 </UserControl>

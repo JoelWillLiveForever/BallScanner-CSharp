@@ -8,14 +8,24 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                
+                <ResourceDictionary Source="Resources/Languages/Lang.ru-RU.xaml" />
+
                 <!-- Application vector icons -->
                 <ResourceDictionary Source="Resources/Icons/Vector.xaml"/>
 
                 <ResourceDictionary Source="Resources/Colors/Generic.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/WindowStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/CustomWindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Values/Values.xaml"/>
+                
+                <!-- Buttons styles -->
+                <ResourceDictionary Source="Resources/Styles/Buttons/MenuButtonStyle.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Buttons/BlockHeaderButtonStyle.xaml" />
+
+                <!-- Fonts -->
+                <ResourceDictionary Source="Resources/Fonts/Fonts.xaml" />
+                
+                
 
             </ResourceDictionary.MergedDictionaries>
 

@@ -1,9 +1,9 @@
-﻿<ResourceDictionary x:Class="BallScanner.Resources.Styles.WindowStyle" 
+﻿<ResourceDictionary x:Class="BallScanner.Resources.Styles.CustomWindowStyle" 
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type Window}"
-           x:Key="WindowStyle">
+           x:Key="CustomWindowStyle">
         <Style.Setters>
             <Setter Property="SnapsToDevicePixels"
                     Value="False" />

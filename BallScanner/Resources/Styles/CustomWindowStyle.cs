@@ -2,9 +2,9 @@
 
 namespace BallScanner.Resources.Styles
 {
-    partial class WindowStyle
+    partial class CustomWindowStyle
     {
-        public WindowStyle()
+        public CustomWindowStyle()
         {
             InitializeComponent();
         }
