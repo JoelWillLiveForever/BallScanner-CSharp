@@ -78,14 +78,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVM\Models\AboutM.cs" />
+    <Compile Include="MVVM\Models\AccountM.cs" />
     <Compile Include="MVVM\Models\CalibrateM.cs" />
+    <Compile Include="MVVM\Models\DocumentsM.cs" />
     <Compile Include="MVVM\Models\MenuM.cs" />
     <Compile Include="MVVM\Models\ScanM.cs" />
+    <Compile Include="MVVM\Models\SettingsM.cs" />
+    <Compile Include="MVVM\ViewModels\AboutVM.cs" />
+    <Compile Include="MVVM\ViewModels\AccountVM.cs" />
     <Compile Include="MVVM\ViewModels\CalibrateVM.cs" />
+    <Compile Include="MVVM\ViewModels\DocumentsVM.cs" />
     <Compile Include="MVVM\ViewModels\MenuVM.cs" />
     <Compile Include="MVVM\ViewModels\ScanVM.cs" />
+    <Compile Include="MVVM\ViewModels\SettingsVM.cs" />
+    <Compile Include="MVVM\Views\AboutV.xaml.cs">
+      <DependentUpon>AboutV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\AccountV.xaml.cs">
+      <DependentUpon>AccountV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\CalibrateV.xaml.cs">
       <DependentUpon>CalibrateV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\DocumentsV.xaml.cs">
+      <DependentUpon>DocumentsV.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\MenuV.xaml.cs">
       <DependentUpon>MenuV.xaml</DependentUpon>
@@ -93,8 +110,23 @@
     <Compile Include="MVVM\Views\ScanV.xaml.cs">
       <DependentUpon>ScanV.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\SettingsV.xaml.cs">
+      <DependentUpon>SettingsV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Styles\WindowStyle.cs" />
+    <Page Include="MVVM\Views\AboutV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\AccountV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\CalibrateV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\DocumentsV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\ScanV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\SettingsV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
@@ -68,6 +69,9 @@ namespace BallScanner.MVVM.Views
             MaxWidth = screen.WorkingArea.Width / scaleFactorX
                 + MyWindowChrome.ResizeBorderThickness.Left
                 + MyWindowChrome.ResizeBorderThickness.Right;
+
+            Debug.WriteLine("X: Scale Factor = " + scaleFactorX + " Screen Width = " + screen.WorkingArea.Width + " WPF Width = " + MaxWidth);
+            Debug.WriteLine("Y: Scale Factor = " + scaleFactorY + " Screen Height = " + screen.WorkingArea.Height + " WPF Height = " + MaxHeight);
         }
 
         //public override void OnApplyTemplate()

@@ -27,12 +27,28 @@
                 <v:MenuV />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vm:AccountVM}">
+                <v:AccountV />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vm:ScanVM}">
                 <v:ScanV />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vm:CalibrateVM}">
                 <v:CalibrateV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DocumentsVM}">
+                <v:DocumentsV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SettingsVM}">
+                <v:SettingsV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:AboutVM}">
+                <v:AboutV />
             </DataTemplate>
 
         </ResourceDictionary>

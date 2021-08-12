@@ -38,6 +38,11 @@
                                TextAlignment="Center" />
                     <Separator />
                     <Button Height="40" 
+                            Margin="0,7,0,0" 
+                            Content="Account" 
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="Account" />
+                    <Button Height="40" 
                             Margin="0,7,0,0"
                             Content="Scan"
                             Command="{Binding MenuButtonClick}"
@@ -47,6 +52,21 @@
                             Content="Calibrate" 
                             Command="{Binding MenuButtonClick}"
                             CommandParameter="Calibrate" />
+                    <Button Height="40" 
+                            Margin="0,7,0,0" 
+                            Content="Documents" 
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="Documents" />
+                    <Button Height="40" 
+                            Margin="0,7,0,0" 
+                            Content="Settings" 
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="Settings" />
+                    <Button Height="40" 
+                            Margin="0,7,0,0" 
+                            Content="About" 
+                            Command="{Binding MenuButtonClick}"
+                            CommandParameter="About" />
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
