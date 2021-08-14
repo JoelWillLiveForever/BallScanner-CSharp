@@ -5,16 +5,18 @@
     <Style TargetType="{x:Type Window}"
            x:Key="CustomWindowStyle">
         <Style.Setters>
+            <Setter Property="Topmost"
+                    Value="True" />
             <Setter Property="SnapsToDevicePixels"
                     Value="False" />
             <Setter Property="WindowStyle"
                     Value="None" />
             <Setter Property="ResizeMode"
-                    Value="CanResize"/>
+                    Value="CanResize" />
             <Setter Property="AllowsTransparency"
-                    Value="False"/>
+                    Value="False" />
             <Setter Property="WindowState"
-                    Value="Normal"/>
+                    Value="Normal" />
             <Setter Property="WindowChrome.WindowChrome">
                 <Setter.Value>
                     <WindowChrome x:Name="MyWindowChrome"
@@ -22,7 +24,7 @@
                                   CornerRadius="0"
                                   GlassFrameThickness="0"
                                   NonClientFrameEdges="None"
-                                  ResizeBorderThickness="7"
+                                  ResizeBorderThickness="{DynamicResource Value_WindowChrome_ResizeBorderThickness}"
                                   UseAeroCaptionButtons="False" />
                 </Setter.Value>
             </Setter>
@@ -30,11 +32,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
                         <Border x:Name="RootBorder"
-                                Background="#121212"
+                                Background="{DynamicResource Brush_Background_Surface}"
                                 BorderThickness="0"
                                 Padding="0"
                                 Margin="0">
-                            <DockPanel LastChildFill="True">
+                            <DockPanel LastChildFill="True"
+                                       Background="{DynamicResource Brush_Background_Primary}">
                                 <StackPanel DockPanel.Dock="Top"
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
@@ -44,7 +47,7 @@
                                                  Width="{DynamicResource Value_IconSize_WindowChromeButton}"
                                                  Height="{DynamicResource Value_IconSize_WindowChromeButton}" 
                                                  VerticalAlignment="Center"
-                                                 HorizontalAlignment="Center"/>
+                                                 HorizontalAlignment="Center" />
                                     </Button>
                                     <Button Style="{StaticResource WindowChromeButtonStyle}"
                                             Click="OnMaximizeRestoreClick">
@@ -52,7 +55,7 @@
                                                  Width="{DynamicResource Value_IconSize_WindowChromeButton}"
                                                  Height="{DynamicResource Value_IconSize_WindowChromeButton}" 
                                                  VerticalAlignment="Center"
-                                                 HorizontalAlignment="Center"/>
+                                                 HorizontalAlignment="Center" />
                                     </Button>
                                     <Button Style="{StaticResource WindowChromeCloseButtonStyle}"
                                             Click="OnCloseClick">
@@ -60,7 +63,7 @@
                                                  Width="{DynamicResource Value_IconSize_WindowChromeButton}"
                                                  Height="{DynamicResource Value_IconSize_WindowChromeButton}" 
                                                  VerticalAlignment="Center"
-                                                 HorizontalAlignment="Center"/>
+                                                 HorizontalAlignment="Center" />
                                     </Button>
                                 </StackPanel>
                                 <ContentPresenter Content="{TemplateBinding Content}" />
@@ -71,9 +74,9 @@
                                      Value="Maximized">
                                 <Setter TargetName="RootBorder" 
                                         Property="BorderThickness" 
-                                        Value="7" />
+                                        Value="{DynamicResource Value_WindowChrome_ResizeBorderThickness}" />
                                 <Setter Property="ResizeMode"
-                                        Value="NoResize"/>
+                                        Value="NoResize" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

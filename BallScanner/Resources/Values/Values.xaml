@@ -2,9 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- WindowChrome.CaptionHeight -->
+    <!-- WindowChrome -->
     <sys:Double x:Key="Value_WindowChrome_CaptionHeight">22</sys:Double>
-
-    <sys:Double x:Key="Value_IconSize_WindowChromeButton">10</sys:Double>
     
+    <Thickness x:Key="Value_WindowChrome_ResizeBorderThickness">8,8,8,8</Thickness>
+
+    <!-- Chrome buttons -->
+    <sys:Double x:Key="Value_IconSize_WindowChromeButton">10</sys:Double>
+
 </ResourceDictionary>

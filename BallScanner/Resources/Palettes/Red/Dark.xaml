@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Colors -->
+    <Color x:Key="Color_Primary">#ef9a9a</Color>
+    <!--<Color x:Key="Color_Primary_Light">#ffcccb</Color>
+    <Color x:Key="Color_Primary_Dark">#ba6b6c</Color>-->
+
+    <Color x:Key="Color_Primary_Variant">#d32f2f</Color>
+    <!--<Color x:Key="Color_Primary_Variant_Light">#ff6659</Color>
+    <Color x:Key="Color_Primary_Variant_Light">#9a0007</Color>-->
+
+    <Color x:Key="Color_OnPrimary">#000000</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="Brush_Background_Primary"
+                     Color="{StaticResource Color_Primary}"
+                     Opacity="0.08" />
+    <SolidColorBrush x:Key="Brush_Primary"
+                     Color="{StaticResource Color_Primary}"
+                     Opacity="1.00" />
+
+    <SolidColorBrush x:Key="Brush_OnPrimary"
+                     Color="{StaticResource Color_OnPrimary}"
+                     Opacity="1.00" />
+
+</ResourceDictionary>

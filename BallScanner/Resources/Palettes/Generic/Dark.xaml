@@ -1,0 +1,76 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Colors -->
+    <Color x:Key="Color_Background_Surface">#121212</Color>
+    <Color x:Key="Color_OnBackground_OnSurface">#ffffff</Color>
+    
+    <Color x:Key="Color_Error">#cf6679</Color>
+    <Color x:Key="Color_OnError">#000000</Color>
+
+    <!-- Brushes -->
+    <!-- Background or surface -->
+    <SolidColorBrush x:Key="Brush_Background_Surface"
+                     Color="{StaticResource Color_Background_Surface}"
+                     Opacity="1.00" />
+
+    <!-- Surface overlays levels -->
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_00dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.00" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_01dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.05" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_02dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.07" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_03dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.08" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_04dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.09" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_06dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.11" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_08dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.12" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_12dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.14" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_16dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.15" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_24dp"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.16" />
+
+    <!-- Text priority -->
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_Disabled"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.38" />
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_Medium"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.60" />
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_High"
+                     Color="{StaticResource Color_OnBackground_OnSurface}"
+                     Opacity="0.87" />
+
+    <!-- Error -->
+    <SolidColorBrush x:Key="Brush_Error"
+                     Color="{StaticResource Color_Error}"
+                     Opacity="1.00" />
+
+    <!-- Text priority for errors -->
+    <SolidColorBrush x:Key="Brush_OnError_Disabled"
+                     Color="{StaticResource Color_OnError}"
+                     Opacity="0.38" />
+    <SolidColorBrush x:Key="Brush_OnError_Medium"
+                     Color="{StaticResource Color_OnError}"
+                     Opacity="0.60" />
+    <SolidColorBrush x:Key="Brush_OnError_High"
+                     Color="{StaticResource Color_OnError}"
+                     Opacity="0.87" />
+
+</ResourceDictionary>
