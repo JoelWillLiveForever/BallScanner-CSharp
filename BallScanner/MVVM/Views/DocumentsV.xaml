@@ -10,8 +10,11 @@
     <UserControl.DataContext>
         <vm:DocumentsVM />
     </UserControl.DataContext>
-    
-    <Grid>
-            
-    </Grid>
+
+    <Border CornerRadius="10,0,0,0">
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource Color_OnBackground_OnSurface}"
+                             Opacity="0.12" />
+        </Border.Background>
+    </Border>
 </UserControl>
