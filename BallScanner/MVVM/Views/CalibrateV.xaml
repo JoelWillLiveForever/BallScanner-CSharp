@@ -11,7 +11,7 @@
         <vm:CalibrateVM />
     </UserControl.DataContext>
     
-    <Grid Background="Yellow">
+    <Grid>
             
     </Grid>
 </UserControl>

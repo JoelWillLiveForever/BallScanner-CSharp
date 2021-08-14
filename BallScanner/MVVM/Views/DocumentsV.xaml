@@ -11,7 +11,7 @@
         <vm:DocumentsVM />
     </UserControl.DataContext>
     
-    <Grid Background="Green">
+    <Grid>
             
     </Grid>
 </UserControl>

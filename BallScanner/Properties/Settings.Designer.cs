@@ -26,36 +26,36 @@ namespace BallScanner.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ru-RU")]
-        public global::System.Globalization.CultureInfo DefaultLanguage {
+        public global::System.Globalization.CultureInfo Language {
             get {
-                return ((global::System.Globalization.CultureInfo)(this["DefaultLanguage"]));
+                return ((global::System.Globalization.CultureInfo)(this["Language"]));
             }
             set {
-                this["DefaultLanguage"] = value;
+                this["Language"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool IsDarkPalette {
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public string Palette {
             get {
-                return ((bool)(this["IsDarkPalette"]));
+                return ((string)(this["Palette"]));
             }
             set {
-                this["IsDarkPalette"] = value;
+                this["Palette"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte CurrentColorPalette {
+        [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
+        public string Theme {
             get {
-                return ((byte)(this["CurrentColorPalette"]));
+                return ((string)(this["Theme"]));
             }
             set {
-                this["CurrentColorPalette"] = value;
+                this["Theme"] = value;
             }
         }
         

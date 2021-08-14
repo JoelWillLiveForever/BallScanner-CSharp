@@ -10,8 +10,10 @@
     <UserControl.DataContext>
         <vm:SettingsVM />
     </UserControl.DataContext>
-    
-    <Grid Background="DeepSkyBlue">
-            
+
+    <Grid>
+        <Button Width="100"
+                Height="100"
+                Click="Button_Click" />
     </Grid>
 </UserControl>

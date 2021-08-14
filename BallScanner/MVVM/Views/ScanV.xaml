@@ -11,7 +11,7 @@
         <vm:ScanVM />
     </UserControl.DataContext>
     
-    <Grid Background="Orange">
+    <Grid>
             
     </Grid>
 </UserControl>

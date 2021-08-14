@@ -73,4 +73,16 @@
                      Color="{StaticResource Color_OnError}"
                      Opacity="0.87" />
 
+    <!-- Colored Brushes -->
+    <SolidColorBrush x:Key="Brush_Background_Primary"
+                     Color="{DynamicResource Color_Primary}"
+                     Opacity="0.08" />
+    <SolidColorBrush x:Key="Brush_Primary"
+                     Color="{DynamicResource Color_Primary}"
+                     Opacity="1.00" />
+
+    <SolidColorBrush x:Key="Brush_OnPrimary"
+                     Color="{DynamicResource Color_OnPrimary}"
+                     Opacity="1.00" />
+
 </ResourceDictionary>

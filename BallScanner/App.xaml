@@ -13,7 +13,7 @@
                 <!-- Languages -->
                 <ResourceDictionary Source="Resources/Languages/Language.ru-RU.xaml" />
 
-                <!-- Palettes -->
+                <!-- Palettes "Generic" dictionary must be first -->
                 <ResourceDictionary Source="Resources/Palettes/Generic/Dark.xaml"/>
                 <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml"/>
 

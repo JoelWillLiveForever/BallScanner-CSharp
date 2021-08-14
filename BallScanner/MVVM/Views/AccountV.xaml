@@ -11,7 +11,7 @@
         <vm:AccountVM />
     </UserControl.DataContext>
     
-    <Grid Background="Red">
+    <Grid>
             
     </Grid>
 </UserControl>

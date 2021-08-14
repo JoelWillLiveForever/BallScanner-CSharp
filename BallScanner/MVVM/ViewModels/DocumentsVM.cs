@@ -1,10 +1,17 @@
-﻿namespace BallScanner.MVVM.ViewModels
+﻿using BallScanner.MVVM.Core;
+
+namespace BallScanner.MVVM.ViewModels
 {
-    public class DocumentsVM
+    public class DocumentsVM : PageVM
     {
         public DocumentsVM()
         {
 
+        }
+
+        public void ChangePalette()
+        {
+            App.Palette = "Green";
         }
     }
 }

@@ -4,8 +4,8 @@ namespace BallScanner.MVVM.ViewModels
 {
     public class MenuVM : BaseViewModel
     {
-        private object _currentActionVM;
-        public object CurrentActionVM
+        private PageVM _currentActionVM;
+        public PageVM CurrentActionVM
         {
             get { return _currentActionVM; }
             set
@@ -65,6 +65,8 @@ namespace BallScanner.MVVM.ViewModels
             {
                 CurrentActionVM = aboutVM;
             }
+
+            CurrentActionVM.ChangePalette();
         }
     }
 }

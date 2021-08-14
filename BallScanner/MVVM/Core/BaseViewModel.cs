@@ -9,7 +9,7 @@ namespace BallScanner.MVVM.Core
 
         protected void OnPropertyChanged([CallerMemberName] string propName = "")
         {
-            if (propName != null)
+            if (propName != null) 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }

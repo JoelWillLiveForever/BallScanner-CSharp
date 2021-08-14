@@ -12,16 +12,4 @@
 
     <Color x:Key="Color_OnPrimary">#000000</Color>
 
-    <!-- Brushes -->
-    <SolidColorBrush x:Key="Brush_Background_Primary"
-                     Color="{StaticResource Color_Primary}"
-                     Opacity="0.08" />
-    <SolidColorBrush x:Key="Brush_Primary"
-                     Color="{StaticResource Color_Primary}"
-                     Opacity="1.00" />
-
-    <SolidColorBrush x:Key="Brush_OnPrimary"
-                     Color="{StaticResource Color_OnPrimary}"
-                     Opacity="1.00" />
-
 </ResourceDictionary>
