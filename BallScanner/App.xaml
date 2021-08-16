@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="Resources/Languages/Language.ru-RU.xaml" />
 
                 <!-- Palettes "Generic" dictionary must be first -->
-                <ResourceDictionary Source="Resources/Palettes/Generic/Dark.xaml"/>
+                <ResourceDictionary Source="Resources/Palettes/Dark.xaml"/>     <!-- Generic palette -->
                 <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml"/>
 
                 <!-- Application vector icons -->

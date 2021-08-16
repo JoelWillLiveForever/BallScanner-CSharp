@@ -106,7 +106,7 @@ namespace BallScanner
             ResourceDictionary newGenericPaletteDictionary = new ResourceDictionary();
             ResourceDictionary newPaletteDictionary = new ResourceDictionary();
 
-            newGenericPaletteDictionary.Source = new Uri(PALETTE_AND_THEMES_URI + string.Format("Generic/{0}.xaml", _theme), UriKind.Relative);
+            newGenericPaletteDictionary.Source = new Uri(PALETTE_AND_THEMES_URI + string.Format("{0}.xaml", _theme), UriKind.Relative);
             newPaletteDictionary.Source = new Uri(PALETTE_AND_THEMES_URI + string.Format("{0}/{1}.xaml", _palette, _theme), UriKind.Relative);
 
             //3. Find old resource dictionary and delete it. After that add a new resource dictionary to app.xaml

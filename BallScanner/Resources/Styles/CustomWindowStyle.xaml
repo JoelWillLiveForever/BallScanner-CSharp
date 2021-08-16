@@ -5,8 +5,6 @@
     <Style TargetType="{x:Type Window}"
            x:Key="CustomWindowStyle">
         <Style.Setters>
-            <Setter Property="Topmost"
-                    Value="True" />
             <Setter Property="SnapsToDevicePixels"
                     Value="False" />
             <Setter Property="WindowStyle"
