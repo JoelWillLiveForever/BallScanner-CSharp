@@ -2,14 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Colors -->
-    <Color x:Key="Color_Primary">#90caf9</Color>
-    <!--<Color x:Key="Color_Primary_Light">#ffcccb</Color>
-    <Color x:Key="Color_Primary_Dark">#ba6b6c</Color>-->
+    <Color x:Key="Color_Primary">#ff90caf9</Color>
+    <Color x:Key="Color_Background_Primary">#1490caf9</Color>
 
-    <Color x:Key="Color_Primary_Variant">#1976d2</Color>
-    <!--<Color x:Key="Color_Primary_Variant_Light">#ff6659</Color>
-    <Color x:Key="Color_Primary_Variant_Light">#9a0007</Color>-->
+    <Color x:Key="Color_Primary_Variant">#ff1976d2</Color>
 
-    <Color x:Key="Color_OnPrimary">#000000</Color>
+    <Color x:Key="Color_OnPrimary">#ff000000</Color>
 
 </ResourceDictionary>

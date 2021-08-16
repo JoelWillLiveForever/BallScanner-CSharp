@@ -12,7 +12,9 @@
     </UserControl.DataContext>
 
     <Border CornerRadius="10,0,0,0"
-            Background="{DynamicResource Brush_Background_Primary}">
-        
+            Background="{DynamicResource Brush_Surface_Overlay_08dp}">
+
+        <!-- Content -->
+
     </Border>
 </UserControl>

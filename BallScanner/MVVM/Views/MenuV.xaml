@@ -14,7 +14,7 @@
     <DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Left"
                    LastChildFill="True"
-                   Margin="10,0,10,10"
+                   Margin="10,0,10,0"
                    Width="180">
 
             <Viewbox DockPanel.Dock="Top"

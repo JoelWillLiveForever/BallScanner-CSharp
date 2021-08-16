@@ -28,6 +28,7 @@ namespace BallScanner.MVVM.Views
             // Handlers
             SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
             LocationChanged += new EventHandler(OnLocationChanged);
+
             //AddHandler(MouseMoveEvent, new System.Windows.Input.MouseEventHandler(OnMouseMove));
         }
 

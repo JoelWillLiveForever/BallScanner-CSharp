@@ -4,8 +4,8 @@
 
     <!-- WindowChrome -->
     <sys:Double x:Key="Value_WindowChrome_CaptionHeight">22</sys:Double>
-    
-    <Thickness x:Key="Value_WindowChrome_ResizeBorderThickness">8,8,8,8</Thickness>
+
+    <Thickness x:Key="Value_WindowChrome_ResizeBorderThickness">6,6,6,6</Thickness>
 
     <!-- Chrome buttons -->
     <sys:Double x:Key="Value_IconSize_WindowChromeButton">10</sys:Double>

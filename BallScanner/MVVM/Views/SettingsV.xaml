@@ -11,11 +11,10 @@
         <vm:SettingsVM />
     </UserControl.DataContext>
 
-    <Border CornerRadius="10,0,0,0">
-        <Border.Background>
-            <SolidColorBrush Color="{DynamicResource Color_OnBackground_OnSurface}"
-                             Opacity="0.12" />
-        </Border.Background>
+    <Border CornerRadius="10,0,0,0"
+            Background="{DynamicResource Brush_Surface_Overlay_08dp}">
+
+        <!-- Content -->
         <Button Width="100"
                 Height="100"
                 Click="Button_Click" />
