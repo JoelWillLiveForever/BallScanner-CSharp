@@ -10,6 +10,8 @@
                     Value="0" />
             <Setter Property="Padding"
                     Value="0" />
+            <Setter Property="Opacity"
+                    Value="1.00" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Stretch" />
             <Setter Property="VerticalContentAlignment"
