@@ -4,6 +4,8 @@
     <Style TargetType="{x:Type Button}"
            x:Key="MenuButtonStyle">
         <Style.Setters>
+            <Setter Property="Background"
+                    Value="{DynamicResource Brush_Primary}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">

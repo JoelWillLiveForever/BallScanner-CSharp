@@ -5,11 +5,11 @@
     <Setting Name="Language" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">ru-RU</Value>
     </Setting>
-    <Setting Name="Palette" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Red</Value>
+    <Setting Name="CurrentPalette" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Theme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Dark</Value>
+    <Setting Name="IsDarkTheme" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="IsAdmin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

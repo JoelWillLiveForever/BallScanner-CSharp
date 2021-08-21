@@ -4,6 +4,7 @@
     <!-- Colors -->
     <Color x:Key="Color_Primary">#ff90caf9</Color>
     <Color x:Key="Color_Background_Primary">#1490caf9</Color>
+    <Color x:Key="Color_Primary_Overlay_24dp">#2990caf9</Color>
 
     <Color x:Key="Color_Primary_Variant">#ff1976d2</Color>
 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -28,42 +29,45 @@
                             Margin="0,8.7,0,0">
                     <Button Content="{DynamicResource Text_Menu}" 
                             Style="{StaticResource BlockHeaderButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0" 
-                            Content="Account" 
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="Account"
-                            Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0"
-                            Content="Scan"
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="Scan" 
-                            Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0" 
-                            Content="Calibrate" 
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="Calibrate"
-                            Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0" 
-                            Content="Documents" 
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="Documents" 
-                            Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0" 
-                            Content="Settings" 
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="Settings" 
-                            Style="{StaticResource MenuButtonStyle}"/>
-                    <Button Height="40" 
-                            Margin="0,7,0,0" 
-                            Content="About" 
-                            Command="{Binding MenuButtonClick}"
-                            CommandParameter="About" 
-                            Style="{StaticResource MenuButtonStyle}"/>
+
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_Account}"
+                                     IconFill="{DynamicResource Brush_Primary_Red}"
+                                     ContentStringFormat="{DynamicResource Text_Account}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="Account" 
+                                     IsChecked="True" />
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_Scan}"
+                                     IconFill="{DynamicResource Brush_Primary_Orange}"
+                                     ContentStringFormat="{DynamicResource Text_Scan}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="Scan" />
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_Calibrate}"
+                                     IconFill="{DynamicResource Brush_Primary_Yellow}"
+                                     ContentStringFormat="{DynamicResource Text_Calibrate}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="Calibrate" />
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_Documents}"
+                                     IconFill="{DynamicResource Brush_Primary_Green}"
+                                     ContentStringFormat="{DynamicResource Text_Documents}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="Documents" />
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_Settings}"
+                                     IconFill="{DynamicResource Brush_Primary_Blue}"
+                                     ContentStringFormat="{DynamicResource Text_Settings}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="Settings" />
+
+                    <joel:MenuButton Icon="{StaticResource Geometry_Icon_About}"
+                                     IconFill="{DynamicResource Brush_Primary_Purple}"
+                                     ContentStringFormat="{DynamicResource Text_About}"
+                                     Command="{Binding MenuButtonClick}"
+                                     CommandParameter="About" />
+
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>

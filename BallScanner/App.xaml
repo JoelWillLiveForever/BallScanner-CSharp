@@ -10,12 +10,17 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+                <!-- Palette & Theme -->
+                <ResourceDictionary x:Name="ThemeDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml" />
+                        <ResourceDictionary Source="Resources/Palettes/Dark.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
                 <!-- Languages -->
                 <ResourceDictionary Source="Resources/Languages/Language.ru-RU.xaml" />
-
-                <!-- Palettes "Generic" dictionary must be first -->
-                <ResourceDictionary Source="Resources/Palettes/Dark.xaml"/>     <!-- Generic palette -->
-                <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml"/>
 
                 <!-- Application vector icons -->
                 <ResourceDictionary Source="Resources/Icons/Icons.xaml"/>

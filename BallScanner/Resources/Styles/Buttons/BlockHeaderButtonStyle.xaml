@@ -11,9 +11,9 @@
             <Setter Property="FontWeight"
                     Value="SemiBold" />
             <Setter Property="Background"
-                    Value="Transparent"/>
+                    Value="Transparent" />
             <Setter Property="Foreground"
-                    Value="#ffffff" />
+                    Value="{DynamicResource Brush_OnBackground_OnSurface}" />
             <Setter Property="Opacity"
                     Value="0.6" />
             <Setter Property="SnapsToDevicePixels"

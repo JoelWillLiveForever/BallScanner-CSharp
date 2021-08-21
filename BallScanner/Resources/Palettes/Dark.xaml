@@ -13,6 +13,15 @@
     <SolidColorBrush x:Key="Brush_Background_Primary"
                      Color="{DynamicResource Color_Background_Primary}" />
 
+    <!-- Fixed colors -->
+    <Color x:Key="Color_Fixed_Surface_Overlay_08dp">#34ffffff</Color>
+    <Color x:Key="Color_Fixed_Surface_Overlay_12dp">#29ffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_Fixed_Surface_Overlay_08dp"
+                     Color="{StaticResource Color_Fixed_Surface_Overlay_08dp}" />
+    <SolidColorBrush x:Key="Brush_Fixed_Surface_Overlay_12dp"
+                     Color="{StaticResource Color_Fixed_Surface_Overlay_12dp}" />
+    
     <!-- Surface overlays levels -->
     <Color x:Key="Color_Surface_Overlay_00dp">#00ffffff</Color>
     <Color x:Key="Color_Surface_Overlay_01dp">#0dffffff</Color>
@@ -84,5 +93,29 @@
                      Color="{DynamicResource Color_Primary}" />
     <SolidColorBrush x:Key="Brush_OnPrimary"
                      Color="{DynamicResource Color_OnPrimary}" />
+    
+    <!-- Colors -->
+    <Color x:Key="Color_Primary_Red">#ffef9a9a</Color>
+    <Color x:Key="Color_Primary_Orange">#ffffcc80</Color>
+    <Color x:Key="Color_Primary_Yellow">#fffff59d</Color>
+    <Color x:Key="Color_Primary_Green">#ffa5d6a7</Color>
+    <Color x:Key="Color_Primary_Blue">#ff90caf9</Color>
+    <Color x:Key="Color_Primary_Purple">#ffce93d8</Color>
+
+    <SolidColorBrush x:Key="Brush_Primary_Red"
+                     Color="{StaticResource Color_Primary_Red}" />
+    <SolidColorBrush x:Key="Brush_Primary_Orange"
+                     Color="{StaticResource Color_Primary_Orange}" />
+    <SolidColorBrush x:Key="Brush_Primary_Yellow"
+                     Color="{StaticResource Color_Primary_Yellow}" />
+    <SolidColorBrush x:Key="Brush_Primary_Green"
+                     Color="{StaticResource Color_Primary_Green}" />
+    <SolidColorBrush x:Key="Brush_Primary_Blue"
+                     Color="{StaticResource Color_Primary_Blue}" />
+    <SolidColorBrush x:Key="Brush_Primary_Purple"
+                     Color="{StaticResource Color_Primary_Purple}" />
+
+    <SolidColorBrush x:Key="Brush_Primary_Overlay_24dp"
+                     Color="{DynamicResource Color_Primary_Overlay_24dp}" />
 
 </ResourceDictionary>

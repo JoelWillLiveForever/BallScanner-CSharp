@@ -8,10 +8,12 @@
                     Value="Transparent" />
             <Setter Property="BorderThickness"
                     Value="0" />
+            <Setter Property="Opacity"
+                    Value=".6" />
             <Setter Property="Background"
-                    Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
+                    Value="{DynamicResource Brush_Fixed_Surface_Overlay_08dp}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+                    Value="{DynamicResource Brush_OnBackground_OnSurface}" />
             <Setter Property="FontSize"
                     Value="15" />
             <Setter Property="FontWeight"
@@ -71,6 +73,7 @@
                                            FontFamily="{TemplateBinding FontFamily}" 
                                            TextAlignment="{TemplateBinding TextAlignment}"
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                           Opacity="{TemplateBinding Opacity}"
                                            Margin="5,0,0,0" />
                             </DockPanel>
                         </Border>
@@ -82,12 +85,14 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="{DynamicResource Brush_Surface_Overlay_12dp}" />
-                <Setter Property="Foreground"
-                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+                        Value="{DynamicResource Brush_Fixed_Surface_Overlay_12dp}" />
+                <Setter Property="Opacity"
+                        Value="0.87" />
             </Trigger>
             <Trigger Property="IsChecked"
                      Value="True">
+                <Setter Property="Opacity"
+                        Value="1.00" />
                 <Setter Property="Background"
                         Value="{DynamicResource Brush_Primary_Overlay_24dp}" />
                 <Setter Property="Foreground"

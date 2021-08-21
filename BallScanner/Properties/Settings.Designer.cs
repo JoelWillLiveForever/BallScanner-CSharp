@@ -37,25 +37,25 @@ namespace BallScanner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
-        public string Palette {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte CurrentPalette {
             get {
-                return ((string)(this["Palette"]));
+                return ((byte)(this["CurrentPalette"]));
             }
             set {
-                this["Palette"] = value;
+                this["CurrentPalette"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
-        public string Theme {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsDarkTheme {
             get {
-                return ((string)(this["Theme"]));
+                return ((bool)(this["IsDarkTheme"]));
             }
             set {
-                this["Theme"] = value;
+                this["IsDarkTheme"] = value;
             }
         }
         
