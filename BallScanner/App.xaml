@@ -18,7 +18,7 @@
                 <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml"/>
 
                 <!-- Application vector icons -->
-                <ResourceDictionary Source="Resources/Icons/Vector.xaml"/>
+                <ResourceDictionary Source="Resources/Icons/Icons.xaml"/>
 
 
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
