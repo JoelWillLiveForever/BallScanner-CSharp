@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallScanner", "BallScanner\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Controls", "Joel.Controls\Joel.Controls.csproj", "{A98AE7DD-5752-4FF0-B74D-D6E185446B88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Utils", "Joel.Utils\Joel.Utils.csproj", "{065DF014-E977-491F-B3CD-B8C2C017B0BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A98AE7DD-5752-4FF0-B74D-D6E185446B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98AE7DD-5752-4FF0-B74D-D6E185446B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98AE7DD-5752-4FF0-B74D-D6E185446B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

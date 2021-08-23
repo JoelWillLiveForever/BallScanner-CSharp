@@ -118,4 +118,10 @@
     <SolidColorBrush x:Key="Brush_Primary_Overlay_24dp"
                      Color="{DynamicResource Color_Primary_Overlay_24dp}" />
 
+    <!-- RadioButton background when "IsChecked" == True -->
+    <Color x:Key="Color_Background_Surface_Overlay_24dp">#29ffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_Background_Overlay_24dp"
+                     Color="{StaticResource Color_Background_Surface_Overlay_24dp}" />
+
 </ResourceDictionary>

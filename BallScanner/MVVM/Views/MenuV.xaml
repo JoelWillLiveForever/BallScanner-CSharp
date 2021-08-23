@@ -28,9 +28,8 @@
                 <StackPanel Orientation="Vertical"
                             Margin="0,8.7,0,0">
                     
-                    <!-- Нужен новый контрол -->
-                    <Button Content="{DynamicResource Text_Menu}" 
-                            Style="{StaticResource BlockHeaderButtonStyle}" />
+                    <joel:BlockHeader Text="{DynamicResource Text_Menu}"
+                                      TextAlignment="Center" />
 
                     <joel:MenuButton Icon="{StaticResource Geometry_Icon_Account}"
                                      IconFill="{DynamicResource Brush_Primary_Red}"

@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Joel.Controls">
+
+    <Style TargetType="{x:Type local:RadioButton}">
+        <Style.Setters>
+            <Setter Property="Width"
+                    Value="Auto" />
+            <Setter Property="Height"
+                    Value="46" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource Font_Montserrat}" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="Background"
+                    Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:RadioButton}">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10">
+                            
+                            <BulletDecorator Background="Transparent"
+                                             VerticalAlignment="Center"
+                                             Margin="16,0">
+
+                                <BulletDecorator.Bullet>
+                                    <Grid Width="22"
+                                          Height="22">
+
+                                        <Ellipse x:Name="OuterRing"
+                                                 StrokeThickness="2"
+                                                 Stroke="{TemplateBinding Foreground}"
+                                                 Panel.ZIndex="0" />
+
+                                        <Ellipse x:Name="InnerCircle"
+                                                 Fill="{DynamicResource Brush_Primary}"
+                                                 Stroke="Transparent"
+                                                 StrokeThickness="0"
+                                                 Visibility="Collapsed"
+                                                 Margin="4"
+                                                 Panel.ZIndex="1" />
+
+                                    </Grid>
+                                </BulletDecorator.Bullet>
+
+                                <DockPanel Margin="10,0,0,0"
+                                           LastChildFill="True">
+
+                                    <ContentPresenter DockPanel.Dock="Left"
+                                                      Content="{TemplateBinding Content}"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      RecognizesAccessKey="True" />
+
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Right">
+
+                                        <ContentPresenter Content="{TemplateBinding ContentStringFormat}"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Right"
+                                                          RecognizesAccessKey="True"
+                                                          Margin="0,0,10,0" />
+
+                                        <Viewbox VerticalAlignment="Center"
+                                                 HorizontalAlignment="Right"
+                                                 Width="34"
+                                                 Height="21" >
+
+                                            <ContentPresenter Content="{TemplateBinding Icon}"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Right" />
+
+                                        </Viewbox>
+
+                                    </StackPanel>
+
+                                </DockPanel>
+
+                            </BulletDecorator>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+                                <Setter TargetName="InnerCircle"
+                                        Property="Visibility"
+                                        Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource Brush_Surface_Overlay_24dp}" />
+            </Trigger>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource Brush_Background_Overlay_24dp}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -15,8 +16,69 @@
             Background="{DynamicResource Brush_Surface_Overlay_08dp}">
 
         <!-- Content -->
-        <Button Width="100"
-                Height="100"
-                Click="Button_Click" />
+        <Grid Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Language block -->
+            <DockPanel Grid.Column="0"
+                       Margin="0,0,5,0"
+                       LastChildFill="True">
+
+                <joel:BlockHeader DockPanel.Dock="Top"
+                                  Text="{DynamicResource Text_Language}" />
+
+                <StackPanel Orientation="Vertical">
+
+                    <joel:RadioButton Name="Button_LanguageRussian"
+                                      Content="{StaticResource Text_Language_Russian_Region}"
+                                      ContentStringFormat="{DynamicResource Text_Language_Russian}"
+                                      Icon="{StaticResource Vector_Image_FlagRussia}"
+                                      Margin="0,7,0,0" 
+                                      Click="Button_LanguageRussian_Click" />
+
+                    <joel:RadioButton Name="Button_LanguageEnglish"
+                                      Content="{StaticResource Text_Language_English_Region}"
+                                      ContentStringFormat="{DynamicResource Text_Language_English}"
+                                      Icon="{StaticResource Vector_Image_FlagAmerica}"
+                                      Margin="0,7,0,0"
+                                      Click="Button_LanguageEnglish_Click" />
+
+                </StackPanel>
+                
+            </DockPanel>
+
+            <!-- Theme block -->
+            <DockPanel Grid.Column="1"
+                       Margin="5,0,0,0"
+                       LastChildFill="True">
+
+                <joel:BlockHeader DockPanel.Dock="Top"
+                                  Text="{DynamicResource Text_Theme}" />
+
+                <StackPanel Orientation="Vertical">
+
+                    <joel:RadioButton Name="Button_DarkTheme" 
+                                      Content="{DynamicResource Text_Theme_Dark}"
+                                      ContentStringFormat=""
+                                      Icon="{StaticResource Vector_Icon_DarkMode}"
+                                      Margin="0,7,0,0" 
+                                      Click="Button_DarkTheme_Click" />
+
+                    <joel:RadioButton Name="Button_LightTheme"
+                                      Content="{DynamicResource Text_Theme_Light}"
+                                      ContentStringFormat=""
+                                      Icon="{StaticResource Vector_Icon_LightMode}"
+                                      Margin="0,7,0,0" 
+                                      Click="Button_LightTheme_Click" />
+
+                </StackPanel>
+                
+            </DockPanel>
+
+        </Grid>
     </Border>
 </UserControl>

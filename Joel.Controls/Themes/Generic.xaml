@@ -2,6 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Joel.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/BlockHeaderStyle.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/RadioButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="{x:Type local:MenuButton}">
         <Style.Setters>
             <Setter Property="BorderBrush"

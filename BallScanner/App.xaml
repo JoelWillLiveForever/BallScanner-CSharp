@@ -19,8 +19,11 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 
-                <!-- Languages -->
+                <!-- Language -->
                 <ResourceDictionary Source="Resources/Languages/Language.ru-RU.xaml" />
+                
+                <!-- Generic -->
+                <ResourceDictionary Source="Resources/Languages/Generic.xaml" />
 
                 <!-- Application vector icons -->
                 <ResourceDictionary Source="Resources/Icons/Icons.xaml"/>

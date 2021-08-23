@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:behaviors="clr-namespace:Joel.Utils.Behaviors;assembly=Joel.Utils"
+                    xmlns:local="clr-namespace:Joel.Controls">
+
+    <Style TargetType="{x:Type local:BlockHeader}">
+        <Style.Setters>
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource Font_Montserrat}" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="TextAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="Margin"
+                    Value="0" />
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:BlockHeader}">
+                        <Border Background="{TemplateBinding Background}"
+                                Margin="{TemplateBinding Margin}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
+
+                            <StackPanel Orientation="Vertical"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
+
+                                <ContentPresenter Content="{TemplateBinding Text}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                <Rectangle Fill="{TemplateBinding Foreground}"
+                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                           Stroke="Transparent"
+                                           StrokeThickness="0"
+                                           Margin="0,4,0,0"
+                                           RadiusX="0.5"
+                                           RadiusY="0.5"
+                                           Height="1"
+                                           Width="Auto" />
+
+                            </StackPanel>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <!--<Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Foreground"
+                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+            </Trigger>
+        </Style.Triggers>-->
+    </Style>
+    
+</ResourceDictionary>

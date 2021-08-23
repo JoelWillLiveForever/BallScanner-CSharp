@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -35,10 +36,9 @@
                            Margin="0,0,0,5"
                            LastChildFill="True">
 
-                    <Button DockPanel.Dock="Top"
-                            Content="Изображение со сканера"
-                            Margin="0,0,0,7"
-                            Style="{StaticResource BlockHeaderButtonStyle}" />
+                    <joel:BlockHeader DockPanel.Dock="Top"
+                                      Text="{DynamicResource Text_OutputImage}"
+                                      Margin="0,0,0,7" />
 
                     <DockPanel LastChildFill="True">
 
@@ -101,10 +101,9 @@
                                Margin="0,0,10,0"
                                LastChildFill="True">
 
-                        <Button DockPanel.Dock="Top"
-                                Content="Регулировка чувствительности"
-                                Margin="0,0,0,7"
-                                Style="{StaticResource BlockHeaderButtonStyle}" />
+                        <joel:BlockHeader DockPanel.Dock="Top"
+                                          Text="{DynamicResource Text_Sensitivity}"
+                                          Margin="0,0,0,7" />
 
                         <Grid Background="Aqua">
                             
@@ -121,10 +120,9 @@
                                Margin="10,0,0,0"
                                LastChildFill="True">
 
-                        <Button DockPanel.Dock="Top"
-                                Content="Регулировка пороговых значений"
-                                Margin="0,0,0,7"
-                                Style="{StaticResource BlockHeaderButtonStyle}" />
+                        <joel:BlockHeader DockPanel.Dock="Top"
+                                          Text="{DynamicResource Text_Thresholds}"
+                                          Margin="0,0,0,7" />
                         
                         <Grid Background="Crimson">
                             
@@ -148,10 +146,9 @@
                                Margin="0,0,0,5"
                                LastChildFill="True">
 
-                        <Button DockPanel.Dock="Top"
-                                Content="Средние значения"
-                                Margin="0,0,0,7"
-                                Style="{StaticResource BlockHeaderButtonStyle}" />
+                        <joel:BlockHeader DockPanel.Dock="Top"
+                                          Text="{DynamicResource Text_GeneralScanResults}"
+                                          Margin="0,0,0,7" />
 
                         <DataGrid>
 
@@ -169,10 +166,9 @@
                                Margin="0,5,0,0"
                                LastChildFill="True">
 
-                        <Button DockPanel.Dock="Top"
-                                Content="Результаты сканирования"
-                                Margin="0,0,0,7"
-                                Style="{StaticResource BlockHeaderButtonStyle}" />
+                        <joel:BlockHeader DockPanel.Dock="Top"
+                                          Text="{DynamicResource Text_DetailedScanResults}"
+                                          Margin="0,0,0,7" />
 
                         <DataGrid>
 
