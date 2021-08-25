@@ -14,6 +14,7 @@ namespace BallScanner.MVVM.ViewModels
         public void ChangePalette()
         {
             var app = (App)Application.Current;
+            app.CurrentPalette = Palettes.Yellow;
 
             if (Properties.Settings.Default.IsDarkTheme)
                 app.ChangeTheme(new Uri("Resources/Palettes/Yellow/Dark.xaml", UriKind.Relative),
@@ -22,7 +23,6 @@ namespace BallScanner.MVVM.ViewModels
                 app.ChangeTheme(new Uri("Resources/Palettes/Yellow/Light.xaml", UriKind.Relative),
                                 new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
 
-            Properties.Settings.Default.CurrentPalette = (byte)Palettes.Yellow;
             Properties.Settings.Default.Save();
         }
     }

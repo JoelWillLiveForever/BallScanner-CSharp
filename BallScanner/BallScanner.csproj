@@ -319,6 +319,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="NewFolder1\" />
     <Folder Include="Resources\Styles\TextBlocks\" />
   </ItemGroup>
   <ItemGroup>

@@ -79,7 +79,7 @@
                                            TextAlignment="{TemplateBinding TextAlignment}"
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                            Opacity="{TemplateBinding Opacity}"
-                                           Margin="5,0,0,0" />
+                                           Margin="7,0,0,0" />
                             </DockPanel>
                         </Border>
                     </ControlTemplate>

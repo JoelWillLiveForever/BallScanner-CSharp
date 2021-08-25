@@ -22,7 +22,7 @@ namespace BallScanner.MVVM.Views
             if (Properties.Settings.Default.IsDarkTheme) return;
 
             var app = (App)Application.Current;
-            switch ((Palettes)Properties.Settings.Default.CurrentPalette)
+            switch (app.CurrentPalette)
             {
                 case Palettes.Red:
                     app.ChangeTheme(new Uri("Resources/Palettes/Red/Dark.xaml", UriKind.Relative),
@@ -59,7 +59,7 @@ namespace BallScanner.MVVM.Views
             if (!Properties.Settings.Default.IsDarkTheme) return;
 
             var app = (App)Application.Current;
-            switch ((Palettes)Properties.Settings.Default.CurrentPalette)
+            switch (app.CurrentPalette)
             {
                 case Palettes.Red:
                     app.ChangeTheme(new Uri("Resources/Palettes/Red/Light.xaml", UriKind.Relative),

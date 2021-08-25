@@ -33,19 +33,23 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <joel:RadioButton Name="Button_LanguageRussian"
-                                      Content="{StaticResource Text_Language_Russian_Region}"
-                                      ContentStringFormat="{DynamicResource Text_Language_Russian}"
-                                      Icon="{StaticResource Vector_Image_FlagRussia}"
-                                      Margin="0,7,0,0" 
-                                      Click="Button_LanguageRussian_Click" />
+                    <joel:CustomRadioButton Name="Button_LanguageRussian"
+                                            Content="{StaticResource Text_Language_Russian_Region}"
+                                            ContentStringFormat="{DynamicResource Text_Language_Russian}"
+                                            Icon="{StaticResource Vector_Image_FlagRussia}"
+                                            IconWidth="34"
+                                            IconHeight="21"
+                                            Margin="0,7,0,0" 
+                                            Click="Button_LanguageRussian_Click" />
 
-                    <joel:RadioButton Name="Button_LanguageEnglish"
-                                      Content="{StaticResource Text_Language_English_Region}"
-                                      ContentStringFormat="{DynamicResource Text_Language_English}"
-                                      Icon="{StaticResource Vector_Image_FlagAmerica}"
-                                      Margin="0,7,0,0"
-                                      Click="Button_LanguageEnglish_Click" />
+                    <joel:CustomRadioButton Name="Button_LanguageEnglish"
+                                            Content="{StaticResource Text_Language_English_Region}"
+                                            ContentStringFormat="{DynamicResource Text_Language_English}"
+                                            Icon="{StaticResource Vector_Image_FlagAmerica}"
+                                            IconWidth="34"
+                                            IconHeight="21"
+                                            Margin="0,7,0,0"
+                                            Click="Button_LanguageEnglish_Click" />
 
                 </StackPanel>
                 
@@ -61,19 +65,23 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <joel:RadioButton Name="Button_DarkTheme" 
-                                      Content="{DynamicResource Text_Theme_Dark}"
-                                      ContentStringFormat=""
-                                      Icon="{StaticResource Vector_Icon_DarkMode}"
-                                      Margin="0,7,0,0" 
-                                      Click="Button_DarkTheme_Click" />
+                    <joel:CustomRadioButton Name="Button_DarkTheme" 
+                                            Content="{DynamicResource Text_Theme_Dark}"
+                                            ContentStringFormat=""
+                                            Icon="{StaticResource Vector_Icon_DarkMode}"
+                                            IconWidth="22"
+                                            IconHeight="22"
+                                            Margin="0,7,0,0" 
+                                            Click="Button_DarkTheme_Click" />
 
-                    <joel:RadioButton Name="Button_LightTheme"
-                                      Content="{DynamicResource Text_Theme_Light}"
-                                      ContentStringFormat=""
-                                      Icon="{StaticResource Vector_Icon_LightMode}"
-                                      Margin="0,7,0,0" 
-                                      Click="Button_LightTheme_Click" />
+                    <joel:CustomRadioButton Name="Button_LightTheme"
+                                            Content="{DynamicResource Text_Theme_Light}"
+                                            ContentStringFormat=""
+                                            Icon="{StaticResource Vector_Icon_LightMode}"
+                                            IconWidth="22"
+                                            IconHeight="22"
+                                            Margin="0,7,0,0" 
+                                            Click="Button_LightTheme_Click" />
 
                 </StackPanel>
                 
