@@ -66,12 +66,22 @@
                                                           RecognizesAccessKey="True"
                                                           Margin="0,0,10,0" />
 
+                                        <Viewbox  Width="{TemplateBinding ImageWidth}"
+                                                  Height="{TemplateBinding ImageHeight}"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center">
+
+                                            <ContentPresenter Content="{TemplateBinding Image}" />
+
+                                        </Viewbox>
+
                                         <Viewbox  Width="{TemplateBinding IconWidth}"
                                                   Height="{TemplateBinding IconHeight}"
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Center">
 
-                                            <ContentPresenter Content="{TemplateBinding Icon}" />
+                                            <Path Fill="{TemplateBinding Foreground}"
+                                                  Data="{TemplateBinding Icon}" />
 
                                         </Viewbox>
 

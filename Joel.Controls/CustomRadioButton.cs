@@ -6,13 +6,42 @@ namespace Joel.Controls
 {
     public class CustomRadioButton : RadioButton
     {
+        // Image
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(CustomRadioButton), new PropertyMetadata(default(UIElement)));
+
+        public UIElement Image
+        {
+            get { return (UIElement)GetValue(ImageProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+
+        // Image Width & Height
+        public static readonly DependencyProperty ImageWidthProperty =
+            DependencyProperty.Register(nameof(ImageWidth), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+
+        public double ImageWidth
+        {
+            get { return (double)GetValue(ImageWidthProperty); }
+            set { SetValue(ImageWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty ImageHeightProperty =
+            DependencyProperty.Register(nameof(ImageHeight), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+
+        public double ImageHeight
+        {
+            get { return (double)GetValue(ImageHeightProperty); }
+            set { SetValue(ImageHeightProperty, value); }
+        }
+
         // Icon
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(nameof(Icon), typeof(UIElement), typeof(CustomRadioButton), new PropertyMetadata(default(UIElement)));
+            DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(CustomRadioButton), new PropertyMetadata(default(Geometry)));
 
-        public UIElement Icon
+        public Geometry Icon
         {
-            get { return (UIElement)GetValue(IconProperty); }
+            get { return (Geometry)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
