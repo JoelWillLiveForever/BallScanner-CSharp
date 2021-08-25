@@ -42,7 +42,6 @@ namespace BallScanner.MVVM.ViewModels
 
         public void OnMenuButtonClick(object param)
         {
-            System.Diagnostics.Debug.WriteLine($"Clicked: {param as string}");
             string name = param as string;
 
             if (name == "Account")

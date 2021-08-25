@@ -72,6 +72,6 @@
             </ScrollViewer>
         </DockPanel>
         
-        <ContentPresenter Content="{Binding CurrentActionVM}" />
+        <ContentPresenter Content="{Binding Path=CurrentActionVM}" />
     </DockPanel>
 </UserControl>

@@ -4,7 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Joel.Controls;component/Themes/BlockHeaderStyle.xaml" />
-        <ResourceDictionary Source="/Joel.Controls;component/Themes/RadioButtonStyle.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/CustomRadioButtonStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="{x:Type local:MenuButton}">
