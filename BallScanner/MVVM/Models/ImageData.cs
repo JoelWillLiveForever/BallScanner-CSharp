@@ -3,20 +3,13 @@ using System.Windows.Media;
 
 namespace BallScanner.MVVM.Models
 {
-    public enum Grade
+    public class ImageData
     {
-        FIRST,
-        SECOND,
-        DEFECTIVE
-    }
-
-    public class CalibrateM
-    {
-        private string _fileName;
-        public string FileName
+        private string _name;
+        public string Name
         {
-            get => _fileName;
-            set => _fileName = value;
+            get => _name;
+            set => _name = value;
         }
 
         private long _numberOfBlackPixels;
@@ -26,11 +19,11 @@ namespace BallScanner.MVVM.Models
             set => _numberOfBlackPixels = value;
         }
 
-        private Grade _grade;
-        public Grade Grade
+        private BallGrade _ballGrade;
+        public BallGrade BallGrade
         {
-            get => _grade;
-            set => _grade = value;
+            get => _ballGrade;
+            set => _ballGrade = value;
         }
 
         private Bitmap _bitmap;

@@ -1,15 +1,17 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Core;
+using BallScanner.MVVM.Models;
+using ILGPU;
+using ILGPU.Runtime;
+using Joel.Utils.Helpers;
 using Microsoft.Win32;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace BallScanner.MVVM.ViewModels
 {
@@ -17,67 +19,46 @@ namespace BallScanner.MVVM.ViewModels
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private ImageSource m_bitmapBind = null;
-        public ImageSource M_bitmapBind 
+        public static RelayCommand PerformAction { get; set; }
+
+        private ImageData[] imagesArr = null;
+        private int currentImageIndex = 0;
+
+        private ImageSource _currentImageSource;
+        public ImageSource CurrentImageSource
         {
-            get => m_bitmapBind;
+            get => _currentImageSource;
             set
             {
-                m_bitmapBind = value;
-                OnPropertyChanged("M_bitmapBind");
+                _currentImageSource = value;
+                OnPropertyChanged(nameof(CurrentImageSource));
             }
         }
 
-        private int _sliderValue;
-        public int SliderValue
+        private int _thresholdValue = 128;
+        public int ThresholdValue
         {
-            get => _sliderValue;
+            get => _thresholdValue;
             set
             {
-                _sliderValue = value;
-                OnPropertyChanged("SliderValue");
+                _thresholdValue = value;
+                OnPropertyChanged(nameof(ThresholdValue));
+
+                if (imagesArr != null)
+                {
+                    Bitmap bitmap = Threshold(new Bitmap(imagesArr[currentImageIndex].Bitmap), ThresholdValue);
+                    CurrentImageSource = Converters.ImageSourceFromBitmap(bitmap);
+                }
             }
         }
-
-        // commands
-        public RelayCommand ButtonCommand { get; set; }
 
         public CalibrateVM()
         {
-            Log.Info("Вызов конструктора класса");
-            Console.WriteLine("CalibrateVM");
-            ButtonCommand = new RelayCommand(OnButtonCommand);
-            //CurrentModel = new CalibrateM();
+            Log.Info("Constructor called!");
+            PerformAction = new RelayCommand(OnPerformAction);
         }
 
-        public BitmapFrame BitmapToBitmapSource(Bitmap bitmap)
-        {
-            // Convert Bitmap to BitmapImage
-            MemoryStream str = new MemoryStream();
-            bitmap.Save(str, ImageFormat.Bmp);
-            str.Seek(0, SeekOrigin.Begin);
-            BmpBitmapDecoder bdc = new BmpBitmapDecoder(str, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-
-            return bdc.Frames[0];
-        }
-
-        BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
-                return bitmapimage;
-            }
-        }
-
-        private void OnButtonCommand(object param)
+        private void OnPerformAction(object param)
         {
             string sender = param as string;
 
@@ -88,10 +69,73 @@ namespace BallScanner.MVVM.ViewModels
                     {
                         OpenFileDialog openFile = new OpenFileDialog();
                         openFile.Filter = "JPEG/JPG - JPG Files|*.jpeg;*.jpg|BMP - Windows Bitmap|*.bmp|PNG - Portable Network Graphics|*.png";
+                        openFile.Multiselect = true;
 
                         if (openFile.ShowDialog() == true)
                         {
+                            imagesArr = new ImageData[openFile.FileNames.Length];
 
+                            for (int i = 0; i < imagesArr.Length; i++)
+                            {
+                                Bitmap bitmapImage = new Bitmap(openFile.FileNames[i]);
+
+                                imagesArr[i] = new ImageData()
+                                {
+                                    Name = openFile.SafeFileNames[i],
+                                    NumberOfBlackPixels = -1,
+                                    BallGrade = BallGrade.INDEFINED,
+                                    Bitmap = bitmapImage,
+                                    ImageSource = Converters.ImageSourceFromBitmap(Threshold(new Bitmap(bitmapImage), ThresholdValue))
+                                };
+                            }
+
+                            CurrentImageSource = imagesArr[currentImageIndex].ImageSource;
+
+                            //var context = new Context();
+
+                            //// Priority search
+                            //Accelerator accelerator = null;
+                            //for (int i = 0; i < 3; i++)
+                            //{
+                            //    foreach (var acceleratorId in Accelerator.Accelerators)
+                            //    {
+                            //        if (i == 0 && acceleratorId.AcceleratorType == AcceleratorType.Cuda ||
+                            //            i == 1 && acceleratorId.AcceleratorType == AcceleratorType.OpenCL ||
+                            //            i == 2 && acceleratorId.AcceleratorType == AcceleratorType.CPU)
+                            //        {
+                            //            accelerator = Accelerator.Create(context, acceleratorId);
+                            //            goto Found;
+                            //        }
+                            //    }
+                            //}
+
+                            //if (accelerator == null)
+                            //    Log.Error("Accelerator is null!");
+
+                            //Found:
+                            //var bitmapData = CurrentImage.Bitmap.LockBits(new Rectangle(0, 0, CurrentImage.Bitmap.Width, CurrentImage.Bitmap.Height),
+                            //    ImageLockMode.ReadOnly,
+                            //    PixelFormat.Format24bppRgb);
+
+                            //// input data
+                            //byte[] pixelData = new byte[bitmapData.Stride * bitmapData.Height];
+                            //Marshal.Copy(bitmapData.Scan0, pixelData, 0, pixelData.Length);
+
+                            //var kernel = accelerator.LoadAutoGroupedStreamKernel<Index1, ArrayView<int>, int>(MyKernel);
+                            //var buffer = accelerator.Allocate<int>(1024);
+
+                            //kernel(buffer.Length, buffer.View, ThresholdValue);
+
+                            //accelerator.Synchronize();
+
+                            //var data = buffer.GetAsArray();
+
+                            //for (int i = 0; i < data.Length; i++)
+                            //{
+
+                            //}
+
+                            break;
                         }
                     }
                     catch (FileNotFoundException ex)
@@ -110,23 +154,45 @@ namespace BallScanner.MVVM.ViewModels
                     {
                         MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    break;
 
+                    break;
                 case "Button_PrevImage":
 
-
-
+                    if (imagesArr != null && currentImageIndex > 0) 
+                        currentImageIndex--;
                     break;
                 case "Button_NextImage":
 
-
-
+                    if (imagesArr != null && currentImageIndex < imagesArr.Length)
+                        currentImageIndex++;
                     break;
-
                 case "Button_Execute":
 
                     break;
             }
+        }
+
+        private Bitmap Threshold(Bitmap bitmap, float threshold)
+        {
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetThreshold(threshold);
+
+            System.Drawing.Point[] points =
+            {
+                new System.Drawing.Point(0,0),
+                new System.Drawing.Point(bitmap.Width, 0),
+                new System.Drawing.Point(0, bitmap.Height)
+            };
+
+            Rectangle rect =
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+
+            using (Graphics gr = Graphics.FromImage(bitmap))
+            {
+                gr.DrawImage(bitmap, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            return bitmap;
         }
 
         public override void ChangePalette()
@@ -144,60 +210,9 @@ namespace BallScanner.MVVM.ViewModels
             Properties.Settings.Default.Save();
         }
 
-        public static class BetterEnumerable
+        private static void MyKernel(Index1 index, ArrayView<int> dataView, int constant)
         {
-            public static IEnumerable<int> SteppedRange(int fromInclusive, int toExclusive, int step)
-            {
-                for (var i = fromInclusive; i < toExclusive; i += step)
-                {
-                    yield return i;
-                }
-            }
+            dataView[index] = dataView[index] + constant;
         }
     }
 }
-
-#region
-//using (var context = new Context())
-//{
-//    // Priority search
-//    Accelerator accelerator = null;
-//    for (int i = 0; i < 3; i++)
-//    {
-//        foreach (var acceleratorId in Accelerator.Accelerators)
-//        {
-//            if (i == 0 && acceleratorId.AcceleratorType == AcceleratorType.Cuda ||
-//                i == 1 && acceleratorId.AcceleratorType == AcceleratorType.OpenCL ||
-//                i == 2 && acceleratorId.AcceleratorType == AcceleratorType.CPU)
-//            {
-//                accelerator = Accelerator.Create(context, acceleratorId);
-//                goto Found;
-//            }
-//        }
-//    }
-
-//    if (accelerator == null)
-//    {
-//        _logger.LogError("Accelerator was null at: {time}", DateTimeOffset.UtcNow);
-//        // error
-//    }
-
-//Found:
-//    var kernel = accelerator.LoadAutoGroupedStreamKernel<Index1, ArrayView<int>, int>(MyKernel);
-
-//    using (var buffer = accelerator.Allocate<int>(1024))
-//    {
-//        kernel(buffer.Length, buffer.View, 42);
-
-//        accelerator.Synchronize();
-
-//        var data = buffer.GetAsArray();
-//        for (int i = 0; i < data.Length; i++)
-//        {
-
-//        }
-//    }
-
-//    break;
-//}
-#endregion

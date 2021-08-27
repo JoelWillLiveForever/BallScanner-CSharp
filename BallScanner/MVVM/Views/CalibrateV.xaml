@@ -56,8 +56,10 @@
                               VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch">
                             
-                            <Image Source="{Binding Path=M_bitmapBind, UpdateSourceTrigger=PropertyChanged}" />
-                            
+                            <Image Source="{Binding CurrentImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   Stretch="Uniform" />
+
                         </Grid>
 
                     </DockPanel>
@@ -85,25 +87,25 @@
 
                         <Button Grid.Column="0" 
                                 Name="Button_LoadImages"
-                                Command="{Binding Path=ButtonCommand}"
+                                Command="{Binding PerformAction}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Content="Загрузить изображения" />
                         
                         <Button Grid.Column="1" 
                                 Name="Button_PrevImage"
-                                Command="{Binding Path=ButtonCommand}"
+                                Command="{Binding PerformAction}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Content="Предыдущая"/>
                         
                         <Button Grid.Column="2" 
                                 Name="Button_NextImage"
-                                Command="{Binding Path=ButtonCommand}"
+                                Command="{Binding PerformAction}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Content="Следующая"/>
 
                         <Button Grid.Column="3" 
                                 Name="Button_Execute"
-                                Command="{Binding Path=ButtonCommand}"
+                                Command="{Binding PerformAction}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Content="Выполнить"/>
 
@@ -159,9 +161,16 @@
                                           Text="{DynamicResource Text_Sensitivity}"
                                           Margin="0,0,0,7" />
 
-                        <Slider Value="{Binding Path=SliderValue, Mode=OneWayToSource}"
+                        <Slider DockPanel.Dock="Top"
+                                Minimum="0"
                                 Maximum="255"
-                                Minimum="0" />
+                                Value="{Binding ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="{Binding ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
+                                   FontSize="14" />
 
                     </DockPanel>
 

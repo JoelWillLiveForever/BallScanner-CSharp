@@ -1,11 +1,12 @@
-﻿using BallScanner.MVVM.Commands;
-using BallScanner.MVVM.Core;
-using System;
+﻿using BallScanner.MVVM.Core;
+using NLog;
 
 namespace BallScanner.MVVM.ViewModels
 {
     public class MainVM : BaseViewModel
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private BaseViewModel _selectedViewModel;
         public BaseViewModel SelectedViewModel
         {
@@ -19,7 +20,7 @@ namespace BallScanner.MVVM.ViewModels
 
         public MainVM()
         {
-            Console.WriteLine("MainVM");
+            Log.Info("Constructor called!");
             SelectedViewModel = new MenuVM();
         }
     }

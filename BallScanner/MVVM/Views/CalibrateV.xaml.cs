@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace BallScanner.MVVM.Views
@@ -47,6 +48,21 @@ namespace BallScanner.MVVM.Views
             {
                 column.MinWidth = column.ActualWidth;
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
+        }
+
+        private void Slider_KeyDown(object sender, KeyEventArgs e)
+        {
+            Slider slider = sender as Slider;
+
+            switch (e.Key)
+            {
+                case Key.Left:
+                    slider.Value -= 1;
+                    break;
+                case Key.Right:
+                    slider.Value += 1;
+                    break;
             }
         }
     }

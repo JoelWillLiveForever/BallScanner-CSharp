@@ -1,11 +1,14 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Core;
+using NLog;
 using System;
 
 namespace BallScanner.MVVM.ViewModels
 {
     public class MenuVM : BaseViewModel
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private static AccountVM accountVM = new AccountVM();
         private static ScanVM scanVM = new ScanVM();
         private static CalibrateVM calibrateVM = new CalibrateVM();
@@ -28,7 +31,7 @@ namespace BallScanner.MVVM.ViewModels
 
         public MenuVM()
         {
-            Console.WriteLine("MenuVM");
+            Log.Info("Constructor called!");
             SelectedPage = accountVM;
 
             // Повесить команды на MenuButtonClick

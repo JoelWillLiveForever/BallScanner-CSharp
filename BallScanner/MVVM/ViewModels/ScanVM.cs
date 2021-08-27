@@ -1,4 +1,5 @@
 ﻿using BallScanner.MVVM.Core;
+using NLog;
 using System;
 using System.Windows;
 
@@ -6,9 +7,11 @@ namespace BallScanner.MVVM.ViewModels
 {
     public class ScanVM : PageVM
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         public ScanVM()
         {
-            Console.WriteLine("ScanVM");
+            Log.Info("Constructor called!");
         }
 
         public override void ChangePalette()
