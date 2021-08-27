@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!-- Palette & Theme -->
+                <!-- Palette & Theme --> 
                 <ResourceDictionary x:Name="ThemeDictionary">
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml" />

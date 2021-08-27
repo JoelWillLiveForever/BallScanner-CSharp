@@ -55,10 +55,20 @@
     <StartupObject>BallScanner.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,7 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MVVM\Core\PageVM.cs" />
+    <Compile Include="MVVM\Base\PageVM.cs" />
     <Compile Include="MVVM\Models\AboutM.cs" />
     <Compile Include="MVVM\Models\AccountM.cs" />
     <Compile Include="MVVM\Models\CalibrateM.cs" />
@@ -139,8 +149,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MVVM\Core\BaseViewModel.cs" />
-    <Compile Include="MVVM\Core\RelayCommand.cs" />
+    <Compile Include="MVVM\Base\BaseViewModel.cs" />
+    <Compile Include="MVVM\Commands\RelayCommand.cs" />
     <Compile Include="MVVM\Models\MainM.cs" />
     <Compile Include="MVVM\ViewModels\MainVM.cs" />
     <Compile Include="MVVM\Views\MainV.xaml.cs">
@@ -274,6 +284,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -344,9 +361,10 @@
       <Project>{a98ae7dd-5752-4ff0-b74d-d6e185446b88}</Project>
       <Name>Joel.Controls</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\1.jpg" />
+    <ProjectReference Include="..\Joel.Utils\Joel.Utils.csproj">
+      <Project>{065df014-e977-491f-b3cd-b8c2c017b0bf}</Project>
+      <Name>Joel.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

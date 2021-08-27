@@ -6,14 +6,12 @@ namespace BallScanner.MVVM.ViewModels
 {
     public class DocumentsVM : PageVM
     {
-        public const string PALETTE = "Green";
-
         public DocumentsVM()
         {
-
+            Console.WriteLine("DocumentsVM");
         }
 
-        public void ChangePalette()
+        public override void ChangePalette()
         {
             var app = (App)Application.Current;
             app.CurrentPalette = Palettes.Green;

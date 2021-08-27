@@ -4,16 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
         WindowStartupLocation="CenterScreen"
         Title="Ball Scanner"
         Height="450"
         Width="800"
         Style="{StaticResource CustomWindowStyle}">
 
-    <Window.DataContext>
-        <vm:MainVM />
-    </Window.DataContext>
-
-    <ContentPresenter Content="{Binding CurrentActionVM}" />
+    <ContentControl Content="{Binding SelectedViewModel}" />
+    
 </Window>

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Shell;
+using BallScanner.MVVM.ViewModels;
 using Microsoft.Win32;
 
 namespace BallScanner.MVVM.Views
@@ -17,6 +18,7 @@ namespace BallScanner.MVVM.Views
         public MainV()
         {
             InitializeComponent();
+            DataContext = new MainVM();
 
             MyWindowChrome = WindowChrome.GetWindowChrome(this);
 

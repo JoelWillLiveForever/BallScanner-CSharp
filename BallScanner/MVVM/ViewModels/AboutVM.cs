@@ -8,10 +8,10 @@ namespace BallScanner.MVVM.ViewModels
     {
         public AboutVM()
         {
-
+            Console.WriteLine("AboutVM");
         }
 
-        public void ChangePalette()
+        public override void ChangePalette()
         {
             var app = (App)Application.Current;
             app.CurrentPalette = Palettes.Purple;

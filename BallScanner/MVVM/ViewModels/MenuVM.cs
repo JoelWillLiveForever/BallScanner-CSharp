@@ -1,40 +1,35 @@
-﻿using BallScanner.MVVM.Core;
+﻿using BallScanner.MVVM.Commands;
+using BallScanner.MVVM.Core;
+using System;
 
 namespace BallScanner.MVVM.ViewModels
 {
     public class MenuVM : BaseViewModel
     {
-        private PageVM _currentActionVM;
-        public PageVM CurrentActionVM
+        private static AccountVM accountVM = new AccountVM();
+        private static ScanVM scanVM = new ScanVM();
+        private static CalibrateVM calibrateVM = new CalibrateVM();
+        private static DocumentsVM documentsVM = new DocumentsVM();
+        private static SettingsVM settingsVM = new SettingsVM();
+        private static AboutVM aboutVM = new AboutVM();
+
+        public static RelayCommand MenuButtonClick { get; set; }
+
+        private PageVM _selectedPage;
+        public PageVM SelectedPage
         {
-            get { return _currentActionVM; }
+            get => _selectedPage;
             set
             {
-                _currentActionVM = value;
-                OnPropertyChanged("CurrentActionVM");
+                _selectedPage = value;
+                OnPropertyChanged(nameof(SelectedPage));
             }
         }
 
-        // Команда, реагирующая на нажатие кнопки из меню
-        public RelayCommand MenuButtonClick { get; set; }
-
-        private AccountVM accountVM;
-        private ScanVM scanVM;
-        private CalibrateVM calibrateVM;
-        private DocumentsVM documentsVM;
-        private SettingsVM settingsVM;
-        private AboutVM aboutVM;
-
         public MenuVM()
         {
-            accountVM = new AccountVM();
-            scanVM = new ScanVM();
-            calibrateVM = new CalibrateVM();
-            documentsVM = new DocumentsVM();
-            settingsVM = new SettingsVM();
-            aboutVM = new AboutVM();
-
-            CurrentActionVM = scanVM;
+            Console.WriteLine("MenuVM");
+            SelectedPage = accountVM;
 
             // Повесить команды на MenuButtonClick
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);
@@ -46,26 +41,26 @@ namespace BallScanner.MVVM.ViewModels
 
             if (name == "Account")
             {
-                CurrentActionVM = accountVM;
+                SelectedPage = accountVM;
             } else if (name == "Scan")
             {
-                CurrentActionVM = scanVM;
+                SelectedPage = scanVM;
             }
             else if (name == "Calibrate")
             {
-                CurrentActionVM = calibrateVM;
+                SelectedPage = calibrateVM;
             } else if (name == "Documents")
             {
-                CurrentActionVM = documentsVM;
+                SelectedPage = documentsVM;
             } else if (name == "Settings")
             {
-                CurrentActionVM = settingsVM;
+                SelectedPage = settingsVM;
             } else if (name == "About")
             {
-                CurrentActionVM = aboutVM;
+                SelectedPage = aboutVM;
             }
 
-            CurrentActionVM.ChangePalette();
+            SelectedPage.ChangePalette();
         }
     }
 }

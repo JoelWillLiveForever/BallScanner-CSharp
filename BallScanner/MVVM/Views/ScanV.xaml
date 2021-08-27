@@ -7,14 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.DataContext>
-        <vm:ScanVM />
-    </UserControl.DataContext>
-
     <Border CornerRadius="10,0,0,0"
             Background="{DynamicResource Brush_Surface_Overlay_08dp}">
 
         <!-- Content -->
 
     </Border>
+    
 </UserControl>

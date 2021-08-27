@@ -2,15 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
+             xmlns:utils="clr-namespace:Joel.Controls.Utils;assembly=Joel.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <UserControl.DataContext>
-        <vm:CalibrateVM />
-    </UserControl.DataContext>
 
     <Border CornerRadius="10,0,0,0"
             Background="{DynamicResource Brush_Surface_Overlay_08dp}">
@@ -43,12 +39,14 @@
                     <DockPanel LastChildFill="True">
 
                         <DataGrid DockPanel.Dock="Top"
-                                  Height="60"
-                                  Margin="0,0,0,3.5">
+                                  utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True"
+                                  Height="60">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Всего изображений загружено" Width="*" />
-                                <DataGridTextColumn Header="Среднее число чёрных пикселей" Width="*" />
+                                <DataGridTextColumn x:Name="localNa" Header="№ п/п" Width="*" />
+                                <DataGridTextColumn Header="Имя файла" Width="*" />
+                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" />
+                                <DataGridTextColumn Header="Сорт" Width="*" />
                             </DataGrid.Columns>
 
                         </DataGrid>
@@ -58,7 +56,7 @@
                               VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch">
                             
-                            <Image Source="/Resources/1.jpg" />
+                            <Image Source="{Binding Path=M_bitmapBind, UpdateSourceTrigger=PropertyChanged}" />
                             
                         </Grid>
 
@@ -68,11 +66,67 @@
 
                 <!-- Control block -->
                 <Grid Grid.Row="1"
-                      Background="GreenYellow"
                       Margin="0,5,0,0">
-                    
-                    
-                    
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Controls -->
+                    <Grid Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" 
+                                Name="Button_LoadImages"
+                                Command="{Binding Path=ButtonCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="Загрузить изображения" />
+                        
+                        <Button Grid.Column="1" 
+                                Name="Button_PrevImage"
+                                Command="{Binding Path=ButtonCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="Предыдущая"/>
+                        
+                        <Button Grid.Column="2" 
+                                Name="Button_NextImage"
+                                Command="{Binding Path=ButtonCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="Следующая"/>
+
+                        <Button Grid.Column="3" 
+                                Name="Button_Execute"
+                                Command="{Binding Path=ButtonCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="Выполнить"/>
+
+                    </Grid>
+
+                    <!-- Status -->
+                    <Grid Grid.Row="1"
+                          Margin="0,10,0,0"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Background="{DynamicResource Brush_Primary}">
+
+                        <TextBlock Grid.Row="1"
+                                   Background="Transparent"
+                                   Foreground="{DynamicResource Brush_OnPrimary}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Padding="10,0"
+                                   TextAlignment="Left"
+                                   Text="Статус: -- Неактивный --"/>
+                        
+                    </Grid>
+
                 </Grid>
                 
             </Grid>
@@ -105,10 +159,10 @@
                                           Text="{DynamicResource Text_Sensitivity}"
                                           Margin="0,0,0,7" />
 
-                        <Grid Background="Aqua">
-                            
-                        </Grid>
-                        
+                        <Slider Value="{Binding Path=SliderValue, Mode=OneWayToSource}"
+                                Maximum="255"
+                                Minimum="0" />
+
                     </DockPanel>
 
                     <!-- Separator -->
@@ -150,7 +204,7 @@
                                           Text="{DynamicResource Text_GeneralScanResults}"
                                           Margin="0,0,0,7" />
 
-                        <DataGrid>
+                        <DataGrid utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Всего изображений загружено" Width="*" />
@@ -190,4 +244,5 @@
         </Grid>
         
     </Border>
+    
 </UserControl>
