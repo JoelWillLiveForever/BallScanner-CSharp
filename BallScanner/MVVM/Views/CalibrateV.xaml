@@ -163,7 +163,7 @@
 
                         <Slider DockPanel.Dock="Top"
                                 Minimum="0"
-                                Maximum="255"
+                                Maximum="256"
                                 Value="{Binding ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Text="{Binding ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"

@@ -1,8 +1,6 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Core;
 using BallScanner.MVVM.Models;
-using ILGPU;
-using ILGPU.Runtime;
 using Joel.Utils.Helpers;
 using Microsoft.Win32;
 using NLog;
@@ -35,6 +33,13 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        //private int _secondThreshold = 128;
+        //private int SecondThreshold
+        //{
+        //    get => _secondThreshold;
+        //    set => _secondThreshold = 256 - value;
+        //}
+
         private int _thresholdValue = 128;
         public int ThresholdValue
         {
@@ -46,7 +51,19 @@ namespace BallScanner.MVVM.ViewModels
 
                 if (imagesArr != null)
                 {
-                    Bitmap bitmap = Threshold(new Bitmap(imagesArr[currentImageIndex].Bitmap), ThresholdValue);
+                    Bitmap bitmap;
+                    if (ThresholdValue == 0)
+                    {
+                        bitmap = new Bitmap(imagesArr[currentImageIndex].Bitmap.Width,
+                            imagesArr[currentImageIndex].Bitmap.Height,
+                            System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
+                    }
+                    else
+                    {
+                        //SecondThreshold = ThresholdValue;
+                        bitmap = Threshold(new Bitmap(imagesArr[currentImageIndex].Bitmap), ThresholdValue);
+                    }
+
                     CurrentImageSource = Converters.ImageSourceFromBitmap(bitmap);
                 }
             }
@@ -78,6 +95,7 @@ namespace BallScanner.MVVM.ViewModels
                             for (int i = 0; i < imagesArr.Length; i++)
                             {
                                 Bitmap bitmapImage = new Bitmap(openFile.FileNames[i]);
+                                //SecondThreshold = ThresholdValue
 
                                 imagesArr[i] = new ImageData()
                                 {
@@ -90,51 +108,6 @@ namespace BallScanner.MVVM.ViewModels
                             }
 
                             CurrentImageSource = imagesArr[currentImageIndex].ImageSource;
-
-                            //var context = new Context();
-
-                            //// Priority search
-                            //Accelerator accelerator = null;
-                            //for (int i = 0; i < 3; i++)
-                            //{
-                            //    foreach (var acceleratorId in Accelerator.Accelerators)
-                            //    {
-                            //        if (i == 0 && acceleratorId.AcceleratorType == AcceleratorType.Cuda ||
-                            //            i == 1 && acceleratorId.AcceleratorType == AcceleratorType.OpenCL ||
-                            //            i == 2 && acceleratorId.AcceleratorType == AcceleratorType.CPU)
-                            //        {
-                            //            accelerator = Accelerator.Create(context, acceleratorId);
-                            //            goto Found;
-                            //        }
-                            //    }
-                            //}
-
-                            //if (accelerator == null)
-                            //    Log.Error("Accelerator is null!");
-
-                            //Found:
-                            //var bitmapData = CurrentImage.Bitmap.LockBits(new Rectangle(0, 0, CurrentImage.Bitmap.Width, CurrentImage.Bitmap.Height),
-                            //    ImageLockMode.ReadOnly,
-                            //    PixelFormat.Format24bppRgb);
-
-                            //// input data
-                            //byte[] pixelData = new byte[bitmapData.Stride * bitmapData.Height];
-                            //Marshal.Copy(bitmapData.Scan0, pixelData, 0, pixelData.Length);
-
-                            //var kernel = accelerator.LoadAutoGroupedStreamKernel<Index1, ArrayView<int>, int>(MyKernel);
-                            //var buffer = accelerator.Allocate<int>(1024);
-
-                            //kernel(buffer.Length, buffer.View, ThresholdValue);
-
-                            //accelerator.Synchronize();
-
-                            //var data = buffer.GetAsArray();
-
-                            //for (int i = 0; i < data.Length; i++)
-                            //{
-
-                            //}
-
                             break;
                         }
                     }
@@ -172,14 +145,14 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        private Bitmap Threshold(Bitmap bitmap, float threshold)
+        private Bitmap Threshold(Bitmap bitmap, int threshold)
         {
             ImageAttributes attributes = new ImageAttributes();
-            attributes.SetThreshold(threshold);
+            attributes.SetThreshold(threshold, ColorAdjustType.Bitmap);
 
             System.Drawing.Point[] points =
             {
-                new System.Drawing.Point(0,0),
+                new System.Drawing.Point(0, 0),
                 new System.Drawing.Point(bitmap.Width, 0),
                 new System.Drawing.Point(0, bitmap.Height)
             };
@@ -192,7 +165,15 @@ namespace BallScanner.MVVM.ViewModels
                 gr.DrawImage(bitmap, points, rect, GraphicsUnit.Pixel, attributes);
             }
 
+            bitmap = BitmapTo1Bpp(bitmap);
+
             return bitmap;
+        }
+
+        public static Bitmap BitmapTo1Bpp(Bitmap original)
+        {
+            var rectangle = new Rectangle(0, 0, original.Width, original.Height);
+            return original.Clone(rectangle, System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
         }
 
         public override void ChangePalette()
@@ -208,11 +189,6 @@ namespace BallScanner.MVVM.ViewModels
                                 new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
 
             Properties.Settings.Default.Save();
-        }
-
-        private static void MyKernel(Index1 index, ArrayView<int> dataView, int constant)
-        {
-            dataView[index] = dataView[index] + constant;
         }
     }
 }
