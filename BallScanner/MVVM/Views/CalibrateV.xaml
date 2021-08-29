@@ -164,6 +164,7 @@
                         <Slider DockPanel.Dock="Top"
                                 Minimum="0"
                                 Maximum="256"
+                                Thumb.DragCompleted="Slider_DragCompleted"
                                 Value="{Binding ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Text="{Binding ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"

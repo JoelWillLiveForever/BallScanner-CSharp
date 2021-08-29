@@ -1,4 +1,6 @@
-﻿using Joel.Controls;
+﻿using BallScanner.MVVM.ViewModels;
+using Joel.Controls;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +65,14 @@ namespace BallScanner.MVVM.Views
                 case Key.Right:
                     slider.Value += 1;
                     break;
+            }
+        }
+
+        private void Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            if (CalibrateVM.PerformAction.CanExecute("DragCompeled"))
+            {
+                CalibrateVM.PerformAction.Execute("DragCompleted");
             }
         }
     }
