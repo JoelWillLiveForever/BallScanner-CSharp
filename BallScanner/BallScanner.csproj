@@ -92,6 +92,7 @@
     </ApplicationDefinition>
     <Compile Include="MVVM\Models\BallGrade.cs" />
     <Compile Include="MVVM\Base\PageVM.cs" />
+    <Compile Include="MVVM\Models\DirectBitmap.cs" />
     <Compile Include="MVVM\Models\ImageData.cs" />
     <Compile Include="MVVM\Models\BrightnessMap.cs" />
     <Compile Include="MVVM\ViewModels\AboutVM.cs" />

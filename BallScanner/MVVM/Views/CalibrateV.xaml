@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              xmlns:utils="clr-namespace:Joel.Controls.Utils;assembly=Joel.Controls"
+             xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -51,14 +52,17 @@
 
                         </DataGrid>
 
-                        <Grid Margin="0,3.5,0,0"
+                        <Grid x:Name="ImageContainer"
+                              Margin="0,3.5,0,0"
                               Background="#ff121212"
                               VerticalAlignment="Stretch"
-                              HorizontalAlignment="Stretch">
-                            
-                            <Image Source="{Binding CurrentImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="Stretch"
+                              observers:SizeObserver.Observe="True"
+                              observers:SizeObserver.ObservedHeight="{Binding DecodePixelHeight, Mode=OneWayToSource}">
+
+                            <Image Stretch="Uniform" 
                                    RenderOptions.BitmapScalingMode="NearestNeighbor"
-                                   Stretch="Uniform" />
+                                   Source="{Binding CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         </Grid>
 
@@ -163,7 +167,7 @@
 
                         <Slider DockPanel.Dock="Top"
                                 Minimum="0"
-                                Maximum="256"
+                                Maximum="255"
                                 Thumb.DragCompleted="Slider_DragCompleted"
                                 Value="{Binding ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -234,13 +238,14 @@
                                           Text="{DynamicResource Text_DetailedScanResults}"
                                           Margin="0,0,0,7" />
 
-                        <DataGrid>
+                        <DataGrid ItemsSource="{Binding Data, UpdateSourceTrigger=PropertyChanged}"
+                                  AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" Width="*" />
-                                <DataGridTextColumn Header="Имя файла" Width="*" />
-                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" />
-                                <DataGridTextColumn Header="Сорт" Width="*" />
+                                <DataGridTextColumn Header="Имя файла" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Сорт" Width="*" Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                             </DataGrid.Columns>
                             
                         </DataGrid>

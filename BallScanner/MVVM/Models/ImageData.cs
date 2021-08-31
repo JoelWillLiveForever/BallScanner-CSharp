@@ -1,56 +1,47 @@
-﻿using System.Drawing;
+﻿using BallScanner.MVVM.Core;
 
 namespace BallScanner.MVVM.Models
 {
-    public struct ImageData
+    public class ImageData : BaseViewModel
     {
         private string _name;
         public string Name
         {
             get => _name;
-            set => _name = value;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
         }
 
         private ulong _numberOfBlackPixels;
         public ulong NumberOfBlackPixels
         {
             get => _numberOfBlackPixels;
-            set => _numberOfBlackPixels = value;
+            set
+            {
+                _numberOfBlackPixels = value;
+                OnPropertyChanged(nameof(NumberOfBlackPixels));
+            }
         }
 
         private BallGrade _ballGrade;
         public BallGrade BallGrade
         {
             get => _ballGrade;
-            set => _ballGrade = value;
+            set
+            {
+                _ballGrade = value;
+                OnPropertyChanged(nameof(BallGrade));
+            }
         }
 
-        //private int _width;
-        //public int Width
-        //{
-        //    get => _width;
-        //    set => _width = value;
-        //}
-
-        //private int _height;
-        //public int Height
-        //{
-        //    get => _height;
-        //    set => _height = value;
-        //}
-
-        //private byte[] _data;
-        //public byte[] Data
-        //{
-        //    get => _data;
-        //    set => _data = value;
-        //}
-
-        private Bitmap _bitmap;
-        public Bitmap Bitmap
+        private string _imagePath;
+        public string ImagePath
         {
-            get => _bitmap;
-            set => _bitmap = value;
+            get => _imagePath;
+            set => _imagePath = value;
         }
     }
 }
