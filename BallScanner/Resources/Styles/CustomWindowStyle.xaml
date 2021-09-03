@@ -101,7 +101,7 @@
                                                   Margin="{TemplateBinding Padding}" />
                             </DockPanel>
                         </Border>
-                        <ControlTemplate.Triggers>
+                        <!--<ControlTemplate.Triggers>
                             <Trigger Property="WindowState" 
                                      Value="Maximized">
                                 <Setter TargetName="RootBorder" 
@@ -110,7 +110,7 @@
                                 <Setter Property="ResizeMode"
                                         Value="NoResize" />
                             </Trigger>
-                        </ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
