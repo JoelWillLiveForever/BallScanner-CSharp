@@ -9,5 +9,10 @@
 
     <!-- Chrome buttons -->
     <sys:Double x:Key="Value_IconSize_WindowChromeButton">10</sys:Double>
+    
+    <!-- Breakpoints -->
+    <sys:Double x:Key="MinWindowBreakpoint">0</sys:Double>
+    <sys:String x:Key="MediumWindowBreakpoint">641</sys:String>
+    <sys:Double x:Key="LargeWindowBreakpoint">1008</sys:Double>
 
 </ResourceDictionary>

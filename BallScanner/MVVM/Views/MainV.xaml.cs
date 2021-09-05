@@ -23,6 +23,7 @@ namespace BallScanner.MVVM.Views
         {
             InitializeComponent();
             DataContext = new MainVM();
+            SizeChanged += OnWindowSizeChanged;
 
             SourceInitialized += (s, e) =>
             {
@@ -44,6 +45,20 @@ namespace BallScanner.MVVM.Views
 
             //AddHandler(MouseMoveEvent, new System.Windows.Input.MouseEventHandler(OnMouseMove));
             #endregion
+        }
+
+        private static void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var window = (Window)sender;
+            var content = (FrameworkElement)window.Content;
+
+            window.MinWidth = window.ActualWidth - content.ActualWidth + content.MinWidth;
+            window.MaxWidth = window.ActualWidth - content.ActualWidth + content.MaxWidth;
+
+            window.MinHeight = window.ActualHeight - content.ActualHeight + content.MinHeight;
+            window.MaxHeight = window.ActualHeight - content.ActualHeight + content.MaxHeight;
+
+            window.SizeChanged -= OnWindowSizeChanged;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -168,6 +183,19 @@ namespace BallScanner.MVVM.Views
 
                 mmi.pointMaxSize.x = Math.Abs(workArea.right - workArea.left);
                 mmi.pointMaxSize.y = Math.Abs(workArea.bottom - workArea.top);
+
+                var main = Application.Current.MainWindow;
+                PresentationSource source = PresentationSource.FromVisual(main);
+
+                double scaleX, scaleY;
+                if (source != null)
+                {
+                    scaleX = source.CompositionTarget.TransformToDevice.M11;
+                    scaleY = source.CompositionTarget.TransformToDevice.M22;
+
+                    mmi.pointMinTrackSize.x = (int)(main.MinWidth * scaleX);
+                    mmi.pointMinTrackSize.y = (int)(main.MinHeight * scaleY);
+                }
             }
 
             Marshal.StructureToPtr(mmi, lParam, true);

@@ -40,8 +40,6 @@
                 <!-- Fonts -->
                 <ResourceDictionary Source="Resources/Fonts/Fonts.xaml" />
 
-
-
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type vm:MainVM}">

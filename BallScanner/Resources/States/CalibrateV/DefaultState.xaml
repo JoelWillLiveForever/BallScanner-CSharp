@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
+                    xmlns:utils="clr-namespace:Joel.Controls.Utils;assembly=Joel.Controls"
+                    xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils">
+
+    
+
+</ResourceDictionary>

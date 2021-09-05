@@ -26,13 +26,23 @@ namespace BallScanner.MVVM.ViewModels
         private System.Timers.Timer resizeTimer = new System.Timers.Timer(100) { Enabled = false };
         //public static RelayCommand UpdateDecodeImageHeight { get; set; }
 
-        private int _decodeImageHeight;
+        private int _decodePixelHeight;
         public int DecodePixelHeight
         {
-            get => _decodeImageHeight;
+            get => _decodePixelHeight;
             set
             {
-                _decodeImageHeight = value;
+                _decodePixelHeight = value;
+
+                PresentationSource source = PresentationSource.FromVisual(Application.Current.MainWindow);
+
+                double scaleY = 0;
+                if (source != null)
+                {
+                    scaleY = source.CompositionTarget.TransformToDevice.M22;
+                }
+
+                _decodePixelHeight = (int)(_decodePixelHeight * scaleY);
 
                 resizeTimer.Stop();
                 resizeTimer.Start();
