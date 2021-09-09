@@ -1,4 +1,4 @@
-﻿using BallScanner.MVVM.Core;
+﻿using BallScanner.MVVM.Base;
 
 namespace BallScanner.MVVM.Models
 {

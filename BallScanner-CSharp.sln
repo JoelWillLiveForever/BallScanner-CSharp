@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Controls", "Joel.Contr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Utils", "Joel.Utils\Joel.Utils.csproj", "{065DF014-E977-491F-B3CD-B8C2C017B0BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Resources", "Joel.Resources\Joel.Resources.csproj", "{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace BallScanner.MVVM.Core
+namespace BallScanner.MVVM.Base
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {

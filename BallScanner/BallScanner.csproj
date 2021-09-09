@@ -93,15 +93,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MVVM\Models\BallGrade.cs" />
+    <Compile Include="MVVM\Base\BaseViewModel.cs" />
     <Compile Include="MVVM\Base\PageVM.cs" />
-    <Compile Include="MVVM\Models\DirectBitmap.cs" />
+    <Compile Include="MVVM\Commands\RelayCommand.cs" />
+    <Compile Include="MVVM\Models\BallGrade.cs" />
     <Compile Include="MVVM\Models\ImageData.cs" />
-    <Compile Include="MVVM\Models\BrightnessMap.cs" />
     <Compile Include="MVVM\ViewModels\AboutVM.cs" />
     <Compile Include="MVVM\ViewModels\AccountVM.cs" />
     <Compile Include="MVVM\ViewModels\CalibrateVM.cs" />
     <Compile Include="MVVM\ViewModels\DocumentsVM.cs" />
+    <Compile Include="MVVM\ViewModels\MainVM.cs" />
     <Compile Include="MVVM\ViewModels\MenuVM.cs" />
     <Compile Include="MVVM\ViewModels\ScanVM.cs" />
     <Compile Include="MVVM\ViewModels\SettingsVM.cs" />
@@ -117,6 +118,9 @@
     <Compile Include="MVVM\Views\DocumentsV.xaml.cs">
       <DependentUpon>DocumentsV.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\MainV.xaml.cs">
+      <DependentUpon>MainV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\MenuV.xaml.cs">
       <DependentUpon>MenuV.xaml</DependentUpon>
     </Compile>
@@ -127,132 +131,117 @@
       <DependentUpon>SettingsV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Page Include="MVVM\Views\AboutV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\AccountV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\CalibrateV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\DocumentsV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\MainV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MVVM\Base\BaseViewModel.cs" />
-    <Compile Include="MVVM\Commands\RelayCommand.cs" />
-    <Compile Include="MVVM\ViewModels\MainVM.cs" />
-    <Compile Include="MVVM\Views\MainV.xaml.cs">
-      <DependentUpon>MainV.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="MVVM\Views\MenuV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\ScanV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\SettingsV.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Fonts\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Icons\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Languages\Generic.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Palettes\Blue\Dark.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Palettes\Blue\Light.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Fonts\Fonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Languages\Language.en-US.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Languages\Language.ru-RU.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Palettes\Blue\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Palettes\Blue\Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Palettes\Light.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Palettes\Green\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Green\Light.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Palettes\Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Orange\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Orange\Light.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Purple\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Purple\Light.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Red\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Red\Light.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Yellow\Dark.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Palettes\Yellow\Light.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\States\CalibrateV\DefaultState.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\States\CalibrateV\MinState.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -271,8 +260,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Values\Values.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -293,10 +282,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="app.manifest" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -305,42 +294,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Black.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-BlackItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Bold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-BoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-ExtraBold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-ExtraBoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-ExtraLight.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-ExtraLightItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Italic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Light.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-LightItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Medium.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-MediumItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Regular.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-SemiBold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-SemiBoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Thin.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-ThinItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Black.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Bold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-BoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-ExtraBold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-ExtraLight.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Italic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Light.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-LightItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Medium.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-MediumItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Regular.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBoldItalic.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-Thin.ttf" />
-    <Resource Include="Resources\Fonts\Montserrat\Montserrat-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -361,15 +314,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Fonts\Montserrat\OFL.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Fonts\Montserrat_Alternates\OFL.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Joel.Controls\Joel.Controls.csproj">
       <Project>{a98ae7dd-5752-4ff0-b74d-d6e185446b88}</Project>
       <Name>Joel.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Joel.Resources\Joel.Resources.csproj">
+      <Project>{df582fda-4f9e-498e-9a43-d83c50ee78dc}</Project>
+      <Name>Joel.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Joel.Utils\Joel.Utils.csproj">
       <Project>{065df014-e977-491f-b3cd-b8c2c017b0bf}</Project>

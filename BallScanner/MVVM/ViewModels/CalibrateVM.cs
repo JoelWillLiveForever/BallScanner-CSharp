@@ -1,5 +1,5 @@
-﻿using BallScanner.MVVM.Commands;
-using BallScanner.MVVM.Core;
+﻿using BallScanner.MVVM.Base;
+using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Models;
 using Microsoft.Win32;
 using NLog;
@@ -7,13 +7,9 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace BallScanner.MVVM.ViewModels

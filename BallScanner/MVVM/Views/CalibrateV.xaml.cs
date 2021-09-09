@@ -13,9 +13,15 @@ namespace BallScanner.MVVM.Views
 {
     public partial class CalibrateV : UserControl
     {
+        private DataTemplate DefaultState;
+        private DataTemplate MinState;
+
         public CalibrateV()
         {
             InitializeComponent();
+
+            DefaultState = FindResource("DefaultState") as DataTemplate;
+            MinState = FindResource("MinState") as DataTemplate;
         }
 
         private void BlockHeader_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
@@ -80,33 +86,17 @@ namespace BallScanner.MVVM.Views
 
         private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //PresentationSource source = PresentationSource.FromVisual(this);
-
-            //double scaleX = 0, scaleY = 0;
-            //if (source != null)
-            //{
-            //    scaleX = source.CompositionTarget.TransformToDevice.M11;
-            //    scaleY = source.CompositionTarget.TransformToDevice.M22;
-            //}
-
-            //var width = Application.Current.MainWindow.ActualWidth;
-            //width = width * scaleX;
-
-            //Console.WriteLine(width);
+            if (DefaultState == null || MinState == null) return;
 
             if (e.NewSize.Width < 1007)
             {
-                MyContentControl.Content = FindResource("MinState");
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                if (MyContentControl.ContentTemplate == MinState) return; 
+                MyContentControl.ContentTemplate = MinState;
             }
             else
             {
-                MyContentControl.Content = FindResource("DefaultState");
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                if (MyContentControl.ContentTemplate == DefaultState) return;
+                MyContentControl.ContentTemplate = DefaultState;
             }
         }
 

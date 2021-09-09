@@ -1,5 +1,5 @@
 ﻿using BallScanner.MVVM.Commands;
-using BallScanner.MVVM.Core;
+using BallScanner.MVVM.Base;
 using NLog;
 using System;
 
