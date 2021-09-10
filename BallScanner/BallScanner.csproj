@@ -243,15 +243,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\Styles\Buttons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\Buttons\BlockHeaderButtonStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\Buttons\MenuButtonStyle.xaml">
+    <Page Include="Resources\Styles\WindowChromeButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,9 +290,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Styles\TextBlocks\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>

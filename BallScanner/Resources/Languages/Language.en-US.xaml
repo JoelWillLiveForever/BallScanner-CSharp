@@ -19,6 +19,12 @@
     <sys:String x:Key="Text_Thresholds">Thresholds</sys:String>
     <sys:String x:Key="Text_GeneralScanResults">General scan results</sys:String>
     <sys:String x:Key="Text_DetailedScanResults">Detailed scan results</sys:String>
+    <sys:String x:Key="Text_Status">Status</sys:String>
+
+    <sys:String x:Key="Text_Download">Download</sys:String>
+    <sys:String x:Key="Text_Previous">Previous</sys:String>
+    <sys:String x:Key="Text_Next">Next</sys:String>
+    <sys:String x:Key="Text_Execute">Execute</sys:String>
     
     <!-- Страница "Настройки" -->
     <sys:String x:Key="Text_Language">Language</sys:String>

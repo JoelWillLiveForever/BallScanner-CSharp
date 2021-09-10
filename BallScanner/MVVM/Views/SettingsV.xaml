@@ -29,7 +29,7 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <joel:CustomRadioButton Name="Button_LanguageRussian"
+                    <joel:SimpleRadioButton Name="Button_LanguageRussian"
                                             Content="{StaticResource Text_Language_Russian_Region}"
                                             ContentStringFormat="{DynamicResource Text_Language_Russian}"
                                             Image="{StaticResource Vector_Image_FlagRussia}"
@@ -38,7 +38,7 @@
                                             Margin="0,7,0,0" 
                                             Click="Button_LanguageRussian_Click" />
 
-                    <joel:CustomRadioButton Name="Button_LanguageEnglish"
+                    <joel:SimpleRadioButton Name="Button_LanguageEnglish"
                                             Content="{StaticResource Text_Language_English_Region}"
                                             ContentStringFormat="{DynamicResource Text_Language_English}"
                                             Image="{StaticResource Vector_Image_FlagAmerica}"
@@ -61,7 +61,7 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <joel:CustomRadioButton Name="Button_DarkTheme" 
+                    <joel:SimpleRadioButton Name="Button_DarkTheme" 
                                             Content="{DynamicResource Text_Theme_Dark}"
                                             ContentStringFormat=""
                                             Icon="{StaticResource Geometry_Icon_DarkMode}"
@@ -70,7 +70,7 @@
                                             Margin="0,7,0,0" 
                                             Click="Button_DarkTheme_Click" />
 
-                    <joel:CustomRadioButton Name="Button_LightTheme"
+                    <joel:SimpleRadioButton Name="Button_LightTheme"
                                             Content="{DynamicResource Text_Theme_Light}"
                                             ContentStringFormat=""
                                             Icon="{StaticResource Geometry_Icon_LightMode}"

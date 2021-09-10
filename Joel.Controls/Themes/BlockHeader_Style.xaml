@@ -1,15 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:utils="clr-namespace:Joel.Controls.Utils"
                     xmlns:local="clr-namespace:Joel.Controls">
 
     <Style TargetType="{x:Type local:BlockHeader}">
-        <Style.Resources>
-            <utils:ViewBoxConstantFontSizeConverter x:Key="conv" />
-        </Style.Resources>
         <Style.Setters>
             <Setter Property="FontSize"
-                    Value="11.5" />
+                    Value="12" />
             <Setter Property="FontFamily"
                     Value="{DynamicResource Font_Montserrat}" />
             <Setter Property="FontWeight"

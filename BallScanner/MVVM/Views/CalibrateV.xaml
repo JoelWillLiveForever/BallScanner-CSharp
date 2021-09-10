@@ -6,9 +6,9 @@
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils"
-             xmlns:utils="clr-namespace:Joel.Controls.Utils;assembly=Joel.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
              Name="Root">
 
     <UserControl.Resources>
@@ -21,14 +21,14 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.315*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" 
+                                      MinWidth="500" />
                 </Grid.ColumnDefinitions>
 
                 <!--Left-->
                 <DockPanel Grid.Column="0"
-                       Margin="0,0,5,0"
-                       MinHeight="640"
-                       LastChildFill="True">
+                           Margin="0,0,5,0"
+                           LastChildFill="True">
 
                     <DockPanel DockPanel.Dock="Top"
                                LastChildFill="True">
@@ -37,89 +37,96 @@
                                           Text="{DynamicResource Text_OutputImage}" />
 
                         <DataGrid Margin="0,7,0,0"
-                                  utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True"
                                   Height="60">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="localNa" Header="№ п/п" Width="*" />
-                                <DataGridTextColumn Header="Имя файла" Width="*" />
-                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" />
-                                <DataGridTextColumn Header="Сорт" Width="*" />
+                                <DataGridTextColumn x:Name="localNa" 
+                                                    Header="№ п/п" 
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Имя файла" 
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Кол-во ч/п" 
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Сорт" 
+                                                    Width="*" />
                             </DataGrid.Columns>
 
                         </DataGrid>
 
                     </DockPanel>
 
+                    <!-- Status -->
                     <DockPanel DockPanel.Dock="Bottom"
                                LastChildFill="True"
                                Margin="0,10,0,0"
                                Height="82">
+                        
                         <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_OutputImage}" />
+                                          Text="{DynamicResource Text_Status}" />
 
-                        <Grid Grid.Row="1"
-                          Margin="0,7,0,0"
-                          Background="#90CAF9"
-                          VerticalAlignment="Stretch"
-                          HorizontalAlignment="Stretch">
+                        <DockPanel Grid.Row="1"
+                                   Margin="0,7,0,0"
+                                   LastChildFill="True">
 
-                            <TextBlock Grid.Row="1"
-                                   Background="Transparent"
-                                   Foreground="{DynamicResource Brush_OnPrimary}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Padding="10,0"
-                                   TextAlignment="Left"
-                                   Text="Статус: -- Неактивный --"/>
+                            <Rectangle DockPanel.Dock="Left"
+                                       Fill="#90CAF9"
+                                       Width="5" />
 
-                        </Grid>
+                            <TextBlock Background="Transparent"
+                                       Foreground="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                       VerticalAlignment="Stretch"
+                                       HorizontalAlignment="Stretch"
+                                       Padding="10,0"
+                                       TextAlignment="Left"
+                                       Text="Статус: -- Неактивный --"/>
+
+                        </DockPanel>
 
                     </DockPanel>
 
                     <UniformGrid DockPanel.Dock="Bottom"
                                  Columns="4"
-                                 Height="54">
+                                 Height="36">
 
-                        <Button Grid.Column="0" 
-                                Name="Button_LoadImages"
-                                Margin="0,0,3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Загрузить изображения" />
+                        <joel:SimpleButton Grid.Column="0" 
+                                           Name="Button_LoadImages"
+                                           Margin="0,0,3.5,0"
+                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Content="{DynamicResource Text_Download}" />
 
-                        <Button Grid.Column="1" 
-                                Name="Button_PrevImage"
-                                Margin="3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Предыдущая"/>
+                        <joel:SimpleButton Grid.Column="1" 
+                                           Name="Button_PrevImage"
+                                           Margin="3.5,0"
+                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Content="{DynamicResource Text_Previous}"/>
 
-                        <Button Grid.Column="2" 
-                                Name="Button_NextImage"
-                                Margin="3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Следующая"/>
+                        <joel:SimpleButton Grid.Column="2" 
+                                           Name="Button_NextImage"
+                                           Margin="3.5,0"
+                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Content="{DynamicResource Text_Next}"/>
 
-                        <Button Grid.Column="3" 
-                                Name="Button_Execute"
-                                Margin="3.5,0,0,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Выполнить"/>
+                        <joel:SimpleButton Grid.Column="3" 
+                                           Name="Button_Execute"
+                                           Margin="3.5,0,0,0"
+                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Content="{DynamicResource Text_Execute}"/>
 
                     </UniformGrid>
 
                     <Grid x:Name="ImageContainer"
-                      Margin="0,7,0,7"
-                      Background="#121212"
-                      observers:SizeObserver.Observe="True"
-                      observers:SizeObserver.ObservedHeight="{Binding ElementName=Root, Path=DataContext.DecodePixelHeight, Mode=OneWayToSource}">
+                          Margin="0,7,0,7"
+                          Background="#121212"
+                          observers:SizeObserver.Observe="True"
+                          observers:SizeObserver.ObservedHeight="{Binding ElementName=Root, Path=DataContext.DecodePixelHeight, Mode=OneWayToSource}">
 
                         <Image Stretch="Uniform"
-                           RenderOptions.BitmapScalingMode="NearestNeighbor"
-                           Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                               RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     </Grid>
 
@@ -128,13 +135,12 @@
 
                 <!--Right-->
                 <DockPanel Grid.Column="1"
-                       Margin="5,0,0,0"
-                       LastChildFill="True">
-
+                           Margin="5,0,0,0"
+                           LastChildFill="True">
 
                     <!--Calibrate-->
                     <Grid DockPanel.Dock="Top"
-                      Height="150">
+                          Height="150">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -143,46 +149,46 @@
                         </Grid.ColumnDefinitions>
 
                         <DockPanel Grid.Column="0"
-                               Margin="0,0,7,0"
-                               LastChildFill="True">
+                                   Margin="0,0,7,0"
+                                   LastChildFill="True">
 
                             <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Sensitivity}" />
+                                              Text="{DynamicResource Text_Sensitivity}" />
 
                             <Slider DockPanel.Dock="Top"
-                                Minimum="0"
-                                Maximum="255"
-                                Thumb.DragCompleted="Slider_DragCompleted"
-                                Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    Minimum="0"
+                                    Maximum="255"
+                                    Thumb.DragCompleted="Slider_DragCompleted"
+                                    Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
-                                   FontSize="14" />
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
+                                       FontSize="14" />
 
                         </DockPanel>
 
 
                         <!--Separator-->
                         <Border Grid.Column="1"
-                            Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+                                Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
 
                         <DockPanel Grid.Column="2"
-                               Margin="7,0,0,0"
-                               LastChildFill="True">
+                                   Margin="7,0,0,0"
+                                   LastChildFill="True">
 
                             <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Thresholds}" />
+                                              Text="{DynamicResource Text_Thresholds}" />
 
                             <UniformGrid Margin="0,7,0,0"
-                                     Rows="2">
+                                         Rows="2">
 
                                 <TextBox Grid.Row="0"
-                                     Margin="0,0,0,3.5" />
+                                         Margin="0,0,0,3.5" />
 
                                 <TextBox Grid.Row="1"
-                                     Margin="0,3.5,0,0" />
+                                         Margin="0,3.5,0,0" />
 
                             </UniformGrid>
 
@@ -193,18 +199,20 @@
 
                     <!--Average-->
                     <DockPanel DockPanel.Dock="Top"
-                           Margin="0,10,0,0"
-                           LastChildFill="True">
+                               Margin="0,10,0,0"
+                               LastChildFill="True">
 
                         <joel:BlockHeader DockPanel.Dock="Top"
-                                      Text="{DynamicResource Text_GeneralScanResults}" />
+                                          Text="{DynamicResource Text_GeneralScanResults}" />
 
                         <DataGrid Margin="0,7,0,0"
-                              utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True">
+                                  Height="60">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Всего изображений загружено" Width="*" />
-                                <DataGridTextColumn Header="Среднее число чёрных пикселей" Width="*" />
+                                <DataGridTextColumn Header="Всего изображений загружено" 
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Среднее число чёрных пикселей" 
+                                                    Width="*" />
                             </DataGrid.Columns>
 
                         </DataGrid>
@@ -212,20 +220,27 @@
                     </DockPanel>
 
                     <DockPanel LastChildFill="True"
-                           Margin="0,10,0,0">
+                               Margin="0,10,0,0">
 
                         <joel:BlockHeader DockPanel.Dock="Top"
-                                      Text="{DynamicResource Text_DetailedScanResults}" />
+                                          Text="{DynamicResource Text_DetailedScanResults}" />
 
                         <DataGrid Margin="0,7,0,0"
-                              ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
-                              AutoGenerateColumns="False">
+                                  ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
+                                  AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="№ п/п" Width="*" />
-                                <DataGridTextColumn Header="Имя файла" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
-                                <DataGridTextColumn Header="Сорт" Width="*" Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="№ п/п" 
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Имя файла"
+                                                    Width="*" 
+                                                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Кол-во ч/п"
+                                                    Width="*"
+                                                    Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Сорт"
+                                                    Width="*" 
+                                                    Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                             </DataGrid.Columns>
 
                         </DataGrid>
@@ -245,125 +260,123 @@
             <Grid Margin="10">
 
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                          ScrollViewer.PanningMode="VerticalOnly"
-                          ScrollViewer.IsDeferredScrollingEnabled="True"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          HorizontalContentAlignment="Center"
-                          VerticalContentAlignment="Top"
-                          Padding="0"
-                          VerticalScrollBarVisibility="Auto">
+                              VerticalScrollBarVisibility="Auto">
 
                     <ScrollViewer.Style>
                         <Style TargetType="{x:Type ScrollViewer}">
                             <Style.Triggers>
                                 <Trigger Property="ComputedHorizontalScrollBarVisibility"
-                                     Value="Visible">
+                                         Value="Visible">
                                     <Setter Property="Padding"
-                                        Value="0,0,10,0" />
+                                            Value="0,0,10,0" />
                                 </Trigger>
                                 <Trigger Property="ComputedVerticalScrollBarVisibility"
-                                     Value="Visible">
+                                         Value="Visible">
                                     <Setter Property="Padding"
-                                        Value="0,0,0,10" />
+                                            Value="0,0,0,10" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </ScrollViewer.Style>
 
                     <StackPanel Orientation="Vertical"
-                            Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width, UpdateSourceTrigger=PropertyChanged}">
+                                Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width, UpdateSourceTrigger=PropertyChanged}">
 
                         <joel:BlockHeader DockPanel.Dock="Top"
-                                      Text="{DynamicResource Text_OutputImage}" />
+                                          Text="{DynamicResource Text_OutputImage}" />
 
                         <DataGrid Margin="0,7,0,0"
-                              utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True"
-                              Height="60">
+                                  Height="60">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="localNa" Header="№ п/п" Width="*" />
-                                <DataGridTextColumn Header="Имя файла" Width="*" />
-                                <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" />
-                                <DataGridTextColumn Header="Сорт" Width="*" />
+                                <DataGridTextColumn x:Name="localNa"
+                                                    Header="№ п/п"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Имя файла"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Кол-во чёрных пикселей"
+                                                    Width="*" />
+                                <DataGridTextColumn Header="Сорт"
+                                                    Width="*" />
                             </DataGrid.Columns>
 
                         </DataGrid>
 
                         <Grid x:Name="ImageContainer"
-                          Margin="0,7,0,0"
-                          Height="480"
-                          Background="#121212"
-                          observers:SizeObserver.Observe="True"
-                          observers:SizeObserver.ObservedHeight="{Binding ElementName=Root, Path=DataContext.DecodePixelHeight, Mode=OneWayToSource}">
+                              Margin="0,7,0,0"
+                              Height="480"
+                              Background="#121212"
+                              observers:SizeObserver.Observe="True"
+                              observers:SizeObserver.ObservedHeight="{Binding ElementName=Root, Path=DataContext.DecodePixelHeight, Mode=OneWayToSource}">
 
                             <Image Stretch="Uniform"
-                           RenderOptions.BitmapScalingMode="NearestNeighbor"
-                           Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                         </Grid>
 
                         <UniformGrid Margin="0,7,0,0"
-                                 Columns="4"
-                                 Height="54">
+                                     Columns="4"
+                                     Height="54">
 
                             <Button Grid.Column="0" 
-                                Name="Button_LoadImages"
-                                Margin="0,0,3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Загрузить изображения" />
+                                    Name="Button_LoadImages"
+                                    Margin="0,0,3.5,0"
+                                    Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Content="Загрузить изображения" />
 
                             <Button Grid.Column="1" 
-                                Name="Button_PrevImage"
-                                Margin="3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Предыдущая"/>
+                                    Name="Button_PrevImage"
+                                    Margin="3.5,0"
+                                    Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Content="Предыдущая"/>
 
                             <Button Grid.Column="2" 
-                                Name="Button_NextImage"
-                                Margin="3.5,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Следующая"/>
+                                    Name="Button_NextImage"
+                                    Margin="3.5,0"
+                                    Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Content="Следующая"/>
 
                             <Button Grid.Column="3" 
-                                Name="Button_Execute"
-                                Margin="3.5,0,0,0"
-                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Content="Выполнить"/>
+                                    Name="Button_Execute"
+                                    Margin="3.5,0,0,0"
+                                    Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Content="Выполнить"/>
 
                         </UniformGrid>
 
                         <DockPanel LastChildFill="True"
-                               Margin="0,10,0,0"
-                               Height="82">
+                                   Margin="0,10,0,0"
+                                   Height="82">
+                            
                             <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_OutputImage}" />
+                                              Text="{DynamicResource Text_OutputImage}" />
 
                             <Grid Grid.Row="1"
-                          Margin="0,7,0,0"
-                          Background="#90CAF9"
-                          VerticalAlignment="Stretch"
-                          HorizontalAlignment="Stretch">
+                                  Margin="0,7,0,0"
+                                  Background="#90CAF9"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch">
 
                                 <TextBlock Grid.Row="1"
-                                   Background="Transparent"
-                                   Foreground="{DynamicResource Brush_OnPrimary}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Padding="10,0"
-                                   TextAlignment="Left"
-                                   Text="Статус: -- Неактивный --"/>
+                                           Background="Transparent"
+                                           Foreground="{DynamicResource Brush_OnPrimary}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Padding="10,0"
+                                           TextAlignment="Left"
+                                           Text="Статус: -- Неактивный --"/>
 
                             </Grid>
 
                         </DockPanel>
 
                         <Grid Margin="0,10,0,0"
-                          Height="150">
+                              Height="150">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -372,45 +385,45 @@
                             </Grid.ColumnDefinitions>
 
                             <DockPanel Grid.Column="0"
-                               Margin="0,0,7,0"
-                               LastChildFill="True">
+                                       Margin="0,0,7,0"
+                                       LastChildFill="True">
 
                                 <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Sensitivity}" />
+                                                  Text="{DynamicResource Text_Sensitivity}" />
 
                                 <Slider DockPanel.Dock="Top"
-                                Minimum="0"
-                                Maximum="255"
-                                Thumb.DragCompleted="Slider_DragCompleted"
-                                Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Minimum="0"
+                                        Maximum="255"
+                                        Thumb.DragCompleted="Slider_DragCompleted"
+                                        Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <TextBlock Text="{Binding ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
-                                   FontSize="14" />
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
+                                           FontSize="14" />
 
                             </DockPanel>
 
                             <!-- Separator -->
                             <Border Grid.Column="1"
-                            Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
 
                             <DockPanel Grid.Column="2"
-                               Margin="7,0,0,0"
-                               LastChildFill="True">
+                                       Margin="7,0,0,0"
+                                       LastChildFill="True">
 
                                 <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Thresholds}" />
+                                                  Text="{DynamicResource Text_Thresholds}" />
 
                                 <UniformGrid Margin="0,7,0,0"
-                                     Rows="2">
+                                             Rows="2">
 
                                     <TextBox Grid.Row="0"
-                                     Margin="0,0,0,3.5" />
+                                             Margin="0,0,0,3.5" />
 
                                     <TextBox Grid.Row="1"
-                                     Margin="0,3.5,0,0" />
+                                             Margin="0,3.5,0,0" />
 
                                 </UniformGrid>
 
@@ -418,19 +431,19 @@
 
                         </Grid>
 
-                        <DockPanel
-                           Margin="0,10,0,0"
-                           LastChildFill="True">
+                        <DockPanel Margin="0,10,0,0"
+                                   LastChildFill="True">
 
                             <joel:BlockHeader DockPanel.Dock="Top"
-                                      Text="{DynamicResource Text_GeneralScanResults}" />
+                                              Text="{DynamicResource Text_GeneralScanResults}" />
 
-                            <DataGrid Margin="0,7,0,0"
-                              utils:SetMinWidthToAutoAttachedBehaviour.SetMinWidthToAuto="True">
+                            <DataGrid Margin="0,7,0,0">
 
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Всего изображений загружено" Width="*" />
-                                    <DataGridTextColumn Header="Среднее число чёрных пикселей" Width="*" />
+                                    <DataGridTextColumn Header="Всего изображений загружено"
+                                                        Width="*" />
+                                    <DataGridTextColumn Header="Среднее число чёрных пикселей" 
+                                                        Width="*" />
                                 </DataGrid.Columns>
 
                             </DataGrid>
@@ -438,20 +451,27 @@
                         </DockPanel>
 
                         <DockPanel LastChildFill="True"
-                           Margin="0,10,0,0">
+                                   Margin="0,10,0,0">
 
                             <joel:BlockHeader DockPanel.Dock="Top"
-                                      Text="{DynamicResource Text_DetailedScanResults}" />
+                                              Text="{DynamicResource Text_DetailedScanResults}" />
 
                             <DataGrid Margin="0,7,0,0"
-                              ItemsSource="{Binding Data, UpdateSourceTrigger=PropertyChanged}"
-                              AutoGenerateColumns="False">
+                                      ItemsSource="{Binding Data, UpdateSourceTrigger=PropertyChanged}"
+                                      AutoGenerateColumns="False">
 
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="№ п/п" Width="*" />
-                                    <DataGridTextColumn Header="Имя файла" Width="*" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Кол-во чёрных пикселей" Width="*" Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
-                                    <DataGridTextColumn Header="Сорт" Width="*" Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="№ п/п" 
+                                                        Width="*" />
+                                    <DataGridTextColumn Header="Имя файла"
+                                                        Width="*" 
+                                                        Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Кол-во чёрных пикселей" 
+                                                        Width="*" 
+                                                        Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataGridTextColumn Header="Сорт"
+                                                        Width="*" 
+                                                        Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataGrid.Columns>
 
                             </DataGrid>

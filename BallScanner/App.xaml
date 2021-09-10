@@ -29,13 +29,9 @@
                 <ResourceDictionary Source="Resources/Icons/Icons.xaml"/>
 
 
-                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/WindowChromeButtons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/CustomWindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Values/Values.xaml"/>
-
-                <!-- Buttons styles -->
-                <ResourceDictionary Source="Resources/Styles/Buttons/MenuButtonStyle.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Buttons/BlockHeaderButtonStyle.xaml" />
 
                 <!-- Fonts -->
                 <ResourceDictionary Source="Resources/Fonts/Fonts.xaml" />

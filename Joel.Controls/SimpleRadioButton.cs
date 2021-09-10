@@ -4,11 +4,11 @@ using System.Windows.Media;
 
 namespace Joel.Controls
 {
-    public class CustomRadioButton : RadioButton
+    public class SimpleRadioButton : RadioButton
     {
         // Image
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(CustomRadioButton), new PropertyMetadata(default(UIElement)));
+            DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(SimpleRadioButton), new PropertyMetadata(default(UIElement)));
 
         public UIElement Image
         {
@@ -18,7 +18,7 @@ namespace Joel.Controls
 
         // Image Width & Height
         public static readonly DependencyProperty ImageWidthProperty =
-            DependencyProperty.Register(nameof(ImageWidth), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(ImageWidth), typeof(double), typeof(SimpleRadioButton), new PropertyMetadata(default(double)));
 
         public double ImageWidth
         {
@@ -27,7 +27,7 @@ namespace Joel.Controls
         }
 
         public static readonly DependencyProperty ImageHeightProperty =
-            DependencyProperty.Register(nameof(ImageHeight), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(ImageHeight), typeof(double), typeof(SimpleRadioButton), new PropertyMetadata(default(double)));
 
         public double ImageHeight
         {
@@ -37,7 +37,7 @@ namespace Joel.Controls
 
         // Icon
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(CustomRadioButton), new PropertyMetadata(default(Geometry)));
+            DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(SimpleRadioButton), new PropertyMetadata(default(Geometry)));
 
         public Geometry Icon
         {
@@ -47,7 +47,7 @@ namespace Joel.Controls
 
         // Icon Fill & Stroke
         public static readonly DependencyProperty IconFillProperty =
-            DependencyProperty.Register(nameof(IconFill), typeof(Brush), typeof(CustomRadioButton), new PropertyMetadata(default(Brush)));
+            DependencyProperty.Register(nameof(IconFill), typeof(Brush), typeof(SimpleRadioButton), new PropertyMetadata(default(Brush)));
 
         public Brush IconFill
         {
@@ -57,7 +57,7 @@ namespace Joel.Controls
 
         // Icon Width & Height
         public static readonly DependencyProperty IconWidthProperty =
-            DependencyProperty.Register(nameof(IconWidth), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(IconWidth), typeof(double), typeof(SimpleRadioButton), new PropertyMetadata(default(double)));
 
         public double IconWidth
         {
@@ -66,7 +66,7 @@ namespace Joel.Controls
         }
 
         public static readonly DependencyProperty IconHeightProperty =
-            DependencyProperty.Register(nameof(IconHeight), typeof(double), typeof(CustomRadioButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(IconHeight), typeof(double), typeof(SimpleRadioButton), new PropertyMetadata(default(double)));
 
         public double IconHeight
         {
@@ -74,10 +74,10 @@ namespace Joel.Controls
             set { SetValue(IconHeightProperty, value); }
         }
 
-        static CustomRadioButton()
+        static SimpleRadioButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomRadioButton),
-                new FrameworkPropertyMetadata(typeof(CustomRadioButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SimpleRadioButton),
+                new FrameworkPropertyMetadata(typeof(SimpleRadioButton)));
         }
     }
 }

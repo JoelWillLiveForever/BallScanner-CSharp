@@ -49,9 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
-    <Compile Include="CustomRadioButton.cs" />
-    <Compile Include="Utils\SetMinWidthToAutoAttachedBehavior.cs" />
-    <Compile Include="Utils\ViewBoxConstantFontSizeConverter.cs" />
+    <Compile Include="SimpleButton.cs" />
+    <Compile Include="SimpleRadioButton.cs" />
+    <Compile Include="SimpleSlider.cs" />
+    <Page Include="Themes\MenuButton_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\SimpleButton_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -59,11 +67,15 @@
     <Compile Include="MenuButton.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\BlockHeaderStyle.xaml">
+    <Page Include="Themes\BlockHeader_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\CustomRadioButtonStyle.xaml">
+    <Page Include="Themes\SimpleRadioButton_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\SimpleSlider_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Joel.Controls.Utils
+namespace Joel.Utils.Other
 {
     public class SetMinWidthToAutoAttachedBehaviour
     {

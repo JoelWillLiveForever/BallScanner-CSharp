@@ -61,6 +61,8 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Observers\SizeObserver.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
+    <Compile Include="Other\SetMinWidthToAutoAttachedBehavior.cs" />
+    <Compile Include="Other\ViewBoxConstantFontSizeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
