@@ -20,6 +20,7 @@
     <sys:String x:Key="Text_GeneralScanResults">Общие результаты сканирования</sys:String>
     <sys:String x:Key="Text_DetailedScanResults">Подробные результаты сканирования</sys:String>
     <sys:String x:Key="Text_Status">Информационная панель</sys:String>
+    <sys:String x:Key="Text_Calibration">Калибровка сканера</sys:String>
 
     <sys:String x:Key="Text_Download">Загрузить</sys:String>
     <sys:String x:Key="Text_Previous">Предыдущая</sys:String>

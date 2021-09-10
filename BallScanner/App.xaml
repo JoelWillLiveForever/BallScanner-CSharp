@@ -28,13 +28,15 @@
                 <!-- Application vector icons -->
                 <ResourceDictionary Source="Resources/Icons/Icons.xaml"/>
 
-
                 <ResourceDictionary Source="Resources/Styles/WindowChromeButtons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/CustomWindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Values/Values.xaml"/>
 
                 <!-- Fonts -->
                 <ResourceDictionary Source="Resources/Fonts/Fonts.xaml" />
+                
+                <!-- Control styles -->
+                <ResourceDictionary Source="pack://application:,,,/Joel.Controls;component/Styles/Styles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 

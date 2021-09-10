@@ -51,7 +51,10 @@
     <Compile Include="BlockHeader.cs" />
     <Compile Include="SimpleButton.cs" />
     <Compile Include="SimpleRadioButton.cs" />
-    <Compile Include="SimpleSlider.cs" />
+    <Page Include="Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\MenuButton_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,7 +78,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\SimpleSlider_Style.xaml">
+    <Page Include="Styles\Slider_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
