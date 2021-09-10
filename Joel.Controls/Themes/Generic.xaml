@@ -4,7 +4,6 @@
         <ResourceDictionary Source="/Joel.Controls;component/Themes/BlockHeader_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Themes/SimpleRadioButton_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Themes/MenuButton_Style.xaml" />
-        <ResourceDictionary Source="/Joel.Controls;component/Themes/SimpleButton_Style.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -21,8 +21,7 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.315*" />
-                    <ColumnDefinition Width="*" 
-                                      MinWidth="500" />
+                    <ColumnDefinition Width="*" />  <!-- MinWidth="500" -->
                 </Grid.ColumnDefinitions>
 
                 <!--Left-->
@@ -88,33 +87,33 @@
                                  Columns="4"
                                  Height="36">
 
-                        <joel:SimpleButton Grid.Column="0" 
-                                           Name="Button_LoadImages"
-                                           Margin="0,0,3.5,0"
-                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                           Content="{DynamicResource Text_Download}" />
+                        <Button Grid.Column="0" 
+                                Name="Button_LoadImages"
+                                Margin="0,0,3.5,0"
+                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="{DynamicResource Text_Download}" />
 
-                        <joel:SimpleButton Grid.Column="1" 
-                                           Name="Button_PrevImage"
-                                           Margin="3.5,0"
-                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                           Content="{DynamicResource Text_Previous}"/>
+                        <Button Grid.Column="1" 
+                                Name="Button_PrevImage"
+                                Margin="3.5,0"
+                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="{DynamicResource Text_Previous}"/>
 
-                        <joel:SimpleButton Grid.Column="2" 
-                                           Name="Button_NextImage"
-                                           Margin="3.5,0"
-                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                           Content="{DynamicResource Text_Next}"/>
+                        <Button Grid.Column="2" 
+                                Name="Button_NextImage"
+                                Margin="3.5,0"
+                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="{DynamicResource Text_Next}"/>
 
-                        <joel:SimpleButton Grid.Column="3" 
-                                           Name="Button_Execute"
-                                           Margin="3.5,0,0,0"
-                                           Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                           Content="{DynamicResource Text_Execute}"/>
+                        <Button Grid.Column="3" 
+                                Name="Button_Execute"
+                                Margin="3.5,0,0,0"
+                                Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="{DynamicResource Text_Execute}"/>
 
                     </UniformGrid>
 
@@ -281,28 +280,28 @@
                                     Margin="0,0,3.5,0"
                                     Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Content="Загрузить изображения" />
+                                    Content="{DynamicResource Text_Download}" />
 
                             <Button Grid.Column="1" 
                                     Name="Button_PrevImage"
                                     Margin="3.5,0"
                                     Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Content="Предыдущая"/>
+                                    Content="{DynamicResource Text_Previous}"/>
 
                             <Button Grid.Column="2" 
                                     Name="Button_NextImage"
                                     Margin="3.5,0"
                                     Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Content="Следующая"/>
+                                    Content="{DynamicResource Text_Next}"/>
 
                             <Button Grid.Column="3" 
                                     Name="Button_Execute"
                                     Margin="3.5,0,0,0"
                                     Command="{Binding ElementName=Root, Path=DataContext.PerformAction}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Content="Выполнить"/>
+                                    Content="{DynamicResource Text_Execute}"/>
 
                         </UniformGrid>
 

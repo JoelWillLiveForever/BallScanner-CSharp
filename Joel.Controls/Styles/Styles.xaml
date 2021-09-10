@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Joel.Controls;component/Styles/Button_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/Slider_Style.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

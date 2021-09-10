@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
-    <Compile Include="SimpleButton.cs" />
     <Compile Include="SimpleRadioButton.cs" />
     <Page Include="Styles\Styles.xaml">
       <SubType>Designer</SubType>
@@ -59,7 +58,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\SimpleButton_Style.xaml">
+    <Page Include="Styles\Button_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
