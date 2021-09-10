@@ -2,15 +2,142 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Joel.Controls">
 
-    <Style TargetType="{x:Type local:SimpleSlider}">
+    <Style x:Key="DecreaseButton"
+           TargetType="{x:Type RepeatButton}">
         <Style.Setters>
-            <!--<Setter Property="Template">
+            <Setter Property="OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:SimpleSlider}">
-                        
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border CornerRadius="2,0,0,2"
+                                Margin="8,0,0,0"
+                                Background="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                Height="4" />
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>-->
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="IncreaseButton" 
+           TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" 
+                Value="True" />
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent"  
+                            CornerRadius="0,2,2,0"
+                            Margin="0,0,8,0"
+                            Height="4" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderThumb"
+           TargetType="{x:Type Thumb}">
+        <Setter Property="SnapsToDevicePixels" 
+                Value="True" />
+        <Setter Property="OverridesDefaultStyle" 
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <Ellipse Grid.Row="0"
+                                 Height="22"
+                                 Width="22"
+                                 Panel.ZIndex="0"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Fill="{DynamicResource Brush_Primary}" />
+
+                        <Ellipse Grid.Row="0"
+                                 Height="6"
+                                 Width="6"
+                                 Panel.ZIndex="1"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Fill="{DynamicResource Brush_Background_Surface}" />
+                        <Ellipse Grid.Row="0"
+                                 Height="6"
+                                 Width="6"
+                                 Panel.ZIndex="2"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Fill="{DynamicResource Brush_Background_Primary}" />
+                        <Ellipse Grid.Row="0"
+                                 Height="6"
+                                 Width="6"
+                                 Panel.ZIndex="3"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Fill="{DynamicResource Brush_Surface_Overlay_08dp}" />
+
+                        <!--<TextBlock Grid.Row="1"
+                                   Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Slider}, Path=Value}"
+                                   FontSize="18"
+                                   FontFamily="{DynamicResource Font_Montserrat}"
+                                   FontWeight="SemiBold"
+                                   Background="Transparent"
+                                   Margin="0,5,0,0"
+                                   Foreground="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Center" />-->
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:SimpleSlider}">
+        <Style.Setters>
+            <Setter Property="Orientation"
+                    Value="Horizontal" />
+            <Setter Property="IsSelectionRangeEnabled"
+                    Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:SimpleSlider}">
+                        <Grid>
+                            <!-- Slider background -->
+                            <Border Panel.ZIndex="0"
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}"
+                                    CornerRadius="2"
+                                    Margin="8,0" 
+                                    Height="4" />
+
+                            
+                            <Track x:Name="PART_Track"
+                                   Panel.ZIndex="1">
+                                <!--<Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource DecreaseButton}"
+                                                  Margin="0,0,-10,0"
+                                                  Command="Slider.DecreaseLarge" />
+                                </Track.DecreaseRepeatButton>--><!--
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource IncreaseButton}"
+                                                  Margin="-10,0,0,0"
+                                                  Command="Slider.IncreaseLarge" />
+                                </Track.IncreaseRepeatButton>-->
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style.Setters>
     </Style>
     

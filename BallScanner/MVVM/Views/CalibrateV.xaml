@@ -150,22 +150,23 @@
 
                         <DockPanel Grid.Column="0"
                                    Margin="0,0,7,0"
-                                   LastChildFill="True">
+                                   LastChildFill="False">
 
                             <joel:BlockHeader DockPanel.Dock="Top"
                                               Text="{DynamicResource Text_Sensitivity}" />
 
+                            <joel:SimpleSlider DockPanel.Dock="Top"
+                                               Minimum="0"
+                                               Maximum="255"
+                                               Thumb.DragCompleted="Slider_DragCompleted"
+                                               Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                             <Slider DockPanel.Dock="Top"
                                     Minimum="0"
                                     Maximum="255"
+                                    Margin="0,40,0,0"
                                     Thumb.DragCompleted="Slider_DragCompleted"
-                                    Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource Brush_OnBackground_OnSurface}"
-                                       FontSize="14" />
+                                    Value="128" />
 
                         </DockPanel>
 

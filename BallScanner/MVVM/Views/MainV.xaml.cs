@@ -23,7 +23,7 @@ namespace BallScanner.MVVM.Views
         {
             InitializeComponent();
             DataContext = new MainVM();
-            SizeChanged += OnWindowSizeChanged;
+            //SizeChanged += OnWindowSizeChanged;
 
             SourceInitialized += (s, e) =>
             {
@@ -47,19 +47,19 @@ namespace BallScanner.MVVM.Views
             #endregion
         }
 
-        private static void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var window = (Window)sender;
-            var content = (FrameworkElement)window.Content;
+        //private static void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var window = (Window)sender;
+        //    var content = (FrameworkElement)window.Content;
 
-            window.MinWidth = window.ActualWidth - content.ActualWidth + content.MinWidth;
-            window.MaxWidth = window.ActualWidth - content.ActualWidth + content.MaxWidth;
+        //    window.MinWidth = window.ActualWidth - content.ActualWidth + content.MinWidth;
+        //    window.MaxWidth = window.ActualWidth - content.ActualWidth + content.MaxWidth;
 
-            window.MinHeight = window.ActualHeight - content.ActualHeight + content.MinHeight;
-            window.MaxHeight = window.ActualHeight - content.ActualHeight + content.MaxHeight;
+        //    window.MinHeight = window.ActualHeight - content.ActualHeight + content.MinHeight;
+        //    window.MaxHeight = window.ActualHeight - content.ActualHeight + content.MaxHeight;
 
-            window.SizeChanged -= OnWindowSizeChanged;
-        }
+        //    window.SizeChanged -= OnWindowSizeChanged;
+        //}
 
         [StructLayout(LayoutKind.Sequential)]
         public struct MyPoint
@@ -183,6 +183,9 @@ namespace BallScanner.MVVM.Views
 
                 mmi.pointMaxSize.x = Math.Abs(workArea.right - workArea.left);
                 mmi.pointMaxSize.y = Math.Abs(workArea.bottom - workArea.top);
+
+                //Console.WriteLine("PointMaxSize.X = " + mmi.pointMaxSize.x);
+                //Console.WriteLine("PointMaxSize.Y = " + mmi.pointMaxSize.y);
 
                 var main = Application.Current.MainWindow;
                 PresentationSource source = PresentationSource.FromVisual(main);
