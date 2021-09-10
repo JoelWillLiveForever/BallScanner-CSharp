@@ -146,18 +146,10 @@
 
                         <Slider Minimum="0"
                                 Maximum="255"
-                                Margin="0,7,0,24"
+                                Margin="0,7,0,0"
                                 VerticalAlignment="Top"
                                 Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Thumb.DragCompleted="Slider_DragCompleted" />
-
-                        <!--<Slider Minimum="0"
-                                Maximum="255"
-                                Margin="0,7,0,0"
-                                VerticalAlignment="Top"
-                                Style="{StaticResource OnlyTextSlider}"
-                                Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Thumb.DragCompleted="Slider_DragCompleted" />-->
 
                     </StackPanel>
 
