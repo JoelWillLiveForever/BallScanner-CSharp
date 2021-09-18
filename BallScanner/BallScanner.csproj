@@ -130,6 +130,9 @@
     <Compile Include="MVVM\Views\SettingsV.xaml.cs">
       <DependentUpon>SettingsV.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -166,6 +169,10 @@
     <Page Include="MVVM\Views\SettingsV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Fonts\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>

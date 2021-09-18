@@ -50,6 +50,10 @@
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
     <Compile Include="SimpleRadioButton.cs" />
+    <Page Include="Styles\DataGrid_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

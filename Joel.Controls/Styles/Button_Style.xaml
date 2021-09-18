@@ -37,13 +37,49 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Name="Root">
 
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              RecognizesAccessKey="True" />
+                            <ContentControl Content="{TemplateBinding Content}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            Margin="{TemplateBinding Padding}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            Name="MyContentControl" />
 
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="Transparent"
+                                                            Duration="0:0:0.2" />
+                                            <ThicknessAnimation Storyboard.TargetName="Root"
+                                                                Storyboard.TargetProperty="BorderThickness"
+                                                                To="{TemplateBinding BorderThickness}"
+                                                                Duration="0:0:0.2" />
+                                            <!--<ColorAnimation Storyboard.TargetName="MyContentControl"
+                                                            Storyboard.TargetProperty="ContentControl.Foreground.Color"
+                                                            To="{DynamicResource Color_Primary}"
+                                                            Duration="0:0:0.2" />-->
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color" 
+                                                            To="{DynamicResource Color_Primary}"
+                                                            Duration="0:0:0.2" />
+                                            <ThicknessAnimation Storyboard.TargetName="Root"
+                                                                Storyboard.TargetProperty="BorderThickness"
+                                                                To="0"
+                                                                Duration="0:0:0.2" />
+                                            <!--<ColorAnimation Storyboard.TargetName="MyContentControl"
+                                                            Storyboard.TargetProperty="Foreground.Color"
+                                                            To="{DynamicResource Color_OnPrimary}"
+                                                            Duration="0:0:0.2" />-->
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -52,12 +88,8 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver"
                      Value="True">
-                <Setter Property="Background"
-                        Value="{DynamicResource Brush_Primary}" />
                 <Setter Property="Foreground"
                         Value="{DynamicResource Brush_OnPrimary}" />
-                <Setter Property="BorderThickness"
-                        Value="0" />
             </Trigger>
         </Style.Triggers>
     </Style>
