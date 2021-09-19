@@ -65,7 +65,7 @@
                     <ControlTemplate TargetType="{x:Type Thumb}">
                         <StackPanel Orientation="Vertical"
                                     Margin="0,0,0,-24">
-                            <Grid>
+                            <Grid>                                
                                 <!-- Big point -->
                                 <Ellipse Panel.ZIndex="0"
                                          Fill="{DynamicResource Brush_Primary}"
@@ -73,26 +73,30 @@
                                          Height="22"
                                          Width="22" />
 
-                                <!-- Center point -->
-                                <Ellipse Panel.ZIndex="1"
-                                         Fill="{DynamicResource Brush_Background_Surface}"
-                                         StrokeThickness="0"
-                                         Height="6"
-                                         Width="6" />
+                                <Grid Name="InnerContent"
+                                      RenderTransformOrigin="0.5, 0.5"
+                                      Width="6"
+                                      Height="6">
+                                    
+                                    <Grid.RenderTransform>
+                                        <ScaleTransform />
+                                    </Grid.RenderTransform>
+                                    
+                                    <!-- Center point -->
+                                    <Ellipse Panel.ZIndex="1"
+                                             Fill="{DynamicResource Brush_Background_Surface}"
+                                             StrokeThickness="0" />
 
-                                <Ellipse Panel.ZIndex="2"
-                                         Fill="{DynamicResource Brush_Background_Primary}"
-                                         StrokeThickness="0"
-                                         Height="6"
-                                         Width="6" />
+                                    <Ellipse Panel.ZIndex="2"
+                                             Fill="{DynamicResource Brush_Background_Primary}"
+                                             StrokeThickness="0" />
 
-                                <Ellipse Panel.ZIndex="3"
-                                         Fill="{DynamicResource Brush_Surface_Overlay_08dp}"
-                                         StrokeThickness="0"
-                                         Height="6"
-                                         Width="6" />
-
+                                    <Ellipse Panel.ZIndex="3"
+                                             Fill="{DynamicResource Brush_Surface_Overlay_08dp}"
+                                             StrokeThickness="0" />
+                                </Grid>
                             </Grid>
+
                             <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Slider}, Path=Value}"
                                        FontSize="14"
                                        FontWeight="SemiBold"
@@ -103,6 +107,35 @@
                                        Margin="0,7,0,0"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Top" />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerContent"
+                                                             Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleX)"
+                                                             To="1" 
+                                                             Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetName="InnerContent"
+                                                             Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleY)"
+                                                             To="1"
+                                                             Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="InnerContent"
+                                                             Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleX)"
+                                                             To="2"
+                                                             Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetName="InnerContent"
+                                                             Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleY)"
+                                                             To="2"
+                                                             Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                         </StackPanel>
                     </ControlTemplate>
                 </Setter.Value>
