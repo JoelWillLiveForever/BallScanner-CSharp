@@ -202,7 +202,7 @@ namespace BallScanner.MVVM.ViewModels
                     break;
                 case "Button_PrevImage":
 
-                    if (Data != null & currentImageIndex > 0)
+                    if (Data != null && currentImageIndex > 0)
                     {
                         currentImageIndex--;
                         UpdateImage();
@@ -219,7 +219,7 @@ namespace BallScanner.MVVM.ViewModels
                     break;
                 case "Button_NextImage":
 
-                    if (Data != null & currentImageIndex < Data.Length - 1)
+                    if (Data != null && currentImageIndex < Data.Length - 1)
                     {
                         currentImageIndex++;
                         UpdateImage();

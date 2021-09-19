@@ -3,14 +3,14 @@
 
     <Style TargetType="{x:Type Button}">
         <Style.Setters>
+            <Setter Property="OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
             <Setter Property="Background"
-                    Value="Transparent" />
+                    Value="{DynamicResource Brush_Primary}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Brush_Primary}" />
-            <Setter Property="BorderBrush"
-                    Value="{DynamicResource Brush_Primary}" />
-            <Setter Property="BorderThickness"
-                    Value="2" />
+                    Value="{DynamicResource Brush_OnPrimary}" />
             <Setter Property="FontFamily"
                     Value="{StaticResource Font_Montserrat}" />
             <Setter Property="FontSize"
@@ -32,30 +32,33 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                        <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
                                 Name="Root">
 
-                            <ContentControl Content="{TemplateBinding Content}"
-                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                            Margin="{TemplateBinding Padding}"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                            Name="MyContentControl" />
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource Color_Primary}" />
+                            </Border.Background>
+                            
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="Root"
-                                                            Storyboard.TargetProperty="Background.Color"
-                                                            To="Transparent"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="{DynamicResource Color_Primary}"
                                                             Duration="0:0:0.2" />
-                                            <ThicknessAnimation Storyboard.TargetName="Root"
+                                            <!--<ThicknessAnimation Storyboard.TargetName="Root"
                                                                 Storyboard.TargetProperty="BorderThickness"
                                                                 To="{TemplateBinding BorderThickness}"
-                                                                Duration="0:0:0.2" />
+                                                                Duration="0:0:0.2" />-->
                                             <!--<ColorAnimation Storyboard.TargetName="MyContentControl"
                                                             Storyboard.TargetProperty="ContentControl.Foreground.Color"
                                                             To="{DynamicResource Color_Primary}"
@@ -65,13 +68,13 @@
                                     <VisualState x:Name="MouseOver">
                                         <Storyboard>
                                             <ColorAnimation Storyboard.TargetName="Root"
-                                                            Storyboard.TargetProperty="Background.Color" 
-                                                            To="{DynamicResource Color_Primary}"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                            To="{DynamicResource Color_OnBackground_OnSurface}"
                                                             Duration="0:0:0.2" />
-                                            <ThicknessAnimation Storyboard.TargetName="Root"
+                                            <!--<ThicknessAnimation Storyboard.TargetName="Root"
                                                                 Storyboard.TargetProperty="BorderThickness"
                                                                 To="0"
-                                                                Duration="0:0:0.2" />
+                                                                Duration="0:0:0.2" />-->
                                             <!--<ColorAnimation Storyboard.TargetName="MyContentControl"
                                                             Storyboard.TargetProperty="Foreground.Color"
                                                             To="{DynamicResource Color_OnPrimary}"
@@ -85,13 +88,13 @@
                 </Setter.Value>
             </Setter>
         </Style.Setters>
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Foreground"
                         Value="{DynamicResource Brush_OnPrimary}" />
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
     
 </ResourceDictionary>
