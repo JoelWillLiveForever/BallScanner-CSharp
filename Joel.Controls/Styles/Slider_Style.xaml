@@ -103,10 +103,10 @@
                                        FontFamily="{DynamicResource Font_Montserrat}"
                                        Foreground="{DynamicResource Brush_OnBackground_OnSurface_High}"
                                        Background="Transparent"
-                                       TextAlignment="Center"
-                                       Margin="0,7,0,0"
                                        HorizontalAlignment="Center"
-                                       VerticalAlignment="Top" />
+                                       VerticalAlignment="Top"
+                                       TextAlignment="Center"
+                                       Padding="0,7,0,0"/>
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">

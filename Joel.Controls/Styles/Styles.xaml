@@ -6,6 +6,7 @@
         <ResourceDictionary Source="/Joel.Controls;component/Styles/ScrollBar_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/ScrollViewer_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/Slider_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Styles/TextBox_Style.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
