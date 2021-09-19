@@ -16,11 +16,11 @@ namespace BallScanner.MVVM.ViewModels
 {
     public class CalibrateVM : PageVM
     {
+        // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         public static RelayCommand PerformAction { get; set; }
-        private System.Timers.Timer resizeTimer = new System.Timers.Timer(100) { Enabled = false };
-        //public static RelayCommand UpdateDecodeImageHeight { get; set; }
+        private Timer resizeTimer = new Timer(100) { Enabled = false };
 
         private int _decodePixelHeight;
         public int DecodePixelHeight
@@ -55,6 +55,7 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        // Массив с изображениями
         private ImageData[] _data;
         public ImageData[] Data
         {
@@ -66,8 +67,10 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        // Индекс текущего изображения
         private int currentImageIndex;
 
+        // Текущее изображение на экране
         private BitmapImage _currentImage;
         public BitmapImage CurrentImage
         {
@@ -79,55 +82,54 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        //private BitmapImage _currentImageSource;
-        //public BitmapImage CurrentImageSource
-        //{
-        //    get => _currentImageSource;
-        //    set
-        //    {
-        //        _currentImageSource = value;
-        //        OnPropertyChanged(nameof(CurrentImageSource));
-        //    }
-        //}
-
-        //private int _secondThreshold = 128;
-        //private int SecondThreshold
-        //{
-        //    get => _secondThreshold;
-        //    set => _secondThreshold = 256 - value;
-        //}
-
+        // Текущая чувствительность сканера (порог пикселя)
         private byte _thresholdValue = 128;
         public byte ThresholdValue
         {
             get => _thresholdValue;
             set
             {
+                if (_thresholdValue == value) return;
+
                 _thresholdValue = value;
                 OnPropertyChanged(nameof(ThresholdValue));
             }
         }
 
+        // Первое и второе пороговые значения
+        private ulong _firstThreshold;
+        public ulong FirstThreshold
+        {
+            get => _firstThreshold;
+            set
+            {
+                if (_firstThreshold == value) return;
+
+                _firstThreshold = value;
+                OnPropertyChanged(nameof(FirstThreshold));
+            }
+        }
+
+        private ulong _secondThreshold;
+        public ulong SecondThreshold
+        {
+            get => _secondThreshold;
+            set
+            {
+                if (_secondThreshold == value) return;
+
+                _secondThreshold = value;
+                OnPropertyChanged(nameof(SecondThreshold));
+            }
+        }
+
+        // Конструктор
         public CalibrateVM()
         {
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
             resizeTimer.Elapsed += new ElapsedEventHandler(ResizingDone);
-            //UpdateDecodeImageHeight = new RelayCommand(OnUpdateDecodeImageHeight);
         }
-
-        //private void OnUpdateDecodeImageHeight(object param)
-        //{
-        //    if (param == null) return;
-        //    if (!double.TryParse(param as string, out double actualHeight)) return;
-
-        //    using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
-        //    {
-        //        decodeImageHeight = (int)(g.DpiY / 96.0d * actualHeight);
-        //    }
-
-        //    Console.WriteLine("decodeImageHeight = " + decodeImageHeight);
-        //}
 
         private void OnPerformAction(object param)
         {
@@ -361,12 +363,6 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        private Bitmap BitmapTo1BppIndexed(Bitmap bitmap)
-        {
-            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            return bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
-        }
-
         private Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
         {
             using (MemoryStream outStream = new MemoryStream())
@@ -445,6 +441,7 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        // Обновить изображение
         private void UpdateImage()
         {
             try
@@ -486,5 +483,15 @@ namespace BallScanner.MVVM.ViewModels
 
             Properties.Settings.Default.Save();
         }
+
+        #region OLD_CODE
+
+        //private Bitmap BitmapTo1BppIndexed(Bitmap bitmap)
+        //{
+        //    Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+        //    return bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
+        //}
+
+        #endregion
     }
 }
