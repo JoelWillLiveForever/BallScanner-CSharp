@@ -221,6 +221,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <!-- Доделать -->
     <!--Template when the orientation of the Slider is Vertical.-->
     <ControlTemplate x:Key="VerticalSlider"
                      TargetType="{x:Type Slider}">

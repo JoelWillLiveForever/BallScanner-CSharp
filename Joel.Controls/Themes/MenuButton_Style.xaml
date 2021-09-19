@@ -8,8 +8,6 @@
                     Value="Transparent" />
             <Setter Property="BorderThickness"
                     Value="0" />
-            <!--<Setter Property="Opacity"
-                    Value=".6" />-->
             <Setter Property="Background"
                     Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
             <Setter Property="Foreground"
@@ -20,8 +18,8 @@
                     Value="Medium" />
             <Setter Property="FontFamily"
                     Value="{DynamicResource Font_Montserrat_Alternates}" />
-            <!--<Setter Property="SnapsToDevicePixels"
-                    Value="False" />-->
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
             <Setter Property="Width"
                     Value="Auto" />
             <Setter Property="Height"
@@ -49,9 +47,11 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Name="RootBorder">
+                                Name="Root">
 
-                            <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            <DockPanel Name="MyDockPanel"
+                                       Background="Transparent"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                        Margin="{TemplateBinding Padding}"
                                        LastChildFill="True">
@@ -62,12 +62,14 @@
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center">
 
-                                    <Path Data="{TemplateBinding Icon}"
+                                    <Path Name="MyIcon"
+                                          Data="{TemplateBinding Icon}"
                                           Fill="{TemplateBinding IconFill}" />
 
                                 </Viewbox>
 
-                                <TextBlock Text="{TemplateBinding ContentStringFormat}"
+                                <TextBlock Name="MyText"
+                                           Text="{TemplateBinding ContentStringFormat}"
                                            FontSize="{TemplateBinding FontSize}"
                                            FontWeight="{TemplateBinding FontWeight}"
                                            FontFamily="{TemplateBinding FontFamily}" 
@@ -76,6 +78,49 @@
                                            Opacity="{TemplateBinding Opacity}"
                                            Margin="7,1,0,0" />
                             </DockPanel>
+
+                            <!--<VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Surface_Overlay_8dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Surface_Overlay_12dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Primary_Overlay_24dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="Transparent"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>-->
+                            
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -85,16 +130,12 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="{DynamicResource Brush_Surface_Overlay_12dp}" />
+                        Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
                 <Setter Property="Foreground"
                         Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
-                <!--<Setter Property="Opacity"
-                        Value="0.87" />-->
             </Trigger>
             <Trigger Property="IsChecked"
                      Value="True">
-                <!--<Setter Property="Opacity"
-                        Value="1.00" />-->
                 <Setter Property="Background"
                         Value="{DynamicResource Brush_Primary_Overlay_24dp}" />
                 <Setter Property="Foreground"
