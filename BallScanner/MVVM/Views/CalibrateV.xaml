@@ -221,23 +221,6 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto">
 
-                    <ScrollViewer.Style>
-                        <Style TargetType="{x:Type ScrollViewer}">
-                            <Style.Triggers>
-                                <Trigger Property="ComputedHorizontalScrollBarVisibility"
-                                         Value="Visible">
-                                    <Setter Property="Padding"
-                                            Value="0,0,10,0" />
-                                </Trigger>
-                                <Trigger Property="ComputedVerticalScrollBarVisibility"
-                                         Value="Visible">
-                                    <Setter Property="Padding"
-                                            Value="0,0,0,10" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ScrollViewer.Style>
-
                     <StackPanel Orientation="Vertical"
                                 Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width, UpdateSourceTrigger=PropertyChanged}">
 
