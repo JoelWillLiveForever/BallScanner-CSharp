@@ -70,6 +70,16 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        // Только для чтения в дизайне
+        public ImageData CurrentData
+        {
+            get
+            {
+                if (Data == null || Data.Length == 0) return null;
+                return Data[currentImageIndex];
+            }
+        }
+
         // Индекс текущего изображения
         private int currentImageIndex;
 
@@ -157,6 +167,7 @@ namespace BallScanner.MVVM.ViewModels
                                 currentImageIndex = 0;
 
                                 for (int i = 0; i < Data.Length; i++)
+                                {
                                     Data[i] = new ImageData()
                                     {
                                         Name = openFile.SafeFileNames[i],
@@ -164,6 +175,9 @@ namespace BallScanner.MVVM.ViewModels
                                         NumberOfBlackPixels = 0,
                                         BallGrade = BallGrade.INDEFINED
                                     };
+
+                                    if (i == 0) OnPropertyChanged(nameof(CurrentData));
+                                }
 
                                 UpdateImage();
                             }
@@ -199,6 +213,7 @@ namespace BallScanner.MVVM.ViewModels
                             lock(locker)
                                 currentImageIndex--;
 
+                            OnPropertyChanged(nameof(CurrentData));
                             UpdateImage();
                         }
                     });
@@ -212,6 +227,7 @@ namespace BallScanner.MVVM.ViewModels
                             lock (locker)
                                 currentImageIndex++;
 
+                            OnPropertyChanged(nameof(CurrentData));
                             UpdateImage();
                         }
                     });
