@@ -7,6 +7,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -18,9 +19,11 @@ namespace BallScanner.MVVM.ViewModels
     {
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static CancellationTokenSource cts = new CancellationTokenSource();
+        private static object locker = new object();
 
         public static RelayCommand PerformAction { get; set; }
-        private Timer resizeTimer = new Timer(100) { Enabled = false };
+        private System.Timers.Timer resizeTimer = new System.Timers.Timer(100) { Enabled = false };
 
         private int _decodePixelHeight;
         public int DecodePixelHeight
@@ -133,117 +136,96 @@ namespace BallScanner.MVVM.ViewModels
 
         private void OnPerformAction(object param)
         {
-            string sender = param as string;
+            Log.Info("Call function \"OnPerformAction(object param)\", param: " + param);
+            Log.Info("Call function \"Task.Run()\"");
 
-            switch (sender)
+            switch (param)
             {
                 case "Button_LoadImages":
-                    //try
-                    //{
-                    OpenFileDialog openFile = new OpenFileDialog();
-                    openFile.Filter = "JPEG/JPG - JPG Files|*.jpeg;*.jpg|BMP - Windows Bitmap|*.bmp|PNG - Portable Network Graphics|*.png";
-                    openFile.Multiselect = true;
-
-                    if (openFile.ShowDialog() == true)
+                    Log.Info("Button \"Load\" has been pressed");
+                    Task.Run(() =>
                     {
-                        Data = new ImageData[openFile.FileNames.Length];
-                        currentImageIndex = 0;
-
-                        for (int i = 0; i < Data.Length; i++)
+                        try
                         {
-                            //Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                            //bmp = bmp.Clone(rect, PixelFormat.Format16bppGrayScale);
+                            OpenFileDialog openFile = new OpenFileDialog();
+                            openFile.Filter = "JPEG/JPG - JPG Files|*.jpeg;*.jpg|BMP - Windows Bitmap|*.bmp|PNG - Portable Network Graphics|*.png";
+                            openFile.Multiselect = true;
 
-                            Data[i] = new ImageData()
+                            if (openFile.ShowDialog() == true)
                             {
-                                Name = openFile.SafeFileNames[i],
-                                ImagePath = openFile.FileNames[i],
-                                NumberOfBlackPixels = 0,
-                                BallGrade = BallGrade.INDEFINED,
-                                //Width = bmp.Width,
-                                //Height = bmp.Height,
-                                //Data = BitmapToArray(bmp)
-                                //BitmapImage = BitmapToBitmapImage(bmp)
-                            };
+                                Data = new ImageData[openFile.FileNames.Length];
+                                currentImageIndex = 0;
+
+                                for (int i = 0; i < Data.Length; i++)
+                                    Data[i] = new ImageData()
+                                    {
+                                        Name = openFile.SafeFileNames[i],
+                                        ImagePath = openFile.FileNames[i],
+                                        NumberOfBlackPixels = 0,
+                                        BallGrade = BallGrade.INDEFINED
+                                    };
+
+                                UpdateImage();
+                            }
                         }
-
-                        UpdateImage();
-
-                        //byte[] data = imagesArr[currentImageIndex].Data;
-                        //Bitmap threshold = ThresholdBitmap(ArrayToBitmap(data));
-                        //CurrentImageSource = BitmapToBitmapImage(threshold);
-
-                        //using (var newBitmap = new Bitmap(imagesArr[currentImageIndex].Bitmap))
-                        //{
-                        //    CurrentImageSource = BitmapToBitmapImage(Threshold(newBitmap, ThresholdValue));
-                        //    newBitmap.Dispose();
-                        //}
-
-                        break;
-                    }
-                    //}
-                    //catch (FileNotFoundException ex)
-                    //{
-                    //    MessageBox.Show(ex.Message, "FileNotFoundException", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //}
-                    //catch (ArgumentException ex)
-                    //{
-                    //    MessageBox.Show(ex.Message, "ArgumentException", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //}
-                    //catch (UriFormatException ex)
-                    //{
-                    //    MessageBox.Show(ex.Message, "IndexOutOfRangeException", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //}
-
+                        catch (FileNotFoundException ex)
+                        {
+                            Log.Error("Error \"" + nameof(FileNotFoundException) + "\"", ex.Message);
+                            MessageBox.Show(ex.Message, "FileNotFoundException", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Log.Error("Error \"" + nameof(ArgumentException) + "\"", ex.Message);
+                            MessageBox.Show(ex.Message, "ArgumentException", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        catch (UriFormatException ex)
+                        {
+                            Log.Error("Error \"" + nameof(IndexOutOfRangeException) + "\"", ex.Message);
+                            MessageBox.Show(ex.Message, "IndexOutOfRangeException", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
+                            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    });
                     break;
                 case "Button_PrevImage":
-
-                    if (Data != null && currentImageIndex > 0)
+                    Log.Info("Button \"Previous\" has been pressed");
+                    Task.Run(() =>
                     {
-                        currentImageIndex--;
-                        UpdateImage();
-                        //byte[] data = imagesArr[currentImageIndex].Data;
-                        //Bitmap threshold = ThresholdBitmap(ArrayToBitmap(data));
-                        //CurrentImageSource = BitmapToBitmapImage(threshold);
+                        if (Data != null && Data.Length > 0 && currentImageIndex > 0)
+                        {
+                            lock(locker)
+                                currentImageIndex--;
 
-                        //using (var newBitmap = new Bitmap(imagesArr[currentImageIndex].Bitmap))
-                        //{
-                        //    CurrentImageSource = BitmapToBitmapImage(Threshold(newBitmap, ThresholdValue));
-                        //    newBitmap.Dispose();
-                        //}
-                    }
+                            UpdateImage();
+                        }
+                    });
                     break;
                 case "Button_NextImage":
-
-                    if (Data != null && currentImageIndex < Data.Length - 1)
+                    Log.Info("Button \"Next\" has been pressed");
+                    Task.Run(() =>
                     {
-                        currentImageIndex++;
-                        UpdateImage();
-                        //byte[] data = imagesArr[currentImageIndex].Data;
-                        //Bitmap threshold = ThresholdBitmap(ArrayToBitmap(data));
-                        //CurrentImageSource = BitmapToBitmapImage(threshold);
+                        if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
+                        {
+                            lock (locker)
+                                currentImageIndex++;
 
-                        //using (var newBitmap = new Bitmap(imagesArr[currentImageIndex].Bitmap))
-                        //{
-                        //    CurrentImageSource = BitmapToBitmapImage(Threshold(newBitmap, ThresholdValue));
-                        //    newBitmap.Dispose();
-                        //}
-                    }
+                            UpdateImage();
+                        }
+                    });
                     break;
                 case "Button_Execute":
-
-                    if (Data != null)
+                    Log.Info("Button \"Execute\" has been pressed");
+                    Task.Run(() =>
                     {
-                        Task.Run(() =>
+                        if (Data != null && Data.Length > 0)
                         {
                             for (int i = 0; i < Data.Length; i++)
                             {
                                 ulong numberOfBlackPixels = 0;
-                                using (var bitmap = ThresholdBitmap(ConvertToGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
+                                using (var bitmap = GetThresholdBitmap(GetGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
                                 {
                                     unsafe
                                     {
@@ -283,7 +265,6 @@ namespace BallScanner.MVVM.ViewModels
                                         bitmap.UnlockBits(bitmapData);
                                     }
 
-
                                     //for (int y = 0; y < bitmap.Height; y++)
                                     //    for (int x = 0; x < bitmap.Width; x++)
                                     //    {
@@ -293,90 +274,37 @@ namespace BallScanner.MVVM.ViewModels
 
                                 }
 
-                                if (numberOfBlackPixels < 11000)
+                                // Определение сорта стеклошарика
+                                if (numberOfBlackPixels <= FirstThreshold)
                                     Data[i].BallGrade = BallGrade.FIRST;
-                                else if (numberOfBlackPixels < 17000)
+                                else if (numberOfBlackPixels <= SecondThreshold)
                                     Data[i].BallGrade = BallGrade.SECOND;
                                 else
                                     Data[i].BallGrade = BallGrade.DEFECTIVE;
 
                                 Data[i].NumberOfBlackPixels = numberOfBlackPixels;
                             }
-                        });
-                    }
-
-                    //SaveFileDialog dialog = new SaveFileDialog();
-                    //dialog.FileName = imagesArr[currentImageIndex].Name;
-
-                    //if (dialog.ShowDialog() == true)
-                    //{
-                    //    Bitmap bmp = new Bitmap(imagesArr[currentImageIndex].Path);
-
-                    //    bmp = ConvertToGrayBitmap(bmp);
-                    //    bmp = ThresholdBitmap(bmp, ThresholdValue);
-
-                    //    bmp.Save(dialog.FileName, ImageFormat.Bmp);
-                    //}
-                    //CurrentImageSource = BitmapToImageSource(imagesArr[currentImageIndex].Bitmap);
-
-                    //using (var bmp = BitmapImageToBitmap(CurrentImageSource))
-                    //{
-                    //    long count = 0;
-                    //    for (int y = 0; y < bmp.Height; y++)
-                    //    {
-                    //        for (int x = 0; x < bmp.Width; x++)
-                    //        {
-                    //            if (bmp.GetPixel(x, y).GetBrightness() == 0) count++;
-                    //        }
-                    //    }
-                    //    Console.WriteLine("Count = " + count);
-                    //}
-
+                        }
+                    });
                     break;
-
                 case "DragCompleted":
-
-                    if (Data != null)
+                    Task.Run(() =>
                     {
-                        UpdateImage();
-                        //byte[] data = imagesArr[currentImageIndex].Data;
-                        //Bitmap threshold = ThresholdBitmap(ArrayToBitmap(data));
-                        //CurrentImageSource = BitmapToBitmapImage(threshold);
+                        Log.Info("Slider has been released");
 
-                        //using (var newBitmap = new Bitmap(imagesArr[currentImageIndex].Bitmap))
-                        //{
-                        //    CurrentImageSource = BitmapToBitmapImage(Threshold(newBitmap, ThresholdValue));
-                        //    newBitmap.Dispose();
-                        //}
-                    }
-
+                        if (Data != null && Data.Length > 0)
+                            UpdateImage();
+                    });
                     break;
             }
+
+            Log.Info("End of function \"OnPerformAction\"");
         }
 
-        private byte[] BitmapToByteArray(Bitmap bitmap)
+        private Bitmap GetGrayBitmap(Bitmap original)
         {
-            using (var stream = new MemoryStream())
-            {
-                bitmap.Save(stream, ImageFormat.Bmp);
-                return stream.ToArray();
-            }
-        }
-
-        private Bitmap BitmapImageToBitmap(BitmapImage bitmapImage)
-        {
-            using (MemoryStream outStream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
-                enc.Save(outStream);
-
-                return new Bitmap(outStream);
-            }
-        }
-
-        private Bitmap ConvertToGrayBitmap(Bitmap original)
-        {
+            Log.Info("Call function \"GetGrayBitmap(Bitmap original)\"");
+            
             using (Graphics g = Graphics.FromImage(original))
             {
                 var gray_matrix = new float[][] {
@@ -397,8 +325,10 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        private Bitmap ThresholdBitmap(Bitmap original, short thresholdValue)
+        private Bitmap GetThresholdBitmap(Bitmap original, short thresholdValue)
         {
+            Log.Info("Call function \"GetThresholdBitmap(Bitmap original)\"");
+            
             Bitmap result = new Bitmap(original);
             using (Graphics g = Graphics.FromImage(result))
             {
@@ -414,8 +344,10 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        private BitmapImage BitmapToBitmapImage(Bitmap bitmap)
+        private BitmapImage GetBitmapImageFromBitmap(Bitmap bitmap)
         {
+            Log.Info("Call function \"GetBitmapImageFromBitmap(Bitmap bitmap)\"");
+            
             using (MemoryStream memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Bmp);
@@ -430,9 +362,7 @@ namespace BallScanner.MVVM.ViewModels
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
 
                 if (imgHeight > DecodePixelHeight)
-                {
                     bitmapImage.DecodePixelHeight = DecodePixelHeight;
-                }
 
                 bitmapImage.EndInit();
 
@@ -444,14 +374,17 @@ namespace BallScanner.MVVM.ViewModels
         // Обновить изображение
         private void UpdateImage()
         {
+            Log.Info("Call function \"UpdateImage()\"");
+            //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
+
             try
             {
                 Bitmap temp = new Bitmap(Data[currentImageIndex].ImagePath);
 
-                temp = ConvertToGrayBitmap(temp);
-                temp = ThresholdBitmap(temp, ThresholdValue);
+                temp = GetGrayBitmap(temp);
+                temp = GetThresholdBitmap(temp, ThresholdValue);
 
-                CurrentImage = BitmapToBitmapImage(temp);
+                CurrentImage = GetBitmapImageFromBitmap(temp);
 
                 temp.Dispose();
 
@@ -461,16 +394,22 @@ namespace BallScanner.MVVM.ViewModels
             }
             catch (ArgumentException e)
             {
+                Log.Error("Error \"ArgumentException\"", e.Message);
                 MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception e)
             {
+                Log.Error("Error \"Exception\"", e.Message);
                 MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            Log.Info("End of function \"UpdateImage()\"");
         }
 
         public override void ChangePalette()
         {
+            Log.Info("Вызов функции \"ChangePalette()\" - смена цвета для текущей страницы");
+
             var app = (App)Application.Current;
             app.CurrentPalette = Palettes.Yellow;
 
@@ -483,15 +422,5 @@ namespace BallScanner.MVVM.ViewModels
 
             Properties.Settings.Default.Save();
         }
-
-        #region OLD_CODE
-
-        //private Bitmap BitmapTo1BppIndexed(Bitmap bitmap)
-        //{
-        //    Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-        //    return bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
-        //}
-
-        #endregion
     }
 }
