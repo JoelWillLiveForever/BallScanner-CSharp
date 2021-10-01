@@ -108,7 +108,7 @@
                                        TextAlignment="Center"
                                        Padding="0,7,0,0"/>
 
-                            <VisualStateManager.VisualStateGroups>
+                            <!--<VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
                                         <Storyboard>
@@ -135,7 +135,7 @@
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                            </VisualStateManager.VisualStateGroups>-->
                         </StackPanel>
                     </ControlTemplate>
                 </Setter.Value>

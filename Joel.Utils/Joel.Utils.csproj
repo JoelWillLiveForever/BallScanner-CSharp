@@ -58,6 +58,7 @@
     <Compile Include="Behaviors\ScaleFontBehavior.cs" />
     <Compile Include="Converters\BlockingConverter.cs" />
     <Compile Include="Converters\LogicalConverter.cs" />
+    <Compile Include="Converters\RowToIndexConverter.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Observers\SizeObserver.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />

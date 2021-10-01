@@ -90,6 +90,8 @@ namespace BallScanner.MVVM.ViewModels
             get => _currentImage;
             set
             {
+                if (_currentImage == value) return;
+
                 _currentImage = value;
                 OnPropertyChanged(nameof(CurrentImage));
             }

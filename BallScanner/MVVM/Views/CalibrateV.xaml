@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils"
+             xmlns:converters="clr-namespace:Joel.Utils.Converters;assembly=Joel.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -35,7 +36,8 @@
                         <joel:BlockHeader DockPanel.Dock="Top"
                                           Text="{DynamicResource Text_OutputImage}" />
 
-                        <Grid Margin="0,7,0,0">
+                        <Grid Margin="0,7,0,0"
+                              Background="#29000000">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="29" />
                                 <RowDefinition Height="29" />
@@ -122,7 +124,7 @@
                                        Grid.Row="0" />
                             
                             <!-- Row 2 -->
-                            <TextBlock Text="-"
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentImageIndex, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
                                        Grid.Column="0"
                                        Grid.Row="1" />
@@ -336,6 +338,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
                                                     CellStyle="{StaticResource FirstColumnCell}"
+                                                    Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converters:RowToIndexConverter}}"
                                                     Width="0.5*" />
                                 <DataGridTextColumn Header="Имя файла"
                                                     Width="*" 
