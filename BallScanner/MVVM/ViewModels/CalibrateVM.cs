@@ -168,10 +168,12 @@ namespace BallScanner.MVVM.ViewModels
                                 Data = new ImageData[openFile.FileNames.Length];
                                 currentImageIndex = 0;
 
+                                int id = 1;
                                 for (int i = 0; i < Data.Length; i++)
                                 {
                                     Data[i] = new ImageData()
                                     {
+                                        Id = id,
                                         Name = openFile.SafeFileNames[i],
                                         ImagePath = openFile.FileNames[i],
                                         NumberOfBlackPixels = 0,
@@ -179,6 +181,7 @@ namespace BallScanner.MVVM.ViewModels
                                     };
 
                                     if (i == 0) OnPropertyChanged(nameof(CurrentData));
+                                    id++;
                                 }
 
                                 UpdateImage();

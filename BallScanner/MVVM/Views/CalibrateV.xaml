@@ -6,7 +6,6 @@
              xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils"
-             xmlns:converters="clr-namespace:Joel.Utils.Converters;assembly=Joel.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -124,7 +123,7 @@
                                        Grid.Row="0" />
                             
                             <!-- Row 2 -->
-                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentImageIndex, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.Id, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
                                        Grid.Column="0"
                                        Grid.Row="1" />
@@ -338,7 +337,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
                                                     CellStyle="{StaticResource FirstColumnCell}"
-                                                    Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converters:RowToIndexConverter}}"
+                                                    Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
                                                     Width="0.5*" />
                                 <DataGridTextColumn Header="Имя файла"
                                                     Width="*" 
