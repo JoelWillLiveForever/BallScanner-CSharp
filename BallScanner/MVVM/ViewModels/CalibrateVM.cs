@@ -19,8 +19,6 @@ namespace BallScanner.MVVM.ViewModels
     {
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private static CancellationTokenSource cts = new CancellationTokenSource();
-        private static object locker = new object();
 
         public static RelayCommand PerformAction { get; set; }
         private System.Timers.Timer resizeTimer = new System.Timers.Timer(100) { Enabled = false };
@@ -80,7 +78,7 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        // Индекс текущего изображения
+        // Индекс текущего изображения (ожидаемого)
         private int currentImageIndex;
 
         // Текущее изображение на экране
@@ -138,6 +136,10 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        // Фоновые задачи
+        private static Action sequential = null;
+        private static Task background = null;
+
         // Конструктор
         public CalibrateVM()
         {
@@ -154,9 +156,9 @@ namespace BallScanner.MVVM.ViewModels
             switch (param)
             {
                 case "Button_LoadImages":
-                    Log.Info("Button \"Load\" has been pressed");
-                    Task.Run(() =>
+                    sequential = delegate ()
                     {
+                        Log.Info("Button \"Load\" has been pressed");
                         try
                         {
                             OpenFileDialog openFile = new OpenFileDialog();
@@ -183,7 +185,7 @@ namespace BallScanner.MVVM.ViewModels
                                     if (i == 0) OnPropertyChanged(nameof(CurrentData));
                                     id++;
                                 }
-
+                                
                                 UpdateImage();
                             }
                         }
@@ -207,16 +209,21 @@ namespace BallScanner.MVVM.ViewModels
                             Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
                             MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                    });
+                    };
+
+                    if (background == null || (background != null && background.IsCompleted))
+                    {
+                        background = Task.Run(sequential);
+                    }
+
                     break;
                 case "Button_PrevImage":
-                    Log.Info("Button \"Previous\" has been pressed");
                     Task.Run(() =>
                     {
+                        Log.Info("Button \"Previous\" has been pressed");
                         if (Data != null && Data.Length > 0 && currentImageIndex > 0)
                         {
-                            lock(locker)
-                                currentImageIndex--;
+                            Interlocked.Decrement(ref currentImageIndex);
 
                             OnPropertyChanged(nameof(CurrentData));
                             UpdateImage();
@@ -224,13 +231,12 @@ namespace BallScanner.MVVM.ViewModels
                     });
                     break;
                 case "Button_NextImage":
-                    Log.Info("Button \"Next\" has been pressed");
                     Task.Run(() =>
                     {
+                        Log.Info("Button \"Next\" has been pressed");
                         if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
                         {
-                            lock (locker)
-                                currentImageIndex++;
+                            Interlocked.Increment(ref currentImageIndex);
 
                             OnPropertyChanged(nameof(CurrentData));
                             UpdateImage();
@@ -238,14 +244,14 @@ namespace BallScanner.MVVM.ViewModels
                     });
                     break;
                 case "Button_Execute":
-                    Log.Info("Button \"Execute\" has been pressed");
-                    Task.Run(() =>
+                    sequential = delegate ()
                     {
+                        Log.Info("Button \"Execute\" has been pressed");
                         if (Data != null && Data.Length > 0)
                         {
                             for (int i = 0; i < Data.Length; i++)
                             {
-                                ulong numberOfBlackPixels = 0;
+                                long numberOfBlackPixels = 0;
                                 using (var bitmap = GetThresholdBitmap(GetGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
                                 {
                                     unsafe
@@ -258,7 +264,6 @@ namespace BallScanner.MVVM.ViewModels
                                         int widthInBytes = bitmapData.Width * bytesPerPixel;
                                         byte* PtrFirstPixel = (byte*)bitmapData.Scan0;
 
-                                        object locker = new object();
                                         Parallel.For(0, heightInPixels, y =>
                                         {
                                             byte* currentLine = PtrFirstPixel + (y * bitmapData.Stride);
@@ -266,8 +271,7 @@ namespace BallScanner.MVVM.ViewModels
                                             {
                                                 // optimized
                                                 if (currentLine[x] == 0)
-                                                    lock (locker)
-                                                        numberOfBlackPixels++;
+                                                    Interlocked.Increment(ref numberOfBlackPixels);
 
                                                 //int blue = currentLine[x];
                                                 //int green = currentLine[x + 1];
@@ -296,17 +300,23 @@ namespace BallScanner.MVVM.ViewModels
                                 }
 
                                 // Определение сорта стеклошарика
-                                if (numberOfBlackPixels <= FirstThreshold)
+                                if (unchecked((ulong)numberOfBlackPixels) <= FirstThreshold)
                                     Data[i].BallGrade = BallGrade.FIRST;
-                                else if (numberOfBlackPixels <= SecondThreshold)
+                                else if (unchecked((ulong)numberOfBlackPixels) <= SecondThreshold)
                                     Data[i].BallGrade = BallGrade.SECOND;
                                 else
                                     Data[i].BallGrade = BallGrade.DEFECTIVE;
 
-                                Data[i].NumberOfBlackPixels = numberOfBlackPixels;
+                                Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
                             }
                         }
-                    });
+                    };
+
+                    if (background == null || (background != null && background.IsCompleted))
+                    {
+                        background = Task.Run(sequential);
+                    }
+
                     break;
                 case "DragCompleted":
                     Task.Run(() =>
@@ -322,10 +332,19 @@ namespace BallScanner.MVVM.ViewModels
             Log.Info("End of function \"OnPerformAction\"");
         }
 
+        public void changeImage(object item)
+        {
+            ImageData data = item as ImageData;
+            currentImageIndex = data.Id - 1;
+
+            OnPropertyChanged(nameof(CurrentData));
+            UpdateImage();
+        }
+
         private Bitmap GetGrayBitmap(Bitmap original)
         {
             Log.Info("Call function \"GetGrayBitmap(Bitmap original)\"");
-            
+
             using (Graphics g = Graphics.FromImage(original))
             {
                 var gray_matrix = new float[][] {
@@ -349,7 +368,7 @@ namespace BallScanner.MVVM.ViewModels
         private Bitmap GetThresholdBitmap(Bitmap original, short thresholdValue)
         {
             Log.Info("Call function \"GetThresholdBitmap(Bitmap original)\"");
-            
+
             Bitmap result = new Bitmap(original);
             using (Graphics g = Graphics.FromImage(result))
             {
@@ -368,7 +387,7 @@ namespace BallScanner.MVVM.ViewModels
         private BitmapImage GetBitmapImageFromBitmap(Bitmap bitmap)
         {
             Log.Info("Call function \"GetBitmapImageFromBitmap(Bitmap bitmap)\"");
-            
+
             using (MemoryStream memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Bmp);
@@ -393,38 +412,82 @@ namespace BallScanner.MVVM.ViewModels
         }
 
         // Обновить изображение
-        private void UpdateImage()
+        private async void UpdateImage()
         {
-            Log.Info("Call function \"UpdateImage()\"");
             //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
-
-            try
+            await Task.Run(() =>
             {
-                Bitmap temp = new Bitmap(Data[currentImageIndex].ImagePath);
+                try
+                {
+                    Bitmap original = new Bitmap(Data[currentImageIndex].ImagePath);
+                    int myImageIndex = currentImageIndex;
 
-                temp = GetGrayBitmap(temp);
-                temp = GetThresholdBitmap(temp, ThresholdValue);
+                    // gray bitmap
+                    using (Graphics g = Graphics.FromImage(original))
+                    {
+                        var gray_matrix = new float[][] {
+                            new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
+                            new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
+                            new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
+                            new float[] { 0,      0,      0,      1, 0 },
+                            new float[] { 0,      0,      0,      0, 1 }
+                        };
 
-                CurrentImage = GetBitmapImageFromBitmap(temp);
+                        var attributes = new ImageAttributes();
+                        float threshold = (float)(ThresholdValue / 255.0d);
 
-                temp.Dispose();
+                        attributes.SetColorMatrix(new ColorMatrix(gray_matrix));
+                        attributes.SetThreshold(threshold, ColorAdjustType.Default);
 
-                // delete old image
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
-            catch (ArgumentException e)
-            {
-                Log.Error("Error \"ArgumentException\"", e.Message);
-                MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception e)
-            {
-                Log.Error("Error \"Exception\"", e.Message);
-                MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                        var rect = new Rectangle(0, 0, original.Width, original.Height);
+                        g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+                    }
 
-            Log.Info("End of function \"UpdateImage()\"");
+                    // actually ?
+                    if (myImageIndex != currentImageIndex) return;
+
+                    // bitmap to bitmap image
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        original.Save(memory, ImageFormat.Bmp);
+                        int imgHeight = original.Height;
+                        original.Dispose();
+
+                        memory.Position = 0;
+
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = memory;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                        if (imgHeight > DecodePixelHeight)
+                            bitmapImage.DecodePixelHeight = DecodePixelHeight;
+
+                        bitmapImage.EndInit();
+
+                        bitmapImage.Freeze();
+
+                        if (myImageIndex != currentImageIndex) return;
+                        CurrentImage = bitmapImage;
+                    }
+
+                    original.Dispose();
+
+                    // delete old image
+                    //GC.Collect();
+                    //GC.WaitForPendingFinalizers();
+                }
+                catch (ArgumentException e)
+                {
+                    Log.Error("Error \"ArgumentException\"", e.Message);
+                    MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Error \"Exception\"", e.Message);
+                    MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
         }
 
         public override void ChangePalette()

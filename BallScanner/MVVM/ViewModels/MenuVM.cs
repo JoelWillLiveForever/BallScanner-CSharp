@@ -11,7 +11,7 @@ namespace BallScanner.MVVM.ViewModels
 
         private static AccountVM accountVM = new AccountVM();
         private static ScanVM scanVM = new ScanVM();
-        private static CalibrateVM calibrateVM = new CalibrateVM();
+        public static CalibrateVM calibrateVM = new CalibrateVM();
         private static DocumentsVM documentsVM = new DocumentsVM();
         private static SettingsVM settingsVM = new SettingsVM();
         private static AboutVM aboutVM = new AboutVM();

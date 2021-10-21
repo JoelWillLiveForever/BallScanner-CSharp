@@ -100,6 +100,12 @@ namespace BallScanner.MVVM.Views
             }
         }
 
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // execute some code
+            Console.WriteLine("Double Ckick");
+        }
+
         //public System.Windows.Size GetElementPixelSize(UIElement element)
         //{
         //    Matrix transformToDevice;

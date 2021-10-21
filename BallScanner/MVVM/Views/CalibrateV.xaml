@@ -333,6 +333,12 @@
                         <DataGrid Margin="0,7,0,0"
                                   ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
                                   AutoGenerateColumns="False">
+                            <!--<DataGrid.ItemContainerStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" 
+                                                 Handler="Row_DoubleClick" />
+                                </Style>
+                            </DataGrid.ItemContainerStyle>-->
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 

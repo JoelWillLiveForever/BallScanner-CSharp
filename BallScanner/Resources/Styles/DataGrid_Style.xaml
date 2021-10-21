@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="BallScanner.Resources.Styles.DataGrid_Style">
 
     <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
 
@@ -492,6 +493,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <EventSetter Event="MouseDoubleClick"
+                     Handler="Row_DoubleClick" />
     </Style>
 
     <!--Style and template for the resize control on the DataGridRowHeader.-->

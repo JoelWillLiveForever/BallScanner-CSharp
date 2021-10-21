@@ -37,6 +37,8 @@
                 
                 <!-- Control styles -->
                 <ResourceDictionary Source="pack://application:,,,/Joel.Controls;component/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/DataGrid_Style.xaml" />
+
 
             </ResourceDictionary.MergedDictionaries>
 
