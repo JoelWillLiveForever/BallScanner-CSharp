@@ -126,6 +126,32 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        private ulong _avgNumBlackPixels;
+        public ulong AvgNumBlackPixels
+        {
+            get => _avgNumBlackPixels;
+            set
+            {
+                if (_avgNumBlackPixels == value) return;
+
+                _avgNumBlackPixels = value;
+                OnPropertyChanged(nameof(AvgNumBlackPixels));
+            }
+        }
+
+        private int _imagesCount;
+        public int ImagesCount
+        {
+            get => _imagesCount;
+            set
+            {
+                if (_imagesCount == value) return;
+
+                _imagesCount = value;
+                OnPropertyChanged(nameof(ImagesCount));
+            }
+        }
+
         // Конструктор
         public CalibrateVM()
         {
@@ -154,7 +180,8 @@ namespace BallScanner.MVVM.ViewModels
 
                                 if (openFile.ShowDialog() == true)
                                 {
-                                    Data = new ImageData[openFile.FileNames.Length];
+                                    ImagesCount = openFile.FileNames.Length;
+                                    Data = new ImageData[ImagesCount];
                                     currentImageIndex = 0;
 
                                     int id = 1;
@@ -266,6 +293,13 @@ namespace BallScanner.MVVM.ViewModels
 
                                     Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
                                 });
+
+                                // Поиск среднего
+                                foreach (var obj in Data)
+                                {
+                                    AvgNumBlackPixels += obj.NumberOfBlackPixels;
+                                }
+                                AvgNumBlackPixels /= (ulong)ImagesCount;
                             }
                         });
                     }

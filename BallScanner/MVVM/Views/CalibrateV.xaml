@@ -59,6 +59,7 @@
                                     Background="{DynamicResource Brush_Primary}" />
 
                             <TextBlock Text="№ п/п"
+                                       Margin="7,0,0,0"
                                        Style="{StaticResource DataGridParody_Header}"
                                        Grid.Column="0"
                                        Grid.Row="0" />
@@ -85,46 +86,16 @@
                                           Grid.Row="0"
                                           Background="{DynamicResource Brush_OnPrimary}" />
 
-                            <TextBlock Text="Кол-во ч/п"
+                            <TextBlock Text="Сорт"
                                        Style="{StaticResource DataGridParody_Header}"
+                                       Margin="0,0,8,0"
                                        Grid.Column="6"
                                        Grid.Row="0" />
-                            
-                            <TextBlock Text="№ п/п"
-                                       Style="{StaticResource DataGridParody_Header}"
-                                       Grid.Column="0"
-                                       Grid.Row="0" />
 
-                            <GridSplitter Grid.Column="1"
-                                          Grid.Row="0"
-                                          Background="{DynamicResource Brush_OnPrimary}" />
-
-                            <TextBlock Text="Имя"
-                                       Style="{StaticResource DataGridParody_Header}"
-                                       Grid.Column="2"
-                                       Grid.Row="0" />
-
-                            <GridSplitter Grid.Column="3"
-                                          Grid.Row="0"
-                                          Background="{DynamicResource Brush_OnPrimary}" />
-
-                            <TextBlock Text="Кол-во ч/п"
-                                       Style="{StaticResource DataGridParody_Header}"
-                                       Grid.Column="4"
-                                       Grid.Row="0" />
-
-                            <GridSplitter Grid.Column="5"
-                                          Grid.Row="0"
-                                          Background="{DynamicResource Brush_OnPrimary}" />
-
-                            <TextBlock Text="Кол-во ч/п"
-                                       Style="{StaticResource DataGridParody_Header}"
-                                       Grid.Column="6"
-                                       Grid.Row="0" />
-                            
                             <!-- Row 2 -->
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.Id, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
+                                       Margin="7,0,0,0"
                                        Grid.Column="0"
                                        Grid.Row="1" />
 
@@ -167,6 +138,7 @@
 
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
+                                       Margin="0,0,8,0"
                                        Grid.Column="6"
                                        Grid.Row="1" />
 
@@ -309,17 +281,70 @@
                         <joel:BlockHeader DockPanel.Dock="Top"
                                           Text="{DynamicResource Text_GeneralScanResults}" />
 
-                        <DataGrid Margin="0,7,0,0"
-                                  Height="60">
+                        <Grid Margin="0,7,0,0"
+                              Background="#29000000">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="29" />
+                                <RowDefinition Height="29" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
 
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Всего изображений загружено" 
-                                                    Width="*" />
-                                <DataGridTextColumn Header="Среднее число чёрных пикселей" 
-                                                    Width="*" />
-                            </DataGrid.Columns>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        </DataGrid>
+                            <Border Grid.ColumnSpan="7"
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Background="{DynamicResource Brush_Primary}" />
+
+                            <TextBlock Text="Среднее число ч/п"
+                                       Style="{StaticResource DataGridParody_Header}"
+                                       Margin="7,0,0,0"
+                                       Grid.Column="0"
+                                       Grid.Row="0" />
+
+                            <GridSplitter Grid.Column="1"
+                                          Grid.Row="0"
+                                          Background="{DynamicResource Brush_OnPrimary}" />
+
+                            <TextBlock Text="Всего изображений"
+                                       Style="{StaticResource DataGridParody_Header}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="2"
+                                       Grid.Row="0" />
+
+                            <!-- Row 2 -->
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.AvgNumBlackPixels, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource DataGridParody_Content}"
+                                       Margin="7,0,0,0"
+                                       Grid.Column="0"
+                                       Grid.Row="1" />
+
+                            <Border Grid.Column="1"
+                                    Grid.Row="1"
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="1"
+                                    Margin="0,5"
+                                    Width="1" />
+
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.ImagesCount, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource DataGridParody_Content}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="2"
+                                       Grid.Row="1" />
+
+                            <!-- Row 3 -->
+                            <Border Grid.Column="0"
+                                    Grid.ColumnSpan="7"
+                                    Grid.Row="3"
+                                    Background="{DynamicResource Brush_Primary}" />
+
+                        </Grid>
 
                     </DockPanel>
 
