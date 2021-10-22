@@ -52,7 +52,7 @@ namespace BallScanner.MVVM.ViewModels
 
             if (Data != null)
             {
-                UpdateImage();
+                UpdateImage(0);
             }
         }
 
@@ -137,8 +137,7 @@ namespace BallScanner.MVVM.ViewModels
         }
 
         // Фоновые задачи
-        private static Action sequential = null;
-        private static Task background = null;
+        private static Task sequentialBackgroundTask = null;
 
         // Конструктор
         public CalibrateVM()
@@ -156,176 +155,160 @@ namespace BallScanner.MVVM.ViewModels
             switch (param)
             {
                 case "Button_LoadImages":
-                    sequential = delegate ()
+                    if (sequentialBackgroundTask == null || (sequentialBackgroundTask != null && sequentialBackgroundTask.IsCompleted))
                     {
-                        Log.Info("Button \"Load\" has been pressed");
-                        try
+                        sequentialBackgroundTask = Task.Run(() =>
                         {
-                            OpenFileDialog openFile = new OpenFileDialog();
-                            openFile.Filter = "JPEG/JPG - JPG Files|*.jpeg;*.jpg|BMP - Windows Bitmap|*.bmp|PNG - Portable Network Graphics|*.png";
-                            openFile.Multiselect = true;
-
-                            if (openFile.ShowDialog() == true)
+                            Log.Info("Button \"Load\" has been pressed");
+                            try
                             {
-                                Data = new ImageData[openFile.FileNames.Length];
-                                currentImageIndex = 0;
+                                OpenFileDialog openFile = new OpenFileDialog();
+                                openFile.Filter = "JPEG/JPG - JPG Files|*.jpeg;*.jpg|BMP - Windows Bitmap|*.bmp|PNG - Portable Network Graphics|*.png";
+                                openFile.Multiselect = true;
 
-                                int id = 1;
-                                for (int i = 0; i < Data.Length; i++)
+                                if (openFile.ShowDialog() == true)
                                 {
-                                    Data[i] = new ImageData()
+                                    Data = new ImageData[openFile.FileNames.Length];
+                                    currentImageIndex = 0;
+
+                                    int id = 1;
+                                    for (int i = 0; i < Data.Length; i++)
                                     {
-                                        Id = id,
-                                        Name = openFile.SafeFileNames[i],
-                                        ImagePath = openFile.FileNames[i],
-                                        NumberOfBlackPixels = 0,
-                                        BallGrade = BallGrade.INDEFINED
-                                    };
+                                        Data[i] = new ImageData()
+                                        {
+                                            Id = id,
+                                            Name = openFile.SafeFileNames[i],
+                                            ImagePath = openFile.FileNames[i],
+                                            NumberOfBlackPixels = 0,
+                                            BallGrade = BallGrade.INDEFINED
+                                        };
 
-                                    if (i == 0) OnPropertyChanged(nameof(CurrentData));
-                                    id++;
+                                        if (i == 0) OnPropertyChanged(nameof(CurrentData));
+                                        id++;
+                                    }
+
+                                    UpdateImage(0);
                                 }
-                                
-                                UpdateImage();
                             }
-                        }
-                        catch (FileNotFoundException ex)
-                        {
-                            Log.Error("Error \"" + nameof(FileNotFoundException) + "\"", ex.Message);
-                            MessageBox.Show(ex.Message, "FileNotFoundException", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        catch (ArgumentException ex)
-                        {
-                            Log.Error("Error \"" + nameof(ArgumentException) + "\"", ex.Message);
-                            MessageBox.Show(ex.Message, "ArgumentException", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        catch (UriFormatException ex)
-                        {
-                            Log.Error("Error \"" + nameof(IndexOutOfRangeException) + "\"", ex.Message);
-                            MessageBox.Show(ex.Message, "IndexOutOfRangeException", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
-                            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    };
-
-                    if (background == null || (background != null && background.IsCompleted))
-                    {
-                        background = Task.Run(sequential);
+                            catch (FileNotFoundException ex)
+                            {
+                                Log.Error("Error \"" + nameof(FileNotFoundException) + "\"", ex.Message);
+                                MessageBox.Show(ex.Message, "FileNotFoundException", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                Log.Error("Error \"" + nameof(ArgumentException) + "\"", ex.Message);
+                                MessageBox.Show(ex.Message, "ArgumentException", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            catch (UriFormatException ex)
+                            {
+                                Log.Error("Error \"" + nameof(IndexOutOfRangeException) + "\"", ex.Message);
+                                MessageBox.Show(ex.Message, "IndexOutOfRangeException", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
+                                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        });
                     }
 
                     break;
                 case "Button_PrevImage":
-                    Task.Run(() =>
+                    Log.Info("Button \"Previous\" has been pressed");
+                    if (Data != null && Data.Length > 0 && currentImageIndex > 0)
                     {
-                        Log.Info("Button \"Previous\" has been pressed");
-                        if (Data != null && Data.Length > 0 && currentImageIndex > 0)
-                        {
-                            Interlocked.Decrement(ref currentImageIndex);
-
-                            OnPropertyChanged(nameof(CurrentData));
-                            UpdateImage();
-                        }
-                    });
+                        currentImageIndex--;
+                        OnPropertyChanged(nameof(CurrentData));
+                        UpdateImage(100);
+                    }
                     break;
                 case "Button_NextImage":
-                    Task.Run(() =>
+                    Log.Info("Button \"Next\" has been pressed");
+                    if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
                     {
-                        Log.Info("Button \"Next\" has been pressed");
-                        if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
-                        {
-                            Interlocked.Increment(ref currentImageIndex);
-
-                            OnPropertyChanged(nameof(CurrentData));
-                            UpdateImage();
-                        }
-                    });
+                        currentImageIndex++;
+                        OnPropertyChanged(nameof(CurrentData));
+                        UpdateImage(100);
+                    }
                     break;
                 case "Button_Execute":
-                    sequential = delegate ()
+                    if (sequentialBackgroundTask == null || (sequentialBackgroundTask != null && sequentialBackgroundTask.IsCompleted))
                     {
-                        Log.Info("Button \"Execute\" has been pressed");
-                        if (Data != null && Data.Length > 0)
+                        sequentialBackgroundTask = Task.Run(() =>
                         {
-                            for (int i = 0; i < Data.Length; i++)
+                            Log.Info("Button \"Execute\" has been pressed");
+                            if (Data != null && Data.Length > 0)
                             {
-                                long numberOfBlackPixels = 0;
-                                using (var bitmap = GetThresholdBitmap(GetGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
+                                Parallel.For(0, Data.Length, i =>
                                 {
-                                    unsafe
+                                    long numberOfBlackPixels = 0;
+                                    using (var bitmap = GetThresholdBitmap(GetGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
                                     {
-                                        Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-                                        BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
-
-                                        int bytesPerPixel = Bitmap.GetPixelFormatSize(bitmap.PixelFormat) / 8;
-                                        int heightInPixels = bitmapData.Height;
-                                        int widthInBytes = bitmapData.Width * bytesPerPixel;
-                                        byte* PtrFirstPixel = (byte*)bitmapData.Scan0;
-
-                                        Parallel.For(0, heightInPixels, y =>
+                                        unsafe
                                         {
-                                            byte* currentLine = PtrFirstPixel + (y * bitmapData.Stride);
-                                            for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                                            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                                            BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
+
+                                            int bytesPerPixel = Bitmap.GetPixelFormatSize(bitmap.PixelFormat) / 8;
+                                            int heightInPixels = bitmapData.Height;
+                                            int widthInBytes = bitmapData.Width * bytesPerPixel;
+                                            byte* PtrFirstPixel = (byte*)bitmapData.Scan0;
+
+                                            Parallel.For(0, heightInPixels, y =>
                                             {
-                                                // optimized
-                                                if (currentLine[x] == 0)
-                                                    Interlocked.Increment(ref numberOfBlackPixels);
+                                                byte* currentLine = PtrFirstPixel + (y * bitmapData.Stride);
+                                                for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                                                {
+                                                    // optimized
+                                                    if (currentLine[x] == 0)
+                                                        Interlocked.Increment(ref numberOfBlackPixels);
 
-                                                //int blue = currentLine[x];
-                                                //int green = currentLine[x + 1];
-                                                //int red = currentLine[x + 2];
+                                                    //int blue = currentLine[x];
+                                                    //int green = currentLine[x + 1];
+                                                    //int red = currentLine[x + 2];
 
-                                                //if (currentLine[x] == 0 & currentLine[x + 1] == 0 & currentLine[x + 2] == 0)
-                                                //{
-                                                //    lock(locker)
-                                                //    {
-                                                //        numberOfBlackPixels++;
-                                                //    }
-                                                //}
-                                            }
-                                        });
+                                                    //if (currentLine[x] == 0 & currentLine[x + 1] == 0 & currentLine[x + 2] == 0)
+                                                    //{
+                                                    //    lock(locker)
+                                                    //    {
+                                                    //        numberOfBlackPixels++;
+                                                    //    }
+                                                    //}
+                                                }
+                                            });
 
-                                        bitmap.UnlockBits(bitmapData);
+                                            bitmap.UnlockBits(bitmapData);
+                                        }
+
+                                        //for (int y = 0; y < bitmap.Height; y++)
+                                        //    for (int x = 0; x < bitmap.Width; x++)
+                                        //    {
+                                        //        System.Drawing.Color pixel = bitmap.GetPixel(x, y);
+                                        //        if (pixel == System.Drawing.Color.FromArgb(255, 0, 0, 0)) numberOfBlackPixels++;
+                                        //    }
+
                                     }
 
-                                    //for (int y = 0; y < bitmap.Height; y++)
-                                    //    for (int x = 0; x < bitmap.Width; x++)
-                                    //    {
-                                    //        System.Drawing.Color pixel = bitmap.GetPixel(x, y);
-                                    //        if (pixel == System.Drawing.Color.FromArgb(255, 0, 0, 0)) numberOfBlackPixels++;
-                                    //    }
+                                    // Определение сорта стеклошарика
+                                    if (unchecked((ulong)numberOfBlackPixels) <= FirstThreshold)
+                                        Data[i].BallGrade = BallGrade.FIRST;
+                                    else if (unchecked((ulong)numberOfBlackPixels) <= SecondThreshold)
+                                        Data[i].BallGrade = BallGrade.SECOND;
+                                    else
+                                        Data[i].BallGrade = BallGrade.DEFECTIVE;
 
-                                }
-
-                                // Определение сорта стеклошарика
-                                if (unchecked((ulong)numberOfBlackPixels) <= FirstThreshold)
-                                    Data[i].BallGrade = BallGrade.FIRST;
-                                else if (unchecked((ulong)numberOfBlackPixels) <= SecondThreshold)
-                                    Data[i].BallGrade = BallGrade.SECOND;
-                                else
-                                    Data[i].BallGrade = BallGrade.DEFECTIVE;
-
-                                Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
+                                    Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
+                                });
                             }
-                        }
-                    };
-
-                    if (background == null || (background != null && background.IsCompleted))
-                    {
-                        background = Task.Run(sequential);
+                        });
                     }
-
                     break;
                 case "DragCompleted":
-                    Task.Run(() =>
-                    {
-                        Log.Info("Slider has been released");
-
-                        if (Data != null && Data.Length > 0)
-                            UpdateImage();
-                    });
+                    Log.Info("Slider has been released");
+                    
+                    if (Data != null && Data.Length > 0)
+                        UpdateImage(0);
                     break;
             }
 
@@ -338,7 +321,7 @@ namespace BallScanner.MVVM.ViewModels
             currentImageIndex = data.Id - 1;
 
             OnPropertyChanged(nameof(CurrentData));
-            UpdateImage();
+            UpdateImage(0);
         }
 
         private Bitmap GetGrayBitmap(Bitmap original)
@@ -412,82 +395,87 @@ namespace BallScanner.MVVM.ViewModels
         }
 
         // Обновить изображение
-        private async void UpdateImage()
+        private async void UpdateImage(int delay)
         {
-            //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
-            await Task.Run(() =>
+            int myImageIndex = currentImageIndex;
+            await Task.Delay(delay);
+
+            if (myImageIndex == currentImageIndex)
             {
-                try
+                //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
+                await Task.Run(() =>
                 {
-                    Bitmap original = new Bitmap(Data[currentImageIndex].ImagePath);
-                    int myImageIndex = currentImageIndex;
+                    try
+                    {
+                        Bitmap original = new Bitmap(Data[currentImageIndex].ImagePath);
 
                     // gray bitmap
                     using (Graphics g = Graphics.FromImage(original))
-                    {
-                        var gray_matrix = new float[][] {
+                        {
+                            var gray_matrix = new float[][] {
                             new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
                             new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
                             new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
                             new float[] { 0,      0,      0,      1, 0 },
                             new float[] { 0,      0,      0,      0, 1 }
-                        };
+                            };
 
-                        var attributes = new ImageAttributes();
-                        float threshold = (float)(ThresholdValue / 255.0d);
+                            var attributes = new ImageAttributes();
+                            float threshold = (float)(ThresholdValue / 255.0d);
 
-                        attributes.SetColorMatrix(new ColorMatrix(gray_matrix));
-                        attributes.SetThreshold(threshold, ColorAdjustType.Default);
+                            attributes.SetColorMatrix(new ColorMatrix(gray_matrix));
+                            attributes.SetThreshold(threshold, ColorAdjustType.Default);
 
-                        var rect = new Rectangle(0, 0, original.Width, original.Height);
-                        g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
-                    }
+                            var rect = new Rectangle(0, 0, original.Width, original.Height);
+                            g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+                        }
 
                     // actually ?
                     if (myImageIndex != currentImageIndex) return;
 
                     // bitmap to bitmap image
                     using (MemoryStream memory = new MemoryStream())
-                    {
-                        original.Save(memory, ImageFormat.Bmp);
-                        int imgHeight = original.Height;
+                        {
+                            original.Save(memory, ImageFormat.Bmp);
+                            int imgHeight = original.Height;
+                            original.Dispose();
+
+                            memory.Position = 0;
+
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.StreamSource = memory;
+                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                            if (imgHeight > DecodePixelHeight)
+                                bitmapImage.DecodePixelHeight = DecodePixelHeight;
+
+                            bitmapImage.EndInit();
+
+                            bitmapImage.Freeze();
+
+                            if (myImageIndex != currentImageIndex) return;
+                            CurrentImage = bitmapImage;
+                        }
+
                         original.Dispose();
-
-                        memory.Position = 0;
-
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.StreamSource = memory;
-                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-
-                        if (imgHeight > DecodePixelHeight)
-                            bitmapImage.DecodePixelHeight = DecodePixelHeight;
-
-                        bitmapImage.EndInit();
-
-                        bitmapImage.Freeze();
-
-                        if (myImageIndex != currentImageIndex) return;
-                        CurrentImage = bitmapImage;
-                    }
-
-                    original.Dispose();
 
                     // delete old image
                     //GC.Collect();
                     //GC.WaitForPendingFinalizers();
                 }
-                catch (ArgumentException e)
-                {
-                    Log.Error("Error \"ArgumentException\"", e.Message);
-                    MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception e)
-                {
-                    Log.Error("Error \"Exception\"", e.Message);
-                    MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            });
+                    catch (ArgumentException e)
+                    {
+                        Log.Error("Error \"ArgumentException\"", e.Message);
+                        MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error("Error \"Exception\"", e.Message);
+                        MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                });
+            }
         }
 
         public override void ChangePalette()
