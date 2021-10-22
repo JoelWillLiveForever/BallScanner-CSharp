@@ -14,7 +14,7 @@ namespace BallScanner.Resources.Styles
         private void Row_DoubleClick(object sender, RoutedEventArgs e)
         {
             DataGridRow row = sender as DataGridRow;
-            MenuVM.calibrateVM.changeImage(row.Item);
+            MenuVM.calibrateVM.ChangeImage(row.Item);
             // Console.WriteLine("Click!");
         }
     }

@@ -9,7 +9,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -20,9 +19,12 @@ namespace BallScanner.MVVM.ViewModels
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        public static RelayCommand PerformAction { get; set; }
-        private System.Timers.Timer resizeTimer = new System.Timers.Timer(100) { Enabled = false };
+        // Фоновые задачи
+        private static Task sequentialBackgroundTask;
 
+        public static RelayCommand PerformAction { get; set; }
+
+        // Декодирование изображения, если пикселей на экране меньше разрешения картинки
         private int _decodePixelHeight;
         public int DecodePixelHeight
         {
@@ -40,19 +42,7 @@ namespace BallScanner.MVVM.ViewModels
                 }
 
                 _decodePixelHeight = (int)(_decodePixelHeight * scaleY);
-
-                resizeTimer.Stop();
-                resizeTimer.Start();
-            }
-        }
-
-        private void ResizingDone(object sender, ElapsedEventArgs e)
-        {
-            resizeTimer.Stop();
-
-            if (Data != null)
-            {
-                UpdateImage(0);
+                if (Data != null && Data.Length != 0) UpdateImage(0);
             }
         }
 
@@ -136,15 +126,11 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
-        // Фоновые задачи
-        private static Task sequentialBackgroundTask = null;
-
         // Конструктор
         public CalibrateVM()
         {
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
-            resizeTimer.Elapsed += new ElapsedEventHandler(ResizingDone);
         }
 
         private void OnPerformAction(object param)
@@ -243,7 +229,7 @@ namespace BallScanner.MVVM.ViewModels
                                 Parallel.For(0, Data.Length, i =>
                                 {
                                     long numberOfBlackPixels = 0;
-                                    using (var bitmap = GetThresholdBitmap(GetGrayBitmap(new Bitmap(Data[i].ImagePath)), ThresholdValue))
+                                    using (var bitmap = GetThresholdBitmap(Data[i].ImagePath, _thresholdValue))
                                     {
                                         unsafe
                                         {
@@ -263,31 +249,11 @@ namespace BallScanner.MVVM.ViewModels
                                                     // optimized
                                                     if (currentLine[x] == 0)
                                                         Interlocked.Increment(ref numberOfBlackPixels);
-
-                                                    //int blue = currentLine[x];
-                                                    //int green = currentLine[x + 1];
-                                                    //int red = currentLine[x + 2];
-
-                                                    //if (currentLine[x] == 0 & currentLine[x + 1] == 0 & currentLine[x + 2] == 0)
-                                                    //{
-                                                    //    lock(locker)
-                                                    //    {
-                                                    //        numberOfBlackPixels++;
-                                                    //    }
-                                                    //}
                                                 }
                                             });
 
                                             bitmap.UnlockBits(bitmapData);
                                         }
-
-                                        //for (int y = 0; y < bitmap.Height; y++)
-                                        //    for (int x = 0; x < bitmap.Width; x++)
-                                        //    {
-                                        //        System.Drawing.Color pixel = bitmap.GetPixel(x, y);
-                                        //        if (pixel == System.Drawing.Color.FromArgb(255, 0, 0, 0)) numberOfBlackPixels++;
-                                        //    }
-
                                     }
 
                                     // Определение сорта стеклошарика
@@ -306,7 +272,7 @@ namespace BallScanner.MVVM.ViewModels
                     break;
                 case "DragCompleted":
                     Log.Info("Slider has been released");
-                    
+
                     if (Data != null && Data.Length > 0)
                         UpdateImage(0);
                     break;
@@ -315,86 +281,49 @@ namespace BallScanner.MVVM.ViewModels
             Log.Info("End of function \"OnPerformAction\"");
         }
 
-        public void changeImage(object item)
+        private Bitmap GetThresholdBitmap(string path, short thresholdValue)
         {
-            ImageData data = item as ImageData;
-            currentImageIndex = data.Id - 1;
-
-            OnPropertyChanged(nameof(CurrentData));
-            UpdateImage(0);
-        }
-
-        private Bitmap GetGrayBitmap(Bitmap original)
-        {
-            Log.Info("Call function \"GetGrayBitmap(Bitmap original)\"");
-
-            using (Graphics g = Graphics.FromImage(original))
+            try
             {
-                var gray_matrix = new float[][] {
-                    new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
-                    new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
-                    new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
-                    new float[] { 0,      0,      0,      1, 0 },
-                    new float[] { 0,      0,      0,      0, 1 }
-                };
+                Bitmap original = new Bitmap(path);
 
-                var attributes = new ImageAttributes();
-                attributes.SetColorMatrix(new ColorMatrix(gray_matrix));
+                // gray bitmap
+                using (Graphics g = Graphics.FromImage(original))
+                {
+                    var gray_matrix = new float[][] {
+                        new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
+                        new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
+                        new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
+                        new float[] { 0,      0,      0,      1, 0 },
+                        new float[] { 0,      0,      0,      0, 1 }
+                    };
 
-                var rect = new Rectangle(0, 0, original.Width, original.Height);
-                g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+                    var attributes = new ImageAttributes();
+                    float threshold = (float)(ThresholdValue / 255.0d);
+
+                    attributes.SetColorMatrix(new ColorMatrix(gray_matrix));
+                    attributes.SetThreshold(threshold, ColorAdjustType.Default);
+
+                    var rect = new Rectangle(0, 0, original.Width, original.Height);
+                    g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+                }
 
                 return original;
             }
-        }
-
-        private Bitmap GetThresholdBitmap(Bitmap original, short thresholdValue)
-        {
-            Log.Info("Call function \"GetThresholdBitmap(Bitmap original)\"");
-
-            Bitmap result = new Bitmap(original);
-            using (Graphics g = Graphics.FromImage(result))
+            catch (ArgumentException e)
             {
-                var attributes = new ImageAttributes();
-
-                float threshold = (float)(thresholdValue / 255.0d);
-                attributes.SetThreshold(threshold, ColorAdjustType.Bitmap);
-
-                var rect = new Rectangle(0, 0, result.Width, result.Height);
-                g.DrawImage(result, rect, 0, 0, result.Width, result.Height, GraphicsUnit.Pixel, attributes);
-
-                return result;
+                Log.Error("Error \"ArgumentException\"", e.Message);
+                MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private BitmapImage GetBitmapImageFromBitmap(Bitmap bitmap)
-        {
-            Log.Info("Call function \"GetBitmapImageFromBitmap(Bitmap bitmap)\"");
-
-            using (MemoryStream memory = new MemoryStream())
+            catch (Exception e)
             {
-                bitmap.Save(memory, ImageFormat.Bmp);
-                int imgHeight = bitmap.Height;
-                bitmap.Dispose();
-
-                memory.Position = 0;
-
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-
-                if (imgHeight > DecodePixelHeight)
-                    bitmapImage.DecodePixelHeight = DecodePixelHeight;
-
-                bitmapImage.EndInit();
-
-                bitmapImage.Freeze();
-                return bitmapImage;
+                Log.Error("Error \"Exception\"", e.Message);
+                MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            return null;
         }
 
-        // Обновить изображение
         private async void UpdateImage(int delay)
         {
             int myImageIndex = currentImageIndex;
@@ -409,15 +338,15 @@ namespace BallScanner.MVVM.ViewModels
                     {
                         Bitmap original = new Bitmap(Data[currentImageIndex].ImagePath);
 
-                    // gray bitmap
-                    using (Graphics g = Graphics.FromImage(original))
+                        // gray bitmap
+                        using (Graphics g = Graphics.FromImage(original))
                         {
                             var gray_matrix = new float[][] {
-                            new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
-                            new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
-                            new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
-                            new float[] { 0,      0,      0,      1, 0 },
-                            new float[] { 0,      0,      0,      0, 1 }
+                                new float[] { 0.299f, 0.299f, 0.299f, 0, 0 },
+                                new float[] { 0.587f, 0.587f, 0.587f, 0, 0 },
+                                new float[] { 0.114f, 0.114f, 0.114f, 0, 0 },
+                                new float[] { 0,      0,      0,      1, 0 },
+                                new float[] { 0,      0,      0,      0, 1 }
                             };
 
                             var attributes = new ImageAttributes();
@@ -430,11 +359,11 @@ namespace BallScanner.MVVM.ViewModels
                             g.DrawImage(original, rect, 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
                         }
 
-                    // actually ?
-                    if (myImageIndex != currentImageIndex) return;
+                        // actually ?
+                        if (myImageIndex != currentImageIndex) return;
 
-                    // bitmap to bitmap image
-                    using (MemoryStream memory = new MemoryStream())
+                        // bitmap to bitmap image
+                        using (MemoryStream memory = new MemoryStream())
                         {
                             original.Save(memory, ImageFormat.Bmp);
                             int imgHeight = original.Height;
@@ -451,7 +380,6 @@ namespace BallScanner.MVVM.ViewModels
                                 bitmapImage.DecodePixelHeight = DecodePixelHeight;
 
                             bitmapImage.EndInit();
-
                             bitmapImage.Freeze();
 
                             if (myImageIndex != currentImageIndex) return;
@@ -460,10 +388,10 @@ namespace BallScanner.MVVM.ViewModels
 
                         original.Dispose();
 
-                    // delete old image
-                    //GC.Collect();
-                    //GC.WaitForPendingFinalizers();
-                }
+                        // delete old image
+                        //GC.Collect();
+                        //GC.WaitForPendingFinalizers();
+                    }
                     catch (ArgumentException e)
                     {
                         Log.Error("Error \"ArgumentException\"", e.Message);
@@ -493,6 +421,15 @@ namespace BallScanner.MVVM.ViewModels
                                 new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
 
             Properties.Settings.Default.Save();
+        }
+
+        public void ChangeImage(object item)
+        {
+            ImageData data = item as ImageData;
+            currentImageIndex = data.Id - 1;
+
+            OnPropertyChanged(nameof(CurrentData));
+            UpdateImage(0);
         }
     }
 }
