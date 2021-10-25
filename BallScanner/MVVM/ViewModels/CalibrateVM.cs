@@ -97,9 +97,10 @@ namespace BallScanner.MVVM.ViewModels
                 _thresholdValue = value;
                 OnPropertyChanged(nameof(ThresholdValue));
 
-                //if (Data != null && Data.Length != 0) UpdateImage(300);
+                if (Data != null && Data.Length != 0 && !isDragging) UpdateImage(300);
             }
         }
+        private bool isDragging;
 
         // Первое и второе пороговые значения
         private ulong _firstThreshold;
@@ -306,8 +307,12 @@ namespace BallScanner.MVVM.ViewModels
                         });
                     }
                     break;
-                case "DragCompleted":
+                case "Slider_DragStarted":
+                    isDragging = true;
+                    break;
+                case "Slider_DragCompleted":
                     Log.Info("Slider has been released");
+                    isDragging = false;
 
                     if (Data != null && Data.Length > 0)
                         UpdateImage(0);
@@ -363,11 +368,12 @@ namespace BallScanner.MVVM.ViewModels
         private async void UpdateImage(int delay)
         {
             int myImageIndex = currentImageIndex;
+            int myThresholdValue = ThresholdValue;
             int myDecodePixelHeight = DecodePixelHeight;
 
             await Task.Delay(delay);
 
-            if (delay == 0 || (myImageIndex == currentImageIndex && myDecodePixelHeight == DecodePixelHeight))
+            if (delay == 0 || (myImageIndex == currentImageIndex && myDecodePixelHeight == DecodePixelHeight && myThresholdValue == ThresholdValue))
             {
                 //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
                 await Task.Run(() =>

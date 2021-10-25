@@ -76,12 +76,16 @@ namespace BallScanner.MVVM.Views
             }
         }
 
+        private void Slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            if (CalibrateVM.PerformAction.CanExecute("Slider_DragStarted"))
+                CalibrateVM.PerformAction.Execute("Slider_DragStarted");
+        }
+
         private void Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
-            if (CalibrateVM.PerformAction.CanExecute("DragCompeled"))
-            {
-                CalibrateVM.PerformAction.Execute("DragCompleted");
-            }
+            if (CalibrateVM.PerformAction.CanExecute("Slider_DragCompeled"))
+                CalibrateVM.PerformAction.Execute("Slider_DragCompleted");
         }
 
         private void Border_SizeChanged(object sender, SizeChangedEventArgs e)

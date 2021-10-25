@@ -269,7 +269,8 @@
                                 Margin="0,7,0,0"
                                 VerticalAlignment="Top"
                                 Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Thumb.DragCompleted="Slider_DragCompleted" />
+                                Thumb.DragCompleted="Slider_DragCompleted"
+                                Thumb.DragStarted="Slider_DragStarted" />
 
                     </StackPanel>
 
@@ -518,6 +519,7 @@
                                 <Slider DockPanel.Dock="Top"
                                         Minimum="0"
                                         Maximum="255"
+                                        Thumb.DragStarted="Slider_DragStarted"
                                         Thumb.DragCompleted="Slider_DragCompleted"
                                         Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
