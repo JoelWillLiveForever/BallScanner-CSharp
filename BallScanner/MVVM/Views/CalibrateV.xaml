@@ -395,13 +395,13 @@
         <DataTemplate x:Key="MinState"
                       DataType="{x:Type vm:CalibrateVM}">
 
-            <Grid Margin="10"
-                  MinWidth="200">
+            <Grid Margin="10">
 
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto">
 
                     <StackPanel Orientation="Vertical"
+                                Margin="0,0,10,0"
                                 Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=Width, UpdateSourceTrigger=PropertyChanged}">
 
                         <joel:BlockHeader DockPanel.Dock="Top"
