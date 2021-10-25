@@ -77,8 +77,10 @@
                 Value="Visible" />-->
         <Setter Property="RowBackground"
                 Value="Transparent" />
-        <!--<Setter Property="AlternatingRowBackground"
-                Value="#29000000" />-->
+        <Setter Property="AlternatingRowBackground"
+                Value="#14000000" />
+        <Setter Property="AlternationCount"
+                Value="1" />
         <Setter Property="RowDetailsVisibilityMode"
                 Value="VisibleWhenSelected" />
         <Setter Property="ScrollViewer.CanContentScroll"
@@ -379,22 +381,14 @@
                             BorderBrush="Transparent"
                             SnapsToDevicePixels="True">
 
-                        <Border.Background>
+                        <!--<Border.Background>
                             <SolidColorBrush Color="Transparent" />
                         </Border.Background>
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Normal_AlternatingRow">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border"
-                                                                      Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0"
-                                                                 Value="#14000000" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="Normal_AlternatingRow" />
                                 <VisualState x:Name="Normal_Selected">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border"
@@ -477,7 +471,7 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                        </VisualStateManager.VisualStateGroups>-->
 
                         <SelectiveScrollingGrid>
                             <SelectiveScrollingGrid.ColumnDefinitions>
@@ -506,6 +500,32 @@
 
                         </SelectiveScrollingGrid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex"
+                                 Value="0">
+                            <Setter Property="Background"
+                                    TargetName="DGR_Border"
+                                    Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex"
+                                 Value="1">
+                            <Setter Property="Background"
+                                    TargetName="DGR_Border"
+                                    Value="#14000000" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="DGR_Border"
+                                    Value="#33000000" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="DGR_Border"
+                                    Value="#29000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
