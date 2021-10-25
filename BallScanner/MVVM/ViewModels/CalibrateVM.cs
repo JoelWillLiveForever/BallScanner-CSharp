@@ -42,7 +42,7 @@ namespace BallScanner.MVVM.ViewModels
                 }
 
                 _decodePixelHeight = (int)(_decodePixelHeight * scaleY);
-                if (Data != null && Data.Length != 0) UpdateImage(0);
+                if (Data != null && Data.Length != 0) UpdateImage(300);
             }
         }
 
@@ -96,6 +96,8 @@ namespace BallScanner.MVVM.ViewModels
 
                 _thresholdValue = value;
                 OnPropertyChanged(nameof(ThresholdValue));
+
+                //if (Data != null && Data.Length != 0) UpdateImage(300);
             }
         }
 
@@ -233,7 +235,7 @@ namespace BallScanner.MVVM.ViewModels
                     {
                         currentImageIndex--;
                         OnPropertyChanged(nameof(CurrentData));
-                        UpdateImage(100);
+                        UpdateImage(300);
                     }
                     break;
                 case "Button_NextImage":
@@ -242,7 +244,7 @@ namespace BallScanner.MVVM.ViewModels
                     {
                         currentImageIndex++;
                         OnPropertyChanged(nameof(CurrentData));
-                        UpdateImage(100);
+                        UpdateImage(300);
                     }
                     break;
                 case "Button_Execute":
@@ -361,9 +363,11 @@ namespace BallScanner.MVVM.ViewModels
         private async void UpdateImage(int delay)
         {
             int myImageIndex = currentImageIndex;
+            int myDecodePixelHeight = DecodePixelHeight;
+
             await Task.Delay(delay);
 
-            if (myImageIndex == currentImageIndex)
+            if (delay == 0 || (myImageIndex == currentImageIndex && myDecodePixelHeight == DecodePixelHeight))
             {
                 //if (Data == null || Data.Length == 0 || currentImageIndex < 0 || currentImageIndex > Data.Length - 1) return;
                 await Task.Run(() =>
@@ -417,6 +421,7 @@ namespace BallScanner.MVVM.ViewModels
                             bitmapImage.Freeze();
 
                             if (myImageIndex != currentImageIndex) return;
+
                             CurrentImage = bitmapImage;
                         }
 
