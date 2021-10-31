@@ -150,29 +150,6 @@
 
                         </Grid>
 
-                        <!--<DataGrid Margin="0,7,0,0"
-                                  ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
-                                  VirtualizingStackPanel.IsVirtualizing="False"
-                                  AutoGenerateColumns="False"
-                                  Height="60">
-
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="№ п/п" 
-                                                    CellStyle="{StaticResource FirstColumnCell}"
-                                                    Width="0.5*" />
-                                <DataGridTextColumn Header="Имя файла"
-                                                    Width="*" 
-                                                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                                <DataGridTextColumn Header="Кол-во ч/п"
-                                                    Width="0.5*"
-                                                    Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
-                                <DataGridTextColumn Header="Сорт"
-                                                    Width="0.5*" 
-                                                    Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataGrid.Columns>
-
-                        </DataGrid>-->
-
                     </DockPanel>
 
                     <!-- Status -->
@@ -187,7 +164,7 @@
 
                             <Rectangle DockPanel.Dock="Left"
                                        Fill="{DynamicResource Brush_Primary_Blue}"
-                                       Width="3" />
+                                       Width="2" />
 
                             <TextBlock Background="Transparent"
                                        Foreground="{DynamicResource Brush_OnBackground_OnSurface_High}"
@@ -195,6 +172,7 @@
                                        HorizontalAlignment="Left"
                                        Padding="10,0"
                                        FontSize="14"
+                                       Height="59"
                                        FontFamily="{StaticResource Font_Montserrat_Alternates}"
                                        FontWeight="SemiBold"
                                        TextAlignment="Left"
@@ -204,6 +182,7 @@
 
                     </StackPanel>
 
+                    <!-- Buttons -->
                     <UniformGrid DockPanel.Dock="Bottom"
                                  Columns="4"
                                  Height="36">
@@ -237,7 +216,8 @@
                                 Content="{DynamicResource Text_Execute}"/>
 
                     </UniformGrid>
-
+                    
+                    <!-- Image -->
                     <Grid x:Name="ImageContainer"
                           Margin="0,7,0,7"
                           Background="#121212"
@@ -272,6 +252,27 @@
                                 Thumb.DragCompleted="Slider_DragCompleted"
                                 Thumb.DragStarted="Slider_DragStarted" />
 
+                    </StackPanel>
+
+                    <!-- Threshold textboxes -->
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Vertical"
+                                Margin="0,10,0,0">
+
+                        <joel:BlockHeader Text="Регулировка пороговых значений" />
+
+                        <Grid Margin="0,7,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="7" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Text="{Binding ElementName=Root, Path=DataContext.FirstThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <TextBox Grid.Column="2"
+                                     Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                        </Grid>
                     </StackPanel>
 
                     <!--Average-->
