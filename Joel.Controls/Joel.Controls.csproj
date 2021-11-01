@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
+    <Compile Include="CollapseButton.cs" />
     <Compile Include="SimpleRadioButton.cs" />
     <Page Include="Styles\GridSplitter_Style.xaml">
       <SubType>Designer</SubType>
@@ -71,6 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TextBox_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CollapseButton_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
