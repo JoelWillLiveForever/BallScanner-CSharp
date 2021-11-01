@@ -4,6 +4,7 @@ using BallScanner.MVVM.Models;
 using Microsoft.Win32;
 using NLog;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -18,9 +19,6 @@ namespace BallScanner.MVVM.ViewModels
     {
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
-        // Фоновые задачи
-        private static Task sequentialBackgroundTask;
 
         public static RelayCommand PerformAction { get; set; }
 
@@ -100,6 +98,7 @@ namespace BallScanner.MVVM.ViewModels
                 if (Data != null && Data.Length != 0 && !isDragging) UpdateImage(300);
             }
         }
+
         private bool isDragging;
 
         // Первое и второе пороговые значения
@@ -155,11 +154,32 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        private int _currentProgress;
+        public int CurrentProgress
+        {
+            get => _currentProgress;
+            private set
+            {
+                if (_currentProgress == value) return;
+
+                _currentProgress = value;
+                OnPropertyChanged(nameof(CurrentProgress));
+            }
+        }
+
+        // Фоновые задачи
+        private BackgroundWorker worker_DownloadExecute;
+
         // Конструктор
         public CalibrateVM()
         {
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
+        }
+
+        private void ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            CurrentProgress = e.ProgressPercentage;
         }
 
         private void OnPerformAction(object param)
@@ -170,9 +190,13 @@ namespace BallScanner.MVVM.ViewModels
             switch (param)
             {
                 case "Button_LoadImages":
-                    if (sequentialBackgroundTask == null || (sequentialBackgroundTask != null && sequentialBackgroundTask.IsCompleted))
+                    if (worker_DownloadExecute == null || (worker_DownloadExecute != null && !worker_DownloadExecute.IsBusy))
                     {
-                        sequentialBackgroundTask = Task.Run(() =>
+                        worker_DownloadExecute = new BackgroundWorker();
+                        worker_DownloadExecute.WorkerReportsProgress = false;
+                        worker_DownloadExecute.WorkerSupportsCancellation = false;
+                        //worker.ProgressChanged += ProgressChanged;
+                        worker_DownloadExecute.DoWork += delegate
                         {
                             Log.Info("Button \"Load\" has been pressed");
                             try
@@ -186,6 +210,7 @@ namespace BallScanner.MVVM.ViewModels
                                     ImagesCount = openFile.FileNames.Length;
                                     Data = new ImageData[ImagesCount];
                                     currentImageIndex = 0;
+                                    CurrentProgress = 0;
 
                                     int id = 1;
                                     for (int i = 0; i < Data.Length; i++)
@@ -226,15 +251,15 @@ namespace BallScanner.MVVM.ViewModels
                                 Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
                                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                        });
+                        };
+                        worker_DownloadExecute.RunWorkerAsync();
                     }
-
                     break;
                 case "Button_PrevImage":
                     Log.Info("Button \"Previous\" has been pressed");
                     if (Data != null && Data.Length > 0 && currentImageIndex > 0)
                     {
-                        currentImageIndex--;
+                        Interlocked.Decrement(ref currentImageIndex);
                         OnPropertyChanged(nameof(CurrentData));
                         UpdateImage(300);
                     }
@@ -243,19 +268,23 @@ namespace BallScanner.MVVM.ViewModels
                     Log.Info("Button \"Next\" has been pressed");
                     if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
                     {
-                        currentImageIndex++;
+                        Interlocked.Increment(ref currentImageIndex);
                         OnPropertyChanged(nameof(CurrentData));
                         UpdateImage(300);
                     }
                     break;
                 case "Button_Execute":
-                    if (sequentialBackgroundTask == null || (sequentialBackgroundTask != null && sequentialBackgroundTask.IsCompleted))
+                    if (worker_DownloadExecute == null || (worker_DownloadExecute != null && !worker_DownloadExecute.IsBusy))
                     {
-                        sequentialBackgroundTask = Task.Run(() =>
-                        {
+                        worker_DownloadExecute = new BackgroundWorker();
+                        worker_DownloadExecute.WorkerReportsProgress = true;
+                        worker_DownloadExecute.WorkerSupportsCancellation = false;
+                        worker_DownloadExecute.ProgressChanged += ProgressChanged;
+                        worker_DownloadExecute.DoWork += delegate {
                             Log.Info("Button \"Execute\" has been pressed");
                             if (Data != null && Data.Length > 0)
                             {
+                                int progress = 0;
                                 Parallel.For(0, Data.Length, i =>
                                 {
                                     long numberOfBlackPixels = 0;
@@ -295,6 +324,9 @@ namespace BallScanner.MVVM.ViewModels
                                         Data[i].BallGrade = BallGrade.DEFECTIVE;
 
                                     Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
+
+                                    Interlocked.Increment(ref progress);
+                                    worker_DownloadExecute.ReportProgress(progress);
                                 });
 
                                 // Поиск среднего
@@ -304,7 +336,8 @@ namespace BallScanner.MVVM.ViewModels
                                 }
                                 AvgNumBlackPixels /= (ulong)ImagesCount;
                             }
-                        });
+                        };
+                        worker_DownloadExecute.RunWorkerAsync();
                     }
                     break;
                 case "Slider_DragStarted":
