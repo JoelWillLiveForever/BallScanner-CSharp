@@ -27,16 +27,16 @@
             <joel:JustButton DockPanel.Dock="Bottom"
                              Name="MyLogoutButton"
                              Click="MyLogoutButton_Click"
-                             Icon="{StaticResource Geometry_Icon_Account}"
-                             IconFill="{DynamicResource Brush_Primary_Red}"
+                             Icon="{StaticResource Geometry_Icon_Logout}"
+                             IconFill="{DynamicResource Brush_OnBackground_OnSurface_High}"
                              ContentStringFormat="Выйти" 
                              IsMinState="{DynamicResource IsMinStateForMenu}" />
             
             <joel:JustButton DockPanel.Dock="Bottom"
                              Name="MyCollapseButton"
                              Click="MyCollapseButton_Click"
-                             Icon="{StaticResource Geometry_Icon_Account}"
-                             IconFill="{DynamicResource Brush_Primary_Red}"
+                             Icon="{StaticResource Geometry_Icon_ExpandLess}"
+                             IconFill="{DynamicResource Brush_OnBackground_OnSurface_High}"
                              ContentStringFormat="Свернуть" 
                              IsMinState="{DynamicResource IsMinStateForMenu}" />
 

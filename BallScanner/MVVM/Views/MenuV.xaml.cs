@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace BallScanner.MVVM.Views
 {
@@ -22,11 +23,15 @@ namespace BallScanner.MVVM.Views
                 MyLogo.Visibility = System.Windows.Visibility.Collapsed;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Collapsed;
                 MyMenuContainer.Width = 40;
+
+                MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandMore");
             } else
             {
                 MyLogo.Visibility = System.Windows.Visibility.Visible;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Visible;
                 MyMenuContainer.Width = 180;
+
+                MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandLess");
             }
         }
 
