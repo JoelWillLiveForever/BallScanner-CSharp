@@ -285,6 +285,7 @@ namespace BallScanner.MVVM.ViewModels
                             if (Data != null && Data.Length > 0)
                             {
                                 int progress = 0;
+                                object locker = new object();
                                 Parallel.For(0, Data.Length, i =>
                                 {
                                     long numberOfBlackPixels = 0;
@@ -326,7 +327,7 @@ namespace BallScanner.MVVM.ViewModels
                                     Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
 
                                     Interlocked.Increment(ref progress);
-                                    worker_DownloadExecute.ReportProgress(progress);
+                                    lock(locker)worker_DownloadExecute.ReportProgress(progress);
                                 });
 
                                 // Поиск среднего
