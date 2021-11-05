@@ -1,12 +1,10 @@
 ﻿using BallScanner.MVVM.ViewModels;
 using Joel.Controls;
 using System;
-using System.Drawing;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace BallScanner.MVVM.Views
