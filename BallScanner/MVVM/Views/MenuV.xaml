@@ -4,35 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <sys:Boolean x:Key="IsMinStateForMenu">False</sys:Boolean>
+    </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Left"
                    LastChildFill="True"
                    Margin="10,0,10,10"
+                   Name="MyMenuContainer"
                    Width="180">
 
             <Viewbox DockPanel.Dock="Top"
                      Child="{StaticResource Vector_Logo}"
-                     Margin="12,0,12,0" 
+                     Margin="12,0,12,8.7" 
                      Name="MyLogo" />
 
-            <joel:CollapseButton DockPanel.Dock="Bottom"
-                                 Name="MyCollapseButton"
-                                 Click="MyCollapseButton_Click"
-                                 Icon="{StaticResource Geometry_Icon_Account}"
-                                 IconFill="{DynamicResource Brush_Primary_Red}"
-                                 ContentStringFormat="Свернуть" />
+            <joel:JustButton DockPanel.Dock="Bottom"
+                             Name="MyLogoutButton"
+                             Click="MyLogoutButton_Click"
+                             Icon="{StaticResource Geometry_Icon_Account}"
+                             IconFill="{DynamicResource Brush_Primary_Red}"
+                             ContentStringFormat="Выйти" 
+                             IsMinState="{DynamicResource IsMinStateForMenu}" />
             
-            <Grid Margin="0,8.7,0,0">
+            <joel:JustButton DockPanel.Dock="Bottom"
+                             Name="MyCollapseButton"
+                             Click="MyCollapseButton_Click"
+                             Icon="{StaticResource Geometry_Icon_Account}"
+                             IconFill="{DynamicResource Brush_Primary_Red}"
+                             ContentStringFormat="Свернуть" 
+                             IsMinState="{DynamicResource IsMinStateForMenu}" />
+
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <joel:BlockHeader Text="{DynamicResource Text_Menu}"
-                                  TextAlignment="Center" />
+                <joel:BlockHeader Name="MyBlockHeader"
+                                  Text="{DynamicResource Text_Menu}"
+                                  TextAlignment="Center"
+                                  Margin="0,0,0,7" />
 
                 <ScrollViewer Grid.Row="1"
                               HorizontalScrollBarVisibility="Auto"
@@ -49,37 +66,44 @@
                                          ContentStringFormat="{DynamicResource Text_Account}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Account" 
-                                         IsChecked="True" />
+                                         IsChecked="True"
+                                         Margin="0"
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Scan}"
                                          IconFill="{DynamicResource Brush_Primary_Orange}"
                                          ContentStringFormat="{DynamicResource Text_Scan}"
                                          Command="{Binding MenuButtonClick}"
-                                         CommandParameter="Scan" />
+                                         CommandParameter="Scan" 
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Calibrate}"
                                          IconFill="{DynamicResource Brush_Primary_Yellow}"
                                          ContentStringFormat="{DynamicResource Text_Calibrate}"
                                          Command="{Binding MenuButtonClick}"
-                                         CommandParameter="Calibrate" />
+                                         CommandParameter="Calibrate" 
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Documents}"
                                          IconFill="{DynamicResource Brush_Primary_Green}"
                                          ContentStringFormat="{DynamicResource Text_Documents}"
                                          Command="{Binding MenuButtonClick}"
-                                         CommandParameter="Documents" />
+                                         CommandParameter="Documents" 
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Settings}"
                                          IconFill="{DynamicResource Brush_Primary_Blue}"
                                          ContentStringFormat="{DynamicResource Text_Settings}"
                                          Command="{Binding MenuButtonClick}"
-                                         CommandParameter="Settings" />
+                                         CommandParameter="Settings" 
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_About}"
                                          IconFill="{DynamicResource Brush_Primary_Purple}"
                                          ContentStringFormat="{DynamicResource Text_About}"
                                          Command="{Binding MenuButtonClick}"
-                                         CommandParameter="About" />
+                                         CommandParameter="About" 
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                     </StackPanel>
                 </ScrollViewer>

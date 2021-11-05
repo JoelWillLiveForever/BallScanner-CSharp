@@ -6,6 +6,16 @@ namespace Joel.Controls
 {
     public class MenuButton : RadioButton
     {
+        // Min state toggle
+        public static readonly DependencyProperty IsMinStateProperty =
+            DependencyProperty.Register(nameof(IsMinState), typeof(bool), typeof(MenuButton), new PropertyMetadata(default(bool)));
+
+        public bool IsMinState
+        {
+            get { return (bool)GetValue(IsMinStateProperty); }
+            set { SetValue(IsMinStateProperty, value); }
+        }
+
         // Icon
         public static readonly DependencyProperty IconProperty =
             DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(MenuButton), new PropertyMetadata(default(Geometry)));

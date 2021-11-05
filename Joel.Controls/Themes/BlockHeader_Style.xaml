@@ -36,7 +36,6 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:BlockHeader}">
                         <Border Background="{TemplateBinding Background}"
-                                Margin="{TemplateBinding Margin}"
                                 HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalAlignment}">
 
@@ -50,15 +49,15 @@
                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">-->
                                     
-                                    <TextBlock Text="{TemplateBinding Text}"
-                                               TextAlignment="{TemplateBinding TextAlignment}"
-                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <TextBlock Text="{TemplateBinding Text}"
+                                           TextAlignment="{TemplateBinding TextAlignment}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                                     <!--</Viewbox>-->
 
-                                        <Rectangle Fill="{TemplateBinding Foreground}"
+                                <Rectangle Fill="{TemplateBinding Foreground}"
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                            Stroke="Transparent"
                                            StrokeThickness="0"

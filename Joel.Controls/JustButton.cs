@@ -4,11 +4,21 @@ using System.Windows.Media;
 
 namespace Joel.Controls
 {
-    public class CollapseButton : Button
+    public class JustButton : Button
     {
+        // Min state toggle
+        public static readonly DependencyProperty IsMinStateProperty =
+            DependencyProperty.Register(nameof(IsMinState), typeof(bool), typeof(JustButton), new PropertyMetadata(default(bool)));
+
+        public bool IsMinState
+        {
+            get { return (bool)GetValue(IsMinStateProperty); }
+            set { SetValue(IsMinStateProperty, value); }
+        }
+
         // Icon
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(CollapseButton), new PropertyMetadata(default(Geometry)));
+            DependencyProperty.Register(nameof(Icon), typeof(Geometry), typeof(JustButton), new PropertyMetadata(default(Geometry)));
 
         public Geometry Icon
         {
@@ -18,7 +28,7 @@ namespace Joel.Controls
 
         // Icon Width & Height
         public static readonly DependencyProperty IconWidthProperty =
-            DependencyProperty.Register(nameof(IconWidth), typeof(double), typeof(CollapseButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(IconWidth), typeof(double), typeof(JustButton), new PropertyMetadata(default(double)));
 
         public double IconWidth
         {
@@ -27,7 +37,7 @@ namespace Joel.Controls
         }
 
         public static readonly DependencyProperty IconHeightProperty =
-            DependencyProperty.Register(nameof(IconHeight), typeof(double), typeof(CollapseButton), new PropertyMetadata(default(double)));
+            DependencyProperty.Register(nameof(IconHeight), typeof(double), typeof(JustButton), new PropertyMetadata(default(double)));
 
         public double IconHeight
         {
@@ -37,7 +47,7 @@ namespace Joel.Controls
 
         // Icon Fill & Stroke
         public static readonly DependencyProperty IconFillProperty =
-            DependencyProperty.Register(nameof(IconFill), typeof(Brush), typeof(CollapseButton), new PropertyMetadata(default(Brush)));
+            DependencyProperty.Register(nameof(IconFill), typeof(Brush), typeof(JustButton), new PropertyMetadata(default(Brush)));
 
         public Brush IconFill
         {
@@ -56,7 +66,7 @@ namespace Joel.Controls
 
         // Icon position
         public static readonly DependencyProperty IconPositionProperty =
-            DependencyProperty.Register(nameof(IconPosition), typeof(Dock), typeof(CollapseButton), new PropertyMetadata(default(Dock)));
+            DependencyProperty.Register(nameof(IconPosition), typeof(Dock), typeof(JustButton), new PropertyMetadata(default(Dock)));
 
         public Dock IconPosition
         {
@@ -66,7 +76,7 @@ namespace Joel.Controls
 
         // Text alingment
         public static readonly DependencyProperty TextAlignmentProperty =
-            DependencyProperty.Register(nameof(TextAlignment), typeof(TextAlignment), typeof(CollapseButton), new PropertyMetadata(default(TextAlignment)));
+            DependencyProperty.Register(nameof(TextAlignment), typeof(TextAlignment), typeof(JustButton), new PropertyMetadata(default(TextAlignment)));
 
         public TextAlignment TextAlignment
         {
@@ -76,7 +86,7 @@ namespace Joel.Controls
 
         // Corner radius
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(CollapseButton), new PropertyMetadata(default(CornerRadius)));
+            DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(JustButton), new PropertyMetadata(default(CornerRadius)));
 
         public CornerRadius CornerRadius
         {
@@ -84,9 +94,9 @@ namespace Joel.Controls
             set { SetValue(TextAlignmentProperty, value); }
         }
 
-        static CollapseButton()
+        static JustButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CollapseButton), new FrameworkPropertyMetadata(typeof(CollapseButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(JustButton), new FrameworkPropertyMetadata(typeof(JustButton)));
         }
     }
 }

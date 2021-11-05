@@ -2,8 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Joel.Controls">
 
-    <Style TargetType="{x:Type local:CollapseButton}">
+    <Style TargetType="{x:Type local:JustButton}">
         <Style.Setters>
+            <Setter Property="IsMinState"
+                    Value="False" />
             <Setter Property="BorderBrush"
                     Value="Transparent" />
             <Setter Property="BorderThickness"
@@ -42,7 +44,7 @@
                     Value="10" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:CollapseButton}">
+                    <ControlTemplate TargetType="{x:Type local:JustButton}">
                         <Border CornerRadius="{TemplateBinding CornerRadius}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -140,6 +142,41 @@
                         Value="{DynamicResource Brush_Primary_Overlay_24dp}" />
                 <Setter Property="Foreground"
                         Value="{DynamicResource Brush_Primary}" />
+            </Trigger>
+            <Trigger Property="IsMinState"
+                     Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:JustButton}">
+                            <Border CornerRadius="{TemplateBinding CornerRadius}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Name="Root">
+
+                                <DockPanel Name="MyDockPanel"
+                                           Background="Transparent"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Margin="{TemplateBinding Padding}"
+                                           LastChildFill="True">
+
+                                    <Viewbox DockPanel.Dock="{TemplateBinding IconPosition}"
+                                             Width="{TemplateBinding IconWidth}"
+                                             Height="{TemplateBinding IconHeight}"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center">
+
+                                        <Path Name="MyIcon"
+                                              Data="{TemplateBinding Icon}"
+                                              Fill="{TemplateBinding IconFill}" />
+
+                                    </Viewbox>
+                                </DockPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
