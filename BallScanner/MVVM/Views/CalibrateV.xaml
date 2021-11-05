@@ -159,7 +159,8 @@
                         <joel:BlockHeader DockPanel.Dock="Top"
                                           Text="{DynamicResource Text_Status}" />
 
-                        <Grid Margin="0,7,0,0">
+                        <Grid Margin="0,7,0,0"
+                              Height="59">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition Width="Auto" />
@@ -183,10 +184,12 @@
                                     Width="1" />
 
                             <!-- Threshold textboxes -->
-                            <TextBox Grid.Column="2"
-                                     Text="{Binding ElementName=Root, Path=DataContext.FirstThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                            <TextBox Grid.Column="4"
-                                     Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <joel:LabelTextBox Grid.Column="2"
+                                               LabelText="Первый сорт"
+                                               Text="{Binding ElementName=Root, Path=DataContext.FirstThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <joel:LabelTextBox Grid.Column="4"
+                                               LabelText="Второй сорт"
+                                               Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                         </Grid>
                     </StackPanel>

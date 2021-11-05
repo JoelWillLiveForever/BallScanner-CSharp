@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
     <Compile Include="JustButton.cs" />
+    <Compile Include="LabelTextBox.cs" />
     <Compile Include="SimpleRadioButton.cs" />
     <Page Include="Styles\GridSplitter_Style.xaml">
       <SubType>Designer</SubType>
@@ -80,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\JustButton_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LabelTextBox_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
