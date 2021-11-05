@@ -756,6 +756,7 @@
 
                         <DataGrid Margin="0,7,0,0"
                                   HorizontalAlignment="Left"
+                                  PreviewMouseWheel="DataGrid_PreviewMouseWheel"
                                   ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
                                   AutoGenerateColumns="False">
 

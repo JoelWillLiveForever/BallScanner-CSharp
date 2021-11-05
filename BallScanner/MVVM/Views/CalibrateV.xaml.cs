@@ -1,6 +1,7 @@
 ﻿using BallScanner.MVVM.ViewModels;
 using Joel.Controls;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,8 @@ namespace BallScanner.MVVM.Views
         private DataTemplate DefaultState;
         private DataTemplate MinState;
 
+        private bool isMinState;
+
         public CalibrateV()
         {
             InitializeComponent();
@@ -22,7 +25,7 @@ namespace BallScanner.MVVM.Views
             MinState = FindResource("MinState") as DataTemplate;
         }
 
-        private void BlockHeader_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        private void BlockHeader_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             BlockHeader blockHeader = sender as BlockHeader;
 
@@ -94,11 +97,15 @@ namespace BallScanner.MVVM.Views
             {
                 if (MyContentControl.ContentTemplate == MinState) return; 
                 MyContentControl.ContentTemplate = MinState;
+
+                isMinState = true;
             }
             else
             {
                 if (MyContentControl.ContentTemplate == DefaultState) return;
                 MyContentControl.ContentTemplate = DefaultState;
+
+                isMinState = false;
             }
         }
 
@@ -106,6 +113,38 @@ namespace BallScanner.MVVM.Views
         {
             // execute some code
             Console.WriteLine("Double Ckick");
+        }
+
+        private void DataGrid_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (isMinState)
+            {
+                foreach (var sv in FindVisualChildren<ScrollViewer>(this))
+                {
+                    if (sv.Name == "sv")
+                    {
+                        sv.ScrollToVerticalOffset(sv.ContentVerticalOffset - e.Delta);
+                    }
+                }
+            }            
+        }
+
+        // Поиск элемента в DataTemplate
+        public IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+
+                    if (child != null && child is T)
+                        yield return (T)child;
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                        yield return childOfChild;
+                }
+            }
         }
 
         //public System.Windows.Size GetElementPixelSize(UIElement element)
