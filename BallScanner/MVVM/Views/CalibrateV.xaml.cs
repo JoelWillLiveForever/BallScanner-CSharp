@@ -1,8 +1,5 @@
 ﻿using BallScanner.MVVM.ViewModels;
-using Joel.Controls;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,57 +22,57 @@ namespace BallScanner.MVVM.Views
             MinState = FindResource("MinState") as DataTemplate;
         }
 
-        private void BlockHeader_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            BlockHeader blockHeader = sender as BlockHeader;
+        //private void BlockHeader_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    BlockHeader blockHeader = sender as BlockHeader;
 
-            var formattedText = new FormattedText(blockHeader.Text,
-                CultureInfo.CurrentCulture, 
-                blockHeader.FlowDirection,
-                new Typeface(blockHeader.FontFamily, blockHeader.FontStyle, blockHeader.FontWeight, blockHeader.FontStretch),
-                blockHeader.FontSize,
-                blockHeader.Foreground,
-                new NumberSubstitution(), 
-                1);
+        //    var formattedText = new FormattedText(blockHeader.Text,
+        //        CultureInfo.CurrentCulture, 
+        //        blockHeader.FlowDirection,
+        //        new Typeface(blockHeader.FontFamily, blockHeader.FontStyle, blockHeader.FontWeight, blockHeader.FontStretch),
+        //        blockHeader.FontSize,
+        //        blockHeader.Foreground,
+        //        new NumberSubstitution(), 
+        //        1);
 
-            if (blockHeader.ActualWidth >= formattedText.Width && blockHeader.FontSize == 14) return;
+        //    if (blockHeader.ActualWidth >= formattedText.Width && blockHeader.FontSize == 14) return;
 
-            if (blockHeader.ActualWidth >= formattedText.Width && blockHeader.FontSize < 14)
-            {
-                blockHeader.FontSize += 0.5;
-            }
+        //    if (blockHeader.ActualWidth >= formattedText.Width && blockHeader.FontSize < 14)
+        //    {
+        //        blockHeader.FontSize += 0.5;
+        //    }
             
-            blockHeader.FontSize -= 0.5;
-        }
+        //    blockHeader.FontSize -= 0.5;
+        //}
 
-        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            SetMinWidths(sender);
-        }
+        //private void DataGrid_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    SetMinWidths(sender);
+        //}
 
-        private void SetMinWidths(object source)
-        {
-            foreach (var column in (source as DataGrid).Columns)
-            {
-                column.MinWidth = column.ActualWidth;
-                column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            }
-        }
+        //private void SetMinWidths(object source)
+        //{
+        //    foreach (var column in (source as DataGrid).Columns)
+        //    {
+        //        column.MinWidth = column.ActualWidth;
+        //        column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+        //    }
+        //}
 
-        private void Slider_KeyDown(object sender, KeyEventArgs e)
-        {
-            Slider slider = sender as Slider;
+        //private void Slider_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    Slider slider = sender as Slider;
 
-            switch (e.Key)
-            {
-                case Key.Left:
-                    slider.Value -= 1;
-                    break;
-                case Key.Right:
-                    slider.Value += 1;
-                    break;
-            }
-        }
+        //    switch (e.Key)
+        //    {
+        //        case Key.Left:
+        //            slider.Value -= 1;
+        //            break;
+        //        case Key.Right:
+        //            slider.Value += 1;
+        //            break;
+        //    }
+        //}
 
         private void Slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
@@ -109,11 +106,11 @@ namespace BallScanner.MVVM.Views
             }
         }
 
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            // execute some code
-            Console.WriteLine("Double Ckick");
-        }
+        //private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    // execute some code
+        //    Console.WriteLine("Double Ckick");
+        //}
 
         private void DataGrid_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
