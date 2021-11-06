@@ -58,5 +58,41 @@ namespace BallScanner.Properties {
                 this["IsAdmin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        public byte Threshold {
+            get {
+                return ((byte)(this["Threshold"]));
+            }
+            set {
+                this["Threshold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FirstThreshold {
+            get {
+                return ((int)(this["FirstThreshold"]));
+            }
+            set {
+                this["FirstThreshold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SecondThreshold {
+            get {
+                return ((int)(this["SecondThreshold"]));
+            }
+            set {
+                this["SecondThreshold"] = value;
+            }
+        }
     }
 }

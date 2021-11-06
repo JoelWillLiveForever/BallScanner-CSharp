@@ -20,6 +20,9 @@ namespace BallScanner.MVVM.ViewModels
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        // Локкер
+        private readonly object global_locker = new object();
+
         public static RelayCommand PerformAction { get; set; }
 
         // Декодирование изображения, если пикселей на экране меньше разрешения картинки
@@ -84,7 +87,7 @@ namespace BallScanner.MVVM.ViewModels
         }
 
         // Текущая чувствительность сканера (порог пикселя)
-        private byte _thresholdValue = 128;
+        private byte _thresholdValue;
         public byte ThresholdValue
         {
             get => _thresholdValue;
@@ -95,6 +98,15 @@ namespace BallScanner.MVVM.ViewModels
                 _thresholdValue = value;
                 OnPropertyChanged(nameof(ThresholdValue));
 
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.Threshold = ThresholdValue;
+                        Properties.Settings.Default.Save();
+                    }
+                });
+
                 if (Data != null && Data.Length != 0 && !isDragging) UpdateImage(300);
             }
         }
@@ -102,8 +114,8 @@ namespace BallScanner.MVVM.ViewModels
         private bool isDragging;
 
         // Первое и второе пороговые значения
-        private ulong _firstThreshold;
-        public ulong FirstThreshold
+        private int _firstThreshold;
+        public int FirstThreshold
         {
             get => _firstThreshold;
             set
@@ -112,11 +124,20 @@ namespace BallScanner.MVVM.ViewModels
 
                 _firstThreshold = value;
                 OnPropertyChanged(nameof(FirstThreshold));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.FirstThreshold = FirstThreshold;
+                        Properties.Settings.Default.Save();
+                    }
+                });
             }
         }
 
-        private ulong _secondThreshold;
-        public ulong SecondThreshold
+        private int _secondThreshold;
+        public int SecondThreshold
         {
             get => _secondThreshold;
             set
@@ -125,11 +146,20 @@ namespace BallScanner.MVVM.ViewModels
 
                 _secondThreshold = value;
                 OnPropertyChanged(nameof(SecondThreshold));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.SecondThreshold = SecondThreshold;
+                        Properties.Settings.Default.Save();
+                    }
+                });
             }
         }
 
-        private ulong _avgNumBlackPixels;
-        public ulong AvgNumBlackPixels
+        private long _avgNumBlackPixels;
+        public long AvgNumBlackPixels
         {
             get => _avgNumBlackPixels;
             set
@@ -175,6 +205,12 @@ namespace BallScanner.MVVM.ViewModels
         {
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
+
+            // Подгрузить настройки
+            ThresholdValue = Properties.Settings.Default.Threshold;
+
+            FirstThreshold = Properties.Settings.Default.FirstThreshold;
+            SecondThreshold = Properties.Settings.Default.SecondThreshold;
         }
 
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -285,11 +321,13 @@ namespace BallScanner.MVVM.ViewModels
                             if (Data != null && Data.Length > 0)
                             {
                                 int progress = 0;
+                                AvgNumBlackPixels = 0;
                                 object locker = new object();
+
                                 Parallel.For(0, Data.Length, i =>
                                 {
-                                    long numberOfBlackPixels = 0;
-                                    using (var bitmap = GetThresholdBitmap(Data[i].ImagePath, _thresholdValue))
+                                    int numberOfBlackPixels = 0;
+                                    using (var bitmap = GetThresholdBitmap(Data[i].ImagePath, ThresholdValue))
                                     {
                                         unsafe
                                         {
@@ -317,14 +355,14 @@ namespace BallScanner.MVVM.ViewModels
                                     }
 
                                     // Определение сорта стеклошарика
-                                    if (unchecked((ulong)numberOfBlackPixels) <= FirstThreshold)
+                                    if (numberOfBlackPixels <= FirstThreshold)
                                         Data[i].BallGrade = BallGrade.FIRST;
-                                    else if (unchecked((ulong)numberOfBlackPixels) <= SecondThreshold)
+                                    else if (numberOfBlackPixels <= SecondThreshold)
                                         Data[i].BallGrade = BallGrade.SECOND;
                                     else
                                         Data[i].BallGrade = BallGrade.DEFECTIVE;
 
-                                    Data[i].NumberOfBlackPixels = unchecked((ulong)numberOfBlackPixels);
+                                    Data[i].NumberOfBlackPixels = numberOfBlackPixels;
 
                                     Interlocked.Increment(ref progress);
                                     lock(locker)worker_DownloadExecute.ReportProgress(progress);
@@ -335,7 +373,7 @@ namespace BallScanner.MVVM.ViewModels
                                 {
                                     AvgNumBlackPixels += obj.NumberOfBlackPixels;
                                 }
-                                AvgNumBlackPixels /= (ulong)ImagesCount;
+                                AvgNumBlackPixels /= ImagesCount;
                             }
                         };
                         worker_DownloadExecute.RunWorkerAsync();
@@ -485,6 +523,15 @@ namespace BallScanner.MVVM.ViewModels
             }
         }
 
+        public void ChangeImage(object item)
+        {
+            ImageData data = item as ImageData;
+            currentImageIndex = data.Id - 1;
+
+            OnPropertyChanged(nameof(CurrentData));
+            UpdateImage(0);
+        }
+
         public override void ChangePalette()
         {
             Log.Info("Вызов функции \"ChangePalette()\" - смена цвета для текущей страницы");
@@ -500,15 +547,6 @@ namespace BallScanner.MVVM.ViewModels
                                 new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
 
             Properties.Settings.Default.Save();
-        }
-
-        public void ChangeImage(object item)
-        {
-            ImageData data = item as ImageData;
-            currentImageIndex = data.Id - 1;
-
-            OnPropertyChanged(nameof(CurrentData));
-            UpdateImage(0);
         }
     }
 }

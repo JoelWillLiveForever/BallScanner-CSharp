@@ -30,8 +30,8 @@ namespace BallScanner.MVVM.Models
             }
         }
 
-        private ulong _numberOfBlackPixels;
-        public ulong NumberOfBlackPixels
+        private int _numberOfBlackPixels;
+        public int NumberOfBlackPixels
         {
             get => _numberOfBlackPixels;
             set
