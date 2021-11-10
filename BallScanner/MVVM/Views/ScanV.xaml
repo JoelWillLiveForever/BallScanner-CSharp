@@ -715,7 +715,23 @@
 
                         <Image Stretch="Uniform"
                                RenderOptions.BitmapScalingMode="NearestNeighbor"
-                               Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                               Source="{Binding ElementName=Root, Path=DataContext.CurrentImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Setters>
+                                        <Setter Property="MinHeight"
+                                                Value="0" />
+                                    </Style.Setters>
+                                    <Style.Triggers>
+                                        <Trigger Property="Source"
+                                                 Value="{x:Null}">
+                                            <Setter Property="MinHeight"
+                                                    Value="360" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
 
                     </Grid>
 
