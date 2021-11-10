@@ -40,7 +40,7 @@
                         <ComboBoxItem Content="Номер партии" />
                         <ComboBoxItem Content="Номер смены" />
                         <ComboBoxItem Content="Значение" />
-                        <ComboBoxItem Content="Примесь" />
+                        <ComboBoxItem Content="Примечание" />
                     </ComboBox>
 
                     <joel:LabelTextBox Grid.Column="2"
@@ -85,7 +85,7 @@
                         <DataGridTextColumn Header="Значение"
                                             Width="*" 
                                             Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
-                        <DataGridTextColumn Header="Примесь"
+                        <DataGridTextColumn Header="Примечание"
                                             Width="*" 
                                             Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
