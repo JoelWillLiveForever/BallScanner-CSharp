@@ -20,10 +20,13 @@ namespace BallScanner.MVVM.ViewModels
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        // Команды
+        public static RelayCommand PerformAction { get; set; }
+
+        public RelayCommand ChangeImageCommand { get; set; }
+
         // Локкер
         private readonly object global_locker = new object();
-
-        public static RelayCommand PerformAction { get; set; }
 
         // Декодирование изображения, если пикселей на экране меньше разрешения картинки
         private int _decodePixelHeight;
@@ -211,6 +214,8 @@ namespace BallScanner.MVVM.ViewModels
 
             FirstThreshold = Properties.Settings.Default.FirstThreshold;
             SecondThreshold = Properties.Settings.Default.SecondThreshold;
+
+            ChangeImageCommand = new RelayCommand(ChangeImage);
         }
 
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)

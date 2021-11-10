@@ -529,8 +529,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <EventSetter Event="MouseDoubleClick"
-                     Handler="Row_DoubleClick" />
+        <!--<EventSetter Event="MouseDoubleClick"
+                     Handler="Row_DoubleClick" />-->
     </Style>
 
     <!--Style and template for the resize control on the DataGridRowHeader.-->

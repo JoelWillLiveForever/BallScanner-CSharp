@@ -20,7 +20,10 @@ namespace BallScanner.MVVM.ViewModels
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        // Команды
         public static RelayCommand PerformAction { get; set; }
+
+        public RelayCommand ChangeImageCommand { get; set; }
 
         // Декодирование изображения, если пикселей на экране меньше разрешения картинки
         private int _decodePixelHeight;
@@ -148,6 +151,8 @@ namespace BallScanner.MVVM.ViewModels
         {
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
+
+            ChangeImageCommand = new RelayCommand(ChangeImage);
         }
 
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -1,7 +1,6 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Base;
 using NLog;
-using System;
 
 namespace BallScanner.MVVM.ViewModels
 {
@@ -9,12 +8,12 @@ namespace BallScanner.MVVM.ViewModels
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private static AccountVM accountVM = new AccountVM();
-        private static ScanVM scanVM = new ScanVM();
-        public static CalibrateVM calibrateVM = new CalibrateVM();
-        private static DocumentsVM documentsVM = new DocumentsVM();
-        private static SettingsVM settingsVM = new SettingsVM();
-        private static AboutVM aboutVM = new AboutVM();
+        private static readonly AccountVM accountVM = new AccountVM();
+        private static readonly ScanVM scanVM = new ScanVM();
+        private static readonly CalibrateVM calibrateVM = new CalibrateVM();
+        private static readonly DocumentsVM documentsVM = new DocumentsVM();
+        private static readonly SettingsVM settingsVM = new SettingsVM();
+        private static readonly AboutVM aboutVM = new AboutVM();
 
         public static RelayCommand MenuButtonClick { get; set; }
 

@@ -367,14 +367,15 @@
                                           Text="{DynamicResource Text_DetailedScanResults}" />
 
                         <DataGrid Margin="0,7,0,0"
+                                  IsSynchronizedWithCurrentItem="True"
                                   ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
                                   AutoGenerateColumns="False">
-                            <!--<DataGrid.ItemContainerStyle>
-                                <Style TargetType="DataGridRow">
-                                    <EventSetter Event="MouseDoubleClick" 
-                                                 Handler="Row_DoubleClick" />
-                                </Style>
-                            </DataGrid.ItemContainerStyle>-->
+
+                            <DataGrid.InputBindings>
+                                <MouseBinding MouseAction="LeftDoubleClick"
+                                              Command="{Binding ElementName=Root, Path=DataContext.ChangeImageCommand}"
+                                              CommandParameter="{Binding ElementName=Root, Path=DataContext.Data/}" />
+                            </DataGrid.InputBindings>
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
@@ -773,10 +774,17 @@
 
                         <DataGrid Margin="0,7,0,0"
                                   HorizontalAlignment="Left"
+                                  IsSynchronizedWithCurrentItem="True"
                                   PreviewMouseWheel="DataGrid_PreviewMouseWheel"
                                   ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
                                   AutoGenerateColumns="False">
 
+                            <DataGrid.InputBindings>
+                                <MouseBinding MouseAction="LeftDoubleClick"
+                                              Command="{Binding ElementName=Root, Path=DataContext.ChangeImageCommand}"
+                                              CommandParameter="{Binding ElementName=Root, Path=DataContext.Data/}" />
+                            </DataGrid.InputBindings>
+                            
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
                                                     CellStyle="{StaticResource FirstColumnCell}"

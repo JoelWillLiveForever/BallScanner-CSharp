@@ -1,8 +1,4 @@
-﻿using BallScanner.MVVM.ViewModels;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace BallScanner.Resources.Styles
+﻿namespace BallScanner.Resources.Styles
 {
     partial class DataGrid_Style
     {
@@ -11,11 +7,11 @@ namespace BallScanner.Resources.Styles
             InitializeComponent();
         }
 
-        private void Row_DoubleClick(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = sender as DataGridRow;
-            MenuVM.calibrateVM.ChangeImage(row.Item);
-            // Console.WriteLine("Click!");
-        }
+        //private void Row_DoubleClick(object sender, RoutedEventArgs e)
+        //{
+        //    //DataGridRow row = sender as DataGridRow;
+        //    //MenuVM.calibrateVM.ChangeImage(row.Item);
+        //    // Console.WriteLine("Click!");
+        //}
     }
 }
