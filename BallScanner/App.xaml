@@ -1,9 +1,11 @@
 ﻿<Application x:Class="BallScanner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels"
-             xmlns:v="clr-namespace:BallScanner.MVVM.Views"
-             StartupUri="MVVM/Views/MainV.xaml"
+             xmlns:avm="clr-namespace:BallScanner.MVVM.ViewModels.Auth"
+             xmlns:av="clr-namespace:BallScanner.MVVM.Views.Auth"
+             xmlns:mvm="clr-namespace:BallScanner.MVVM.ViewModels.Main"
+             xmlns:sv="clr-namespace:BallScanner.MVVM.Views.Main"
+             StartupUri="MVVM/Views/Auth/RootV.xaml"
              LoadCompleted="OnLoadCompleted"
              Startup="OnStartup">
     
@@ -42,36 +44,48 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type vm:MainVM}">
-                <v:MainV />
+            <DataTemplate DataType="{x:Type avm:RootVM}">
+                <av:RootV />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type avm:LoginVM}">
+                <av:LoginV />
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type avm:RegistrationVM}">
+                <av:RegistrationV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:MenuVM}">
-                <v:MenuV />
+            <DataTemplate DataType="{x:Type mvm:RootVM}">
+                <sv:RootV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:AccountVM}">
-                <v:AccountV />
+            <DataTemplate DataType="{x:Type mvm:MenuVM}">
+                <sv:MenuV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:ScanVM}">
-                <v:ScanV />
+            <DataTemplate DataType="{x:Type mvm:AccountVM}">
+                <sv:AccountV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:CalibrateVM}">
-                <v:CalibrateV />
+            <DataTemplate DataType="{x:Type mvm:ScanVM}">
+                <sv:ScanV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:DocumentsVM}">
-                <v:DocumentsV />
+            <DataTemplate DataType="{x:Type mvm:CalibrateVM}">
+                <sv:CalibrateV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:SettingsVM}">
-                <v:SettingsV />
+            <DataTemplate DataType="{x:Type mvm:DocumentsVM}">
+                <sv:DocumentsV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vm:AboutVM}">
-                <v:AboutV />
+            <DataTemplate DataType="{x:Type mvm:SettingsVM}">
+                <sv:SettingsV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type mvm:AboutVM}">
+                <sv:AboutV />
             </DataTemplate>
 
         </ResourceDictionary>

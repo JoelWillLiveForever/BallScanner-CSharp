@@ -96,42 +96,51 @@
     <Compile Include="MVVM\Base\BaseViewModel.cs" />
     <Compile Include="MVVM\Base\PageVM.cs" />
     <Compile Include="MVVM\Commands\RelayCommand.cs" />
-    <Compile Include="MVVM\Models\BallGrade.cs" />
-    <Compile Include="MVVM\Models\ImageData.cs" />
-    <Compile Include="MVVM\ViewModels\AboutVM.cs" />
-    <Compile Include="MVVM\ViewModels\AccountVM.cs" />
-    <Compile Include="MVVM\ViewModels\CalibrateVM.cs" />
-    <Compile Include="MVVM\ViewModels\DocumentsVM.cs" />
-    <Compile Include="MVVM\ViewModels\MainVM.cs" />
-    <Compile Include="MVVM\ViewModels\MenuVM.cs" />
-    <Compile Include="MVVM\ViewModels\ScanVM.cs" />
-    <Compile Include="MVVM\ViewModels\SettingsVM.cs" />
-    <Compile Include="MVVM\Views\AboutV.xaml.cs">
+    <Compile Include="MVVM\Models\Main\BallGrade.cs" />
+    <Compile Include="MVVM\Models\Main\ImageData.cs" />
+    <Compile Include="MVVM\ViewModels\Auth\LoginVM.cs" />
+    <Compile Include="MVVM\ViewModels\Auth\RegistrationVM.cs" />
+    <Compile Include="MVVM\ViewModels\Auth\RootVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\AboutVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\AccountVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\CalibrateVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\DocumentsVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\RootVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\MenuVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\ScanVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\SettingsVM.cs" />
+    <Compile Include="MVVM\Views\Main\AboutV.xaml.cs">
       <DependentUpon>AboutV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\AccountV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\AccountV.xaml.cs">
       <DependentUpon>AccountV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\CalibrateV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\CalibrateV.xaml.cs">
       <DependentUpon>CalibrateV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\DocumentsV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\DocumentsV.xaml.cs">
       <DependentUpon>DocumentsV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\MainV.xaml.cs">
-      <DependentUpon>MainV.xaml</DependentUpon>
+    <Compile Include="MVVM\Views\Main\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\MenuV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\MenuV.xaml.cs">
       <DependentUpon>MenuV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\ScanV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\ScanV.xaml.cs">
       <DependentUpon>ScanV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\SettingsV.xaml.cs">
+    <Compile Include="MVVM\Views\Main\SettingsV.xaml.cs">
       <DependentUpon>SettingsV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
+    <Compile Include="MVVM\Views\Auth\LoginV.xaml.cs">
+      <DependentUpon>LoginV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Auth\RegistrationV.xaml.cs">
+      <DependentUpon>RegistrationV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
     <Compile Include="App.xaml.cs">
@@ -139,39 +148,47 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Resources\Styles\DataGrid_Style.cs" />
-    <Page Include="MVVM\Views\AboutV.xaml">
+    <Page Include="MVVM\Views\Main\AboutV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\AccountV.xaml">
+    <Page Include="MVVM\Views\Main\AccountV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\CalibrateV.xaml">
+    <Page Include="MVVM\Views\Main\CalibrateV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\DocumentsV.xaml">
+    <Page Include="MVVM\Views\Main\DocumentsV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\MainV.xaml">
+    <Page Include="MVVM\Views\Main\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\MenuV.xaml">
+    <Page Include="MVVM\Views\Main\MenuV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\ScanV.xaml">
+    <Page Include="MVVM\Views\Main\ScanV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\SettingsV.xaml">
+    <Page Include="MVVM\Views\Main\SettingsV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\Test.xaml">
+    <Page Include="MVVM\Views\Auth\LoginV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Auth\RegistrationV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Auth\RootV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,7 +322,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MVVM\Models\Auth\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
