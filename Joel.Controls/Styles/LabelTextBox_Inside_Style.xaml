@@ -81,17 +81,17 @@
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsKeyboardFocused"
-                                           Value="False" />
+                                           Value="True" />
                                 <Condition Property="Text"
                                            Value="{x:Null}" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter Property="Visibility"
                                         TargetName="MyLabel"
-                                        Value="Visible" />
+                                        Value="Collapsed" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         
@@ -107,14 +107,28 @@
                                         TargetName="MyLabel"
                                         Value="Visible" />
                             </MultiTrigger.Setters>
+                        </MultiTrigger>-->
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocused"
+                                           Value="False" />
+                                <Condition Property="Text"
+                                           Value="{x:Static sys:String.Empty}" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Visibility"
+                                    TargetName="MyLabel"
+                                    Value="Visible" />
+                            </MultiTrigger.Setters>
                         </MultiTrigger>
                         
-                        <Trigger Property="IsKeyboardFocused"
+                        <!--<Trigger Property="IsKeyboardFocused"
                                  Value="False">
                             <Setter Property="Visibility"
                                     TargetName="MyLabel"
                                     Value="Visible" />
-                        </Trigger>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

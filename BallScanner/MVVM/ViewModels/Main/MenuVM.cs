@@ -15,8 +15,6 @@ namespace BallScanner.MVVM.ViewModels.Main
         private static readonly SettingsVM settingsVM = new SettingsVM();
         private static readonly AboutVM aboutVM = new AboutVM();
 
-        public static RelayCommand MenuButtonClick { get; set; }
-
         private PageVM _selectedPage;
         public PageVM SelectedPage
         {
@@ -28,6 +26,8 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
         }
 
+        public static RelayCommand MenuButtonClick { get; set; }
+
         public MenuVM()
         {
             Log.Info("Constructor called!");
@@ -37,7 +37,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);
         }
 
-        public void OnMenuButtonClick(object param)
+        private void OnMenuButtonClick(object param)
         {
             string name = param as string;
 
