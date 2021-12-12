@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BallScanner.MVVM.Views.Auth
@@ -15,8 +16,17 @@ namespace BallScanner.MVVM.Views.Auth
             TimeSpan.TicksPerDay * version.Build + // days since 1 January 2000
             TimeSpan.TicksPerSecond * 2 * version.Revision)); // seconds since midnight, (multiply by 2 to get original)
 
-            Version_Field.Text = "v." + version.ToString();
-            Build_Field.Text = "Build " + buildDateTime.ToString("dd/MM/yyyy");
+            Version_Field.Text = "v." + version.ToString() + " beta";
+            Build_Field.Text = "Build " + buildDateTime.ToString("dd-MM-yyyy");
         }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Application.Current.MainWindow = null;
+        //    //RootV rootV = new RootV();
+        //    //rootV.Show();
+        //    //var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+        //    //currentWindow.Close();
+        //}
     }
 }

@@ -94,29 +94,5 @@ namespace BallScanner.Properties {
                 this["SecondThreshold"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AppBuild {
-            get {
-                return ((string)(this["AppBuild"]));
-            }
-            set {
-                this["AppBuild"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PrevBuildDate {
-            get {
-                return ((string)(this["PrevBuildDate"]));
-            }
-            set {
-                this["PrevBuildDate"] = value;
-            }
-        }
     }
 }

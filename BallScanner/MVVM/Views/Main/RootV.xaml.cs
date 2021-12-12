@@ -5,10 +5,10 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using BallScanner.MVVM.ViewModels.Main;
 //using System.Windows.Forms;
 //using System.Windows.Interop;
 //using System.Windows.Shell;
-using BallScanner.MVVM.ViewModels.Main;
 //using Microsoft.Win32;
 
 namespace BallScanner.MVVM.Views.Main
@@ -45,6 +45,11 @@ namespace BallScanner.MVVM.Views.Main
 
             //AddHandler(MouseMoveEvent, new System.Windows.Input.MouseEventHandler(OnMouseMove));
             #endregion
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
         }
 
         //private static void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)

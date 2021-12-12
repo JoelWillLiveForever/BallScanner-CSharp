@@ -65,11 +65,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>17CC7BDC1A35B2B609B89203CF124F7126FC98D2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F6910FDA9D79B369B093190B6454266032455DAD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>JoelKeyFile.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -84,7 +83,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>BallScanner_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>JoelKeyFile.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework" />
@@ -133,9 +132,20 @@
     <Compile Include="MVVM\ViewModels\Main\CalibrateVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\DocumentsVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\RootVM.cs" />
+    <Compile Include="MVVM\ViewModels\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\MenuVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\ScanVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\SettingsVM.cs" />
+    <Compile Include="MVVM\ViewModels\TestVM.cs" />
+    <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Main\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Main\AboutV.xaml.cs">
       <DependentUpon>AboutV.xaml</DependentUpon>
     </Compile>
@@ -148,7 +158,7 @@
     <Compile Include="MVVM\Views\Main\DocumentsV.xaml.cs">
       <DependentUpon>DocumentsV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\Main\RootV.xaml.cs">
+    <Compile Include="MVVM\Views\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\Main\MenuV.xaml.cs">
@@ -166,8 +176,8 @@
     <Compile Include="MVVM\Views\Auth\RegistrationV.xaml.cs">
       <DependentUpon>RegistrationV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
-      <DependentUpon>RootV.xaml</DependentUpon>
+    <Compile Include="MVVM\Views\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
     <Compile Include="App.xaml.cs">
@@ -175,6 +185,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Resources\Styles\DataGrid_Style.cs" />
+    <Page Include="MVVM\Views\Auth\RootV.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Main\RootV.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\Main\AboutV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,7 +213,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\Main\RootV.xaml">
+    <Page Include="MVVM\Views\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -215,7 +237,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\Views\Auth\RootV.xaml">
+    <Page Include="MVVM\Views\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,10 +356,10 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="BallScanner_TemporaryKey.pfx" />
     <None Include="Data\db.sqlite3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="JoelKeyFile.pfx" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

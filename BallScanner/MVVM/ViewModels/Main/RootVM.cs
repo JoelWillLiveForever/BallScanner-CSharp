@@ -1,4 +1,5 @@
 ﻿using BallScanner.MVVM.Base;
+using BallScanner.MVVM.Commands;
 using NLog;
 
 namespace BallScanner.MVVM.ViewModels.Main
@@ -6,6 +7,8 @@ namespace BallScanner.MVVM.ViewModels.Main
     public class RootVM : BaseViewModel
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
+        private static readonly MenuVM menuVM = new MenuVM();
 
         private BaseViewModel _selectedViewModel;
         public BaseViewModel SelectedViewModel
@@ -18,10 +21,24 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
         }
 
+        public RelayCommand ChangeRootVM_Command { get; set; }
+
         public RootVM()
         {
             Log.Info("Constructor called!");
-            SelectedViewModel = new MenuVM();
+
+            menuVM.ParentViewModel = this;
+
+            SelectedViewModel = menuVM;
+            ChangeRootVM_Command = new RelayCommand(ChangeVM);
+        }
+
+        private void ChangeVM(object param)
+        {
+            string parameter = param as string;
+
+            if (parameter == "menu")
+                SelectedViewModel = menuVM;
         }
     }
 }

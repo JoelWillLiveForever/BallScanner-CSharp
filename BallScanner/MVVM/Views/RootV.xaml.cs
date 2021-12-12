@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using BallScanner.MVVM.ViewModels.Auth;
+using BallScanner.MVVM.ViewModels;
 //using System.Windows.Forms;
 //using System.Windows.Interop;
 //using System.Windows.Shell;
 //using Microsoft.Win32;
 
-namespace BallScanner.MVVM.Views.Auth
+namespace BallScanner.MVVM.Views
 {
     public partial class RootV : Window
     {

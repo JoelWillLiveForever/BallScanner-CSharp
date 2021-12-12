@@ -31,6 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>JoelKeyFile.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -101,6 +107,7 @@
     <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-SemiBoldItalic.ttf" />
     <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Thin.ttf" />
     <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ThinItalic.ttf" />
+    <None Include="JoelKeyFile.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

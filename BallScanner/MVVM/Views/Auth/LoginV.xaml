@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="400" 
+             d:DesignWidth="500">
 
     <Border Background="{StaticResource Brush_Surface_Overlay_01dp}">
         <DockPanel LastChildFill="True"
@@ -41,27 +42,32 @@
                 <joel:LabelTextBox Height="29"
                                    Margin="0,7,0,0"
                                    LabelText="Логин"
+                                   Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    Style="{StaticResource Style_Inside}" />
 
                 <joel:LabelTextBox Height="29"
-                                   Margin="0,10,0,0"
+                                   Margin="0,7,0,0"
                                    LabelText="Пароль"
+                                   Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    Style="{StaticResource Style_Inside}" />
 
-                <Grid Margin="0,10,0,0"
+                <Grid Margin="0,7,0,0"
                       Height="29">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="7" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button Content="Регистрация"
+                            Command="{Binding ChangeSelectedVM_Command}"
+                            CommandParameter="Registration"
                             Height="29" />
 
                     <Button Grid.Column="2"
                             Content="Вход"
+                            Command="{Binding AuthUser_Command}"
                             Height="29" />
 
                 </Grid>

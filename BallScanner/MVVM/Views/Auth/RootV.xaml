@@ -4,13 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        Title="Ball Scanner: Login window"
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
+        Width="500"
+        Height="400"
         ResizeMode="CanMinimize"
-        Title="Ball Scanner"
-        Height="375"
-        Width="550"
         Style="{StaticResource CustomWindowStyle}">
 
-    <ContentControl Content="{Binding SelectedViewModel}" />
+    <Grid>
+        <ContentControl Content="{Binding SelectedViewModel}" />
+    </Grid>
 
 </Window>
