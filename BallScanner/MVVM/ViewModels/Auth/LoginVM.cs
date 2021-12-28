@@ -1,6 +1,9 @@
 ﻿using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
 using NLog;
+using System.Windows;
+using Joel.Utils.Services;
+using System;
 
 namespace BallScanner.MVVM.ViewModels.Auth
 {
@@ -29,7 +32,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
             {
                 if (_password == value) return;
 
-                _login = value;
+                _password = value;
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -46,8 +49,13 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
         private void Authenticate(object param)
         {
-            ChangeVM("menu");
-            new Views.Main.RootV().Show();
+            //Console.WriteLine("\nSHA " + SHAService.ComputeSha256Hash("\"C@5p&ww"));
+
+            // superuser rights
+            if (SHAService.ComputeSha256Hash(Login) == "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" && SHAService.ComputeSha256Hash(Password) == "1001540fac666406992a208c9ad35851f9e70df938d7fde716618da6602cc2f4")
+                new Views.Main.RootV().Show();
+            else
+                MessageBox.Show("User not found!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.None);
 
             //if (current != null)
             //{
