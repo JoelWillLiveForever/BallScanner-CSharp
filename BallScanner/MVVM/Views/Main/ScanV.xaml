@@ -175,6 +175,8 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <Border Grid.ColumnSpan="7"
@@ -203,8 +205,17 @@
 
                             <TextBlock Text="Второй сорт"
                                        Style="{StaticResource DataGridParody_Header}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="4"
+                                       Grid.Row="0" />
+
+                            <GridSplitter Grid.Column="5"
+                                          Grid.Row="0"
+                                          Background="{DynamicResource Brush_OnPrimary}" />
+
+                            <TextBlock Text="Фракция"
+                                       Style="{StaticResource DataGridParody_Header}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="6"
                                        Grid.Row="0" />
 
                             <!-- Row 2 -->
@@ -239,8 +250,22 @@
 
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                        Style="{StaticResource DataGridParody_Content}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="4"
+                                       Grid.Row="1" />
+
+                            <Border Grid.Column="5"
+                                    Grid.Row="1"
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="1"
+                                    Margin="0,5"
+                                    Width="1" />
+
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                       Style="{StaticResource DataGridParody_Content}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="6"
                                        Grid.Row="1" />
 
                             <!-- Row 3 -->
