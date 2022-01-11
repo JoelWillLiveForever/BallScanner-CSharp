@@ -1,6 +1,7 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Base;
 using NLog;
+using System.Windows;
 
 namespace BallScanner.MVVM.ViewModels.Main
 {
@@ -27,6 +28,7 @@ namespace BallScanner.MVVM.ViewModels.Main
         }
 
         public static RelayCommand MenuButtonClick { get; set; }
+        public static RelayCommand Logout_Command { get; set; }
 
         public MenuVM()
         {
@@ -35,6 +37,7 @@ namespace BallScanner.MVVM.ViewModels.Main
 
             // Повесить команды на MenuButtonClick
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);
+            Logout_Command = new RelayCommand(Logout);
         }
 
         private void OnMenuButtonClick(object param)
@@ -63,6 +66,20 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
 
             SelectedPage.ChangePalette();
+        }
+
+        private void Logout(object param)
+        {
+            App.CurrentUser = null;
+
+            // open login window
+            Window old = Application.Current.MainWindow;
+            Window future = new Views.Auth.RootV();
+
+            Application.Current.MainWindow = future;
+
+            future.Show();
+            old.Close();
         }
     }
 }
