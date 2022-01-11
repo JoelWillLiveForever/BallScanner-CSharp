@@ -161,6 +161,28 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
         }
 
+        private string _fraction;
+        public string Fraction
+        {
+            get => _fraction;
+            set
+            {
+                if (_fraction == value) return;
+
+                _fraction = value;
+                OnPropertyChanged(nameof(Fraction));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.Fraction = Fraction;
+                        Properties.Settings.Default.Save();
+                    }
+                });
+            }
+        }
+
         private long _avgNumBlackPixels;
         public long AvgNumBlackPixels
         {
@@ -214,6 +236,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
             FirstThreshold = Properties.Settings.Default.FirstThreshold;
             SecondThreshold = Properties.Settings.Default.SecondThreshold;
+
+            Fraction = Properties.Settings.Default.Fraction;
 
             ChangeImageCommand = new RelayCommand(ChangeImage);
         }

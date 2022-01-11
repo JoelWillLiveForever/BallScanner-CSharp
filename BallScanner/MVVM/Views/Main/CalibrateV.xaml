@@ -435,6 +435,8 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="7" />
                                 <ColumnDefinition Width="0.25*" />
+                                <ColumnDefinition Width="7" />
+                                <ColumnDefinition Width="0.25*" />
                             </Grid.ColumnDefinitions>
 
                             <!-- Slider -->
@@ -458,6 +460,9 @@
                             <joel:LabelTextBox Grid.Column="4"
                                                LabelText="Второй сорт"
                                                Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <joel:LabelTextBox Grid.Column="6"
+                                               LabelText="Фракция"
+                                               Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                         </Grid>
                     </StackPanel>

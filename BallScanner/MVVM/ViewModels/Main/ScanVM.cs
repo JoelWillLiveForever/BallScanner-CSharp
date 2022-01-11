@@ -99,9 +99,15 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             get => Properties.Settings.Default.FirstThreshold;
         }
+
         public int SecondThreshold
         {
             get => Properties.Settings.Default.SecondThreshold;
+        }
+
+        public string Fraction
+        {
+            get => Properties.Settings.Default.Fraction;
         }
 
         private long _avgNumBlackPixels;

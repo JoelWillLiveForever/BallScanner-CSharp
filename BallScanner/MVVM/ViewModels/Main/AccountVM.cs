@@ -31,7 +31,16 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         public string Access_Level
         {
-            get => App.CurrentUser._is_admin == 0 ? "Пользователь" : "Администратор";
+            get
+            {
+                switch (App.CurrentUser._access_level)
+                {
+                    case 0: return "Суперпользователь";
+                    case 1: return "Администратор";
+                    case 2: return "Пользователь";
+                }
+                return "Не определён";
+            }
         }
 
         public AccountVM()

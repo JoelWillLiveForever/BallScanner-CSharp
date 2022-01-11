@@ -11,7 +11,7 @@ namespace BallScanner.Data.Tables
         public string _lastname { get; set; }
         public int _smena_number { get; set; }
         public int _is_active { get; set; }
-        public int _is_admin { get; set; }
+        public int _access_level { get; set; }
         public string _username { get; set; }
         public string _password_hash { get; set; }
     }

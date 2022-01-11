@@ -20,5 +20,8 @@
     <Setting Name="SecondThreshold" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="Fraction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

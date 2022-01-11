@@ -94,5 +94,17 @@ namespace BallScanner.Properties {
                 this["SecondThreshold"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string Fraction {
+            get {
+                return ((string)(this["Fraction"]));
+            }
+            set {
+                this["Fraction"] = value;
+            }
+        }
     }
 }
