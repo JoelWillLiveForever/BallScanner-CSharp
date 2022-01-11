@@ -6,7 +6,7 @@
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="400" 
-             d:DesignWidth="500">
+             d:DesignWidth="550">
 
     <Border Background="{StaticResource Brush_Surface_Overlay_01dp}">
         <DockPanel LastChildFill="True"
@@ -61,8 +61,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Content="Регистрация"
-                            Command="{Binding ChangeSelectedVM_Command}"
-                            CommandParameter="Registration"
+                            Command="{Binding GoToRegistrationView_Command}"
                             Height="29" />
 
                     <Button Grid.Column="2"

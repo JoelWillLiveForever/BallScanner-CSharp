@@ -42,13 +42,14 @@ namespace BallScanner.MVVM.ViewModels.Auth
         }
 
         public RelayCommand AuthUser_Command { get; set; }
-        public RelayCommand ChangeSelectedVM_Command { get; set; }
+        public RelayCommand GoToRegistrationView_Command { get; set; }
 
         public LoginVM()
         {
             Log.Info("Constructor called!");
+
             AuthUser_Command = new RelayCommand(Authenticate);
-            ChangeSelectedVM_Command = new RelayCommand(ChangeVM);
+            GoToRegistrationView_Command = new RelayCommand(ChangeVM);
         }
 
         private void Authenticate(object param)
@@ -64,7 +65,15 @@ namespace BallScanner.MVVM.ViewModels.Auth
             // superuser rights
             if (SHAService.ComputeSha256Hash(Login) == "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" && SHAService.ComputeSha256Hash(Password) == "1001540fac666406992a208c9ad35851f9e70df938d7fde716618da6602cc2f4")
             {
-                new Views.Main.RootV().Show();
+                // open work window
+                Window old = Application.Current.MainWindow;
+                Window future = new Views.Main.RootV();
+
+                Application.Current.MainWindow = future;
+
+                future.Show();
+                old.Close();
+
                 return;
             }
             else
@@ -90,31 +99,31 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                         App.CurrentUser = user;
                         Console.WriteLine(user._surname);
-                        new Views.Main.RootV().Show();
+
+                        // open work window
+                        Window old = Application.Current.MainWindow;
+                        Window future = new Views.Main.RootV();
+
+                        Application.Current.MainWindow = future;
+
+                        future.Show();
+                        old.Close();
                     }
                 } catch (Exception ex)
                 {
                     MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 }
             }
-
-            //if (current != null)
-            //{
-            //    current.Close();
-
-            //    current = new RootV();
-            //    Application.Current.MainWindow = current;
-            //    current.Show();
-            //}
         }
 
         private void ChangeVM(object param)
         {
-            //RootVM parent = ParentViewModel as RootVM;
-            //if (parent.ChangeRootVM_Command.CanExecute(param))
-            //{
-            //    parent.ChangeRootVM_Command.Execute(param);
-            //}
+            RootVM root = ParentViewModel as RootVM;
+
+            if (root.ChangeRootVM_Command.CanExecute("registration"))
+            {
+                root.ChangeRootVM_Command.Execute("registration");
+            }
         }
     }
 }
