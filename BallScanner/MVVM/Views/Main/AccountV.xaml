@@ -91,7 +91,7 @@
                                Grid.Row="0" />
 
                     <!-- Row 2 -->
-                    <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.Id, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource DataGridParody_Content}"
                                Margin="7,0,0,0"
                                Grid.Column="0"
@@ -106,7 +106,7 @@
                             Margin="0,5"
                             Width="1" />
 
-                    <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.Name, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource DataGridParody_Content}"
                                Grid.Column="2"
                                Grid.Row="1" />
@@ -120,7 +120,7 @@
                             Margin="0,5"
                             Width="1" />
 
-                    <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource DataGridParody_Content}"
                                Grid.Column="4"
                                Grid.Row="1" />
@@ -134,7 +134,7 @@
                             Margin="0,5"
                             Width="1" />
 
-                    <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Smena_Number, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource DataGridParody_Content}"
                                Grid.Column="6"
                                Grid.Row="1" />
@@ -148,7 +148,7 @@
                             Margin="0,5"
                             Width="1" />
 
-                    <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Access_Level, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource DataGridParody_Content}"
                                Margin="0,0,8,0"
                                Grid.Column="8"

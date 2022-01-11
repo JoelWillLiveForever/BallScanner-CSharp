@@ -9,6 +9,31 @@ namespace BallScanner.MVVM.ViewModels.Main
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        public string Surname
+        {
+            get => App.CurrentUser._surname;
+        }
+
+        public string Name
+        {
+            get => App.CurrentUser._name;
+        }
+
+        public string Lastname
+        {
+            get => App.CurrentUser._lastname;
+        }
+
+        public int Smena_Number
+        {
+            get => App.CurrentUser._smena_number;
+        }
+
+        public string Access_Level
+        {
+            get => App.CurrentUser._is_admin == 0 ? "Пользователь" : "Администратор";
+        }
+
         public AccountVM()
         {
             Log.Info("Constructor called!");

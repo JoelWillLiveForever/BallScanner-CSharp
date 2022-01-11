@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BallScanner.Data.Tables;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -17,6 +18,9 @@ namespace BallScanner
 
     public partial class App : Application
     {
+        // Auth
+        public static User CurrentUser { get; set; }
+
         private const string LANGUAGE_URI = "Resources/Languages/Language.";
         public Palettes CurrentPalette = Palettes.Red;
 
