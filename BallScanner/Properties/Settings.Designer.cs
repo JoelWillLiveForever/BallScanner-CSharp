@@ -106,5 +106,17 @@ namespace BallScanner.Properties {
                 this["Fraction"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string Partia_Number {
+            get {
+                return ((string)(this["Partia_Number"]));
+            }
+            set {
+                this["Partia_Number"] = value;
+            }
+        }
     }
 }

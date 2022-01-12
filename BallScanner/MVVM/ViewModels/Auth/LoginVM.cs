@@ -83,13 +83,13 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                 try
                 {
-                    using (AppDbContext dbContext = new AppDbContext())
+                    AppDbContext dbContext = AppDbContext.GetInstance();
                     {
-                        dbContext.Users.Load();
+                        //dbContext.Users.Load();
 
-                        User user = (from u in dbContext.Users
-                                     where u._username == username && u._password_hash == password_hash
-                                     select u).FirstOrDefault();
+                        User user = dbContext.Users
+                            .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash))
+                            .FirstOrDefault();
 
                         if (user == null)
                         {

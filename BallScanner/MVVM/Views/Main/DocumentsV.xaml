@@ -81,7 +81,7 @@
                                             Binding="{Binding _partia_number, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Номер смены"
                                             Width="*" 
-                                            Binding="{Binding Smena_Number, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding User._smena_number, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Значение"
                                             Width="*" 
                                             Binding="{Binding _avg_black_pixels_value, UpdateSourceTrigger=PropertyChanged}" />

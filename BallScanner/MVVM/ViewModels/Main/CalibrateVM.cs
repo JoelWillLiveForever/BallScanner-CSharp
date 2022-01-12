@@ -183,6 +183,28 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
         }
 
+        private string _partia_number;
+        public string Partia_Number
+        {
+            get => _partia_number;
+            set
+            {
+                if (_partia_number == value) return;
+
+                _partia_number = value;
+                OnPropertyChanged(nameof(Partia_Number));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.Partia_Number = Partia_Number;
+                        Properties.Settings.Default.Save();
+                    }
+                });
+            }
+        }
+
         private long _avgNumBlackPixels;
         public long AvgNumBlackPixels
         {
@@ -238,6 +260,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             SecondThreshold = Properties.Settings.Default.SecondThreshold;
 
             Fraction = Properties.Settings.Default.Fraction;
+            Partia_Number = Properties.Settings.Default.Partia_Number;
 
             ChangeImageCommand = new RelayCommand(ChangeImage);
         }

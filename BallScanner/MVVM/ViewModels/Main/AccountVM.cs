@@ -9,6 +9,11 @@ namespace BallScanner.MVVM.ViewModels.Main
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        public string Login
+        {
+            get => App.CurrentUser._username;
+        }
+
         public string Surname
         {
             get => App.CurrentUser._surname;

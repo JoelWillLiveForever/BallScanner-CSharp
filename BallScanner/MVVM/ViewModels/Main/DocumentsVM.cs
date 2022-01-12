@@ -19,17 +19,8 @@ namespace BallScanner.MVVM.ViewModels.Main
             {
                 try
                 {
-                    using (AppDbContext dbContext = new AppDbContext())
-                    {
-                        var list = dbContext.Reports.ToList();
-
-                        //for (int i = 0; i < list.Count; i++)
-                        //{
-                        //    list[i].Row_Number = i + 1;
-                        //}
-
-                        return list;
-                    }
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    return dbContext.Reports.ToList();
                 } catch (Exception ex)
                 {
                     MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);

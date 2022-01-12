@@ -177,14 +177,16 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.ColumnSpan="7"
+                            <Border Grid.ColumnSpan="9"
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Background="{DynamicResource Brush_Primary}" />
 
-                            <TextBlock Text="Чувствительность"
+                            <TextBlock Text="Чувств."
                                        Style="{StaticResource DataGridParody_Header}"
                                        Margin="7,0,0,0"
                                        Grid.Column="0"
@@ -214,8 +216,17 @@
 
                             <TextBlock Text="Фракция"
                                        Style="{StaticResource DataGridParody_Header}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="6"
+                                       Grid.Row="0" />
+
+                            <GridSplitter Grid.Column="7"
+                                          Grid.Row="0"
+                                          Background="{DynamicResource Brush_OnPrimary}" />
+
+                            <TextBlock Text="Номер партии"
+                                       Style="{StaticResource DataGridParody_Header}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="8"
                                        Grid.Row="0" />
 
                             <!-- Row 2 -->
@@ -264,13 +275,27 @@
 
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                        Style="{StaticResource DataGridParody_Content}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="6"
+                                       Grid.Row="1" />
+
+                            <Border Grid.Column="7"
+                                    Grid.Row="1"
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="1"
+                                    Margin="0,5"
+                                    Width="1" />
+
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.Partia_Number, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                       Style="{StaticResource DataGridParody_Content}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="8"
                                        Grid.Row="1" />
 
                             <!-- Row 3 -->
                             <Border Grid.Column="0"
-                                    Grid.ColumnSpan="7"
+                                    Grid.ColumnSpan="9"
                                     Grid.Row="3"
                                     Background="{DynamicResource Brush_Primary}" />
 
@@ -517,14 +542,16 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.ColumnSpan="7"
+                            <Border Grid.ColumnSpan="9"
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Background="{DynamicResource Brush_Primary}" />
 
-                            <TextBlock Text="Чувствительность"
+                            <TextBlock Text="Чувств."
                                        Style="{StaticResource DataGridParody_Header}"
                                        Margin="7,0,0,0"
                                        Grid.Column="0"
@@ -554,8 +581,17 @@
 
                             <TextBlock Text="Фракция"
                                        Style="{StaticResource DataGridParody_Header}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="6"
+                                       Grid.Row="0" />
+
+                            <GridSplitter Grid.Column="7"
+                                          Grid.Row="0"
+                                          Background="{DynamicResource Brush_OnPrimary}" />
+
+                            <TextBlock Text="Номер партии"
+                                       Style="{StaticResource DataGridParody_Header}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="8"
                                        Grid.Row="0" />
 
                             <!-- Row 2 -->
@@ -604,13 +640,27 @@
 
                             <TextBlock Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                        Style="{StaticResource DataGridParody_Content}"
-                                       Margin="0,0,8,0"
                                        Grid.Column="6"
+                                       Grid.Row="1" />
+
+                            <Border Grid.Column="7"
+                                    Grid.Row="1"
+                                    Background="{DynamicResource Brush_OnBackground_OnSurface_High}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="1"
+                                    Margin="0,5"
+                                    Width="1" />
+
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.Partia_Number, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                       Style="{StaticResource DataGridParody_Content}"
+                                       Margin="0,0,8,0"
+                                       Grid.Column="8"
                                        Grid.Row="1" />
 
                             <!-- Row 3 -->
                             <Border Grid.Column="0"
-                                    Grid.ColumnSpan="7"
+                                    Grid.ColumnSpan="9"
                                     Grid.Row="3"
                                     Background="{DynamicResource Brush_Primary}" />
 

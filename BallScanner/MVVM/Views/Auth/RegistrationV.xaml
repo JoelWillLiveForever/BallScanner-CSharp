@@ -18,7 +18,7 @@
                        TextWrapping="Wrap"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
-                       Text="Поля, помеченные звёздочкой, являются обязательными к заполнению! Пароль должен содержать минимум 8 символов!"
+                       Text="Поля, помеченные звёздочкой, являются обязательными к заполнению! Пароль должен содержать минимум 4 символа!"
                        Name="Version_Field" />
 
             <StackPanel Orientation="Vertical">

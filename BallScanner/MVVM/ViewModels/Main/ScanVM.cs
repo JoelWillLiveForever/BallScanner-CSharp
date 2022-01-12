@@ -111,6 +111,10 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             get => Properties.Settings.Default.Fraction;
         }
+        public string Partia_Number
+        {
+            get => Properties.Settings.Default.Partia_Number;
+        }
 
         private long _avgNumBlackPixels;
         public long AvgNumBlackPixels
@@ -328,13 +332,13 @@ namespace BallScanner.MVVM.ViewModels.Main
                                 // Сохранение данных в БД
                                 try
                                 {
-                                    using (AppDbContext dbContext = new AppDbContext())
+                                    AppDbContext dbContext = AppDbContext.GetInstance();
                                     {
                                         Report newReport;
                                         if (App.CurrentUser != null)
-                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, AvgNumBlackPixels); // admin or user
+                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels); // admin or user
                                         else
-                                            newReport = new Report(-1, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, AvgNumBlackPixels);  // superuser
+                                            newReport = new Report(-1, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels);  // superuser
 
                                         dbContext.Reports.Add(newReport);
                                         dbContext.SaveChanges();

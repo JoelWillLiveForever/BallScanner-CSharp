@@ -1,5 +1,7 @@
-﻿using BallScanner.Data.Tables;
+﻿using BallScanner.Data;
+using BallScanner.Data.Tables;
 using System;
+using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
 using System.Windows;

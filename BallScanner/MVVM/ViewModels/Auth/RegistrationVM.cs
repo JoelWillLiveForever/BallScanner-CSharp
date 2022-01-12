@@ -120,7 +120,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
         {
             try
             {
-                using (AppDbContext dbContext = new AppDbContext())
+                AppDbContext dbContext = AppDbContext.GetInstance();
                 {
                     User newUser = new User(Surname, Name, Lastname, Smena_Number, Login, SHAService.ComputeSha256Hash(Password));
 
