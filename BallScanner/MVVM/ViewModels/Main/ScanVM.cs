@@ -1,4 +1,6 @@
-﻿using BallScanner.MVVM.Base;
+﻿using BallScanner.Data;
+using BallScanner.Data.Tables;
+using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Models.Main;
 using Microsoft.Win32;
@@ -322,6 +324,27 @@ namespace BallScanner.MVVM.ViewModels.Main
                                     AvgNumBlackPixels += obj.NumberOfBlackPixels;
                                 }
                                 AvgNumBlackPixels /= ImagesCount;
+
+                                // Сохранение данных в БД
+                                try
+                                {
+                                    using (AppDbContext dbContext = new AppDbContext())
+                                    {
+                                        Report newReport;
+                                        if (App.CurrentUser != null)
+                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, AvgNumBlackPixels); // admin or user
+                                        else
+                                            newReport = new Report(-1, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, AvgNumBlackPixels);  // superuser
+
+                                        dbContext.Reports.Add(newReport);
+                                        dbContext.SaveChanges();
+
+                                        //OnPropertyChanged("Reports");
+                                    }
+                                } catch (Exception ex)
+                                {
+                                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                }
                             }
                         };
                         worker_DownloadExecute.RunWorkerAsync();

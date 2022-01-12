@@ -1,7 +1,11 @@
-﻿using BallScanner.MVVM.Base;
+﻿using BallScanner.Data;
+using BallScanner.Data.Tables;
+using BallScanner.MVVM.Base;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 
 namespace BallScanner.MVVM.ViewModels.Main
 {
@@ -9,9 +13,38 @@ namespace BallScanner.MVVM.ViewModels.Main
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        public List<Report> Reports
+        {
+            get
+            {
+                try
+                {
+                    using (AppDbContext dbContext = new AppDbContext())
+                    {
+                        var list = dbContext.Reports.ToList();
+
+                        //for (int i = 0; i < list.Count; i++)
+                        //{
+                        //    list[i].Row_Number = i + 1;
+                        //}
+
+                        return list;
+                    }
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                }
+                return null;
+            }
+            set
+            {
+
+            }
+        }
+
         public DocumentsVM()
         {
-            Log.Info("Constructor called!");
+
         }
 
         public override void ChangePalette()

@@ -7,6 +7,7 @@ namespace BallScanner.Data
     {
         // Entities
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
 
         public AppDbContext() : base("DefaultConnection") { }
 

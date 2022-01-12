@@ -62,32 +62,32 @@
 
                 <!-- Table -->
                 <DataGrid Margin="0,7,0,0"
-                          ItemsSource="{Binding ElementName=Root, Path=DataContext.Data, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding ElementName=Root, Path=DataContext.Reports, UpdateSourceTrigger=PropertyChanged}"
                           AutoGenerateColumns="False">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№ п/п" 
                                             CellStyle="{StaticResource FirstColumnCell}"
-                                            Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                                            Binding="{Binding _id, UpdateSourceTrigger=PropertyChanged}"
                                             Width="0.5*" />
                         <DataGridTextColumn Header="Дата"
                                             Width="*" 
-                                            Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Фракция"
                                             Width="*"
-                                            Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding _fraction, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Номер партии"
                                             Width="*" 
-                                            Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding _partia_number, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Номер смены"
                                             Width="*" 
-                                            Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding Smena_Number, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Значение"
                                             Width="*" 
-                                            Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding _avg_black_pixels_value, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="Примечание"
                                             Width="*" 
-                                            Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                            Binding="{Binding _note, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
 
                 </DataGrid>
