@@ -36,7 +36,33 @@ namespace BallScanner.MVVM.ViewModels.Main
         public MenuVM()
         {
             Log.Info("Constructor called!");
-            SelectedPage = accountVM;
+
+            switch (Properties.Settings.Default.SelectedPage)
+            {
+                case 0:
+                    SelectedPage = accountManagmentVM;
+                    break;
+                case 1:
+                    SelectedPage = accountVM;
+                    break;
+                case 2:
+                    SelectedPage = scanVM;
+                    break;
+                case 3:
+                    SelectedPage = calibrateVM;
+                    break;
+                case 4:
+                    SelectedPage = documentsVM;
+                    break;
+                case 5:
+                    SelectedPage = settingsVM;
+                    break;
+                case 6:
+                    SelectedPage = aboutVM;
+                    break;
+
+            }
+            SelectedPage.ChangePalette();
 
             // Повесить команды на MenuButtonClick
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);

@@ -63,55 +63,61 @@
                                           TextAlignment="Center" />-->
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_AccountManagment}"
-                                         IconFill="#f48fb1"
+                                         IconFill="{DynamicResource Brush_Primary_Pink}"
                                          ContentStringFormat="{DynamicResource Text_AccountManagment}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="AccountManagment" 
                                          Margin="0"
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="AccountManagmentButton" />
                         
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Account}"
                                          IconFill="{DynamicResource Brush_Primary_Red}"
                                          ContentStringFormat="{DynamicResource Text_Account}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Account" 
-                                         IsChecked="True"
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="AccountButton" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Scan}"
                                          IconFill="{DynamicResource Brush_Primary_Orange}"
                                          ContentStringFormat="{DynamicResource Text_Scan}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Scan" 
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="ScanButton" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Calibrate}"
                                          IconFill="{DynamicResource Brush_Primary_Yellow}"
                                          ContentStringFormat="{DynamicResource Text_Calibrate}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Calibrate" 
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="CalibrateButton" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Documents}"
                                          IconFill="{DynamicResource Brush_Primary_Green}"
                                          ContentStringFormat="{DynamicResource Text_Documents}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Documents" 
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="DocumentsButton" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Settings}"
                                          IconFill="{DynamicResource Brush_Primary_Blue}"
                                          ContentStringFormat="{DynamicResource Text_Settings}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Settings" 
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="SettingsButton" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_About}"
                                          IconFill="{DynamicResource Brush_Primary_Purple}"
                                          ContentStringFormat="{DynamicResource Text_About}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="About" 
-                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                                         IsMinState="{DynamicResource IsMinStateForMenu}"
+                                         Name="AboutButton" />
 
                     </StackPanel>
                 </ScrollViewer>

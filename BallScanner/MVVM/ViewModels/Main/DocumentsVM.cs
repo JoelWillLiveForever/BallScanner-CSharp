@@ -60,15 +60,13 @@ namespace BallScanner.MVVM.ViewModels.Main
         public override void ChangePalette()
         {
             var app = (App)Application.Current;
-            app.CurrentPalette = Palettes.Green;
 
             if (Properties.Settings.Default.IsDarkTheme)
-                app.ChangeTheme(new Uri("Resources/Palettes/Green/Dark.xaml", UriKind.Relative),
-                                new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                app.ChangeTheme(new Uri("Resources/Palettes/Dark/Green.xaml", UriKind.Relative));
             else
-                app.ChangeTheme(new Uri("Resources/Palettes/Green/Light.xaml", UriKind.Relative),
-                                new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                app.ChangeTheme(new Uri("Resources/Palettes/Light/Green.xaml", UriKind.Relative));
 
+            Properties.Settings.Default.SelectedPage = 4;
             Properties.Settings.Default.Save();
         }
     }

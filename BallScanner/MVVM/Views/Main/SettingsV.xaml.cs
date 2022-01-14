@@ -22,31 +22,28 @@ namespace BallScanner.MVVM.Views.Main
             if (Properties.Settings.Default.IsDarkTheme) return;
 
             var app = (App)Application.Current;
-            switch (app.CurrentPalette)
+            switch (Properties.Settings.Default.SelectedPage)
             {
-                case Palettes.Red:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Red/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 0:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Pink.xaml", UriKind.Relative));
                     break;
-                case Palettes.Orange:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Orange/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 1:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Red.xaml", UriKind.Relative));
                     break;
-                case Palettes.Yellow:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Yellow/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 2:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Orange.xaml", UriKind.Relative));
                     break;
-                case Palettes.Green:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Green/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 3:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Yellow.xaml", UriKind.Relative));
                     break;
-                case Palettes.Blue:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Blue/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 4:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Green.xaml", UriKind.Relative));
                     break;
-                case Palettes.Purple:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Purple/Dark.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Dark.xaml", UriKind.Relative));
+                case 5:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Blue.xaml", UriKind.Relative));
+                    break;
+                case 6:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Dark/Purple.xaml", UriKind.Relative));
                     break;
             }
 
@@ -59,31 +56,28 @@ namespace BallScanner.MVVM.Views.Main
             if (!Properties.Settings.Default.IsDarkTheme) return;
 
             var app = (App)Application.Current;
-            switch (app.CurrentPalette)
+            switch (Properties.Settings.Default.SelectedPage)
             {
-                case Palettes.Red:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Red/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 0:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Pink.xaml", UriKind.Relative));
                     break;
-                case Palettes.Orange:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Orange/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 1:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Red.xaml", UriKind.Relative));
                     break;
-                case Palettes.Yellow:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Yellow/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 2:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Orange.xaml", UriKind.Relative));
                     break;
-                case Palettes.Green:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Green/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 3:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Yellow.xaml", UriKind.Relative));
                     break;
-                case Palettes.Blue:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Blue/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 4:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Green.xaml", UriKind.Relative));
                     break;
-                case Palettes.Purple:
-                    app.ChangeTheme(new Uri("Resources/Palettes/Purple/Light.xaml", UriKind.Relative),
-                        new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
+                case 5:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Blue.xaml", UriKind.Relative));
+                    break;
+                case 6:
+                    app.ChangeTheme(new Uri("Resources/Palettes/Light/Purple.xaml", UriKind.Relative));
                     break;
             }
 

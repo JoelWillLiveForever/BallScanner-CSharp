@@ -118,5 +118,17 @@ namespace BallScanner.Properties {
                 this["Partia_Number"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public byte SelectedPage {
+            get {
+                return ((byte)(this["SelectedPage"]));
+            }
+            set {
+                this["SelectedPage"] = value;
+            }
+        }
     }
 }

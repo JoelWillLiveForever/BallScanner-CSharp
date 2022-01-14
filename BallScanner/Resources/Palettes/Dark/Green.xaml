@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Background -->
+    <Color x:Key="Color_Background_Surface">#ff121212</Color>
+    <Color x:Key="Color_OnBackground_OnSurface">#ffffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_Background_Surface"
+                     Color="{StaticResource Color_Background_Surface}" />
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface"
+                     Color="{StaticResource Color_OnBackground_OnSurface}" />
+
+    <SolidColorBrush x:Key="Brush_Background_Primary"
+                     Color="{DynamicResource Color_Background_Primary}" />
+
+    <!-- Fixed colors -->
+    <Color x:Key="Color_Fixed_Surface_Overlay_08dp">#34ffffff</Color>
+    <Color x:Key="Color_Fixed_Surface_Overlay_12dp">#29ffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_Fixed_Surface_Overlay_08dp"
+                     Color="{StaticResource Color_Fixed_Surface_Overlay_08dp}" />
+    <SolidColorBrush x:Key="Brush_Fixed_Surface_Overlay_12dp"
+                     Color="{StaticResource Color_Fixed_Surface_Overlay_12dp}" />
+
+    <!-- Surface overlays levels -->
+    <Color x:Key="Color_Surface_Overlay_00dp">#00ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_01dp">#0dffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_02dp">#12ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_03dp">#14ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_04dp">#17ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_06dp">#1cffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_08dp">#1fffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_12dp">#24ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_16dp">#26ffffff</Color>
+    <Color x:Key="Color_Surface_Overlay_24dp">#29ffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_00dp"
+                     Color="{StaticResource Color_Surface_Overlay_00dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_01dp"
+                     Color="{StaticResource Color_Surface_Overlay_01dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_02dp"
+                     Color="{StaticResource Color_Surface_Overlay_02dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_03dp"
+                     Color="{StaticResource Color_Surface_Overlay_03dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_04dp"
+                     Color="{StaticResource Color_Surface_Overlay_04dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_06dp"
+                     Color="{StaticResource Color_Surface_Overlay_06dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_08dp"
+                     Color="{StaticResource Color_Surface_Overlay_08dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_12dp"
+                     Color="{StaticResource Color_Surface_Overlay_12dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_16dp"
+                     Color="{StaticResource Color_Surface_Overlay_16dp}" />
+    <SolidColorBrush x:Key="Brush_Surface_Overlay_24dp"
+                     Color="{StaticResource Color_Surface_Overlay_24dp}" />
+
+    <!-- Text priority -->
+    <Color x:Key="Color_OnBackground_OnSurface_Disabled">#61ffffff</Color>
+    <Color x:Key="Color_OnBackground_OnSurface_Medium">#99ffffff</Color>
+    <Color x:Key="Color_OnBackground_OnSurface_High">#deffffff</Color>
+
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_Disabled"
+                     Color="{StaticResource Color_OnBackground_OnSurface_Disabled}" />
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_Medium"
+                     Color="{StaticResource Color_OnBackground_OnSurface_Medium}" />
+    <SolidColorBrush x:Key="Brush_OnBackground_OnSurface_High"
+                     Color="{StaticResource Color_OnBackground_OnSurface_High}" />
+
+    <!-- Error -->
+    <Color x:Key="Color_Error">#ffcf6679</Color>
+    <Color x:Key="Color_OnError">#ff000000</Color>
+
+    <SolidColorBrush x:Key="Brush_Error"
+                     Color="{StaticResource Color_Error}" />
+    <SolidColorBrush x:Key="Brush_OnError"
+                     Color="{StaticResource Color_OnError}" />
+
+    <!-- Text priority for errors -->
+    <Color x:Key="Color_OnError_Disabled">#61000000</Color>
+    <Color x:Key="Color_OnError_Medium">#99000000</Color>
+    <Color x:Key="Color_OnError_High">#de000000</Color>
+
+    <SolidColorBrush x:Key="Brush_OnError_Disabled"
+                     Color="{StaticResource Color_OnError_Disabled}" />
+    <SolidColorBrush x:Key="Brush_OnError_Medium"
+                     Color="{StaticResource Color_OnError_Medium}" />
+    <SolidColorBrush x:Key="Brush_OnError_High"
+                     Color="{StaticResource Color_OnError_High}" />
+
+    <!-- Primary -->
+    <SolidColorBrush x:Key="Brush_Primary"
+                     Color="{DynamicResource Color_Primary}" />
+    <SolidColorBrush x:Key="Brush_OnPrimary"
+                     Color="{DynamicResource Color_OnPrimary}" />
+
+    <!-- Colors -->
+    <Color x:Key="Color_Primary_Pink">#fff48fb1</Color>
+    <Color x:Key="Color_Primary_Red">#ffef9a9a</Color>
+    <Color x:Key="Color_Primary_Orange">#ffffcc80</Color>
+    <Color x:Key="Color_Primary_Yellow">#fffff59d</Color>
+    <Color x:Key="Color_Primary_Green">#ffa5d6a7</Color>
+    <Color x:Key="Color_Primary_Blue">#ff90caf9</Color>
+    <Color x:Key="Color_Primary_Purple">#ffce93d8</Color>
+
+    <SolidColorBrush x:Key="Brush_Primary_Pink"
+                     Color="{StaticResource Color_Primary_Pink}" />
+    <SolidColorBrush x:Key="Brush_Primary_Red"
+                     Color="{StaticResource Color_Primary_Red}" />
+    <SolidColorBrush x:Key="Brush_Primary_Orange"
+                     Color="{StaticResource Color_Primary_Orange}" />
+    <SolidColorBrush x:Key="Brush_Primary_Yellow"
+                     Color="{StaticResource Color_Primary_Yellow}" />
+    <SolidColorBrush x:Key="Brush_Primary_Green"
+                     Color="{StaticResource Color_Primary_Green}" />
+    <SolidColorBrush x:Key="Brush_Primary_Blue"
+                     Color="{StaticResource Color_Primary_Blue}" />
+    <SolidColorBrush x:Key="Brush_Primary_Purple"
+                     Color="{StaticResource Color_Primary_Purple}" />
+
+    <SolidColorBrush x:Key="Brush_Primary_Overlay_24dp"
+                     Color="{DynamicResource Color_Primary_Overlay_24dp}" />
+
+    <!-- RadioButton background when "IsChecked" == True -->
+    <Color x:Key="Color_Background_Surface_Overlay_24dp">#29121212</Color>
+
+    <SolidColorBrush x:Key="Brush_Background_Overlay_24dp"
+                     Color="{StaticResource Color_Background_Surface_Overlay_24dp}" />
+    
+    
+    <!-- Green zone -->
+    <!-- Colors -->
+    <Color x:Key="Color_Primary">#ffa5d6a7</Color>
+    <Color x:Key="Color_Background_Primary">#14a5d6a7</Color>
+    <Color x:Key="Color_Primary_Overlay_24dp">#29a5d6a7</Color>
+
+    <Color x:Key="Color_Primary_Variant">#ff388e3c</Color>
+
+    <Color x:Key="Color_OnPrimary">#ff000000</Color>
+
+</ResourceDictionary>

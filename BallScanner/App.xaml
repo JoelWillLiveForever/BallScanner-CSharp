@@ -17,11 +17,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!-- Palette & Theme -->
+                <!-- Theme -->
                 <ResourceDictionary x:Name="ThemeDictionary">
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="Resources/Palettes/Red/Dark.xaml" />
-                        <ResourceDictionary Source="Resources/Palettes/Dark.xaml" />
+                        <ResourceDictionary Source="Resources/Palettes/Dark/Red.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
 

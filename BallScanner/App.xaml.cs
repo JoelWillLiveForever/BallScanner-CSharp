@@ -1,22 +1,21 @@
-﻿using BallScanner.Data;
-using BallScanner.Data.Tables;
+﻿using BallScanner.Data.Tables;
 using System;
-using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 
 namespace BallScanner
 {
-    public enum Palettes
-    {
-        Red,
-        Orange,
-        Yellow,
-        Green,
-        Blue,
-        Purple
-    }
+    //public enum Palettes
+    //{
+    //    Pink,
+    //    Red,
+    //    Orange,
+    //    Yellow,
+    //    Green,
+    //    Blue,
+    //    Purple
+    //}
 
     public partial class App : Application
     {
@@ -24,7 +23,6 @@ namespace BallScanner
         public static User CurrentUser { get; set; }
 
         private const string LANGUAGE_URI = "Resources/Languages/Language.";
-        public Palettes CurrentPalette = Palettes.Red;
 
         // Palette & Theme
         public ResourceDictionary ThemeDictionary
@@ -32,10 +30,9 @@ namespace BallScanner
             get => Resources.MergedDictionaries[0];
         }
 
-        public void ChangeTheme(Uri paletteUri, Uri themeUri)
+        public void ChangeTheme(Uri themeUri)
         {
             ThemeDictionary.MergedDictionaries.Clear();
-            ThemeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = paletteUri });
             ThemeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = themeUri });
         }
 
@@ -86,12 +83,57 @@ namespace BallScanner
         {
             Language = BallScanner.Properties.Settings.Default.Language;
 
-            if (!BallScanner.Properties.Settings.Default.IsDarkTheme)
-            {
-                var app = (App)Current;
-                app.ChangeTheme(new Uri("Resources/Palettes/Red/Light.xaml", UriKind.Relative),
-                            new Uri("Resources/Palettes/Light.xaml", UriKind.Relative));
-            }
+            var app = (App)Current;
+            if (BallScanner.Properties.Settings.Default.IsDarkTheme)
+                switch (BallScanner.Properties.Settings.Default.SelectedPage)
+                {
+                    case 0:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Pink.xaml", UriKind.Relative));
+                        break;
+                    case 1:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Red.xaml", UriKind.Relative));
+                        break;
+                    case 2:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Orange.xaml", UriKind.Relative));
+                        break;
+                    case 3:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Yellow.xaml", UriKind.Relative));
+                        break;
+                    case 4:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Green.xaml", UriKind.Relative));
+                        break;
+                    case 5:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Blue.xaml", UriKind.Relative));
+                        break;
+                    case 6:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Dark/Purple.xaml", UriKind.Relative));
+                        break;
+                }
+            else
+                switch (BallScanner.Properties.Settings.Default.SelectedPage)
+                {
+                    case 0:
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Pink.xaml", UriKind.Relative));
+                        break;                                     
+                    case 1:                                        
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Red.xaml", UriKind.Relative));
+                        break;                                     
+                    case 2:                                        
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Orange.xaml", UriKind.Relative));
+                        break;                                      
+                    case 3:                                         
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Yellow.xaml", UriKind.Relative));
+                        break;                                     
+                    case 4:                                        
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Green.xaml", UriKind.Relative));
+                        break;                                     
+                    case 5:                                        
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Blue.xaml", UriKind.Relative));
+                        break;                                    
+                    case 6:                                       
+                        app.ChangeTheme(new Uri("Resources/Palettes/Light/Purple.xaml", UriKind.Relative));
+                        break;
+                }
         }
 
         private void OnLoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
