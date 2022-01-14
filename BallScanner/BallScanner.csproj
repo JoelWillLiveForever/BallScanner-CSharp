@@ -149,6 +149,9 @@
     <Compile Include="MVVM\ViewModels\Auth\LoginVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\RegistrationVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\RootVM.cs" />
+    <Compile Include="MVVM\ViewModels\Edit\EditReportsVM.cs" />
+    <Compile Include="MVVM\ViewModels\Edit\EditUsersVM.cs" />
+    <Compile Include="MVVM\ViewModels\Edit\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\AboutVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\AccountVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\CalibrateVM.cs" />
@@ -396,6 +399,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVVM\Models\Auth\" />
+    <Folder Include="MVVM\Models\Edit\" />
+    <Folder Include="MVVM\Views\Edit\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

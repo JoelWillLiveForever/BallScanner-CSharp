@@ -6,12 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Linq;
+using BallScanner.MVVM.Commands;
 
 namespace BallScanner.MVVM.ViewModels.Main
 {
     public class DocumentsVM : PageVM
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
+        public RelayCommand OpenDialogWindowCommand { get; set; }
 
         public List<Report> Reports
         {
@@ -29,12 +32,28 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
             set
             {
+                //if (Reports == value) return;
 
+                //Reports = value;
+                //OnPropertyChanged(nameof(Reports));
             }
         }
 
         public DocumentsVM()
         {
+            OpenDialogWindowCommand = new RelayCommand(OpenDialogWindow);
+        }
+
+        public void UpdateDataGrid()
+        {
+            OnPropertyChanged(nameof(Reports));
+        }
+
+        private void OpenDialogWindow(object param)
+        {
+            Report data = param as Report;
+            int currentImageIndex = data._id;
+
 
         }
 

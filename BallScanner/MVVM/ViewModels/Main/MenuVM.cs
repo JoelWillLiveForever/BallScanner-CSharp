@@ -30,6 +30,8 @@ namespace BallScanner.MVVM.ViewModels.Main
         public static RelayCommand MenuButtonClick { get; set; }
         public static RelayCommand Logout_Command { get; set; }
 
+        public static RelayCommand Documents_UpdateDataGridCommand { get; set; }
+
         public MenuVM()
         {
             Log.Info("Constructor called!");
@@ -38,6 +40,13 @@ namespace BallScanner.MVVM.ViewModels.Main
             // Повесить команды на MenuButtonClick
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);
             Logout_Command = new RelayCommand(Logout);
+
+            Documents_UpdateDataGridCommand = new RelayCommand(UpdateDataGridInDocumentsVM);
+        }
+
+        private void UpdateDataGridInDocumentsVM(object param)
+        {
+            documentsVM.UpdateDataGrid();
         }
 
         private void OnMenuButtonClick(object param)

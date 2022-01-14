@@ -343,7 +343,9 @@ namespace BallScanner.MVVM.ViewModels.Main
                                         dbContext.Reports.Add(newReport);
                                         dbContext.SaveChanges();
 
-                                        //OnPropertyChanged("Reports");
+                                        // update datagrid in documents vm
+                                        if (MenuVM.Documents_UpdateDataGridCommand.CanExecute(null))
+                                            MenuVM.Documents_UpdateDataGridCommand.Execute(null);
                                     }
                                 } catch (Exception ex)
                                 {

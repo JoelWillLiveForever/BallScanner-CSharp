@@ -62,8 +62,15 @@
 
                 <!-- Table -->
                 <DataGrid Margin="0,7,0,0"
+                          IsSynchronizedWithCurrentItem="True"
                           ItemsSource="{Binding ElementName=Root, Path=DataContext.Reports, UpdateSourceTrigger=PropertyChanged}"
                           AutoGenerateColumns="False">
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick"
+                                      Command="{Binding ElementName=Root, Path=DataContext.OpenDialogWindowCommand}"
+                                      CommandParameter="{Binding ElementName=Root, Path=DataContext.Reports/}" />
+                    </DataGrid.InputBindings>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№ п/п" 
