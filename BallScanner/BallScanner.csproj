@@ -153,6 +153,7 @@
     <Compile Include="MVVM\ViewModels\Edit\EditUsersVM.cs" />
     <Compile Include="MVVM\ViewModels\Edit\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\AboutVM.cs" />
+    <Compile Include="MVVM\ViewModels\Main\AccountManagmentVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\AccountVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\CalibrateVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\DocumentsVM.cs" />
@@ -164,6 +165,18 @@
     <Compile Include="MVVM\ViewModels\TestVM.cs" />
     <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Edit\EditReportsV.xaml.cs">
+      <DependentUpon>EditReportsV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Edit\EditUsersV.xaml.cs">
+      <DependentUpon>EditUsersV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Edit\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Main\AccountManagmentV.xaml.cs">
+      <DependentUpon>AccountManagmentV.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\Main\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
@@ -213,6 +226,22 @@
     <Page Include="MVVM\Views\Auth\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MVVM\Views\Edit\EditReportsV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Edit\EditUsersV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Edit\RootV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Main\AccountManagmentV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\Main\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -400,7 +429,6 @@
   <ItemGroup>
     <Folder Include="MVVM\Models\Auth\" />
     <Folder Include="MVVM\Models\Edit\" />
-    <Folder Include="MVVM\Views\Edit\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

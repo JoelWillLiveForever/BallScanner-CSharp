@@ -21,14 +21,14 @@ namespace BallScanner.MVVM.Views.Main
             {
                 MyLogo.Visibility = System.Windows.Visibility.Collapsed;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Collapsed;
-                MyMenuContainer.Width = 40;
+                MyMenuContainer.Width = 40.0d;
 
                 MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandMore");
             } else
             {
                 MyLogo.Visibility = System.Windows.Visibility.Visible;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Visible;
-                MyMenuContainer.Width = 180;
+                MyMenuContainer.Width = double.NaN;
 
                 MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandLess");
             }

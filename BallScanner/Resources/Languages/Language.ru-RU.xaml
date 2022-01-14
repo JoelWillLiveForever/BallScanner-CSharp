@@ -6,6 +6,7 @@
     <sys:String x:Key="Text_Menu">Меню</sys:String>
     
     <!-- Пункты меню -->
+    <sys:String x:Key="Text_AccountManagment">Администрирование</sys:String>
     <sys:String x:Key="Text_Account">Аккаунт</sys:String>
     <sys:String x:Key="Text_Scan">Сканирование</sys:String>
     <sys:String x:Key="Text_Calibrate">Калибровка</sys:String>

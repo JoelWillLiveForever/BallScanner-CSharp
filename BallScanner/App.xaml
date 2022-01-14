@@ -5,6 +5,8 @@
              xmlns:v="clr-namespace:BallScanner.MVVM.Views"
              xmlns:avm="clr-namespace:BallScanner.MVVM.ViewModels.Auth"
              xmlns:av="clr-namespace:BallScanner.MVVM.Views.Auth"
+             xmlns:evm="clr-namespace:BallScanner.MVVM.ViewModels.Edit"
+             xmlns:ev="clr-namespace:BallScanner.MVVM.Views.Edit"
              xmlns:mvm="clr-namespace:BallScanner.MVVM.ViewModels.Main"
              xmlns:mv="clr-namespace:BallScanner.MVVM.Views.Main"
              StartupUri="MVVM/Views/Auth/RootV.xaml"
@@ -54,6 +56,19 @@
             <DataTemplate DataType="{x:Type vm:RootVM}">
                 <v:RootV />
             </DataTemplate>
+            
+            <!-- Edit -->
+            <DataTemplate DataType="{x:Type evm:RootVM}">
+                <ev:RootV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type evm:EditReportsVM}">
+                <ev:EditReportsV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type evm:EditUsersVM}">
+                <ev:EditUsersV />
+            </DataTemplate>
 
             <!-- Auth -->
             <DataTemplate DataType="{x:Type avm:RootVM}">
@@ -77,6 +92,10 @@
                 <mv:MenuV />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type mvm:AccountManagmentVM}">
+                <mv:AccountManagmentV />
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type mvm:AccountVM}">
                 <mv:AccountV />
             </DataTemplate>

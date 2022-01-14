@@ -17,11 +17,12 @@
                    LastChildFill="True"
                    Margin="10,0,10,10"
                    Name="MyMenuContainer"
-                   Width="180">
+                   Width="Auto">
 
             <Viewbox DockPanel.Dock="Top"
                      Child="{StaticResource Vector_Logo}"
                      Margin="12,0,12,8.7" 
+                     MaxWidth="180"
                      Name="MyLogo" />
 
             <joel:JustButton DockPanel.Dock="Bottom"
@@ -61,13 +62,20 @@
                         <!--<joel:BlockHeader Text="{DynamicResource Text_Menu}"
                                           TextAlignment="Center" />-->
 
+                        <joel:MenuButton Icon="{StaticResource Geometry_Icon_AccountManagment}"
+                                         IconFill="#f48fb1"
+                                         ContentStringFormat="{DynamicResource Text_AccountManagment}"
+                                         Command="{Binding MenuButtonClick}"
+                                         CommandParameter="AccountManagment" 
+                                         Margin="0"
+                                         IsMinState="{DynamicResource IsMinStateForMenu}" />
+                        
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Account}"
                                          IconFill="{DynamicResource Brush_Primary_Red}"
                                          ContentStringFormat="{DynamicResource Text_Account}"
                                          Command="{Binding MenuButtonClick}"
                                          CommandParameter="Account" 
                                          IsChecked="True"
-                                         Margin="0"
                                          IsMinState="{DynamicResource IsMinStateForMenu}" />
 
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Scan}"

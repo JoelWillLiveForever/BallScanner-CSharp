@@ -9,6 +9,7 @@ namespace BallScanner.MVVM.ViewModels.Main
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        private static readonly AccountManagmentVM accountManagmentVM = new AccountManagmentVM();
         private static readonly AccountVM accountVM = new AccountVM();
         private static readonly ScanVM scanVM = new ScanVM();
         private static readonly CalibrateVM calibrateVM = new CalibrateVM();
@@ -53,7 +54,10 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             string name = param as string;
 
-            if (name == "Account")
+            if (name == "AccountManagment" /*&& App.CurrentUser._access_level == 0*/)
+            {
+                SelectedPage = accountManagmentVM;
+            } else if (name == "Account")
             {
                 SelectedPage = accountVM;
             } else if (name == "Scan")
