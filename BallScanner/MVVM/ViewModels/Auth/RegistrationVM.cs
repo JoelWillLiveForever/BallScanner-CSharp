@@ -6,6 +6,7 @@ using Joel.Utils.Services;
 using NLog;
 using System;
 using System.Windows;
+using System.Linq;
 
 namespace BallScanner.MVVM.ViewModels.Auth
 {
@@ -66,8 +67,8 @@ namespace BallScanner.MVVM.ViewModels.Auth
             }
         }
 
-        private int _smena_number;
-        public int Smena_Number
+        private string _smena_number;
+        public string Smena_Number
         {
             get => _smena_number;
             set
@@ -120,15 +121,96 @@ namespace BallScanner.MVVM.ViewModels.Auth
         {
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
+                // Null surname
+                if (Surname == null || Surname.Equals("") || Surname.Length == 0)
                 {
-                    User newUser = new User(Surname, Name, Lastname, Smena_Number, Login, SHAService.ComputeSha256Hash(Password));
-
-                    dbContext.Users.Add(newUser);
-                    dbContext.SaveChanges();
-
-                    ChangeVM("login");
+                    MessageBox.Show("Вы не указали свою фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
                 }
+
+                // Null name
+                if (Name == null || Name.Equals("") || Name.Length == 0)
+                {
+                    MessageBox.Show("Вы не указали своё имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Null login
+                if (Login == null || Login.Equals("") || Login.Length == 0)
+                {
+                    MessageBox.Show("Вы не указали свой логин для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Null smena_number
+                if (Smena_Number == null || Smena_Number.Equals("") || Smena_Number.Length == 0)
+                {
+                    MessageBox.Show("Вы не указали номер своей смены!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Null password
+                if (Password == null || Password.Equals(""))
+                {
+                    MessageBox.Show("Вы не указали свой пароль для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Null password_check
+                if (Password_Check == null || Password_Check.Equals(""))
+                {
+                    MessageBox.Show("Вы не указали повтор пароля для проверки!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Bad password length or password_check length
+                if (Password.Length < 4 || Password_Check.Length < 4)
+                {
+                    MessageBox.Show("Длина пароля меньше 4-х символов!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Password equals password_check
+                if (!Password.Equals(Password_Check))
+                {
+                    MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // Smena_Number is number
+                int smena_number_value;
+                if (!int.TryParse(Smena_Number, out smena_number_value))
+                {
+                    if (Smena_Number.Length > int.MaxValue.ToString().Length)
+                        MessageBox.Show("Максимальный размер числа для номера смены равен " + int.MaxValue + ".", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    else
+                        MessageBox.Show("Номер смены должен состоять только из цифр!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                }
+
+                // init db connection
+                AppDbContext dbContext = AppDbContext.GetInstance();
+
+                // Check login free to use
+                var user = (from u in dbContext.Users
+                            where u._username == Login
+                            select u).FirstOrDefault();
+
+                if (user != null)
+                {
+                    MessageBox.Show("Пользователь с таким логином уже зарегистрирован!\nПожалуйста, выберите себе другой логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
+                } 
+
+                user = new User(Surname, Name, Lastname, smena_number_value, Login, SHAService.ComputeSha256Hash(Password));
+
+                dbContext.Users.Add(user);
+                dbContext.SaveChanges();
+
+                // Clear fields
+                Surname = Name = Lastname = Login = Smena_Number = Password = Password_Check = null;
+
+                ChangeVM("login");
             } catch (Exception ex)
             {
                 MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);

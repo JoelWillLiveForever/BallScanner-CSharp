@@ -56,7 +56,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
         {
             //Console.WriteLine("\nSHA " + SHAService.ComputeSha256Hash("\"C@5p&ww"));
 
-            if ((Login == null || Login.Length == 0 || Login == "") || (Password == null || Password.Length == 0 || Password == ""))
+            if ((Login == null || Login.Length == 0 || Login.Equals("")) || (Password == null || Password.Length == 0 || Password.Equals("")))
             {
                 MessageBox.Show("Укажите данные для входа!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
@@ -70,6 +70,9 @@ namespace BallScanner.MVVM.ViewModels.Auth
                 Window future = new Views.Main.RootV();
 
                 Application.Current.MainWindow = future;
+
+                // Clear fields
+                Login = Password = null;
 
                 future.Show();
                 old.Close();
@@ -98,13 +101,16 @@ namespace BallScanner.MVVM.ViewModels.Auth
                         }
 
                         App.CurrentUser = user;
-                        Console.WriteLine(user._surname);
+                        //Console.WriteLine(user._surname);
 
                         // open work window
                         Window old = Application.Current.MainWindow;
                         Window future = new Views.Main.RootV();
 
                         Application.Current.MainWindow = future;
+
+                        // Clear fields
+                        Login = Password = null;
 
                         future.Show();
                         old.Close();
