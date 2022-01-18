@@ -11,8 +11,8 @@ namespace Joel.Controls
 
         public string LabelText
         {
-            get { return (string)GetValue(LabelTextProperty); }
-            set { SetValue(LabelTextProperty, value); }
+            get => (string)GetValue(LabelTextProperty);
+            set => SetValue(LabelTextProperty, value);
         }
 
         static LabelTextBox()

@@ -94,17 +94,17 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <joel:LabelTextBox Grid.Column="0"
-                                       Height="29"
-                                       LabelText="* Пароль"
-                                       Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       Style="{StaticResource Style_Inside}" />
+                    <joel:LabelPasswordBox Grid.Column="0"
+                                           Height="29"
+                                           LabelText="* Пароль"
+                                           HiddenText="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource PasswordBox_Style}" />
 
-                    <joel:LabelTextBox Grid.Column="2"
-                                       Height="29"
-                                       LabelText="* Повторите пароль"
-                                       Text="{Binding Password_Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       Style="{StaticResource Style_Inside}" />
+                    <joel:LabelPasswordBox Grid.Column="2"
+                                           Height="29"
+                                           LabelText="* Повторите пароль"
+                                           HiddenText="{Binding Password_Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource PasswordBox_Style}" />
 
                 </Grid>
 

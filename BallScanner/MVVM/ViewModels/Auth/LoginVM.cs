@@ -81,6 +81,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
             }
             else
             {
+                Console.WriteLine("PASSWORD = " + Password);
                 string username = Login;
                 string password_hash = SHAService.ComputeSha256Hash(Password);
 

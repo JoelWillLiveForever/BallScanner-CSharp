@@ -45,11 +45,11 @@
                                    Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    Style="{StaticResource Style_Inside}" />
 
-                <joel:LabelTextBox Height="29"
-                                   Margin="0,7,0,0"
-                                   LabelText="Пароль"
-                                   Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Style="{StaticResource Style_Inside}" />
+                <joel:LabelPasswordBox Height="29"
+                                       Margin="0,7,0,0"
+                                       LabelText="Пароль"
+                                       HiddenText="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource PasswordBox_Style}" />
 
                 <Grid Margin="0,7,0,0"
                       Height="29">

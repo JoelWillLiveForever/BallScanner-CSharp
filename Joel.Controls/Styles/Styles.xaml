@@ -6,6 +6,7 @@
         <ResourceDictionary Source="/Joel.Controls;component/Styles/GridSplitter_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/LabelTextBox_Inside_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/ProgressBar_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Styles/PasswordBox_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/ScrollBar_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/ScrollViewer_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/Slider_Style.xaml" />
