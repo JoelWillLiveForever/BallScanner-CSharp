@@ -10,8 +10,8 @@
              xmlns:mvm="clr-namespace:BallScanner.MVVM.ViewModels.Main"
              xmlns:mv="clr-namespace:BallScanner.MVVM.Views.Main"
              StartupUri="MVVM/Views/Auth/RootV.xaml"
-             LoadCompleted="OnLoadCompleted"
-             Startup="OnStartup">
+             Startup="OnStartup"
+             Exit="OnExit">
     
     <Application.Resources>
         <ResourceDictionary>

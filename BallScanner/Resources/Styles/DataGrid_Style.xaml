@@ -53,6 +53,8 @@
 
     <!--Style and template for the DataGrid.-->
     <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="CanUserAddRows"
+                Value="False" />
         <Setter Property="HorizontalScrollBarVisibility"
                 Value="Auto" />
         <Setter Property="VerticalScrollBarVisibility"
@@ -62,7 +64,7 @@
         <!--<Setter Property="Background"
                 Value="Transparent" />-->
         <Setter Property="IsReadOnly"
-                Value="True" />
+                Value="False" />
         <Setter Property="Foreground"
                 Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
         <!--<Setter Property="BorderBrush"
@@ -145,7 +147,7 @@
 
                                         <ScrollBar Grid.Row="1"
                                                    Grid.Column="1"
-                                                   Margin="-10,0,0,0"
+                                                   Margin="-12,0,0,0"
                                                    x:Name="PART_VerticalScrollBar"
                                                    Orientation="Vertical"
                                                    ViewportSize="{TemplateBinding ViewportHeight}"

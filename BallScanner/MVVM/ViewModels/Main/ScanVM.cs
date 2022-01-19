@@ -335,10 +335,11 @@ namespace BallScanner.MVVM.ViewModels.Main
                                     AppDbContext dbContext = AppDbContext.GetInstance();
                                     {
                                         Report newReport;
+
                                         if (App.CurrentUser != null)
-                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels); // admin or user
+                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Date.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels); // admin or user
                                         else
-                                            newReport = new Report(-1, DateTime.Now.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels);  // superuser
+                                            newReport = new Report(-1, DateTime.Now.Date.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels);  // superuser
 
                                         dbContext.Reports.Add(newReport);
                                         dbContext.SaveChanges();

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows;
+using System.Linq;
 //using System.Data.Entity;
 //using System.Windows;
 
@@ -9,9 +12,46 @@ namespace BallScanner.Data.Tables
     //[Table("Reports")]
     public class Report
     {
+        //public event PropertyChangedEventHandler PropertyChanged;
+
         [Key]
         public int _id { get; set; }
         public double _date { get; set; }
+        public string _fraction { get; set; }
+        public string _partia_number { get; set; }
+        public long _avg_black_pixels_value { get; set; }
+        public string _note { get; set; }
+
+        //private string _my_note;
+        //public string _note
+        //{
+        //    get => _my_note;
+        //    set
+        //    {
+        //        Console.WriteLine("ИЗМЕНЕНО!");
+        //        if (_my_note == value) return;
+
+        //        _my_note = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs(nameof(_note)));
+
+        //        try
+        //        {
+        //            AppDbContext dbContext = AppDbContext.GetInstance();
+        //            dbContext.SaveChanges();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+        //        }
+        //    }
+        //}
+
+        // foreign key
+        [ForeignKey("User")]
+        public int _user_id { get; set; }
+        public virtual User User { get; set; }
+
         public string Date
         {
             get
@@ -21,31 +61,16 @@ namespace BallScanner.Data.Tables
             }
         }
 
-        public string _fraction { get; set; }
-        public string _partia_number { get; set; }
-        public long _avg_black_pixels_value { get; set; }
-        public string _note { get; set; }
-
-        // foreign key
-        [ForeignKey("User")]
-        public int _user_id { get; set; }
-        public virtual User User { get; set; }
-        //public int Smena_Number
+        //public string Note
         //{
-        //    get
+        //    get => _note;
+        //    set
         //    {
-        //        try
-        //        {
-        //            using (AppDbContext db = new AppDbContext())
-        //            {
-        //                db.Users.Load();
-        //                return User._smena_number;
-        //            }
-        //        } catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-        //        }
-        //        return -1;
+        //        if (_note == value) return;
+
+        //        _note = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs(nameof(Note)));
         //    }
         //}
 

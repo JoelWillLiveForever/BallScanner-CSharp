@@ -1,7 +1,10 @@
-﻿using BallScanner.Data.Tables;
+﻿using BallScanner.Data;
+using BallScanner.Data.Tables;
 using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace BallScanner
@@ -81,6 +84,21 @@ namespace BallScanner
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Task.Run(() =>
+            {
+                try
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+
+                    dbContext.Users.Load();
+                    dbContext.Reports.Load();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                }
+            });
+
             Language = BallScanner.Properties.Settings.Default.Language;
 
             var app = (App)Current;
@@ -136,9 +154,17 @@ namespace BallScanner
                 }
         }
 
-        private void OnLoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void OnExit(object sender, ExitEventArgs e)
         {
-
+            try
+            {
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
         }
     }
 }
