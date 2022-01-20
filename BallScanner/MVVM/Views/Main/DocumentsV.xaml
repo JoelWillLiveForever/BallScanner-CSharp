@@ -35,9 +35,8 @@
                                           MinWidth="150" />
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox>
-                        <ComboBoxItem IsSelected="True"
-                                      Content="Дата" />
+                    <ComboBox SelectedIndex="{Binding Selected_Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBoxItem Content="Дата" />
                         <ComboBoxItem Content="Фракция" />
                         <ComboBoxItem Content="Номер партии" />
                         <ComboBoxItem Content="Номер смены" />

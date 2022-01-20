@@ -1,23 +1,24 @@
 ﻿using System;
-//using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//using System.Windows;
-//using System.Linq;
-//using System.Timers;
-//using System.Threading.Tasks;
+using System.Windows;
+using System.Linq;
+using System.Timers;
+using System.Threading.Tasks;
 
-//using System.Data.Entity;
-//using System.Windows;
-//using System.ComponentModel;
+using System.Data.Entity;
+using System.Windows;
+using System.ComponentModel;
 
 namespace BallScanner.Data.Tables
 {
     //[Table("Reports")]
     public class Report
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //private static Timer timer = new Timer(5000);
+        public event PropertyChangedEventHandler PropertyChanged;
+        private Timer timer = new Timer(5000) { Enabled = false };
+
+        private bool isInit = true;
 
         [Key]
         public int _id { get; set; }
@@ -25,25 +26,31 @@ namespace BallScanner.Data.Tables
         public string _fraction { get; set; }
         public string _partia_number { get; set; }
         public long _avg_black_pixels_value { get; set; }
-        public string _note { get; set; }
+        //public string _note { get; set; }
 
-        //private string _my_note;
-        //public string _note
-        //{
-        //    get => _my_note;
-        //    set
-        //    {
-        //        if (_my_note == value) return;
+        private string _my_note;
+        public string _note
+        {
+            get => _my_note;
+            set
+            {
+                if (_my_note == value) return;
 
-        //        _my_note = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs(nameof(_note)));
+                _my_note = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(_note)));
 
-        //        // save info when 5 sec no activity
-        //        if (timer.Enabled) timer.Stop();
-        //        timer.Start();
-        //    }
-        //}
+                if (!isInit)
+                {
+                    // save info when 5 sec no activity
+                    timer.Stop();
+                    timer.Start();
+                } else
+                {
+                    isInit = false;
+                }
+            }
+        }
 
         // foreign key
         [ForeignKey("User")]
@@ -70,7 +77,7 @@ namespace BallScanner.Data.Tables
 
         public Report() 
         {
-            //timer.Elapsed += new ElapsedEventHandler(OnSaveDbContext);
+            timer.Elapsed += new ElapsedEventHandler(OnSaveDbContext);
         }
 
         public Report(int user_id, double date, string fraction, string partia_number, long avg_black_pixels_value)
@@ -84,22 +91,21 @@ namespace BallScanner.Data.Tables
             _note = null;
         }
 
-        //private static async void OnSaveDbContext(object source, ElapsedEventArgs e)
-        //{
-        //    await Task.Run(() =>
-        //    {
-        //        try
-        //        {
-        //            AppDbContext dbContext = AppDbContext.GetInstance();
-        //            dbContext.SaveChanges();
+        private void OnSaveDbContext(object source, ElapsedEventArgs e)
+        {
+            timer.Stop();
 
-        //            Console.WriteLine("SAVED!");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-        //        }
-        //    });
-        //}
+            try
+            {
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
+
+                Console.WriteLine("SAVED!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
+        }
     }
 }
