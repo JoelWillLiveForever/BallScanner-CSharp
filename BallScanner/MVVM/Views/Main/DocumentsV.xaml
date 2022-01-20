@@ -26,11 +26,13 @@
                 <Grid Margin="0,7,0,0"
                       Height="29">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="0.25*"
+                                          MinWidth="150" />
                         <ColumnDefinition Width="7" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="7" />
-                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="0.25*"
+                                          MinWidth="150" />
                     </Grid.ColumnDefinitions>
 
                     <ComboBox>

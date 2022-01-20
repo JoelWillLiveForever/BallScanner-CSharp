@@ -29,7 +29,7 @@
         <Setter Property="Foreground"
                 Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
         <Setter Property="FontSize"
-                Value="14" />
+                Value="12" />
         <Setter Property="FontWeight"
                 Value="SemiBold" />
         <Setter Property="FontFamily"

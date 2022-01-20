@@ -30,8 +30,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                 _reports = value;
                 OnPropertyChanged(nameof(Reports));
-
-                Console.WriteLine("EDIT!");
             }
         }
 
@@ -91,10 +89,7 @@ namespace BallScanner.MVVM.ViewModels.Main
                 DateTime searchDateTime;
 
                 if (DateTime.TryParseExact(Search_Value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out searchDateTime))
-                {
-                    Console.WriteLine(searchDateTime.ToString());
                     date = searchDateTime.Date.Subtract(DateTime.MinValue).TotalMilliseconds;
-                }
 
                 var search_result = (from report in dbContext.Reports
                                      where report._fraction.Equals(Search_Value) || report._partia_number.Equals(Search_Value) || report._date == date || report.User._smena_number.ToString().Equals(Search_Value) || report._avg_black_pixels_value.ToString().Equals(Search_Value)
@@ -121,12 +116,6 @@ namespace BallScanner.MVVM.ViewModels.Main
             catch (Exception ex)
             {
                 MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-            }
-
-            Console.WriteLine("ВСЕ НОУТЫ:");
-            foreach (var item in Reports)
-            {
-                Console.WriteLine(item._note);
             }
         }
 

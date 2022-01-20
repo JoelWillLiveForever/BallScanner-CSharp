@@ -2,6 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Joel.Controls;component/Styles/Button_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Styles/ComboBox_Style.xaml" />
         <!--<ResourceDictionary Source="/Joel.Controls;component/Styles/DataGrid_Style.xaml" />-->
         <ResourceDictionary Source="/Joel.Controls;component/Styles/GridSplitter_Style.xaml" />
         <ResourceDictionary Source="/Joel.Controls;component/Styles/LabelTextBox_Inside_Style.xaml" />

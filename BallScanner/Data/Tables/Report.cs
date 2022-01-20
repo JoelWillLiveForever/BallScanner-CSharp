@@ -1,11 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
+//using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Windows;
-using System.Linq;
+//using System.Windows;
+//using System.Linq;
+//using System.Timers;
+//using System.Threading.Tasks;
+
 //using System.Data.Entity;
 //using System.Windows;
+//using System.ComponentModel;
 
 namespace BallScanner.Data.Tables
 {
@@ -13,6 +17,7 @@ namespace BallScanner.Data.Tables
     public class Report
     {
         //public event PropertyChangedEventHandler PropertyChanged;
+        //private static Timer timer = new Timer(5000);
 
         [Key]
         public int _id { get; set; }
@@ -28,22 +33,15 @@ namespace BallScanner.Data.Tables
         //    get => _my_note;
         //    set
         //    {
-        //        Console.WriteLine("ИЗМЕНЕНО!");
         //        if (_my_note == value) return;
 
         //        _my_note = value;
         //        if (PropertyChanged != null)
         //            PropertyChanged(this, new PropertyChangedEventArgs(nameof(_note)));
 
-        //        try
-        //        {
-        //            AppDbContext dbContext = AppDbContext.GetInstance();
-        //            dbContext.SaveChanges();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-        //        }
+        //        // save info when 5 sec no activity
+        //        if (timer.Enabled) timer.Stop();
+        //        timer.Start();
         //    }
         //}
 
@@ -54,11 +52,7 @@ namespace BallScanner.Data.Tables
 
         public string Date
         {
-            get
-            {
-                Console.WriteLine("\n\n\nDate: " + _date);
-                return DateTime.MinValue.AddMilliseconds(_date).ToString("dd.MM.yyyy");
-            }
+            get => DateTime.MinValue.AddMilliseconds(_date).ToString("dd.MM.yyyy");
         }
 
         //public string Note
@@ -74,7 +68,10 @@ namespace BallScanner.Data.Tables
         //    }
         //}
 
-        public Report() { }
+        public Report() 
+        {
+            //timer.Elapsed += new ElapsedEventHandler(OnSaveDbContext);
+        }
 
         public Report(int user_id, double date, string fraction, string partia_number, long avg_black_pixels_value)
         {
@@ -86,5 +83,23 @@ namespace BallScanner.Data.Tables
 
             _note = null;
         }
+
+        //private static async void OnSaveDbContext(object source, ElapsedEventArgs e)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        try
+        //        {
+        //            AppDbContext dbContext = AppDbContext.GetInstance();
+        //            dbContext.SaveChanges();
+
+        //            Console.WriteLine("SAVED!");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+        //        }
+        //    });
+        //}
     }
 }

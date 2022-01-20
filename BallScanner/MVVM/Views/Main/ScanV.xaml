@@ -485,16 +485,20 @@
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
+                                                    IsReadOnly="True"
                                                     CellStyle="{StaticResource FirstColumnCell}"
                                                     Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
                                                     Width="0.5*" />
                                 <DataGridTextColumn Header="Имя файла"
+                                                    IsReadOnly="True"
                                                     Width="*" 
                                                     Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                                 <DataGridTextColumn Header="Кол-во ч/п"
+                                                    IsReadOnly="True"
                                                     Width="0.5*"
                                                     Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
                                 <DataGridTextColumn Header="Сорт"
+                                                    IsReadOnly="True"
                                                     Width="0.5*" 
                                                     Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                             </DataGrid.Columns>
@@ -999,16 +1003,20 @@
                             
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№ п/п" 
+                                                    IsReadOnly="True"
                                                     CellStyle="{StaticResource FirstColumnCell}"
                                                     Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
                                                     Width="0.5*" />
                                 <DataGridTextColumn Header="Имя файла"
+                                                    IsReadOnly="True"
                                                     Width="*" 
                                                     Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                                 <DataGridTextColumn Header="Кол-во ч/п"
+                                                    IsReadOnly="True"
                                                     Width="0.5*"
                                                     Binding="{Binding NumberOfBlackPixels, UpdateSourceTrigger=PropertyChanged}" />
                                 <DataGridTextColumn Header="Сорт"
+                                                    IsReadOnly="True"
                                                     Width="0.5*" 
                                                     Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
                             </DataGrid.Columns>
