@@ -69,7 +69,9 @@
                                          CommandParameter="AccountManagment" 
                                          Margin="0"
                                          IsMinState="{DynamicResource IsMinStateForMenu}"
-                                         Name="AccountManagmentButton" />
+                                         Name="AccountManagmentButton"
+                                         Visibility="Collapsed"
+                                         IsEnabled="False" />
                         
                         <joel:MenuButton Icon="{StaticResource Geometry_Icon_Account}"
                                          IconFill="{DynamicResource Brush_Primary_Red}"

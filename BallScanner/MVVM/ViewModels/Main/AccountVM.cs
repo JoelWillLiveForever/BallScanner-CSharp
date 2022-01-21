@@ -38,12 +38,16 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             get
             {
+                // superuser
+                if (App.CurrentUser == null)
+                    return "Суперпользователь";
+
                 switch (App.CurrentUser._access_level)
                 {
-                    case 0: return "Суперпользователь";
-                    case 1: return "Администратор";
-                    case 2: return "Пользователь";
+                    case 0: return "Пользователь";  // user
+                    case 1: return "Администратор"; // admin
                 }
+
                 return "Не определён";
             }
         }

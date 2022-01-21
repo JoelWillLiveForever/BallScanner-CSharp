@@ -6,6 +6,12 @@
     <Style x:Key="Style_Inside"
            TargetType="{x:Type local:LabelTextBox}">
 
+        <Setter Property="HorizontalScrollBarVisibility"
+                Value="Hidden" />
+        <Setter Property="MaxLines"
+                Value="1" />
+        <Setter Property="MinLines"
+                Value="1" />
         <Setter Property="LabelText"
                 Value="label" />
         <Setter Property="SnapsToDevicePixels"

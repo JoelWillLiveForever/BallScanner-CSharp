@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BallScanner.MVVM.Views.Edit
 {
-    /// <summary>
-    /// Interaction logic for EditReportsV.xaml
-    /// </summary>
     public partial class EditReportsV : UserControl
     {
         public EditReportsV()
         {
             InitializeComponent();
+
+            if (App.CurrentUser == null || App.CurrentUser._access_level == 1)
+            {
+                DeleteButton.Visibility = Visibility.Visible;
+                DeleteButton.IsEnabled = true;
+            } else
+            {
+                DeleteButton.Visibility = Visibility.Collapsed;
+                DeleteButton.IsEnabled = false;
+            }
         }
     }
 }

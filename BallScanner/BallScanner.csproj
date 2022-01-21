@@ -161,11 +161,9 @@
     <Compile Include="MVVM\ViewModels\Main\CalibrateVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\DocumentsVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\RootVM.cs" />
-    <Compile Include="MVVM\ViewModels\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\MenuVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\ScanVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\SettingsVM.cs" />
-    <Compile Include="MVVM\ViewModels\TestVM.cs" />
     <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
@@ -184,9 +182,6 @@
     <Compile Include="MVVM\Views\Main\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Views\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\Views\Main\AboutV.xaml.cs">
       <DependentUpon>AboutV.xaml</DependentUpon>
     </Compile>
@@ -198,9 +193,6 @@
     </Compile>
     <Compile Include="MVVM\Views\Main\DocumentsV.xaml.cs">
       <DependentUpon>DocumentsV.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\Views\RootV.xaml.cs">
-      <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\Main\MenuV.xaml.cs">
       <DependentUpon>MenuV.xaml</DependentUpon>
@@ -216,9 +208,6 @@
     </Compile>
     <Compile Include="MVVM\Views\Auth\RegistrationV.xaml.cs">
       <DependentUpon>RegistrationV.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\Views\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
     <Compile Include="App.xaml.cs">
@@ -250,10 +239,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MVVM\Views\Test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\Views\Main\AboutV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -267,10 +252,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\Main\DocumentsV.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MVVM\Views\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -291,10 +272,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\Auth\RegistrationV.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\Views\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -461,11 +438,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Fonts\Montserrat_Alternates\MontserratAlternates-Medium.ttf" />
+    <Resource Include="Resources\Fonts\Montserrat_Alternates\OFL.txt" />
+    <Resource Include="Resources\Fonts\Montserrat\OFL.txt" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
+    <Resource Include="Resources\Fonts\Montserrat\Montserrat-SemiBold.ttf" />
     <Resource Include="favicon.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -501,10 +482,6 @@
     <ProjectReference Include="..\Joel.Controls\Joel.Controls.csproj">
       <Project>{a98ae7dd-5752-4ff0-b74d-d6e185446b88}</Project>
       <Name>Joel.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Joel.Resources\Joel.Resources.csproj">
-      <Project>{df582fda-4f9e-498e-9a43-d83c50ee78dc}</Project>
-      <Name>Joel.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Joel.Utils\Joel.Utils.csproj">
       <Project>{065df014-e977-491f-b3cd-b8c2c017b0bf}</Project>

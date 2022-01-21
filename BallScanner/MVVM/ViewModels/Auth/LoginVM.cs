@@ -6,7 +6,6 @@ using Joel.Utils.Services;
 using System.Linq;
 using BallScanner.Data;
 using BallScanner.Data.Tables;
-using System.Data.Entity;
 using System;
 
 namespace BallScanner.MVVM.ViewModels.Auth
@@ -63,7 +62,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
             }
 
             // superuser rights
-            if (SHAService.ComputeSha256Hash(Login) == "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" && SHAService.ComputeSha256Hash(Password) == "1001540fac666406992a208c9ad35851f9e70df938d7fde716618da6602cc2f4")
+            if (SHAService.ComputeSha256Hash(Login) == "4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2" && SHAService.ComputeSha256Hash(Password) == "1001540fac666406992a208c9ad35851f9e70df938d7fde716618da6602cc2f4")
             {
                 // open work window
                 Window old = Application.Current.MainWindow;
@@ -81,7 +80,6 @@ namespace BallScanner.MVVM.ViewModels.Auth
             }
             else
             {
-                Console.WriteLine("PASSWORD = " + Password);
                 string username = Login;
                 string password_hash = SHAService.ComputeSha256Hash(Password);
 
@@ -94,6 +92,9 @@ namespace BallScanner.MVVM.ViewModels.Auth
                         User user = dbContext.Users
                             .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash))
                             .FirstOrDefault();
+
+                        if (user._is_active != 1)
+                            user = null;
 
                         if (user == null)
                         {

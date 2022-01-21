@@ -10,7 +10,7 @@
     <sys:String x:Key="Text_Account">Аккаунт</sys:String>
     <sys:String x:Key="Text_Scan">Сканирование</sys:String>
     <sys:String x:Key="Text_Calibrate">Калибровка</sys:String>
-    <sys:String x:Key="Text_Documents">Документы</sys:String>
+    <sys:String x:Key="Text_Documents">Отчёты</sys:String>
     <sys:String x:Key="Text_Settings">Настройки</sys:String>
     <sys:String x:Key="Text_About">О программе</sys:String>
 

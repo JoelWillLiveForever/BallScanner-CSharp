@@ -20,6 +20,19 @@ namespace BallScanner.MVVM.Views.Auth
             Build_Field.Text = "Build " + buildDateTime.ToString("dd-MM-yyyy");
         }
 
+        //private void Login_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    Console.WriteLine("ВВОД ТЕКСТА!");
+
+        //    Login.SelectionLength = Login.Text.Length;
+        //    Login.SelectionStart = Login.Text.Length;
+
+        //    Login.CaretIndex = Login.Text.Length;
+        //    var rect = Login.GetRectFromCharacterIndex(Login.CaretIndex);
+        //    Login.ScrollToHorizontalOffset(rect.Right);
+        //    Login.ScrollToHome();
+        //}
+
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{
         //    //Application.Current.MainWindow = null;

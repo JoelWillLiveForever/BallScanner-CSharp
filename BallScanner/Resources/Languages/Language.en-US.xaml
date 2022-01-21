@@ -10,7 +10,7 @@
     <sys:String x:Key="Text_Account">Account</sys:String>
     <sys:String x:Key="Text_Scan">Scan</sys:String>
     <sys:String x:Key="Text_Calibrate">Calibration</sys:String>
-    <sys:String x:Key="Text_Documents">Documents</sys:String>
+    <sys:String x:Key="Text_Documents">Reports</sys:String>
     <sys:String x:Key="Text_Settings">Settings</sys:String>
     <sys:String x:Key="Text_About">About</sys:String>
     

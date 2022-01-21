@@ -3,10 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BallScanner.MVVM.Views.Edit"
+             xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+    
+    <Border Background="{StaticResource Brush_Surface_Overlay_01dp}">
+        <DockPanel LastChildFill="False"
+                   Margin="10">
+
+            <joel:BlockHeader Text="{Binding Title_Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                              TextAlignment="Center"
+                              DockPanel.Dock="Top" />
+
+            <Grid Height="59"
+                  Margin="0,7,0,0"
+                  DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <joel:LabelTextBox Grid.Column="0"
+                                   LabelText="Фамилия"
+                                   Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="2"
+                                   LabelText="Имя"
+                                   Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="4"
+                                   LabelText="Отчество"
+                                   Text="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+
+            <Grid Height="59"
+                  Margin="0,7,0,0"
+                  DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <joel:LabelTextBox Grid.Column="0"
+                                   LabelText="Логин"
+                                   Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="2"
+                                   LabelText="Номер смены"
+                                   Text="{Binding Smena_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+
+            <Grid Height="59"
+                  Margin="0,7,0,0"
+                  DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <joel:LabelTextBox Grid.Column="0"
+                                   LabelText="Уровень доступа"
+                                   Text="{Binding Access_Level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="2"
+                                   LabelText="Статус аккаунта"
+                                   Text="{Binding Is_Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+
+            <Button Height="29"
+                    Margin="0,7,0,0"
+                    Name="DeleteButton"
+                    DockPanel.Dock="Bottom"
+                    Command="{Binding DeleteReportCommand}"
+                    Visibility="Visible"
+                    IsEnabled="True"
+                    Content="Удалить" />
+
+        </DockPanel>
+    </Border>
 </UserControl>

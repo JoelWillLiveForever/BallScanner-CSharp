@@ -73,6 +73,12 @@
     </LinearGradientBrush>-->
 
     <Style TargetType="{x:Type TextBox}">
+        <Setter Property="HorizontalScrollBarVisibility"
+                Value="Hidden" />
+        <Setter Property="MaxLines"
+                Value="1" />
+        <Setter Property="MinLines"
+                Value="1" />
         <Setter Property="SnapsToDevicePixels"
                 Value="True" />
         <Setter Property="OverridesDefaultStyle"
@@ -94,7 +100,7 @@
         <Setter Property="Foreground"
                 Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
         <Setter Property="FontSize"
-                Value="14" />
+                Value="12" />
         <Setter Property="FontWeight"
                 Value="SemiBold" />
         <Setter Property="FontFamily"

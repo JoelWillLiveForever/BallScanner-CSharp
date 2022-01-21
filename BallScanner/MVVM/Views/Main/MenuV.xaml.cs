@@ -1,20 +1,53 @@
-﻿using System.Windows.Controls;
+﻿using BallScanner.MVVM.ViewModels.Main;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace BallScanner.MVVM.Views.Main
 {
     public partial class MenuV : UserControl
     {
-        private bool isMinState = false;
-
         public MenuV()
         {
             InitializeComponent();
+            ChangeMenuState(true);
+
+            if (App.CurrentUser == null)
+            {
+                AccountManagmentButton.Visibility = Visibility.Visible;
+                AccountManagmentButton.IsEnabled = true;
+            } else
+            {
+                switch (App.CurrentUser._access_level)
+                {
+                    case 0:
+                        // user
+                        AccountButton.Margin = new Thickness(0,0,0,0);
+                        break;
+                    case 1:
+                        // admin
+                        AccountButton.Margin = new Thickness(0, 7, 0, 0);
+
+                        AccountManagmentButton.Visibility = Visibility.Visible;
+                        AccountManagmentButton.IsEnabled = true;
+                        break;
+                }
+            }
 
             switch (Properties.Settings.Default.SelectedPage)
             {
                 case 0:
-                    AccountManagmentButton.IsChecked = true;
+                    if (App.CurrentUser == null)
+                        AccountManagmentButton.IsChecked = true;
+                    else if (App.CurrentUser._access_level == 1)
+                        AccountManagmentButton.IsChecked = true;
+                    else
+                    {
+                        if (MenuVM.MenuButtonClick.CanExecute("Account"))
+                            MenuVM.MenuButtonClick.Execute("Account");
+
+                        AccountButton.IsChecked = true;
+                    }
                     break;
                 case 1:
                     AccountButton.IsChecked = true;
@@ -39,23 +72,34 @@ namespace BallScanner.MVVM.Views.Main
 
         private void MyCollapseButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            isMinState = !isMinState;
-            Resources["IsMinStateForMenu"] = isMinState;
+            ChangeMenuState(false);
+        }
 
-            if (isMinState)
+        private void ChangeMenuState(bool isInit)
+        {
+            if (!isInit)
+            {
+                Properties.Settings.Default.IsSmallMenuState = !Properties.Settings.Default.IsSmallMenuState;
+                Properties.Settings.Default.Save();
+            }
+
+            Resources["IsMinStateForMenu"] = Properties.Settings.Default.IsSmallMenuState;
+
+            if (Properties.Settings.Default.IsSmallMenuState)
             {
                 MyLogo.Visibility = System.Windows.Visibility.Collapsed;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Collapsed;
                 MyMenuContainer.Width = 40.0d;
 
-                MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandMore");
-            } else
+                MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandMore");
+            }
+            else
             {
                 MyLogo.Visibility = System.Windows.Visibility.Visible;
                 MyBlockHeader.Visibility = System.Windows.Visibility.Visible;
                 MyMenuContainer.Width = double.NaN;
 
-                MyCollapseButton.Icon = (Geometry) FindResource("Geometry_Icon_ExpandLess");
+                MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandLess");
             }
         }
     }

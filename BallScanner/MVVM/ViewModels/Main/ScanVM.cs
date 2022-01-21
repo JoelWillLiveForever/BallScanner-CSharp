@@ -22,10 +22,14 @@ namespace BallScanner.MVVM.ViewModels.Main
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        // Локкер
+        private readonly object global_locker = new object();
+
         // Команды
         public static RelayCommand PerformAction { get; set; }
 
         public RelayCommand ChangeImageCommand { get; set; }
+        public RelayCommand SaveReportCommand { get; set; }
 
         // Декодирование изображения, если пикселей на экране меньше разрешения картинки
         private int _decodePixelHeight;
@@ -94,7 +98,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             get => Properties.Settings.Default.Threshold;
         }
 
-        private bool isDragging;
+        //private bool isDragging;
 
         // Первое и второе пороговые значения
         public int FirstThreshold
@@ -107,13 +111,48 @@ namespace BallScanner.MVVM.ViewModels.Main
             get => Properties.Settings.Default.SecondThreshold;
         }
 
+        private string _fraction;
         public string Fraction
         {
-            get => Properties.Settings.Default.Fraction;
+            get => _fraction;
+            set
+            {
+                if (_fraction == value) return;
+
+                _fraction = value;
+                OnPropertyChanged(nameof(Fraction));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.Fraction = Fraction;
+                        Properties.Settings.Default.Save();
+                    }
+                });
+            }
         }
+
+        private string _partia_number;
         public string Partia_Number
         {
-            get => Properties.Settings.Default.Partia_Number;
+            get => _partia_number;
+            set
+            {
+                if (_partia_number == value) return;
+
+                _partia_number = value;
+                OnPropertyChanged(nameof(Partia_Number));
+
+                Task.Run(() =>
+                {
+                    lock (global_locker)
+                    {
+                        Properties.Settings.Default.Partia_Number = Partia_Number;
+                        Properties.Settings.Default.Save();
+                    }
+                });
+            }
         }
 
         private long _avgNumBlackPixels;
@@ -164,7 +203,41 @@ namespace BallScanner.MVVM.ViewModels.Main
             Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
 
+            Fraction = Properties.Settings.Default.Fraction;
+            Partia_Number = Properties.Settings.Default.Partia_Number;
+
             ChangeImageCommand = new RelayCommand(ChangeImage);
+            SaveReportCommand = new RelayCommand(SaveReport);
+        }
+
+        private void SaveReport(object param)
+        {
+            // Сохранение данных в БД
+            try
+            {
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                {
+                    Report newReport;
+
+                    if (App.CurrentUser != null)
+                        newReport = new Report(App.CurrentUser._id, DateTime.Now.Date, Fraction, Partia_Number, AvgNumBlackPixels); // admin or user
+                    else
+                        newReport = new Report(-1, DateTime.Now.Date, Fraction, Partia_Number, AvgNumBlackPixels);  // superuser
+
+                    dbContext.Reports.Add(newReport);
+                    dbContext.SaveChanges();
+
+                    // update datagrid in documents vm
+                    if (DocumentsVM.RefreshDataGrid.CanExecute(null))
+                        DocumentsVM.RefreshDataGrid.Execute(null);
+
+                    MessageBox.Show("Сохранение прошло успешно!", "Сообщение!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
         }
 
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -327,31 +400,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                                 {
                                     AvgNumBlackPixels += obj.NumberOfBlackPixels;
                                 }
+
                                 AvgNumBlackPixels /= ImagesCount;
-
-                                // Сохранение данных в БД
-                                try
-                                {
-                                    AppDbContext dbContext = AppDbContext.GetInstance();
-                                    {
-                                        Report newReport;
-
-                                        if (App.CurrentUser != null)
-                                            newReport = new Report(App.CurrentUser._id, DateTime.Now.Date.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels); // admin or user
-                                        else
-                                            newReport = new Report(-1, DateTime.Now.Date.Subtract(DateTime.MinValue).TotalMilliseconds, Fraction, Partia_Number, AvgNumBlackPixels);  // superuser
-
-                                        dbContext.Reports.Add(newReport);
-                                        dbContext.SaveChanges();
-
-                                        // update datagrid in documents vm
-                                        if (MenuVM.Documents_UpdateDataGridCommand.CanExecute(null))
-                                            MenuVM.Documents_UpdateDataGridCommand.Execute(null);
-                                    }
-                                } catch (Exception ex)
-                                {
-                                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                                }
                             }
                         };
                         worker_DownloadExecute.RunWorkerAsync();
@@ -493,11 +543,14 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         public void ChangeImage(object item)
         {
-            ImageData data = item as ImageData;
-            currentImageIndex = data.Id - 1;
+            if (item != null)
+            {
+                ImageData data = item as ImageData;
+                currentImageIndex = data.Id - 1;
 
-            OnPropertyChanged(nameof(CurrentData));
-            UpdateImage(0);
+                OnPropertyChanged(nameof(CurrentData));
+                UpdateImage(0);
+            }
         }
 
         public override void ChangePalette()

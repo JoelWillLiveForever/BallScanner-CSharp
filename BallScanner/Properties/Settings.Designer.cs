@@ -130,5 +130,17 @@ namespace BallScanner.Properties {
                 this["SelectedPage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsSmallMenuState {
+            get {
+                return ((bool)(this["IsSmallMenuState"]));
+            }
+            set {
+                this["IsSmallMenuState"] = value;
+            }
+        }
     }
 }

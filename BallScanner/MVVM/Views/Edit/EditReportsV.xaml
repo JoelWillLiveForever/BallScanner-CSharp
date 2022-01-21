@@ -3,10 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BallScanner.MVVM.Views.Edit"
+             xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="400" 
+             d:DesignWidth="550">
+
+    <Border Background="{StaticResource Brush_Surface_Overlay_01dp}">
+        <DockPanel LastChildFill="True"
+                   Margin="10">
+
+            <joel:BlockHeader Text="{Binding Title_Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                              TextAlignment="Center"
+                              DockPanel.Dock="Top" />
+
+            <Grid Height="59"
+                  Margin="0,7,0,0"
+                  DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <joel:LabelTextBox Grid.Column="0"
+                                   LabelText="Дата"
+                                   IsReadOnly="{Binding OtherFields_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="2"
+                                   LabelText="Номер смены"
+                                   IsReadOnly="{Binding OtherFields_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Smena_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="4"
+                                   LabelText="Значение"
+                                   IsReadOnly="{Binding OtherFields_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Avg_Black_Pixels_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+
+            <Grid Height="59"
+                  Margin="0,7,0,0"
+                  DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <joel:LabelTextBox Grid.Column="0"
+                                   LabelText="Фракция"
+                                   IsReadOnly="{Binding OtherFields_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Fraction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <joel:LabelTextBox Grid.Column="2"
+                                   LabelText="Номер партии"
+                                   IsReadOnly="{Binding OtherFields_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Text="{Binding Partia_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </Grid>
+
+            <Button Height="29"
+                    Margin="0,7,0,0"
+                    Name="DeleteButton"
+                    DockPanel.Dock="Bottom"
+                    Command="{Binding DeleteReportCommand}"
+                    Visibility="Collapsed"
+                    IsEnabled="False"
+                    Content="Удалить" />
             
-    </Grid>
+            <joel:LabelTextBox Margin="0,7,0,0"
+                               LabelText="Примечание"
+                               IsReadOnly="{Binding Note_IsReadOnly, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                               Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource Style_Multiline}" />
+
+        </DockPanel>
+    </Border>
 </UserControl>

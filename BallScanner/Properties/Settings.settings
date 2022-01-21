@@ -29,5 +29,8 @@
     <Setting Name="SelectedPage" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="IsSmallMenuState" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Timers;
+using BallScanner.MVVM.Views.Edit;
 
 namespace BallScanner.MVVM.ViewModels.Main
 {
@@ -21,6 +22,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         public RelayCommand OpenDialogWindowCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
+
+        public static RelayCommand RefreshDataGrid { get; set; }
 
         public RelayCommand UpdateCommand { get; set; }
 
@@ -77,6 +80,8 @@ namespace BallScanner.MVVM.ViewModels.Main
             SearchCommand = new RelayCommand(Search);
             UpdateCommand = new RelayCommand(Update);
 
+            RefreshDataGrid = new RelayCommand(OnRefreshDataGrid);
+
             Task.Run(() =>
             {
                 try
@@ -93,7 +98,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             timer.Elapsed += new ElapsedEventHandler(OnSearch);
         }
 
-        public void UpdateDataGrid()
+        private void OnRefreshDataGrid(object param)
         {
             if (Search_Value != null || Search_Value != "" || Search_Value.Length != 0) Search(null);
             else OnPropertyChanged(nameof(Reports));
@@ -102,7 +107,7 @@ namespace BallScanner.MVVM.ViewModels.Main
         private void OnSearch(object source, ElapsedEventArgs e)
         {
             timer.Stop();
-            Console.WriteLine("ПРОШЛО 400 мс.!");
+            //Console.WriteLine("ПРОШЛО 400 мс.!");
             Search(null);
         }
 
@@ -112,7 +117,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             {
                 AppDbContext dbContext = AppDbContext.GetInstance();
 
-                Console.WriteLine("SEARCH VALUE = " + Search_Value);
+                //Console.WriteLine("SEARCH VALUE = " + Search_Value);
 
                 if (Search_Value == null || Search_Value == "" || Search_Value.Length == 0)
                 {
@@ -132,7 +137,7 @@ namespace BallScanner.MVVM.ViewModels.Main
                             date = searchDateTime.Date.Subtract(DateTime.MinValue).TotalMilliseconds;
 
                         search_result = (from report in dbContext.Reports
-                                         where report._date == date
+                                         where report._date == searchDateTime.Date
                                          select report).ToList();
 
                         if (search_result != null)
@@ -229,10 +234,11 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         private void OpenDialogWindow(object param)
         {
-            Report data = param as Report;
-            int currentImageIndex = data._id;
-
-
+            if (param != null)
+            {
+                RootV editWindow = new RootV(param);
+                editWindow.ShowDialog();
+            }
         }
 
         public override void ChangePalette()

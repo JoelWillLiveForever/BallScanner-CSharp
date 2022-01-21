@@ -20,62 +20,6 @@
             <DockPanel Margin="10"
                        LastChildFill="True">
 
-                <!-- Calibrate -->
-                <StackPanel DockPanel.Dock="Bottom"
-                            Orientation="Vertical"
-                            Margin="0,10,0,0">
-
-                    <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Status}" />
-
-                    <Grid Margin="0,7,0,0"
-                              Height="59">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="0.25*" />
-                            <ColumnDefinition Width="7" />
-                            <ColumnDefinition Width="0.25*" />
-                            <ColumnDefinition Width="7" />
-                            <ColumnDefinition Width="0.25*" />
-                            <ColumnDefinition Width="7" />
-                            <ColumnDefinition Width="0.25*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Slider -->
-                        <Slider Minimum="0"
-                                Maximum="255"
-                                VerticalAlignment="Center"
-                                Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Thumb.DragCompleted="Slider_DragCompleted"
-                                Thumb.DragStarted="Slider_DragStarted" />
-
-                        <Border Grid.Column="1"
-                                Margin="7,0,7,0"
-                                Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}"
-                                CornerRadius="0.5"
-                                Width="1" />
-
-                        <!-- Threshold textboxes -->
-                        <joel:LabelTextBox Grid.Column="2"
-                                           LabelText="Первый сорт"
-                                           Text="{Binding ElementName=Root, Path=DataContext.FirstThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-                        <joel:LabelTextBox Grid.Column="4"
-                                           LabelText="Второй сорт"
-                                           Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-                        <joel:LabelTextBox Grid.Column="6"
-                                           LabelText="Фракция"
-                                           Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-                        <joel:LabelTextBox Grid.Column="8"
-                                           LabelText="Номер партии"
-                                           Text="{Binding ElementName=Root, Path=DataContext.Partia_Number, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-                    </Grid>
-                </StackPanel>
-
                 <Grid>
 
                     <Grid.ColumnDefinitions>
@@ -88,6 +32,50 @@
                     <DockPanel Grid.Column="0"
                            Margin="0,0,5,0"
                            LastChildFill="True">
+
+                        <!-- Calibrate -->
+                        <StackPanel DockPanel.Dock="Bottom"
+                            Orientation="Vertical"
+                            Margin="0,10,0,0">
+
+                            <joel:BlockHeader DockPanel.Dock="Top"
+                                          Text="Калибровка сканера" />
+
+                            <Grid Margin="0,7,0,0"
+                              Height="59">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.25*" />
+                                    <ColumnDefinition Width="7" />
+                                    <ColumnDefinition Width="0.25*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Slider -->
+                                <Slider Minimum="0"
+                                Maximum="255"
+                                VerticalAlignment="Center"
+                                Value="{Binding ElementName=Root, Path=DataContext.ThresholdValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Thumb.DragCompleted="Slider_DragCompleted"
+                                Thumb.DragStarted="Slider_DragStarted" />
+
+                                <Border Grid.Column="1"
+                                Margin="7,0,7,0"
+                                Background="{DynamicResource Brush_OnBackground_OnSurface_Medium}"
+                                CornerRadius="0.5"
+                                Width="1" />
+
+                                <!-- Threshold textboxes -->
+                                <joel:LabelTextBox Grid.Column="2"
+                                           LabelText="Первый сорт"
+                                           Text="{Binding ElementName=Root, Path=DataContext.FirstThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                                <joel:LabelTextBox Grid.Column="4"
+                                           LabelText="Второй сорт"
+                                           Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                            </Grid>
+                        </StackPanel>
 
                         <!-- Image Info -->
                         <StackPanel DockPanel.Dock="Top"
@@ -441,17 +429,13 @@
                     <StackPanel Orientation="Vertical">
 
                         <joel:BlockHeader DockPanel.Dock="Top"
-                                          Text="{DynamicResource Text_Status}" />
+                                          Text="Калибровка сканера" />
 
                         <Grid Margin="0,7,0,0"
                               Height="59">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="0.25*" />
-                                <ColumnDefinition Width="7" />
-                                <ColumnDefinition Width="0.25*" />
-                                <ColumnDefinition Width="7" />
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="7" />
                                 <ColumnDefinition Width="0.25*" />
@@ -478,12 +462,6 @@
                             <joel:LabelTextBox Grid.Column="4"
                                                LabelText="Второй сорт"
                                                Text="{Binding ElementName=Root, Path=DataContext.SecondThreshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                            <joel:LabelTextBox Grid.Column="6"
-                                               LabelText="Фракция"
-                                               Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                            <joel:LabelTextBox Grid.Column="8"
-                                               LabelText="Номер партии"
-                                               Text="{Binding ElementName=Root, Path=DataContext.Fraction, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                         </Grid>
                     </StackPanel>

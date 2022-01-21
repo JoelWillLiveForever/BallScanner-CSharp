@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:BallScanner.MVVM.ViewModels.Main"
              xmlns:joel="clr-namespace:Joel.Controls;assembly=Joel.Controls"
-             xmlns:observers="clr-namespace:Joel.Utils.Observers;assembly=Joel.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800"
@@ -27,13 +25,14 @@
                       Height="29">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.25*"
-                                          MinWidth="150" />
+                                          MinWidth="150"
+                                          MaxWidth="200" />
                         <ColumnDefinition Width="7" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="7" />
-                        <ColumnDefinition Width="0.25*"
-                                          MinWidth="150" />
                     </Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="7" />
+                        <ColumnDefinition Width="0.25*"
+                                          MinWidth="150"-->
 
                     <ComboBox SelectedIndex="{Binding Selected_Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Дата" />
@@ -50,10 +49,10 @@
                                        Text="{Binding Search_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource Style_Inside}" />
 
-                    <Button Grid.Column="4"
+                    <!--<Button Grid.Column="4"
                             Name="MySearchButton"
                             Command="{Binding UpdateCommand}"
-                            Content="Сохранить" />
+                            Content="Сохранить" />-->
 
                 </Grid>
             </StackPanel>
@@ -84,7 +83,7 @@
                                             Width="0.5*" />
                         <DataGridTextColumn Header="Дата"
                                             Width="*" 
-                                            Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                                            Binding="{Binding _date, StringFormat=dd.MM.yyyy, UpdateSourceTrigger=PropertyChanged}"
                                             IsReadOnly="True" />
                         <DataGridTextColumn Header="Фракция"
                                             Width="*"
@@ -103,9 +102,9 @@
                                             Binding="{Binding _avg_black_pixels_value, UpdateSourceTrigger=PropertyChanged}"
                                             IsReadOnly="True" />
                         <DataGridTextColumn Header="Примечание"
-                                            Width="*" 
+                                            Width="*"
                                             Binding="{Binding _note, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
-                                            IsReadOnly="False" />
+                                            IsReadOnly="True" />
                     </DataGrid.Columns>
 
                 </DataGrid>

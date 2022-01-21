@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallScanner", "BallScanner\BallScanner.csproj", "{BCB28185-3D09-4D8E-9D20-3AEA8007F37D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Controls", "Joel.Controls\Joel.Controls.csproj", "{A98AE7DD-5752-4FF0-B74D-D6E185446B88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Utils", "Joel.Utils\Joel.Utils.csproj", "{065DF014-E977-491F-B3CD-B8C2C017B0BF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joel.Resources", "Joel.Resources\Joel.Resources.csproj", "{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{065DF014-E977-491F-B3CD-B8C2C017B0BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

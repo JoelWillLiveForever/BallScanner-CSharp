@@ -161,49 +161,49 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
         }
 
-        private string _fraction;
-        public string Fraction
-        {
-            get => _fraction;
-            set
-            {
-                if (_fraction == value) return;
+        //private string _fraction;
+        //public string Fraction
+        //{
+        //    get => _fraction;
+        //    set
+        //    {
+        //        if (_fraction == value) return;
 
-                _fraction = value;
-                OnPropertyChanged(nameof(Fraction));
+        //        _fraction = value;
+        //        OnPropertyChanged(nameof(Fraction));
 
-                Task.Run(() =>
-                {
-                    lock (global_locker)
-                    {
-                        Properties.Settings.Default.Fraction = Fraction;
-                        Properties.Settings.Default.Save();
-                    }
-                });
-            }
-        }
+        //        Task.Run(() =>
+        //        {
+        //            lock (global_locker)
+        //            {
+        //                Properties.Settings.Default.Fraction = Fraction;
+        //                Properties.Settings.Default.Save();
+        //            }
+        //        });
+        //    }
+        //}
 
-        private string _partia_number;
-        public string Partia_Number
-        {
-            get => _partia_number;
-            set
-            {
-                if (_partia_number == value) return;
+        //private string _partia_number;
+        //public string Partia_Number
+        //{
+        //    get => _partia_number;
+        //    set
+        //    {
+        //        if (_partia_number == value) return;
 
-                _partia_number = value;
-                OnPropertyChanged(nameof(Partia_Number));
+        //        _partia_number = value;
+        //        OnPropertyChanged(nameof(Partia_Number));
 
-                Task.Run(() =>
-                {
-                    lock (global_locker)
-                    {
-                        Properties.Settings.Default.Partia_Number = Partia_Number;
-                        Properties.Settings.Default.Save();
-                    }
-                });
-            }
-        }
+        //        Task.Run(() =>
+        //        {
+        //            lock (global_locker)
+        //            {
+        //                Properties.Settings.Default.Partia_Number = Partia_Number;
+        //                Properties.Settings.Default.Save();
+        //            }
+        //        });
+        //    }
+        //}
 
         private long _avgNumBlackPixels;
         public long AvgNumBlackPixels
@@ -259,8 +259,8 @@ namespace BallScanner.MVVM.ViewModels.Main
             FirstThreshold = Properties.Settings.Default.FirstThreshold;
             SecondThreshold = Properties.Settings.Default.SecondThreshold;
 
-            Fraction = Properties.Settings.Default.Fraction;
-            Partia_Number = Properties.Settings.Default.Partia_Number;
+            //Fraction = Properties.Settings.Default.Fraction;
+            //Partia_Number = Properties.Settings.Default.Partia_Number;
 
             ChangeImageCommand = new RelayCommand(ChangeImage);
         }
@@ -577,11 +577,14 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         public void ChangeImage(object item)
         {
-            ImageData data = item as ImageData;
-            currentImageIndex = data.Id - 1;
+            if (item != null)
+            {
+                ImageData data = item as ImageData;
+                currentImageIndex = data.Id - 1;
 
-            OnPropertyChanged(nameof(CurrentData));
-            UpdateImage(0);
+                OnPropertyChanged(nameof(CurrentData));
+                UpdateImage(0);
+            }
         }
 
         public override void ChangePalette()

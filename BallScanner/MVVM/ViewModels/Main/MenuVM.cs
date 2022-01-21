@@ -2,6 +2,8 @@
 using BallScanner.MVVM.Base;
 using NLog;
 using System.Windows;
+using System;
+using BallScanner.Data;
 
 namespace BallScanner.MVVM.ViewModels.Main
 {
@@ -31,12 +33,8 @@ namespace BallScanner.MVVM.ViewModels.Main
         public static RelayCommand MenuButtonClick { get; set; }
         public static RelayCommand Logout_Command { get; set; }
 
-        public static RelayCommand Documents_UpdateDataGridCommand { get; set; }
-
         public MenuVM()
         {
-            Log.Info("Constructor called!");
-
             switch (Properties.Settings.Default.SelectedPage)
             {
                 case 0:
@@ -67,13 +65,6 @@ namespace BallScanner.MVVM.ViewModels.Main
             // Повесить команды на MenuButtonClick
             MenuButtonClick = new RelayCommand(OnMenuButtonClick);
             Logout_Command = new RelayCommand(Logout);
-
-            Documents_UpdateDataGridCommand = new RelayCommand(UpdateDataGridInDocumentsVM);
-        }
-
-        private void UpdateDataGridInDocumentsVM(object param)
-        {
-            documentsVM.UpdateDataGrid();
         }
 
         private void OnMenuButtonClick(object param)
@@ -109,6 +100,16 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         private void Logout(object param)
         {
+            try
+            {
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
+
             App.CurrentUser = null;
 
             // open login window

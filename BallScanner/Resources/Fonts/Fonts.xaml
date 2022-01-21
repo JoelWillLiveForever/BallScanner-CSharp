@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily x:Key="Font_Montserrat">pack://application:,,,/Joel.Resources;component/Fonts/Montserrat/#Montserrat</FontFamily>
-    <FontFamily x:Key="Font_Montserrat_Alternates">pack://application:,,,/Joel.Resources;component/Fonts/Montserrat_Alternates/#Montserrat Alternates</FontFamily>
+    <FontFamily x:Key="Font_Montserrat">./Montserrat/#Montserrat</FontFamily>
+    <FontFamily x:Key="Font_Montserrat_Alternates">./Montserrat_Alternates/#Montserrat Alternates</FontFamily>
 
 </ResourceDictionary>
