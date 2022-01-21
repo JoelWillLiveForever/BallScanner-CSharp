@@ -38,6 +38,9 @@ namespace BallScanner.MVVM.ViewModels.Main
             switch (Properties.Settings.Default.SelectedPage)
             {
                 case 0:
+                    if (AccountManagmentVM.RefreshDataGrid.CanExecute(null))
+                        AccountManagmentVM.RefreshDataGrid.Execute(null);
+
                     SelectedPage = accountManagmentVM;
                     break;
                 case 1:
@@ -50,6 +53,9 @@ namespace BallScanner.MVVM.ViewModels.Main
                     SelectedPage = calibrateVM;
                     break;
                 case 4:
+                    if (DocumentsVM.RefreshDataGrid.CanExecute(null))
+                        DocumentsVM.RefreshDataGrid.Execute(null);
+
                     SelectedPage = documentsVM;
                     break;
                 case 5:
@@ -73,6 +79,9 @@ namespace BallScanner.MVVM.ViewModels.Main
 
             if (name == "AccountManagment" /*&& App.CurrentUser._access_level == 0*/)
             {
+                if (AccountManagmentVM.RefreshDataGrid.CanExecute(null))
+                    AccountManagmentVM.RefreshDataGrid.Execute(null);
+
                 SelectedPage = accountManagmentVM;
             } else if (name == "Account")
             {
@@ -86,6 +95,9 @@ namespace BallScanner.MVVM.ViewModels.Main
                 SelectedPage = calibrateVM;
             } else if (name == "Documents")
             {
+                if (DocumentsVM.RefreshDataGrid.CanExecute(null))
+                    DocumentsVM.RefreshDataGrid.Execute(null);
+
                 SelectedPage = documentsVM;
             } else if (name == "Settings")
             {

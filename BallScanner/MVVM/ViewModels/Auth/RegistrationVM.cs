@@ -219,6 +219,16 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
         private void ChangeVM(object param)
         {
+            Surname = null;
+            Name = null;
+            Lastname = null;
+
+            Login = null;
+            Smena_Number = null;
+
+            Password = null;
+            Password_Check = null;
+
             RootVM root = ParentViewModel as RootVM;
 
             if (root.ChangeRootVM_Command.CanExecute("login"))

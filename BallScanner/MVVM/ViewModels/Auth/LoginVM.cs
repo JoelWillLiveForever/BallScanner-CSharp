@@ -90,11 +90,8 @@ namespace BallScanner.MVVM.ViewModels.Auth
                         //dbContext.Users.Load();
 
                         User user = dbContext.Users
-                            .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash))
+                            .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash) && u._is_active == 1)
                             .FirstOrDefault();
-
-                        if (user._is_active != 1)
-                            user = null;
 
                         if (user == null)
                         {
@@ -126,6 +123,9 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
         private void ChangeVM(object param)
         {
+            Password = null;
+            Login = null;
+
             RootVM root = ParentViewModel as RootVM;
 
             if (root.ChangeRootVM_Command.CanExecute("registration"))

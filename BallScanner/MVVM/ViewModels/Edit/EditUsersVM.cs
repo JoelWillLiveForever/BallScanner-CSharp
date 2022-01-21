@@ -135,14 +135,14 @@ namespace BallScanner.MVVM.ViewModels.Edit
 
         public EditUsersVM()
         {
-            DeleteReportCommand = new RelayCommand(Delete_Report);
+            DeleteReportCommand = new RelayCommand(Delete_User);
         }
 
-        public EditUsersVM(User report, Window currDialogWindow)
+        public EditUsersVM(User user, Window currDialogWindow)
         {
-            DeleteReportCommand = new RelayCommand(Delete_Report);
+            DeleteReportCommand = new RelayCommand(Delete_User);
 
-            this.user = report;
+            this.user = user;
             this.currDialogWindow = currDialogWindow;
         }
 
@@ -155,9 +155,15 @@ namespace BallScanner.MVVM.ViewModels.Edit
                 DocumentsVM.RefreshDataGrid.Execute(null);
         }
 
-        private void Delete_Report(object param)
+        private void Delete_User(object param)
         {
-            if (user.Reports != null)
+            if (user == App.CurrentUser)
+            {
+                MessageBox.Show("Нельзя удалить авторизованного пользователя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+            
+            if (user.Reports != null && user.Reports.Count != 0)
             {
                 MessageBox.Show("У данного пользователя есть отчёты в базе данных!\nЧтобы удалить данного пользователя, нужно сначала\nудалить все его отчёты!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
