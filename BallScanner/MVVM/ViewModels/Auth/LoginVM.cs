@@ -53,8 +53,6 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
         private void Authenticate(object param)
         {
-            //Console.WriteLine("\nSHA " + SHAService.ComputeSha256Hash("\"C@5p&ww"));
-
             if ((Login == null || Login.Length == 0 || Login.Equals("")) || (Password == null || Password.Length == 0 || Password.Equals("")))
             {
                 MessageBox.Show("Укажите данные для входа!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
@@ -62,7 +60,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
             }
 
             // superuser rights
-            if (SHAService.ComputeSha256Hash(Login) == "4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2" && SHAService.ComputeSha256Hash(Password) == "1001540fac666406992a208c9ad35851f9e70df938d7fde716618da6602cc2f4")
+            if (SHAService.ComputeSha256Hash(Login) == "4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2" && SHAService.ComputeSha256Hash(Password) == "e2a5cb13dd352aabe3568985c8af2498f1edf4045ce434f36fac21101092439e")
             {
                 // open work window
                 Window old = Application.Current.MainWindow;

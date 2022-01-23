@@ -3,6 +3,7 @@ using BallScanner.Data.Tables;
 using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.ViewModels.Main;
+using Joel.Utils.Services;
 using System;
 using System.Windows;
 
@@ -11,6 +12,7 @@ namespace BallScanner.MVVM.ViewModels.Edit
     public class EditUsersVM : BaseViewModel
     {
         public RelayCommand DeleteReportCommand { get; set; }
+        public RelayCommand ChangePasswordCommand { get; set; }
 
         private User user;
         private Window currDialogWindow;
@@ -133,14 +135,42 @@ namespace BallScanner.MVVM.ViewModels.Edit
             }
         }
 
+        private string _newPassword;
+        public string NewPassword
+        {
+            get => _newPassword;
+            set
+            {
+                if (_newPassword == value) return;
+
+                _newPassword = value;
+                OnPropertyChanged(nameof(NewPassword));
+            }
+        }
+
+        private string _newPassword_check;
+        public string NewPassword_Check
+        {
+            get => _newPassword_check;
+            set
+            {
+                if (_newPassword_check == value) return;
+
+                _newPassword_check = value;
+                OnPropertyChanged(nameof(NewPassword_Check));
+            }
+        }
+
         public EditUsersVM()
         {
             DeleteReportCommand = new RelayCommand(Delete_User);
+            ChangePasswordCommand = new RelayCommand(ChangePassword);
         }
 
         public EditUsersVM(User user, Window currDialogWindow)
         {
             DeleteReportCommand = new RelayCommand(Delete_User);
+            ChangePasswordCommand = new RelayCommand(ChangePassword);
 
             this.user = user;
             this.currDialogWindow = currDialogWindow;
@@ -183,6 +213,41 @@ namespace BallScanner.MVVM.ViewModels.Edit
             {
                 MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
+        }
+
+        private void ChangePassword(object param)
+        {
+            // Null password
+            if (NewPassword == null || NewPassword.Equals(""))
+            {
+                MessageBox.Show("Вы не указали новый пароль для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            // Null password_check
+            if (NewPassword_Check == null || NewPassword_Check.Equals(""))
+            {
+                MessageBox.Show("Вы не указали повтор нового пароля для проверки!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            // Bad password length or password_check length
+            if (NewPassword.Length < 4 || NewPassword_Check.Length < 4)
+            {
+                MessageBox.Show("Длина пароля меньше 4-х символов!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            // Password equals password_check
+            if (!NewPassword.Equals(NewPassword_Check))
+            {
+                MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                return;
+            }
+
+            user._password_hash = SHAService.ComputeSha256Hash(NewPassword);
+
+            MessageBox.Show("Пароль был успешно изменён!", "Сообщение!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
         }
     }
 }

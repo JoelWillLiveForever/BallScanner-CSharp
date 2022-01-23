@@ -96,15 +96,50 @@
 
             </Grid>
 
-            <Button Height="29"
-                    Margin="0,7,0,0"
-                    Name="DeleteButton"
-                    DockPanel.Dock="Bottom"
-                    Command="{Binding DeleteReportCommand}"
-                    Visibility="Visible"
-                    IsEnabled="True"
-                    Content="Удалить" />
+            <joel:BlockHeader Text="Смена пароля для пользователя"
+                              TextAlignment="Center"
+                              DockPanel.Dock="Top"
+                              Margin="0,10,0,0" />
 
+            <joel:LabelTextBox Height="29"
+                               Margin="0,7,0,0"
+                               Name="NewPassword"
+                               DockPanel.Dock="Top"
+                               LabelText="Новый пароль"
+                               Text="{Binding NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource Style_Inside}" />
+
+            <joel:LabelTextBox Height="29"
+                               Margin="0,7,0,0"
+                               Name="NewPasswordRepeat"
+                               DockPanel.Dock="Top"
+                               LabelText="Повторите новый пароль"
+                               Text="{Binding NewPassword_Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource Style_Inside}" />
+
+            <Grid DockPanel.Dock="Bottom"
+                  Height="29">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Name="ChangePasswordButton"
+                        Command="{Binding ChangePasswordCommand}"
+                        Visibility="Visible"
+                        IsEnabled="True"
+                        Content="Изменить пароль" />
+                
+                <Button Grid.Column="2"
+                        Name="DeleteButton"
+                        Command="{Binding DeleteReportCommand}"
+                        Visibility="Visible"
+                        IsEnabled="True"
+                        Content="Удалить аккаунт" />
+
+            </Grid>
         </DockPanel>
     </Border>
 </UserControl>
