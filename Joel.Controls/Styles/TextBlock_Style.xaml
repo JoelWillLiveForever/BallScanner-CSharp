@@ -47,6 +47,13 @@
             <Setter Property="VerticalAlignment"
                     Value="Center" />
         </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="Text"
+                     Value="Не соот.">
+                <Setter Property="Foreground"
+                        Value="{DynamicResource Brush_Error}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

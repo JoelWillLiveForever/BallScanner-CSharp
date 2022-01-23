@@ -53,6 +53,26 @@ namespace BallScanner.MVVM.Models.Main
 
                 _ballGrade = value;
                 OnPropertyChanged(nameof(BallGrade));
+                OnPropertyChanged(nameof(BallGrade_Text));
+            }
+        }
+
+        public string BallGrade_Text
+        {
+            get
+            {
+                switch (BallGrade)
+                {
+                    case BallGrade.FIRST:
+                        return "Первый";
+                    case BallGrade.SECOND:
+                        return "Второй";
+                    case BallGrade.DEFECTIVE:
+                        return "Не соот.";
+                    case BallGrade.INDEFINED:
+                        return "-";
+                }
+                return null;
             }
         }
 

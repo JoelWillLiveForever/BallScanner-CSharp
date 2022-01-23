@@ -179,7 +179,7 @@
                                     Margin="0,5"
                                     Width="1" />
 
-                                <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade_Text, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
                                        Margin="0,0,8,0"
                                        Grid.Column="6"
@@ -492,7 +492,19 @@
                                     <DataGridTextColumn Header="Сорт"
                                                     IsReadOnly="True"
                                                     Width="0.5*" 
-                                                    Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                                    Binding="{Binding BallGrade_Text, UpdateSourceTrigger=PropertyChanged}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="Text"
+                                                         Value="Не соот.">
+                                                        <Setter Property="Foreground"
+                                                            Value="{DynamicResource Brush_Error}" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
 
                             </DataGrid>
@@ -720,7 +732,7 @@
                                     Margin="0,5"
                                     Width="1" />
 
-                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBlock Text="{Binding ElementName=Root, Path=DataContext.CurrentData.BallGrade_Text, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource DataGridParody_Content}"
                                        Margin="0,0,8,0"
                                        Grid.Column="6"
@@ -959,7 +971,19 @@
                                 <DataGridTextColumn Header="Сорт"
                                                     IsReadOnly="True"
                                                     Width="0.5*" 
-                                                    Binding="{Binding BallGrade, UpdateSourceTrigger=PropertyChanged}" />
+                                                    Binding="{Binding BallGrade_Text, UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="Text"
+                                                         Value="Не соот.">
+                                                    <Setter Property="Foreground"
+                                                            Value="{DynamicResource Brush_Error}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
