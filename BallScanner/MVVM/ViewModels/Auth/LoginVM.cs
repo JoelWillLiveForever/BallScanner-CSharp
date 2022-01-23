@@ -12,6 +12,7 @@ namespace BallScanner.MVVM.ViewModels.Auth
 {
     public class LoginVM : BaseViewModel
     {
+        private static readonly object global_locker = new object();
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         private string _login;
@@ -83,8 +84,9 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                 try
                 {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    lock (global_locker)
                     {
+                        AppDbContext dbContext = AppDbContext.GetInstance();
                         //dbContext.Users.Load();
 
                         User user = dbContext.Users

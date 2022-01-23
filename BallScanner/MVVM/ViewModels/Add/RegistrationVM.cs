@@ -13,6 +13,7 @@ namespace BallScanner.MVVM.ViewModels.Add
 {
     public class RegistrationVM : BaseViewModel
     {
+        private static readonly object global_locker = new object();
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         // Fields
@@ -187,24 +188,27 @@ namespace BallScanner.MVVM.ViewModels.Add
                     return;
                 }
 
-                // init db connection
-                AppDbContext dbContext = AppDbContext.GetInstance();
-
-                // Check login free to use
-                var user = (from u in dbContext.Users
-                            where u._username == Login
-                            select u).FirstOrDefault();
-
-                if (user != null)
+                lock (global_locker)
                 {
-                    MessageBox.Show("Пользователь с таким логином уже зарегистрирован!\nПожалуйста, выберите себе другой логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                    return;
+                    // init db connection
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+
+                    // Check login free to use
+                    var user = (from u in dbContext.Users
+                                where u._username == Login
+                                select u).FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже зарегистрирован!\nПожалуйста, выберите себе другой логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        return;
+                    }
+
+                    user = new User(Surname, Name, Lastname, smena_number_value, Login, SHAService.ComputeSha256Hash(Password));
+
+                    dbContext.Users.Add(user);
+                    dbContext.SaveChanges();
                 }
-
-                user = new User(Surname, Name, Lastname, smena_number_value, Login, SHAService.ComputeSha256Hash(Password));
-
-                dbContext.Users.Add(user);
-                dbContext.SaveChanges();
 
                 // Clear fields
                 Surname = Name = Lastname = Login = Smena_Number = Password = Password_Check = null;

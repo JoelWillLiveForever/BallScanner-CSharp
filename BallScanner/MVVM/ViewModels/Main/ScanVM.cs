@@ -19,11 +19,10 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class ScanVM : PageVM
     {
+        private static readonly object global_locker = new object();
+
         // Логгер
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
-        // Локкер
-        private readonly object global_locker = new object();
 
         // Команды
         public static RelayCommand PerformAction { get; set; }
@@ -215,8 +214,9 @@ namespace BallScanner.MVVM.ViewModels.Main
             // Сохранение данных в БД
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
+                lock (global_locker)
                 {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
                     Report newReport;
 
                     if (App.CurrentUser != null)
@@ -226,13 +226,13 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                     dbContext.Reports.Add(newReport);
                     dbContext.SaveChanges();
-
-                    // update datagrid in documents vm
-                    if (DocumentsVM.RefreshDataGrid.CanExecute(null))
-                        DocumentsVM.RefreshDataGrid.Execute(null);
-
-                    MessageBox.Show("Сохранение прошло успешно!", "Сообщение!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
                 }
+
+                // update datagrid in documents vm
+                if (DocumentsVM.RefreshDataGrid.CanExecute(null))
+                    DocumentsVM.RefreshDataGrid.Execute(null);
+
+                MessageBox.Show("Сохранение прошло успешно!", "Сообщение!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
             }
             catch (Exception ex)
             {

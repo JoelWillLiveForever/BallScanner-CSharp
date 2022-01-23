@@ -9,6 +9,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class MenuVM : BaseViewModel
     {
+        private static readonly object global_locker = new object();
+
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         private static readonly AccountManagmentVM accountManagmentVM = new AccountManagmentVM();
@@ -114,8 +116,11 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-                dbContext.SaveChanges();
+                lock (global_locker)
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    dbContext.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

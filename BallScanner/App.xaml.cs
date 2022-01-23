@@ -22,6 +22,8 @@ namespace BallScanner
 
     public partial class App : Application
     {
+        private static readonly object global_locker = new object();
+
         // Auth
         public static User CurrentUser { get; set; }
 
@@ -88,10 +90,13 @@ namespace BallScanner
             {
                 try
                 {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    lock (global_locker)
+                    {
+                        AppDbContext dbContext = AppDbContext.GetInstance();
 
-                    dbContext.Users.Load();
-                    dbContext.Reports.Load();
+                        dbContext.Users.Load();
+                        dbContext.Reports.Load();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -158,8 +163,11 @@ namespace BallScanner
         {
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-                dbContext.SaveChanges();
+                lock (global_locker)
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    dbContext.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

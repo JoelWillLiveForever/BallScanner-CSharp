@@ -11,6 +11,7 @@ namespace BallScanner.MVVM.ViewModels.Edit
 {
     public class EditUsersVM : BaseViewModel
     {
+        private static readonly object global_locker = new object();
         public RelayCommand DeleteReportCommand { get; set; }
         public RelayCommand ChangePasswordCommand { get; set; }
 
@@ -201,10 +202,13 @@ namespace BallScanner.MVVM.ViewModels.Edit
 
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
+                lock (global_locker)
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
 
-                dbContext.Users.Remove(user);
-                dbContext.SaveChanges();
+                    dbContext.Users.Remove(user);
+                    dbContext.SaveChanges();
+                }
 
                 currDialogWindow.Close();
                 RefreshDataGrid();

@@ -10,6 +10,8 @@ namespace BallScanner.Data.Tables
     //[Table("Reports")]
     public class Report : INotifyPropertyChanged
     {
+        private static readonly object global_locker = new object();
+
         public event PropertyChangedEventHandler PropertyChanged;
         private Timer timer = new Timer(5000) { Enabled = false };
 
@@ -206,10 +208,13 @@ namespace BallScanner.Data.Tables
 
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-                dbContext.SaveChanges();
+                lock (global_locker)
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    dbContext.SaveChanges();
+                }
 
-                Console.WriteLine("SAVED!");
+                //Console.WriteLine("SAVED!");
             }
             catch (Exception ex)
             {

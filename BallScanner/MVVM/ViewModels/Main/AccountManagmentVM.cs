@@ -15,6 +15,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class AccountManagmentVM : PageVM
     {
+        private static readonly object global_locker = new object();
+
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private static Timer timer = new Timer(400) { Enabled = false };
 
@@ -79,8 +81,11 @@ namespace BallScanner.MVVM.ViewModels.Main
             {
                 try
                 {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-                    Users = new ObservableCollection<User>(dbContext.Users.ToList());
+                    lock (global_locker)
+                    {
+                        AppDbContext dbContext = AppDbContext.GetInstance();
+                        Users = new ObservableCollection<User>(dbContext.Users.ToList());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -108,119 +113,122 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-
-                //Console.WriteLine("SEARCH VALUE = " + Search_Value);
-
-                if (Search_Value == null || Search_Value == "" || Search_Value.Length == 0)
+                lock (global_locker)
                 {
-                    Users = new ObservableCollection<User>(dbContext.Users.ToList());
-                    return;
-                }
+                    AppDbContext dbContext = AppDbContext.GetInstance();
 
-                List<User> search_result;
-                switch (Selected_Index)
-                {
-                    case 0:
-                        // login
-                        search_result = (from user in dbContext.Users
-                                         where user._username.Equals(Search_Value)
-                                         select user).ToList();
+                    //Console.WriteLine("SEARCH VALUE = " + Search_Value);
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                    if (Search_Value == null || Search_Value == "" || Search_Value.Length == 0)
+                    {
+                        Users = new ObservableCollection<User>(dbContext.Users.ToList());
+                        return;
+                    }
 
-                        break;
-                    case 1:
-                        // surname
-                        search_result = (from user in dbContext.Users
-                                         where user._surname.Equals(Search_Value)
-                                         select user).ToList();
+                    List<User> search_result;
+                    switch (Selected_Index)
+                    {
+                        case 0:
+                            // login
+                            search_result = (from user in dbContext.Users
+                                             where user._username.Equals(Search_Value)
+                                             select user).ToList();
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
-                    case 2:
-                        // name
-                        search_result = (from user in dbContext.Users
-                                         where user._name.Equals(Search_Value)
-                                         select user).ToList();
+                            break;
+                        case 1:
+                            // surname
+                            search_result = (from user in dbContext.Users
+                                             where user._surname.Equals(Search_Value)
+                                             select user).ToList();
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
-                    case 3:
-                        // lastname
-                        search_result = (from user in dbContext.Users
-                                         where user._lastname.Equals(Search_Value)
-                                         select user).ToList();
+                            break;
+                        case 2:
+                            // name
+                            search_result = (from user in dbContext.Users
+                                             where user._name.Equals(Search_Value)
+                                             select user).ToList();
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
-                    case 4:
-                        // smena_number
-                        search_result = (from user in dbContext.Users
-                                         where user._smena_number.ToString().Equals(Search_Value)
-                                         select user).ToList();
+                            break;
+                        case 3:
+                            // lastname
+                            search_result = (from user in dbContext.Users
+                                             where user._lastname.Equals(Search_Value)
+                                             select user).ToList();
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
-                    case 5:
-                        // access level
-                        switch (Search_Value)
-                        {
-                            case "Пользователь":
-                                search_result = (from user in dbContext.Users
-                                                 where user._access_level == 0
-                                                 select user).ToList();
-                                break;
-                            case "Администратор":
-                                search_result = (from user in dbContext.Users
-                                                 where user._access_level == 1
-                                                 select user).ToList();
-                                break;
-                            default:
-                                search_result = (from user in dbContext.Users
-                                                 where user._access_level.ToString().Equals(Search_Value)
-                                                 select user).ToList();
-                                break;
-                        }
+                            break;
+                        case 4:
+                            // smena_number
+                            search_result = (from user in dbContext.Users
+                                             where user._smena_number.ToString().Equals(Search_Value)
+                                             select user).ToList();
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
-                    case 6:
-                        // is active user
-                        switch (Search_Value)
-                        {
-                            case "Активен":
-                                search_result = (from user in dbContext.Users
-                                                 where user._is_active == 1
-                                                 select user).ToList();
-                                break;
-                            case "Неактивен":
-                                search_result = (from user in dbContext.Users
-                                                 where user._is_active == 0
-                                                 select user).ToList();
-                                break;
-                            default:
-                                search_result = (from user in dbContext.Users
-                                                 where user._is_active.ToString().Equals(Search_Value)
-                                                 select user).ToList();
-                                break;
-                        }
+                            break;
+                        case 5:
+                            // access level
+                            switch (Search_Value.ToUpper())
+                            {
+                                case "ПОЛЬЗОВАТЕЛЬ":
+                                    search_result = (from user in dbContext.Users
+                                                     where user._access_level == 0
+                                                     select user).ToList();
+                                    break;
+                                case "АДМИНИСТРАТОР":
+                                    search_result = (from user in dbContext.Users
+                                                     where user._access_level == 1
+                                                     select user).ToList();
+                                    break;
+                                default:
+                                    search_result = (from user in dbContext.Users
+                                                     where user._access_level.ToString().Equals(Search_Value)
+                                                     select user).ToList();
+                                    break;
+                            }
 
-                        if (search_result != null)
-                            Users = new ObservableCollection<User>(search_result);
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
 
-                        break;
+                            break;
+                        case 6:
+                            // is active user
+                            switch (Search_Value.ToUpper())
+                            {
+                                case "АКТИВЕН":
+                                    search_result = (from user in dbContext.Users
+                                                     where user._is_active == 1
+                                                     select user).ToList();
+                                    break;
+                                case "НЕАКТИВЕН":
+                                    search_result = (from user in dbContext.Users
+                                                     where user._is_active == 0
+                                                     select user).ToList();
+                                    break;
+                                default:
+                                    search_result = (from user in dbContext.Users
+                                                     where user._is_active.ToString().Equals(Search_Value)
+                                                     select user).ToList();
+                                    break;
+                            }
+
+                            if (search_result != null)
+                                Users = new ObservableCollection<User>(search_result);
+
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -233,8 +241,11 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             try
             {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-                dbContext.SaveChanges();
+                lock (global_locker)
+                {
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    dbContext.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
