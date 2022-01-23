@@ -1,6 +1,8 @@
 ﻿<Application x:Class="BallScanner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:addvm="clr-namespace:BallScanner.MVVM.ViewModels.Add"
+             xmlns:addv="clr-namespace:BallScanner.MVVM.Views.Add"
              xmlns:avm="clr-namespace:BallScanner.MVVM.ViewModels.Auth"
              xmlns:av="clr-namespace:BallScanner.MVVM.Views.Auth"
              xmlns:evm="clr-namespace:BallScanner.MVVM.ViewModels.Edit"
@@ -45,6 +47,15 @@
 
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- Add -->
+            <DataTemplate DataType="{x:Type addvm:RootVM}">
+                <addv:RootV />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type addvm:RegistrationVM}">
+                <addv:RegistrationV />
+            </DataTemplate>
+            
             <!-- Edit -->
             <DataTemplate DataType="{x:Type evm:RootVM}">
                 <ev:RootV />

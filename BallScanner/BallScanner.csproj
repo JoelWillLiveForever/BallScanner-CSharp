@@ -149,6 +149,8 @@
     <Compile Include="MVVM\Commands\RelayCommand.cs" />
     <Compile Include="MVVM\Models\Main\BallGrade.cs" />
     <Compile Include="MVVM\Models\Main\ImageData.cs" />
+    <Compile Include="MVVM\ViewModels\Add\RegistrationVM.cs" />
+    <Compile Include="MVVM\ViewModels\Add\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\LoginVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\RegistrationVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\RootVM.cs" />
@@ -164,6 +166,12 @@
     <Compile Include="MVVM\ViewModels\Main\MenuVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\ScanVM.cs" />
     <Compile Include="MVVM\ViewModels\Main\SettingsVM.cs" />
+    <Compile Include="MVVM\Views\Add\RegistrationV.xaml.cs">
+      <DependentUpon>RegistrationV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\Add\RootV.xaml.cs">
+      <DependentUpon>RootV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\Auth\RootV.xaml.cs">
       <DependentUpon>RootV.xaml</DependentUpon>
     </Compile>
@@ -215,6 +223,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Resources\Styles\DataGrid_Style.cs" />
+    <Page Include="MVVM\Views\Add\RegistrationV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\Add\RootV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\Auth\RootV.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -468,6 +484,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MVVM\Models\Add\" />
     <Folder Include="MVVM\Models\Auth\" />
     <Folder Include="MVVM\Models\Edit\" />
   </ItemGroup>

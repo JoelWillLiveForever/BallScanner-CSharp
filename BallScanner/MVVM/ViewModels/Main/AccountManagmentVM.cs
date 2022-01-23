@@ -2,12 +2,10 @@
 using BallScanner.Data.Tables;
 using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
-using BallScanner.MVVM.Views.Edit;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -248,14 +246,15 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             if (param != null)
             {
-                RootV editWindow = new RootV(param);
+                Views.Edit.RootV editWindow = new Views.Edit.RootV(param);
                 editWindow.ShowDialog();
             }
         }
 
         private void AddUser(object param)
         {
-
+            Views.Add.RootV addWindow = new Views.Add.RootV();
+            addWindow.ShowDialog();
         }
 
         public override void ChangePalette()

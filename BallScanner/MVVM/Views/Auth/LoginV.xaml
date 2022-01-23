@@ -52,7 +52,12 @@
                                        HiddenText="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource PasswordBox_Style}" />
 
-                <Grid Margin="0,7,0,0"
+                <Button Height="29"
+                        Margin="0,7,0,0"
+                        Content="Вход"
+                        Command="{Binding AuthUser_Command}" />
+                
+                <!--<Grid Margin="0,7,0,0"
                       Height="29">
 
                     <Grid.ColumnDefinitions>
@@ -70,7 +75,7 @@
                             Command="{Binding AuthUser_Command}"
                             Height="29" />
 
-                </Grid>
+                </Grid>-->
 
             </StackPanel>
         </DockPanel>
