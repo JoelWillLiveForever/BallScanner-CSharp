@@ -20,12 +20,11 @@ namespace BallScanner.MVVM.ViewModels.Main
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private static Timer timer = new Timer(400) { Enabled = false };
 
+        public static RelayCommand RefreshDataGrid { get; set; }
         public RelayCommand OpenDialogWindowCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-
-        public static RelayCommand RefreshDataGrid { get; set; }
-
         public RelayCommand UpdateCommand { get; set; }
+        public RelayCommand AddUser_Command { get; set; }
 
         private ObservableCollection<User> _users;
         public ObservableCollection<User> Users
@@ -74,6 +73,7 @@ namespace BallScanner.MVVM.ViewModels.Main
             OpenDialogWindowCommand = new RelayCommand(OpenDialogWindow);
             SearchCommand = new RelayCommand(Search);
             UpdateCommand = new RelayCommand(Update);
+            AddUser_Command = new RelayCommand(AddUser);
 
             RefreshDataGrid = new RelayCommand(OnRefreshDataGrid);
 
@@ -175,9 +175,24 @@ namespace BallScanner.MVVM.ViewModels.Main
                         break;
                     case 5:
                         // access level
-                        search_result = (from user in dbContext.Users
-                                         where user._access_level.ToString().Equals(Search_Value)
-                                         select user).ToList();
+                        switch (Search_Value)
+                        {
+                            case "Пользователь":
+                                search_result = (from user in dbContext.Users
+                                                 where user._access_level == 0
+                                                 select user).ToList();
+                                break;
+                            case "Администратор":
+                                search_result = (from user in dbContext.Users
+                                                 where user._access_level == 1
+                                                 select user).ToList();
+                                break;
+                            default:
+                                search_result = (from user in dbContext.Users
+                                                 where user._access_level.ToString().Equals(Search_Value)
+                                                 select user).ToList();
+                                break;
+                        }
 
                         if (search_result != null)
                             Users = new ObservableCollection<User>(search_result);
@@ -185,9 +200,24 @@ namespace BallScanner.MVVM.ViewModels.Main
                         break;
                     case 6:
                         // is active user
-                        search_result = (from user in dbContext.Users
-                                         where user._is_active.ToString().Equals(Search_Value)
-                                         select user).ToList();
+                        switch (Search_Value)
+                        {
+                            case "Активен":
+                                search_result = (from user in dbContext.Users
+                                                 where user._is_active == 1
+                                                 select user).ToList();
+                                break;
+                            case "Неактивен":
+                                search_result = (from user in dbContext.Users
+                                                 where user._is_active == 0
+                                                 select user).ToList();
+                                break;
+                            default:
+                                search_result = (from user in dbContext.Users
+                                                 where user._is_active.ToString().Equals(Search_Value)
+                                                 select user).ToList();
+                                break;
+                        }
 
                         if (search_result != null)
                             Users = new ObservableCollection<User>(search_result);
@@ -221,6 +251,11 @@ namespace BallScanner.MVVM.ViewModels.Main
                 RootV editWindow = new RootV(param);
                 editWindow.ShowDialog();
             }
+        }
+
+        private void AddUser(object param)
+        {
+
         }
 
         public override void ChangePalette()

@@ -29,6 +29,10 @@
                                           MaxWidth="200" />
                         <ColumnDefinition Width="7" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="7" />
+                        <ColumnDefinition Width="0.25*"
+                                          MinWidth="150"
+                                          MaxWidth="200" />
                     </Grid.ColumnDefinitions>
                     <!--<ColumnDefinition Width="7" />
                         <ColumnDefinition Width="0.25*"
@@ -49,6 +53,11 @@
                                        
                                        Text="{Binding Search_Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        Style="{StaticResource Style_Inside}" />
+
+                    <Button Grid.Column="4"
+                            Content="Добавить аккаунт"
+                            Command="{Binding AddUser_Command}"
+                            Height="29" />
 
                 </Grid>
             </StackPanel>
