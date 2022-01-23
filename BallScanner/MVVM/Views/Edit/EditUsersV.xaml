@@ -62,7 +62,7 @@
 
             </Grid>
 
-            <Grid Height="59"
+            <Grid Height="Auto"
                   Margin="0,7,0,0"
                   DockPanel.Dock="Top">
 
@@ -72,13 +72,27 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <joel:LabelTextBox Grid.Column="0"
+                <joel:LabelComboBox Grid.Column="0"
+                                    LabelText="Уровень доступа"
+                                    SelectedIndex="{Binding Access_Level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="Пользователь" />
+                    <ComboBoxItem Content="Администратор" />
+                </joel:LabelComboBox>
+
+                <joel:LabelComboBox Grid.Column="2"
+                                    LabelText="Статус аккаунта"
+                                    SelectedIndex="{Binding Is_Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem Content="Неактивен" />
+                    <ComboBoxItem Content="Активен" />
+                </joel:LabelComboBox>
+                
+                <!--<joel:LabelTextBox Grid.Column="0"
                                    LabelText="Уровень доступа"
                                    Text="{Binding Access_Level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <joel:LabelTextBox Grid.Column="2"
                                    LabelText="Статус аккаунта"
-                                   Text="{Binding Is_Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                   Text="{Binding Is_Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
             </Grid>
 

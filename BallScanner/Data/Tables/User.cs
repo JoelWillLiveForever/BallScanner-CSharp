@@ -144,6 +144,21 @@ namespace BallScanner.Data.Tables
             }
         }
 
+        public string Is_Active
+        {
+            get
+            {
+                switch (_is_active)
+                {
+                    case 0:
+                        return "Неактивен";
+                    case 1:
+                        return "Активен";
+                }
+                return null;
+            }
+        }
+
         private int _my_access_level;
         public int _access_level
         {
@@ -166,6 +181,21 @@ namespace BallScanner.Data.Tables
                 {
                     isInit[5] = false;
                 }
+            }
+        }
+
+        public string Access_Level
+        {
+            get
+            {
+                switch (_access_level)
+                {
+                    case 0:
+                        return "Пользователь";
+                    case 1:
+                        return "Администратор";
+                }
+                return null;
             }
         }
 

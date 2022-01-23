@@ -99,11 +99,11 @@
                                             IsReadOnly="True" />
                         <DataGridTextColumn Header="Уровень доступа"
                                             Width="*"
-                                            Binding="{Binding _access_level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Binding="{Binding Access_Level, UpdateSourceTrigger=PropertyChanged}"
                                             IsReadOnly="True" />
                         <DataGridTextColumn Header="Статус аккаунта"
                                             Width="*"
-                                            Binding="{Binding _is_active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Binding="{Binding Is_Active, UpdateSourceTrigger=PropertyChanged}"
                                             IsReadOnly="True" />
                     </DataGrid.Columns>
 

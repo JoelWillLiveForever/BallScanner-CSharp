@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BlockHeader.cs" />
     <Compile Include="JustButton.cs" />
+    <Compile Include="LabelComboBox.cs" />
     <Compile Include="LabelTextBox.cs" />
     <Compile Include="LabelPasswordBox.cs" />
     <Compile Include="SimpleRadioButton.cs" />
@@ -104,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\JustButton_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LabelComboBox_Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
