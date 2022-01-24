@@ -22,7 +22,20 @@ namespace BallScanner
     public partial class App : Application
     {
         // Auth
-        public static User CurrentUser { get; set; }
+        private static User _currentUser = null;
+        public static User CurrentUser
+        {
+            get => _currentUser;
+            set
+            {
+                if (_currentUser == value) return;
+                if (value == null)
+                    WriteMsg2Log("Выход из аккаунта", LoggerTypes.INFO);
+
+                _currentUser = value;
+                WriteMsg2Log("Авторизация в приложении", LoggerTypes.INFO);
+            }
+        }
 
         private const string LANGUAGE_URI = "Resources/Languages/Language.";
 
@@ -159,12 +172,11 @@ namespace BallScanner
 
         private void OnExit(object sender, ExitEventArgs e)
         {
-            if (CurrentUser == null)
-            {
-                Logger log = LogManager.GetLogger("Неавторизованный пользователь");
-                log.Info("Выход из приложения!");
-            } else
-                WriteMsg2Log("Выход из приложения!", LoggerTypes.INFO);
+            if (CurrentUser != null)
+                CurrentUser = null;
+
+            Logger log = LogManager.GetLogger("Неавторизованный пользователь");
+            log.Info("Выход из приложения!");
 
             try
             {

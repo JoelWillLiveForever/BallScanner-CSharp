@@ -92,7 +92,6 @@ namespace BallScanner.MVVM.Views.Main
                 MyMenuContainer.Width = 40.0d;
 
                 MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandMore");
-                App.WriteMsg2Log("Нажатие на пункт меню \"Сжать меню\"", LoggerTypes.INFO);
             }
             else
             {
@@ -101,7 +100,6 @@ namespace BallScanner.MVVM.Views.Main
                 MyMenuContainer.Width = double.NaN;
 
                 MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandLess");
-                App.WriteMsg2Log("Нажатие на пункт меню \"Расширить меню\"", LoggerTypes.INFO);
             }
         }
     }

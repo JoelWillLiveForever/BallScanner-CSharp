@@ -123,8 +123,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         private void Logout(object param)
         {
-            App.WriteMsg2Log("Нажатие на пункт меню \"Выход из аккаунта\"", LoggerTypes.INFO);
-
             try
             {
                 AppDbContext dbContext = AppDbContext.GetInstance();
@@ -137,7 +135,6 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
 
             App.CurrentUser = null;
-            App.WriteMsg2Log("Выход из системы", LoggerTypes.INFO);
 
             // open login window
             Window old = Application.Current.MainWindow;

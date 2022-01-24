@@ -101,7 +101,6 @@ namespace BallScanner.MVVM.ViewModels.Auth
                     }
 
                     App.CurrentUser = user;
-                    App.WriteMsg2Log("Авторизация в системе", LoggerTypes.INFO);
                     //Console.WriteLine(user._surname);
 
                     // open work window

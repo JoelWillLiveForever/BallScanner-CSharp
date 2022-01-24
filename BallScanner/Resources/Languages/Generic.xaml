@@ -4,6 +4,6 @@
 
     <!-- Страница "Настройки" -->
     <sys:String x:Key="Text_Language_Russian_Region">Русский, Россия</sys:String>
-    <sys:String x:Key="Text_Language_English_Region">English, USA</sys:String>
+    <sys:String x:Key="Text_Language_English_Region">English, USA - beta</sys:String>
 
 </ResourceDictionary>

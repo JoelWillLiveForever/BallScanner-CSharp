@@ -35,8 +35,9 @@
     <sys:String x:Key="Text_Language_Russian">Russian, Russia</sys:String>
     <sys:String x:Key="Text_Language_English">English, USA</sys:String>
 
-    <sys:String x:Key="Text_Theme_Light">Light - Beta</sys:String>
+    <sys:String x:Key="Text_Theme_Light">Light - beta</sys:String>
     <sys:String x:Key="Text_Theme_Dark">Dark</sys:String>
 
+    <sys:String x:Key="Text_Copyright">Copyright © 2022 Nikulin V.S. All rights reserved.</sys:String>
 
 </ResourceDictionary>
