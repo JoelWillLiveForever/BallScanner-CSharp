@@ -1,14 +1,12 @@
 ﻿using BallScanner.Data;
 using BallScanner.Data.Tables;
 using BallScanner.MVVM.Base;
-using NLog;
 using System;
 using System.Windows;
 using System.Linq;
 using BallScanner.MVVM.Commands;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Timers;
 using BallScanner.MVVM.Views.Edit;
@@ -17,15 +15,12 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class DocumentsVM : PageVM
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private static Timer timer = new Timer(400) { Enabled = false };
 
         public RelayCommand OpenDialogWindowCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
 
         public static RelayCommand RefreshDataGrid { get; set; }
-
-        public RelayCommand UpdateCommand { get; set; }
 
         private ObservableCollection<Report> _reports;
         public ObservableCollection<Report> Reports
@@ -53,11 +48,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                 timer.Stop();
                 timer.Start();
-                //timer.Stop();
-                //if (_search_value == null || _search_value == "" || _search_value.Length == 0)
-                //    Search(null);
-                //else
-                //    timer.Start();
             }
         }
 
@@ -71,6 +61,9 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                 _selected_index = value;
                 OnPropertyChanged(nameof(Selected_Index));
+
+                timer.Stop();
+                timer.Start();
             }
         }
 
@@ -78,22 +71,19 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             OpenDialogWindowCommand = new RelayCommand(OpenDialogWindow);
             SearchCommand = new RelayCommand(Search);
-            UpdateCommand = new RelayCommand(Update);
 
             RefreshDataGrid = new RelayCommand(OnRefreshDataGrid);
 
-            Task.Run(() =>
+            try
             {
-                try
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-                    Reports = new ObservableCollection<Report>(dbContext.Reports.ToList());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                }
-            });
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                Reports = new ObservableCollection<Report>(dbContext.Reports.ToList());
+            }
+            catch (Exception ex)
+            {
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
 
             timer.Elapsed += new ElapsedEventHandler(OnSearch);
         }
@@ -129,6 +119,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                 switch (Selected_Index)
                 {
                     case 0:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Дата\"", LoggerTypes.INFO);
+
                         // date
                         double date = -1;
                         DateTime searchDateTime;
@@ -145,6 +137,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                     case 1:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Фракция\"", LoggerTypes.INFO);
+
                         // fraction
                         search_result = (from report in dbContext.Reports
                                          where report._fraction.Equals(Search_Value)
@@ -155,6 +149,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                     case 2:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Номер партии\"", LoggerTypes.INFO);
+
                         // partia_number
                         search_result = (from report in dbContext.Reports
                                          where report._partia_number.Equals(Search_Value)
@@ -165,6 +161,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                     case 3:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Номер смены\"", LoggerTypes.INFO);
+
                         // smena_number
                         search_result = (from report in dbContext.Reports
                                          where report.User._smena_number.ToString().Equals(Search_Value)
@@ -175,6 +173,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                     case 4:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Значение\"", LoggerTypes.INFO);
+
                         // avg_value
                         search_result = (from report in dbContext.Reports
                                          where report._avg_black_pixels_value.ToString().Equals(Search_Value)
@@ -185,6 +185,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                     case 5:
+                        App.WriteMsg2Log("Поиск отчётов на странице \"Отчёты\" по параметру \"Примечание\"", LoggerTypes.INFO);
+
                         // note
                         search_result = (from report in dbContext.Reports
                                          where report._note.Equals(Search_Value)
@@ -195,7 +197,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                         break;
                 }
-
                 #region Поиск по всем параметрам одновременно
                 //double date = -1;
                 //DateTime searchDateTime;
@@ -215,20 +216,8 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-            }
-        }
-
-        private void Update(object param)
-        {
-            try
-            {
-                AppDbContext dbContext = AppDbContext.GetInstance();
-                dbContext.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
 
@@ -236,8 +225,12 @@ namespace BallScanner.MVVM.ViewModels.Main
         {
             if (param != null)
             {
+                App.WriteMsg2Log("Открытие окна редактирования отчёта. Отчёт #" + (param as Report)._id + ". Страница \"Отчёты\".", LoggerTypes.INFO);
+
                 RootV editWindow = new RootV(param);
                 editWindow.ShowDialog();
+
+                App.WriteMsg2Log("Закрытие окна редактирования отчёта!", LoggerTypes.INFO);
             }
         }
 

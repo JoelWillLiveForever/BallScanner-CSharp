@@ -2,7 +2,6 @@
 using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Models.Main;
 using Microsoft.Win32;
-using NLog;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,16 +16,10 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class CalibrateVM : PageVM
     {
-        // Логгер
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         // Команды
         public static RelayCommand PerformAction { get; set; }
 
         public RelayCommand ChangeImageCommand { get; set; }
-
-        // Локкер
-        private readonly object global_locker = new object();
 
         // Декодирование изображения, если пикселей на экране меньше разрешения картинки
         private int _decodePixelHeight;
@@ -101,14 +94,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                 _thresholdValue = value;
                 OnPropertyChanged(nameof(ThresholdValue));
 
-                Task.Run(() =>
-                {
-                    lock (global_locker)
-                    {
-                        Properties.Settings.Default.Threshold = ThresholdValue;
-                        Properties.Settings.Default.Save();
-                    }
-                });
+                Properties.Settings.Default.Threshold = ThresholdValue;
+                Properties.Settings.Default.Save();
 
                 if (Data != null && Data.Length != 0 && !isDragging) UpdateImage(300);
             }
@@ -128,14 +115,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                 _firstThreshold = value;
                 OnPropertyChanged(nameof(FirstThreshold));
 
-                Task.Run(() =>
-                {
-                    lock (global_locker)
-                    {
-                        Properties.Settings.Default.FirstThreshold = FirstThreshold;
-                        Properties.Settings.Default.Save();
-                    }
-                });
+                Properties.Settings.Default.FirstThreshold = FirstThreshold;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -150,60 +131,10 @@ namespace BallScanner.MVVM.ViewModels.Main
                 _secondThreshold = value;
                 OnPropertyChanged(nameof(SecondThreshold));
 
-                Task.Run(() =>
-                {
-                    lock (global_locker)
-                    {
-                        Properties.Settings.Default.SecondThreshold = SecondThreshold;
-                        Properties.Settings.Default.Save();
-                    }
-                });
+                Properties.Settings.Default.SecondThreshold = SecondThreshold;
+                Properties.Settings.Default.Save();
             }
         }
-
-        //private string _fraction;
-        //public string Fraction
-        //{
-        //    get => _fraction;
-        //    set
-        //    {
-        //        if (_fraction == value) return;
-
-        //        _fraction = value;
-        //        OnPropertyChanged(nameof(Fraction));
-
-        //        Task.Run(() =>
-        //        {
-        //            lock (global_locker)
-        //            {
-        //                Properties.Settings.Default.Fraction = Fraction;
-        //                Properties.Settings.Default.Save();
-        //            }
-        //        });
-        //    }
-        //}
-
-        //private string _partia_number;
-        //public string Partia_Number
-        //{
-        //    get => _partia_number;
-        //    set
-        //    {
-        //        if (_partia_number == value) return;
-
-        //        _partia_number = value;
-        //        OnPropertyChanged(nameof(Partia_Number));
-
-        //        Task.Run(() =>
-        //        {
-        //            lock (global_locker)
-        //            {
-        //                Properties.Settings.Default.Partia_Number = Partia_Number;
-        //                Properties.Settings.Default.Save();
-        //            }
-        //        });
-        //    }
-        //}
 
         private long _avgNumBlackPixels;
         public long AvgNumBlackPixels
@@ -250,7 +181,6 @@ namespace BallScanner.MVVM.ViewModels.Main
         // Конструктор
         public CalibrateVM()
         {
-            Log.Info("Constructor called!");
             PerformAction = new RelayCommand(OnPerformAction);
 
             // Подгрузить настройки
@@ -272,12 +202,11 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         private void OnPerformAction(object param)
         {
-            Log.Info("Call function \"OnPerformAction(object param)\", param: " + param);
-            Log.Info("Call function \"Task.Run()\"");
-
             switch (param)
             {
                 case "Button_LoadImages":
+                    App.WriteMsg2Log("Нажатие на кнопку \"Загрузка изображений\" на странице \"Калибровка\"", LoggerTypes.INFO);
+
                     if (worker_DownloadExecute == null || (worker_DownloadExecute != null && !worker_DownloadExecute.IsBusy))
                     {
                         worker_DownloadExecute = new BackgroundWorker();
@@ -286,7 +215,6 @@ namespace BallScanner.MVVM.ViewModels.Main
                         //worker.ProgressChanged += ProgressChanged;
                         worker_DownloadExecute.DoWork += delegate
                         {
-                            Log.Info("Button \"Load\" has been pressed");
                             try
                             {
                                 OpenFileDialog openFile = new OpenFileDialog();
@@ -321,30 +249,31 @@ namespace BallScanner.MVVM.ViewModels.Main
                             }
                             catch (FileNotFoundException ex)
                             {
-                                Log.Error("Error \"" + nameof(FileNotFoundException) + "\"", ex.Message);
-                                MessageBox.Show(ex.Message, "FileNotFoundException", MessageBoxButton.OK, MessageBoxImage.Error);
+                                App.WriteMsg2Log("Ошибка \"" + nameof(FileNotFoundException) + "\"! Текст ошибки: " + ex.Message, LoggerTypes.ERROR);
+                                MessageBox.Show("Текст ошибки: " + ex.Message, "Ошибка \"" + nameof(FileNotFoundException) + "\"!", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                             catch (ArgumentException ex)
                             {
-                                Log.Error("Error \"" + nameof(ArgumentException) + "\"", ex.Message);
-                                MessageBox.Show(ex.Message, "ArgumentException", MessageBoxButton.OK, MessageBoxImage.Error);
+                                App.WriteMsg2Log("Ошибка \"" + nameof(ArgumentException) + "\"! Текст ошибки: " + ex.Message, LoggerTypes.ERROR);
+                                MessageBox.Show("Текст ошибки: " + ex.Message, "Ошибка \"" + nameof(ArgumentException) + "\"!", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                             catch (UriFormatException ex)
                             {
-                                Log.Error("Error \"" + nameof(IndexOutOfRangeException) + "\"", ex.Message);
-                                MessageBox.Show(ex.Message, "IndexOutOfRangeException", MessageBoxButton.OK, MessageBoxImage.Error);
+                                App.WriteMsg2Log("Ошибка \"" + nameof(UriFormatException) + "\"! Текст ошибки: " + ex.Message, LoggerTypes.ERROR);
+                                MessageBox.Show("Текст ошибки: " + ex.Message, "Ошибка \"" + nameof(UriFormatException) + "\"!", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                             catch (Exception ex)
                             {
-                                Log.Error("Error \"" + nameof(Exception) + "\"", ex.Message);
-                                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         };
                         worker_DownloadExecute.RunWorkerAsync();
                     }
                     break;
                 case "Button_PrevImage":
-                    Log.Info("Button \"Previous\" has been pressed");
+                    App.WriteMsg2Log("Нажатие на кнопку \"Предыдущее изображение\" на странице \"Калибровка\"", LoggerTypes.INFO);
+
                     if (Data != null && Data.Length > 0 && currentImageIndex > 0)
                     {
                         Interlocked.Decrement(ref currentImageIndex);
@@ -353,7 +282,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                     }
                     break;
                 case "Button_NextImage":
-                    Log.Info("Button \"Next\" has been pressed");
+                    App.WriteMsg2Log("Нажатие на кнопку \"Следующее изображение\" на странице \"Калибровка\"", LoggerTypes.INFO);
+
                     if (Data != null && Data.Length > 0 && currentImageIndex < Data.Length - 1)
                     {
                         Interlocked.Increment(ref currentImageIndex);
@@ -362,6 +292,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                     }
                     break;
                 case "Button_Execute":
+                    App.WriteMsg2Log("Нажатие на кнопку \"Выполнить\" на странице \"Калибровка\"", LoggerTypes.INFO);
+
                     if (worker_DownloadExecute == null || (worker_DownloadExecute != null && !worker_DownloadExecute.IsBusy))
                     {
                         worker_DownloadExecute = new BackgroundWorker();
@@ -369,7 +301,6 @@ namespace BallScanner.MVVM.ViewModels.Main
                         worker_DownloadExecute.WorkerSupportsCancellation = false;
                         worker_DownloadExecute.ProgressChanged += ProgressChanged;
                         worker_DownloadExecute.DoWork += delegate {
-                            Log.Info("Button \"Execute\" has been pressed");
                             if (Data != null && Data.Length > 0)
                             {
                                 int progress = 0;
@@ -426,6 +357,8 @@ namespace BallScanner.MVVM.ViewModels.Main
                                     AvgNumBlackPixels += obj.NumberOfBlackPixels;
                                 }
                                 AvgNumBlackPixels /= ImagesCount;
+
+                                App.WriteMsg2Log("Завершено сканирование " + Data.Length + " изображений на странице \"Калибровка\"! Среднее число чёрных пикселей = " + AvgNumBlackPixels + ". Порогое значение ползунка = " + ThresholdValue + ". Первое порогое значение = " + FirstThreshold + ". Второе пороговое значение = " + SecondThreshold + ".", LoggerTypes.INFO);
                             }
                         };
                         worker_DownloadExecute.RunWorkerAsync();
@@ -435,15 +368,13 @@ namespace BallScanner.MVVM.ViewModels.Main
                     isDragging = true;
                     break;
                 case "Slider_DragCompleted":
-                    Log.Info("Slider has been released");
                     isDragging = false;
+                    App.WriteMsg2Log("Изменено положение ползунка \"Пороговое значение\" на странице \"Калибровка\"! Новое значение = " + ThresholdValue, LoggerTypes.INFO);
 
                     if (Data != null && Data.Length > 0)
                         UpdateImage(0);
                     break;
             }
-
-            Log.Info("End of function \"OnPerformAction\"");
         }
 
         private Bitmap GetThresholdBitmap(string path, short thresholdValue)
@@ -477,13 +408,13 @@ namespace BallScanner.MVVM.ViewModels.Main
             }
             catch (ArgumentException e)
             {
-                Log.Error("Error \"ArgumentException\"", e.Message);
-                MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
+                App.WriteMsg2Log("Ошибка \"" + nameof(ArgumentException) + "\" в методе \"" + nameof(GetThresholdBitmap) + "\". Активная страница \"Калибровка\". Текст ошибки: " + e.Message, LoggerTypes.ERROR);
+                MessageBox.Show("Текст ошибки: " + e.Message, "Ошибка \"" + nameof(ArgumentException) + "\"!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception e)
             {
-                Log.Error("Error \"Exception\"", e.Message);
-                MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
+                App.WriteMsg2Log("Непредвиденная ошибка в методе \"" + nameof(GetThresholdBitmap) + "\". Активная страница \"Калибровка\". Текст ошибки: " + e.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + e.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return null;
@@ -563,13 +494,13 @@ namespace BallScanner.MVVM.ViewModels.Main
                     }
                     catch (ArgumentException e)
                     {
-                        Log.Error("Error \"ArgumentException\"", e.Message);
-                        MessageBox.Show(e.Message, nameof(ArgumentException), MessageBoxButton.OK, MessageBoxImage.Error);
+                        App.WriteMsg2Log("Ошибка \"" + nameof(ArgumentException) + "\" в методе \"" + nameof(UpdateImage) + "\". Активная страница \"Калибровка\". Текст ошибки: " + e.Message, LoggerTypes.ERROR);
+                        MessageBox.Show("Текст ошибки: " + e.Message, "Ошибка \"" + nameof(ArgumentException) + "\"!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     catch (Exception e)
                     {
-                        Log.Error("Error \"Exception\"", e.Message);
-                        MessageBox.Show(e.Message, nameof(Exception), MessageBoxButton.OK, MessageBoxImage.Error);
+                        App.WriteMsg2Log("Непредвиденная ошибка в методе \"" + nameof(UpdateImage) + "\". Активная страница \"Калибровка\". Текст ошибки: " + e.Message, LoggerTypes.FATAL);
+                        MessageBox.Show("Текст ошибки: " + e.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 });
             }
@@ -584,6 +515,8 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                 OnPropertyChanged(nameof(CurrentData));
                 UpdateImage(0);
+
+                App.WriteMsg2Log("Изменено текущее изображение. Информация о новом изображении: номер в списке = " + data.Id + "; имя файла = " + data.Name + "; путь к файлу = " + data.ImagePath + "; число чёрных пикселей = " + data.NumberOfBlackPixels + "; cорт шарика = " + data.BallGrade_Text + ";", LoggerTypes.INFO);
             }
         }
 

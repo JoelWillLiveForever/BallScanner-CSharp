@@ -1,16 +1,12 @@
 ﻿using BallScanner.Data.Tables;
 using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
-using NLog;
-using System;
 using System.Windows;
 
 namespace BallScanner.MVVM.ViewModels.Edit
 {
     public class RootVM : BaseViewModel
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         private static EditReportsVM editReportsVM;
         private static EditUsersVM editUsersVM;
 
@@ -29,8 +25,6 @@ namespace BallScanner.MVVM.ViewModels.Edit
 
         public RootVM()
         {
-            Log.Info("Constructor called!");
-
             editReportsVM = new EditReportsVM();
             editUsersVM = new EditUsersVM();
 

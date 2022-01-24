@@ -1,5 +1,6 @@
 ﻿using BallScanner.Data;
 using BallScanner.Data.Tables;
+using NLog;
 using System;
 using System.Data.Entity;
 using System.Globalization;
@@ -9,21 +10,17 @@ using System.Windows;
 
 namespace BallScanner
 {
-    //public enum Palettes
-    //{
-    //    Pink,
-    //    Red,
-    //    Orange,
-    //    Yellow,
-    //    Green,
-    //    Blue,
-    //    Purple
-    //}
+    public enum LoggerTypes
+    {
+        DEBUG,
+        INFO,
+        WARN,
+        ERROR,
+        FATAL
+    }
 
     public partial class App : Application
     {
-        private static readonly object global_locker = new object();
-
         // Auth
         public static User CurrentUser { get; set; }
 
@@ -86,21 +83,22 @@ namespace BallScanner
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Logger log = LogManager.GetLogger("Неавторизованный пользователь");
+            log.Info("Запуск приложения");
+
             Task.Run(() =>
             {
                 try
                 {
-                    lock (global_locker)
-                    {
-                        AppDbContext dbContext = AppDbContext.GetInstance();
+                    AppDbContext dbContext = AppDbContext.GetInstance();
 
-                        dbContext.Users.Load();
-                        dbContext.Reports.Load();
-                    }
+                    dbContext.Users.Load();
+                    dbContext.Reports.Load();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                    MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 }
             });
 
@@ -161,17 +159,54 @@ namespace BallScanner
 
         private void OnExit(object sender, ExitEventArgs e)
         {
+            if (CurrentUser == null)
+            {
+                Logger log = LogManager.GetLogger("Неавторизованный пользователь");
+                log.Info("Выход из приложения!");
+            } else
+                WriteMsg2Log("Выход из приложения!", LoggerTypes.INFO);
+
             try
             {
-                lock (global_locker)
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-                    dbContext.SaveChanges();
-                }
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+            }
+        }
+
+        private static string GetCurrentUserFullName()
+        {
+            return CurrentUser._username + " (" + CurrentUser._surname + " " + CurrentUser._name + ")";
+        }
+
+        public static void WriteMsg2Log(string msg, LoggerTypes type)
+        {
+            if (CurrentUser != null)
+            {
+                Logger log = LogManager.GetLogger(GetCurrentUserFullName());
+
+                switch (type)
+                {
+                    case LoggerTypes.DEBUG:
+                        log.Debug(msg);
+                        break;
+                    case LoggerTypes.INFO:
+                        log.Info(msg);
+                        break;
+                    case LoggerTypes.WARN:
+                        log.Warn(msg);
+                        break;
+                    case LoggerTypes.ERROR:
+                        log.Error(msg);
+                        break;
+                    case LoggerTypes.FATAL:
+                        log.Fatal(msg);
+                        break;
+                }
             }
         }
     }

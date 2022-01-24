@@ -1,19 +1,18 @@
 ﻿using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
-using NLog;
 using System.Windows;
 using Joel.Utils.Services;
 using System.Linq;
 using BallScanner.Data;
 using BallScanner.Data.Tables;
 using System;
+using NLog;
 
 namespace BallScanner.MVVM.ViewModels.Auth
 {
     public class LoginVM : BaseViewModel
     {
-        private static readonly object global_locker = new object();
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        //private static readonly Logger Log = LogManager.GetLogger("Неавторизованный пользователь");
 
         private string _login;
         public string Login
@@ -25,6 +24,8 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                 _login = value;
                 OnPropertyChanged(nameof(Login));
+
+                //Log.Info("Изменение данных в поле \"Логин\"");
             }
         }
 
@@ -38,25 +39,26 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                 _password = value;
                 OnPropertyChanged(nameof(Password));
+
+                //Log.Info("Изменение данных в поле \"Пароль\"");
             }
         }
 
         public RelayCommand AuthUser_Command { get; set; }
-        public RelayCommand GoToRegistrationView_Command { get; set; }
 
         public LoginVM()
         {
-            Log.Info("Constructor called!");
-
             AuthUser_Command = new RelayCommand(Authenticate);
-            GoToRegistrationView_Command = new RelayCommand(ChangeVM);
         }
 
         private void Authenticate(object param)
         {
+            Logger Log = LogManager.GetLogger("Неавторизованный пользователь");
+
             if ((Login == null || Login.Length == 0 || Login.Equals("")) || (Password == null || Password.Length == 0 || Password.Equals("")))
             {
-                MessageBox.Show("Укажите данные для входа!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                Log.Warn("Предупреждение пользователя! Не были указаны данные (логин или пароль) для авторизации!");
+                MessageBox.Show("Укажите данные для входа!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
 
@@ -84,53 +86,41 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
                 try
                 {
-                    lock (global_locker)
+                    AppDbContext dbContext = AppDbContext.GetInstance();
+                    //dbContext.Users.Load();
+
+                    User user = dbContext.Users
+                        .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash) && u._is_active == 1)
+                        .FirstOrDefault();
+
+                    if (user == null)
                     {
-                        AppDbContext dbContext = AppDbContext.GetInstance();
-                        //dbContext.Users.Load();
-
-                        User user = dbContext.Users
-                            .Where(u => u._username.Equals(username) && u._password_hash.Equals(password_hash) && u._is_active == 1)
-                            .FirstOrDefault();
-
-                        if (user == null)
-                        {
-                            MessageBox.Show("Неправильный логин или пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                            return;
-                        }
-
-                        App.CurrentUser = user;
-                        //Console.WriteLine(user._surname);
-
-                        // open work window
-                        Window old = Application.Current.MainWindow;
-                        Window future = new Views.Main.RootV();
-
-                        Application.Current.MainWindow = future;
-
-                        // Clear fields
-                        Login = Password = null;
-
-                        future.Show();
-                        old.Close();
+                        Log.Error("Ошибка авторизации! Неправильный логин или пароль!");
+                        MessageBox.Show("Неправильный логин или пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        return;
                     }
-                } catch (Exception ex)
-                {
-                    MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+
+                    App.CurrentUser = user;
+                    App.WriteMsg2Log("Авторизация в системе", LoggerTypes.INFO);
+                    //Console.WriteLine(user._surname);
+
+                    // open work window
+                    Window old = Application.Current.MainWindow;
+                    Window future = new Views.Main.RootV();
+
+                    Application.Current.MainWindow = future;
+
+                    // Clear fields
+                    Login = Password = null;
+
+                    future.Show();
+                    old.Close();
                 }
-            }
-        }
-
-        private void ChangeVM(object param)
-        {
-            Password = null;
-            Login = null;
-
-            RootVM root = ParentViewModel as RootVM;
-
-            if (root.ChangeRootVM_Command.CanExecute("registration"))
-            {
-                root.ChangeRootVM_Command.Execute("registration");
+                catch (Exception ex)
+                {
+                    Log.Fatal("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message);
+                    MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                }
             }
         }
     }

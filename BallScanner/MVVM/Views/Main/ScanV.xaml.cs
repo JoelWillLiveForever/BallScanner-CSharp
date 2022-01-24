@@ -31,6 +31,7 @@ namespace BallScanner.MVVM.Views.Main
                 MyContentControl.ContentTemplate = MinState;
 
                 isMinState = true;
+                App.WriteMsg2Log("Изменено состояние страницы \"Сканирование\" на \"Компактное состояние\"", LoggerTypes.INFO);
             }
             else
             {
@@ -38,6 +39,7 @@ namespace BallScanner.MVVM.Views.Main
                 MyContentControl.ContentTemplate = DefaultState;
 
                 isMinState = false;
+                App.WriteMsg2Log("Изменено состояние страницы \"Сканирование\" на \"Обычное состояние\"", LoggerTypes.INFO);
             }
         }
 

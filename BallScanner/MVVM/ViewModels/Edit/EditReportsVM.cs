@@ -11,8 +11,6 @@ namespace BallScanner.MVVM.ViewModels.Edit
 {
     public class EditReportsVM : BaseViewModel
     {
-        private static readonly object global_locker = new object();
-
         public RelayCommand DeleteReportCommand { get; set; }
 
         private Report report;
@@ -194,22 +192,21 @@ namespace BallScanner.MVVM.ViewModels.Edit
 
         private void Delete_Report(object param)
         {
+            App.WriteMsg2Log("Удаление отчёта. Информация об отчёте: номер = " + report._id + "; дата = " + report._date + "; фракция = " + report._fraction + "; номер партии = " + report._partia_number + "; среднее значение чёрных пикселей = " + report._avg_black_pixels_value + "; примечание = " + report._note + "; номер пользователя, который сделал отчёт = " + report._user_id + ";", LoggerTypes.INFO);
             try
             {
-                lock (global_locker)
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
+                AppDbContext dbContext = AppDbContext.GetInstance();
 
-                    dbContext.Reports.Remove(report);
-                    dbContext.SaveChanges();
-                }
+                dbContext.Reports.Remove(report);
+                dbContext.SaveChanges();
 
                 currDialogWindow.Close();
                 RefreshDataGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
     }

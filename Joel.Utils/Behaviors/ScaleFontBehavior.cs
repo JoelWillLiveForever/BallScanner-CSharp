@@ -72,12 +72,13 @@ namespace Joel.Utils.Behaviors
         }
 
         // Measures text size of textblock
+        [Obsolete]
         private Size MeasureText(TextBlock tb)
         {
             var formattedText = new FormattedText(tb.Text, CultureInfo.CurrentUICulture,
                 FlowDirection.LeftToRight,
                 new Typeface(tb.FontFamily, tb.FontStyle, tb.FontWeight, tb.FontStretch),
-                this.MaxFontSize, Brushes.Black); // always uses MaxFontSize for desiredSize
+                MaxFontSize, Brushes.Black); // always uses MaxFontSize for desiredSize
 
             return new Size(formattedText.Width, formattedText.Height);
         }

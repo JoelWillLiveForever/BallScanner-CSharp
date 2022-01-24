@@ -70,7 +70,7 @@ namespace BallScanner.MVVM.Views.Main
             }
         }
 
-        private void MyCollapseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void MyCollapseButton_Click(object sender, RoutedEventArgs e)
         {
             ChangeMenuState(false);
         }
@@ -87,19 +87,21 @@ namespace BallScanner.MVVM.Views.Main
 
             if (Properties.Settings.Default.IsSmallMenuState)
             {
-                MyLogo.Visibility = System.Windows.Visibility.Collapsed;
-                MyBlockHeader.Visibility = System.Windows.Visibility.Collapsed;
+                MyLogo.Visibility = Visibility.Collapsed;
+                MyBlockHeader.Visibility = Visibility.Collapsed;
                 MyMenuContainer.Width = 40.0d;
 
                 MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandMore");
+                App.WriteMsg2Log("Нажатие на пункт меню \"Сжать меню\"", LoggerTypes.INFO);
             }
             else
             {
-                MyLogo.Visibility = System.Windows.Visibility.Visible;
-                MyBlockHeader.Visibility = System.Windows.Visibility.Visible;
+                MyLogo.Visibility = Visibility.Visible;
+                MyBlockHeader.Visibility = Visibility.Visible;
                 MyMenuContainer.Width = double.NaN;
 
                 MyCollapseButton.Icon = (Geometry)FindResource("Geometry_Icon_ExpandLess");
+                App.WriteMsg2Log("Нажатие на пункт меню \"Расширить меню\"", LoggerTypes.INFO);
             }
         }
     }

@@ -78,10 +78,6 @@
                 <av:LoginV />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type avm:RegistrationVM}">
-                <av:RegistrationV />
-            </DataTemplate>
-            
             <!-- Main -->
             <DataTemplate DataType="{x:Type mvm:RootVM}">
                 <mv:RootV />

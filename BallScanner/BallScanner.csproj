@@ -152,7 +152,6 @@
     <Compile Include="MVVM\ViewModels\Add\RegistrationVM.cs" />
     <Compile Include="MVVM\ViewModels\Add\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\LoginVM.cs" />
-    <Compile Include="MVVM\ViewModels\Auth\RegistrationVM.cs" />
     <Compile Include="MVVM\ViewModels\Auth\RootVM.cs" />
     <Compile Include="MVVM\ViewModels\Edit\EditReportsVM.cs" />
     <Compile Include="MVVM\ViewModels\Edit\EditUsersVM.cs" />
@@ -213,9 +212,6 @@
     </Compile>
     <Compile Include="MVVM\Views\Auth\LoginV.xaml.cs">
       <DependentUpon>LoginV.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\Views\Auth\RegistrationV.xaml.cs">
-      <DependentUpon>RegistrationV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Styles\CustomWindowStyle.cs" />
     <Compile Include="App.xaml.cs">
@@ -284,10 +280,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MVVM\Views\Auth\LoginV.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\Views\Auth\RegistrationV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

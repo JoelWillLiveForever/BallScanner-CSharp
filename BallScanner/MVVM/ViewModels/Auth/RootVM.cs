@@ -1,15 +1,13 @@
 ﻿using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
-using NLog;
 
 namespace BallScanner.MVVM.ViewModels.Auth
 {
     public class RootVM : BaseViewModel
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        //private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         private static readonly LoginVM loginVM = new LoginVM();
-        private static readonly RegistrationVM registrationVM = new RegistrationVM();
 
         private BaseViewModel _selectedViewModel;
         public BaseViewModel SelectedViewModel
@@ -26,12 +24,9 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
         public RootVM()
         {
-            Log.Info("Constructor called!");
-
             loginVM.ParentViewModel = this;
-            registrationVM.ParentViewModel = this;
-
             SelectedViewModel = loginVM;
+
             ChangeRootVM_Command = new RelayCommand(ChangeVM);
         }
 
@@ -41,8 +36,6 @@ namespace BallScanner.MVVM.ViewModels.Auth
 
             if (parameter == "login")
                 SelectedViewModel = loginVM;
-            else if (parameter == "registration")
-                SelectedViewModel = registrationVM;
         }
     }
 }

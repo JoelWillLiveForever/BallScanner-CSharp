@@ -11,12 +11,11 @@ namespace BallScanner.MVVM.ViewModels.Edit
 {
     public class EditUsersVM : BaseViewModel
     {
-        private static readonly object global_locker = new object();
         public RelayCommand DeleteReportCommand { get; set; }
         public RelayCommand ChangePasswordCommand { get; set; }
 
-        private User user;
         private Window currDialogWindow;
+        private User user;
 
         public string Title_Text
         {
@@ -190,32 +189,34 @@ namespace BallScanner.MVVM.ViewModels.Edit
         {
             if (user == App.CurrentUser)
             {
+                App.WriteMsg2Log("Попытка удалить авторизованного пользователя (самого себя)!", LoggerTypes.ERROR);
                 MessageBox.Show("Нельзя удалить авторизованного пользователя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
             }
             
             if (user.Reports != null && user.Reports.Count != 0)
             {
+                App.WriteMsg2Log("Попытка удалить пользователя, у которого есть отчёты в базе данных!", LoggerTypes.ERROR);
                 MessageBox.Show("У данного пользователя есть отчёты в базе данных!\nЧтобы удалить данного пользователя, нужно сначала\nудалить все его отчёты!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                 return;
             }
 
+            App.WriteMsg2Log("Удаление пользователя. Информация о пользователе: номер = " + user._id + "; фамилия = " + user._surname + "; имя = " + user._name + "; отчество = " + user._lastname + "; логин = " + user._username + "; номер смены = " + user._smena_number + "; уровень доступа = " + user.Access_Level + "; статус аккаунта = " + user.Is_Active + ";", LoggerTypes.INFO);
             try
             {
-                lock (global_locker)
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
 
-                    dbContext.Users.Remove(user);
-                    dbContext.SaveChanges();
-                }
+                AppDbContext dbContext = AppDbContext.GetInstance();
+
+                dbContext.Users.Remove(user);
+                dbContext.SaveChanges();
 
                 currDialogWindow.Close();
                 RefreshDataGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
 
@@ -224,34 +225,39 @@ namespace BallScanner.MVVM.ViewModels.Edit
             // Null password
             if (NewPassword == null || NewPassword.Equals(""))
             {
-                MessageBox.Show("Вы не указали новый пароль для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Предупреждение пользователя! Поле \"Новый пароль\" пустое!", LoggerTypes.WARN);
+                MessageBox.Show("Вы не указали новый пароль для авторизации!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
 
             // Null password_check
             if (NewPassword_Check == null || NewPassword_Check.Equals(""))
             {
-                MessageBox.Show("Вы не указали повтор нового пароля для проверки!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Предупреждение пользователя! Поле \"Повторите новый пароль\" пустое!", LoggerTypes.WARN);
+                MessageBox.Show("Вы не указали повтор нового пароля для проверки!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
 
             // Bad password length or password_check length
             if (NewPassword.Length < 4 || NewPassword_Check.Length < 4)
             {
-                MessageBox.Show("Длина пароля меньше 4-х символов!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Предупреждение пользователя! Длина пароля или повтора пароля меньше 4-х символов!", LoggerTypes.WARN);
+                MessageBox.Show("Длина пароля меньше 4-х символов!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
 
             // Password equals password_check
             if (!NewPassword.Equals(NewPassword_Check))
             {
-                MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Предупреждение пользователя! Пароли не совпадают!", LoggerTypes.WARN);
+                MessageBox.Show("Пароли не совпадают!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                 return;
             }
 
             user._password_hash = SHAService.ComputeSha256Hash(NewPassword);
 
-            MessageBox.Show("Пароль был успешно изменён!", "Сообщение!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+            App.WriteMsg2Log("Изменение пароля для пользователя. Информация о пользователе: номер = " + user._id + "; фамилия = " + user._surname + "; имя = " + user._name + "; отчество = " + user._lastname + "; логин = " + user._username + "; номер смены = " + user._smena_number + "; уровень доступа = " + user.Access_Level + "; статус аккаунта = " + user.Is_Active + ";", LoggerTypes.INFO);
+            MessageBox.Show("Пароль был успешно изменён!", "Уведомление!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
         }
     }
 }

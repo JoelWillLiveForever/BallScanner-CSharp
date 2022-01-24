@@ -11,8 +11,6 @@ namespace BallScanner.Data.Tables
     //[Table("Users")]
     public class User : INotifyPropertyChanged
     {
-        private static readonly object global_locker = new object();
-
         public event PropertyChangedEventHandler PropertyChanged;
         private Timer timer = new Timer(5000) { Enabled = false };
 
@@ -279,20 +277,19 @@ namespace BallScanner.Data.Tables
         private void OnSaveDbContext(object source, ElapsedEventArgs e)
         {
             timer.Stop();
+            App.WriteMsg2Log("Изменение пользователя. Информация о пользователе: номер = " + _id + "; фамилия = " + _surname + "; имя = " + _name + "; отчество = " + _lastname + "; логин = " + _username + "; номер смены = " + _smena_number + "; уровень доступа = " + Access_Level + "; статус аккаунта = " + Is_Active + ";", LoggerTypes.INFO);
 
             try
             {
-                lock (global_locker)
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-                    dbContext.SaveChanges();
-                }
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
 
                 //Console.WriteLine("SAVED!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
     }

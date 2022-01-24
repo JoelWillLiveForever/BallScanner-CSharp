@@ -36,11 +36,5 @@ namespace Joel.Utils.Converters
 
             return convertor;
         }
-
-
-        public RowToIndexConverter()
-        {
-
-        }
     }
 }

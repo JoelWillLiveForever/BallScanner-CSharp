@@ -1,5 +1,4 @@
 ﻿using BallScanner.MVVM.Base;
-using NLog;
 using System;
 using System.Windows;
 
@@ -7,8 +6,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class AccountVM : PageVM
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         public string Login
         {
             get => App.CurrentUser._username;
@@ -50,11 +47,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 
                 return "Не определён";
             }
-        }
-
-        public AccountVM()
-        {
-            Log.Info("Constructor called!");
         }
 
         public override void ChangePalette()

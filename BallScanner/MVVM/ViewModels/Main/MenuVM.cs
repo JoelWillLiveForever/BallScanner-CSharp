@@ -1,6 +1,5 @@
 ﻿using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.Base;
-using NLog;
 using System.Windows;
 using System;
 using BallScanner.Data;
@@ -9,10 +8,6 @@ namespace BallScanner.MVVM.ViewModels.Main
 {
     public class MenuVM : BaseViewModel
     {
-        private static readonly object global_locker = new object();
-
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         private static readonly AccountManagmentVM accountManagmentVM = new AccountManagmentVM();
         private static readonly AccountVM accountVM = new AccountVM();
         private static readonly ScanVM scanVM = new ScanVM();
@@ -44,27 +39,34 @@ namespace BallScanner.MVVM.ViewModels.Main
                         AccountManagmentVM.RefreshDataGrid.Execute(null);
 
                     SelectedPage = accountManagmentVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Администрирование\"", LoggerTypes.INFO);
                     break;
                 case 1:
                     SelectedPage = accountVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Аккаунт\"", LoggerTypes.INFO);
                     break;
                 case 2:
                     SelectedPage = scanVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Сканирование\"", LoggerTypes.INFO);
                     break;
                 case 3:
                     SelectedPage = calibrateVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Калибровка\"", LoggerTypes.INFO);
                     break;
                 case 4:
                     if (DocumentsVM.RefreshDataGrid.CanExecute(null))
                         DocumentsVM.RefreshDataGrid.Execute(null);
 
                     SelectedPage = documentsVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Отчёты\"", LoggerTypes.INFO);
                     break;
                 case 5:
                     SelectedPage = settingsVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"Настройки\"", LoggerTypes.INFO);
                     break;
                 case 6:
                     SelectedPage = aboutVM;
+                    App.WriteMsg2Log("Нажатие на пункт меню \"О программе\"", LoggerTypes.INFO);
                     break;
 
             }
@@ -85,28 +87,35 @@ namespace BallScanner.MVVM.ViewModels.Main
                     AccountManagmentVM.RefreshDataGrid.Execute(null);
 
                 SelectedPage = accountManagmentVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Администрирование\"", LoggerTypes.INFO);
             } else if (name == "Account")
             {
                 SelectedPage = accountVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Аккаунт\"", LoggerTypes.INFO);
             } else if (name == "Scan")
             {
                 SelectedPage = scanVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Сканирование\"", LoggerTypes.INFO);
             }
             else if (name == "Calibrate")
             {
                 SelectedPage = calibrateVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Калибровка\"", LoggerTypes.INFO);
             } else if (name == "Documents")
             {
                 if (DocumentsVM.RefreshDataGrid.CanExecute(null))
                     DocumentsVM.RefreshDataGrid.Execute(null);
 
                 SelectedPage = documentsVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Отчёты\"", LoggerTypes.INFO);
             } else if (name == "Settings")
             {
                 SelectedPage = settingsVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"Настройки\"", LoggerTypes.INFO);
             } else if (name == "About")
             {
                 SelectedPage = aboutVM;
+                App.WriteMsg2Log("Нажатие на пункт меню \"О программе\"", LoggerTypes.INFO);
             }
 
             SelectedPage.ChangePalette();
@@ -114,20 +123,21 @@ namespace BallScanner.MVVM.ViewModels.Main
 
         private void Logout(object param)
         {
+            App.WriteMsg2Log("Нажатие на пункт меню \"Выход из аккаунта\"", LoggerTypes.INFO);
+
             try
             {
-                lock (global_locker)
-                {
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-                    dbContext.SaveChanges();
-                }
+                AppDbContext dbContext = AppDbContext.GetInstance();
+                dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.ERROR);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
 
             App.CurrentUser = null;
+            App.WriteMsg2Log("Выход из системы", LoggerTypes.INFO);
 
             // open login window
             Window old = Application.Current.MainWindow;

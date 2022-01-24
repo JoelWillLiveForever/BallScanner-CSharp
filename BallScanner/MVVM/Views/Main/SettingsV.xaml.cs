@@ -49,6 +49,8 @@ namespace BallScanner.MVVM.Views.Main
 
             Properties.Settings.Default.IsDarkTheme = true;
             Properties.Settings.Default.Save();
+
+            App.WriteMsg2Log("Переключение темы приложения на \"Тёмная\"", LoggerTypes.INFO);
         }
 
         private void Button_LightTheme_Click(object sender, RoutedEventArgs e)
@@ -83,16 +85,20 @@ namespace BallScanner.MVVM.Views.Main
 
             Properties.Settings.Default.IsDarkTheme = false;
             Properties.Settings.Default.Save();
+
+            App.WriteMsg2Log("Переключение темы приложения на \"Светлая\"", LoggerTypes.INFO);
         }
 
         private void Button_LanguageRussian_Click(object sender, RoutedEventArgs e)
         {
             App.Language = new System.Globalization.CultureInfo("ru-RU");
+            App.WriteMsg2Log("Переключение языка приложения на \"Русский, Россия\"", LoggerTypes.INFO);
         }
 
         private void Button_LanguageEnglish_Click(object sender, RoutedEventArgs e)
         {
             App.Language = new System.Globalization.CultureInfo("en-US");
+            App.WriteMsg2Log("Переключение языка приложения на \"Английский, США\"", LoggerTypes.INFO);
         }
     }
 }

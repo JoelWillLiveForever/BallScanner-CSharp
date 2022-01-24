@@ -4,7 +4,6 @@ using BallScanner.MVVM.Base;
 using BallScanner.MVVM.Commands;
 using BallScanner.MVVM.ViewModels.Main;
 using Joel.Utils.Services;
-using NLog;
 using System;
 using System.Linq;
 using System.Windows;
@@ -13,9 +12,6 @@ namespace BallScanner.MVVM.ViewModels.Add
 {
     public class RegistrationVM : BaseViewModel
     {
-        private static readonly object global_locker = new object();
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         // Fields
         private string _surname;
         public string Surname
@@ -112,8 +108,6 @@ namespace BallScanner.MVVM.ViewModels.Add
 
         public RegistrationVM()
         {
-            Log.Info("Constructor called!");
-
             AddUser_Command = new RelayCommand(Register);
         }
 
@@ -124,56 +118,64 @@ namespace BallScanner.MVVM.ViewModels.Add
                 // Null surname
                 if (Surname == null || Surname.Equals("") || Surname.Length == 0)
                 {
-                    MessageBox.Show("Вы не указали свою фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Фамилия\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали фамилию пользователя!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Null name
                 if (Name == null || Name.Equals("") || Name.Length == 0)
                 {
-                    MessageBox.Show("Вы не указали своё имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Имя\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали имя пользователя!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Null login
                 if (Login == null || Login.Equals("") || Login.Length == 0)
                 {
-                    MessageBox.Show("Вы не указали свой логин для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Логин\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали логин аккаунта пользователя!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Null smena_number
                 if (Smena_Number == null || Smena_Number.Equals("") || Smena_Number.Length == 0)
                 {
-                    MessageBox.Show("Вы не указали номер своей смены!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Номер смены\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали номер смены пользователя!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Null password
                 if (Password == null || Password.Equals(""))
                 {
-                    MessageBox.Show("Вы не указали свой пароль для авторизации!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Пароль\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали пароль для авторизации!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Null password_check
                 if (Password_Check == null || Password_Check.Equals(""))
                 {
-                    MessageBox.Show("Вы не указали повтор пароля для проверки!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Поле \"Повторите пароль\" пустое!", LoggerTypes.WARN);
+                    MessageBox.Show("Вы не указали повтор пароля для проверки!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Bad password length or password_check length
                 if (Password.Length < 4 || Password_Check.Length < 4)
                 {
-                    MessageBox.Show("Длина пароля меньше 4-х символов!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Длина пароля или повтора пароля меньше 4-х символов!", LoggerTypes.WARN);
+                    MessageBox.Show("Длина пароля меньше 4-х символов!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
                 // Password equals password_check
                 if (!Password.Equals(Password_Check))
                 {
-                    MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    App.WriteMsg2Log("Предупреждение пользователя! Пароли не совпадают!", LoggerTypes.WARN);
+                    MessageBox.Show("Пароли не совпадают!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
                     return;
                 }
 
@@ -182,33 +184,38 @@ namespace BallScanner.MVVM.ViewModels.Add
                 if (!int.TryParse(Smena_Number, out smena_number_value))
                 {
                     if (Smena_Number.Length > int.MaxValue.ToString().Length)
-                        MessageBox.Show("Максимальный размер числа для номера смены равен " + int.MaxValue + ".", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    {
+                        App.WriteMsg2Log("Предупреждение пользователя! Превышено максимально допустимое значение (" + int.MaxValue + ") для ввода номера смены!", LoggerTypes.WARN);
+                        MessageBox.Show("Максимальный размер числа для номера смены равен " + int.MaxValue + ".", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                    }
                     else
-                        MessageBox.Show("Номер смены должен состоять только из цифр!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    {
+                        App.WriteMsg2Log("Предупреждение пользователя! Номер смены должен состоять только из цифр!", LoggerTypes.WARN);
+                        MessageBox.Show("Номер смены должен состоять только из цифр!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+                    }
+
                     return;
                 }
 
-                lock (global_locker)
+                // init db connection
+                AppDbContext dbContext = AppDbContext.GetInstance();
+
+                // Check login free to use
+                var user = (from u in dbContext.Users
+                            where u._username == Login
+                            select u).FirstOrDefault();
+
+                if (user != null)
                 {
-                    // init db connection
-                    AppDbContext dbContext = AppDbContext.GetInstance();
-
-                    // Check login free to use
-                    var user = (from u in dbContext.Users
-                                where u._username == Login
-                                select u).FirstOrDefault();
-
-                    if (user != null)
-                    {
-                        MessageBox.Show("Пользователь с таким логином уже зарегистрирован!\nПожалуйста, выберите себе другой логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-                        return;
-                    }
-
-                    user = new User(Surname, Name, Lastname, smena_number_value, Login, SHAService.ComputeSha256Hash(Password));
-
-                    dbContext.Users.Add(user);
-                    dbContext.SaveChanges();
+                    App.WriteMsg2Log("Попытка зарегистрировать пользователя с логином, который уже имеется в базе данных!", LoggerTypes.ERROR);
+                    MessageBox.Show("Пользователь с таким логином уже зарегистрирован!\nПожалуйста, выберите другой логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    return;
                 }
+
+                user = new User(Surname, Name, Lastname, smena_number_value, Login, SHAService.ComputeSha256Hash(Password));
+
+                dbContext.Users.Add(user);
+                dbContext.SaveChanges();
 
                 // Clear fields
                 Surname = Name = Lastname = Login = Smena_Number = Password = Password_Check = null;
@@ -219,7 +226,8 @@ namespace BallScanner.MVVM.ViewModels.Add
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Непредвиденная ошибка: " + ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                App.WriteMsg2Log("Непредвиденная ошибка во время выполнения! Текст ошибки: " + ex.Message, LoggerTypes.FATAL);
+                MessageBox.Show("Текст ошибки: " + ex.Message, "Непредвиденная ошибка!", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
             }
         }
     }
