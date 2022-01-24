@@ -1,0 +1,184 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Joel.Controls">
+
+    <Style TargetType="{x:Type local:JustButton}">
+        <Style.Setters>
+            <Setter Property="IsMinState"
+                    Value="False" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Background"
+                    Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource Brush_OnBackground_OnSurface_Medium}" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="FontWeight"
+                    Value="Medium" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource Font_Montserrat_Alternates}" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="Width"
+                    Value="Auto" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="IconPosition"
+                    Value="Left" />
+            <Setter Property="IconHeight"
+                    Value="20" />
+            <Setter Property="IconWidth"
+                    Value="20" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="Padding"
+                    Value="10,0" />
+            <Setter Property="Margin"
+                    Value="0,10,0,0" />
+            <Setter Property="CornerRadius"
+                    Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:JustButton}">
+                        <Border CornerRadius="{TemplateBinding CornerRadius}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Name="Root">
+
+                            <DockPanel Name="MyDockPanel"
+                                       Background="Transparent"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Margin="{TemplateBinding Padding}"
+                                       LastChildFill="True">
+
+                                <Viewbox DockPanel.Dock="{TemplateBinding IconPosition}"
+                                         Width="{TemplateBinding IconWidth}"
+                                         Height="{TemplateBinding IconHeight}"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center">
+
+                                    <Path Name="MyIcon"
+                                          Data="{TemplateBinding Icon}"
+                                          Fill="{TemplateBinding IconFill}" />
+
+                                </Viewbox>
+
+                                <TextBlock Name="MyText"
+                                           Text="{TemplateBinding ContentStringFormat}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontWeight="{TemplateBinding FontWeight}"
+                                           FontFamily="{TemplateBinding FontFamily}" 
+                                           TextAlignment="{TemplateBinding TextAlignment}"
+                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                           Opacity="{TemplateBinding Opacity}"
+                                           Margin="7,1,0,0" />
+                            </DockPanel>
+
+                            <!--<VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Surface_Overlay_8dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Surface_Overlay_12dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="{DynamicResource Color_Primary_Overlay_24dp}"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0:0:0.2"
+                                                            Storyboard.TargetName="Root"
+                                                            Storyboard.TargetProperty="Background.Color"
+                                                            To="Transparent"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>-->
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource Brush_Surface_Overlay_08dp}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+            </Trigger>
+            <Trigger Property="IsPressed"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource Brush_Surface_Overlay_24dp}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
+            </Trigger>
+            <Trigger Property="IsMinState"
+                     Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:JustButton}">
+                            <Border CornerRadius="{TemplateBinding CornerRadius}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Name="Root">
+
+                                <DockPanel Name="MyDockPanel"
+                                           Background="Transparent"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Margin="{TemplateBinding Padding}"
+                                           LastChildFill="True">
+
+                                    <Viewbox DockPanel.Dock="{TemplateBinding IconPosition}"
+                                             Width="{TemplateBinding IconWidth}"
+                                             Height="{TemplateBinding IconHeight}"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center">
+
+                                        <Path Name="MyIcon"
+                                              Data="{TemplateBinding Icon}"
+                                              Fill="{TemplateBinding IconFill}" />
+
+                                    </Viewbox>
+                                </DockPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

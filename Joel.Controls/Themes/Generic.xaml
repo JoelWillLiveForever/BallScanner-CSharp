@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/BlockHeader_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/JustButton_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/LabelComboBox_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/LabelTextBox_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/SimpleRadioButton_Style.xaml" />
+        <ResourceDictionary Source="/Joel.Controls;component/Themes/MenuButton_Style.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

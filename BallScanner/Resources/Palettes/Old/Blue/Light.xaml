@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="Color_Primary">#ff2196f3</Color>
+    <Color x:Key="Color_Background_Primary">#14000000</Color>
+    <Color x:Key="Color_Primary_Overlay_24dp">#292196f3</Color>
+
+    <Color x:Key="Color_Primary_Variant">#ff1976d2</Color>
+
+    <Color x:Key="Color_OnPrimary">#ff000000</Color>
+
+</ResourceDictionary>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Заголовки блоков -->
+    <sys:String x:Key="Text_Menu">Меню</sys:String>
+    
+    <!-- Пункты меню -->
+    <sys:String x:Key="Text_AccountManagment">Администрирование</sys:String>
+    <sys:String x:Key="Text_Account">Аккаунт</sys:String>
+    <sys:String x:Key="Text_Scan">Сканирование</sys:String>
+    <sys:String x:Key="Text_Calibrate">Калибровка</sys:String>
+    <sys:String x:Key="Text_Documents">Отчёты</sys:String>
+    <sys:String x:Key="Text_Settings">Настройки</sys:String>
+    <sys:String x:Key="Text_About">О программе</sys:String>
+
+    <!-- Страница "Калибровка" -->
+    <sys:String x:Key="Text_OutputImage">Изображение со сканера</sys:String>
+    <sys:String x:Key="Text_Sensitivity">Регулировка чувствительности</sys:String>
+    <sys:String x:Key="Text_Thresholds">Регулировка пороговых значений</sys:String>
+    <sys:String x:Key="Text_GeneralScanResults">Общие результаты сканирования</sys:String>
+    <sys:String x:Key="Text_DetailedScanResults">Подробные результаты сканирования</sys:String>
+    <sys:String x:Key="Text_Status">Информационная панель</sys:String>
+    <sys:String x:Key="Text_Calibration">Калибровка сканера</sys:String>
+
+    <sys:String x:Key="Text_Download">Загрузить</sys:String>
+    <sys:String x:Key="Text_Previous">Предыдущая</sys:String>
+    <sys:String x:Key="Text_Next">Следующая</sys:String>
+    <sys:String x:Key="Text_Execute">Выполнить</sys:String>
+
+    <!-- Страница "Настройки" -->
+    <sys:String x:Key="Text_Language">Язык</sys:String>
+    <sys:String x:Key="Text_Theme">Тема</sys:String>
+
+    <sys:String x:Key="Text_Language_Russian">Русский, Россия</sys:String>
+    <sys:String x:Key="Text_Language_English">Английский, США</sys:String>
+
+    <sys:String x:Key="Text_Theme_Light">Светлая - beta</sys:String>
+    <sys:String x:Key="Text_Theme_Dark">Тёмная</sys:String>
+
+    <sys:String x:Key="Text_Copyright">Copyright © 2022 Никулин В.С. Все права защищены.</sys:String>
+    
+</ResourceDictionary>

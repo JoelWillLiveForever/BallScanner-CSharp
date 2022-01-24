@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF582FDA-4F9E-498E-9A43-D83C50EE78DC}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Joel.Resources</RootNamespace>
+    <AssemblyName>Joel.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>JoelKeyFile.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Black.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Bold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-BoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLight.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Italic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Light.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-LightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Medium.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-MediumItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Regular.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Thin.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ThinItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Black.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-BlackItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Bold.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-BoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ExtraBold.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ExtraLight.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Italic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Light.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-LightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Medium.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-MediumItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Regular.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-SemiBold.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-Thin.ttf" />
+    <Resource Include="Fonts\Montserrat_Alternates\MontserratAlternates-ThinItalic.ttf" />
+    <None Include="JoelKeyFile.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Fonts\Montserrat\OFL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\Montserrat_Alternates\OFL.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
