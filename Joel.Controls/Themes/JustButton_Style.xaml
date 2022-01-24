@@ -139,9 +139,9 @@
             <Trigger Property="IsPressed"
                      Value="True">
                 <Setter Property="Background"
-                        Value="{DynamicResource Brush_Primary_Overlay_24dp}" />
+                        Value="{DynamicResource Brush_Surface_Overlay_24dp}" />
                 <Setter Property="Foreground"
-                        Value="{DynamicResource Brush_Primary}" />
+                        Value="{DynamicResource Brush_OnBackground_OnSurface_High}" />
             </Trigger>
             <Trigger Property="IsMinState"
                      Value="True">
